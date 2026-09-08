@@ -26,7 +26,7 @@ jobs:
 
       - name: Install pipek1 binary
         run: |
-          curl -sL https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/pipek1-x86_64-linux-musl -o /tmp/pipek1
+          curl -sL https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/pipek1 -o /tmp/pipek1
           chmod +x /tmp/pipek1
           sudo mv /tmp/pipek1 /usr/local/bin/pipek1
 
