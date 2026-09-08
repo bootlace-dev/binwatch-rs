@@ -176,6 +176,23 @@ fn main() -> io::Result<()> {
             manifest.finalize_seal();
             println!("#{}", manifest.hex_seal);
         }
+        "finalize" => {
+            if args.len() < 3 {
+                eprintln!("Error: Missing manifest.json argument");
+                std::process::exit(2);
+            }
+            let path = &args[2];
+            let mut file = File::open(path)?;
+            let mut content = String::new();
+            file.read_to_string(&mut content)?;
+            let mut manifest: ManifestAudit = serde_json::from_str(&content)
+                .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+            manifest.finalize_seal();
+            let updated_json = serde_json::to_string_pretty(&manifest)
+                .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+            std::fs::write(path, updated_json)?;
+            println!("Updated manifest with seal #{} (root: {})", manifest.hex_seal, manifest.merkle_root_sha256);
+        }
         "demo" => {
             let mut manifest = ManifestAudit::new("2026-09-08T18:30:00Z".to_string(), Some(965215), None);
 
