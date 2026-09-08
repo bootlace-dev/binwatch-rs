@@ -28,6 +28,15 @@ Canonical Merkle Root:
 
 ---
 
+## Live Verification Endpoints & Dashboards
+* **Public Web Dashboard**: https://bootlace-dev.github.io/binwatch-rs/
+* **Raw Audit Manifest (JSON)**: https://bootlace-dev.github.io/binwatch-rs/manifest.json
+* **Compressed Audit Manifest (GZIP)**: https://bootlace-dev.github.io/binwatch-rs/manifest.json.gz
+* **Nostr Kind 1 Plaintext Digest**: https://bootlace-dev.github.io/binwatch-rs/digest.txt
+* **GitHub Actions Continuous Audit Log**: https://github.com/bootlace-dev/binwatch-rs/actions/workflows/audit.yml
+
+---
+
 ## The `binwatch-rs` Architecture
 * **BIP-340 & PGP Verification**: Verifies release signatures using `pipek1` (Schnorr) and standalone detached PGP signatures without background daemons.
 * **Canonical Merkle Root**: Hashes the full state of all monitored binaries into a single SHA-256 root.
