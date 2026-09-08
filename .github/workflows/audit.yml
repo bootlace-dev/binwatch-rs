@@ -47,7 +47,7 @@ jobs:
         env:
           NOSTR_BOT_NSEC: ${{ secrets.NOSTR_BOT_NSEC }}
         run: |
-          pip install websocket-client ecdsa
+          pip install websockets
           python3 ./scripts/nostr_broadcast.py public/digest.txt public/manifest.json
 
       - name: Upload Artifact

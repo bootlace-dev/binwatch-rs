@@ -2,29 +2,135 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 bootlace-dev
 # Stateless Nostr Kind 1 publisher for binwatch audit digest
+# Pure standard-library BIP-340 Schnorr signing + WebSocket broadcasting
+
 import os
 import sys
 import json
 import time
-import ssl
-import websocket
 import hashlib
-from ecdsa import SigningKey, SECP256k1
+import asyncio
+from typing import Tuple, Optional
 
+# --- Official BIP-340 Schnorr Reference Implementation ---
+p = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
+n = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+G = (0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798, 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8)
+Point = Tuple[int, int]
+
+def tagged_hash(tag: str, msg: bytes) -> bytes:
+    tag_hash = hashlib.sha256(tag.encode()).digest()
+    return hashlib.sha256(tag_hash + tag_hash + msg).digest()
+
+def is_infinite(P: Optional[Point]) -> bool:
+    return P is None
+
+def x(P: Point) -> int:
+    assert not is_infinite(P)
+    return P[0]
+
+def y(P: Point) -> int:
+    assert not is_infinite(P)
+    return P[1]
+
+def point_add(P1: Optional[Point], P2: Optional[Point]) -> Optional[Point]:
+    if P1 is None: return P2
+    if P2 is None: return P1
+    if (x(P1) == x(P2)) and (y(P1) != y(P2)): return None
+    if P1 == P2:
+        lam = (3 * x(P1) * x(P1) * pow(2 * y(P1), p - 2, p)) % p
+    else:
+        lam = ((y(P2) - y(P1)) * pow(x(P2) - x(P1), p - 2, p)) % p
+    x3 = (lam * lam - x(P1) - x(P2)) % p
+    return (x3, (lam * (x(P1) - x3) - y(P1)) % p)
+
+def point_mul(P: Optional[Point], n_val: int) -> Optional[Point]:
+    R = None
+    for i in range(256):
+        if (n_val >> i) & 1:
+            R = point_add(R, P)
+        P = point_add(P, P)
+    return R
+
+def bytes_from_int(val: int) -> bytes:
+    return val.to_bytes(32, byteorder="big")
+
+def bytes_from_point(P: Point) -> bytes:
+    return bytes_from_int(x(P))
+
+def xor_bytes(b0: bytes, b1: bytes) -> bytes:
+    return bytes(a ^ b for (a, b) in zip(b0, b1))
+
+def lift_x(x_val: int) -> Optional[Point]:
+    if x_val >= p: return None
+    y_sq = (pow(x_val, 3, p) + 7) % p
+    y_val = pow(y_sq, (p + 1) // 4, p)
+    if pow(y_val, 2, p) != y_sq: return None
+    return (x_val, y_val if y_val & 1 == 0 else p - y_val)
+
+def int_from_bytes(b: bytes) -> int:
+    return int.from_bytes(b, byteorder="big")
+
+def has_even_y(P: Point) -> bool:
+    assert not is_infinite(P)
+    return y(P) % 2 == 0
+
+def pubkey_gen(seckey: bytes) -> bytes:
+    d0 = int_from_bytes(seckey)
+    if not (1 <= d0 <= n - 1):
+        raise ValueError('Secret key out of range 1..n-1.')
+    P = point_mul(G, d0)
+    assert P is not None
+    return bytes_from_point(P)
+
+def schnorr_sign(msg: bytes, seckey: bytes, aux_rand: bytes) -> bytes:
+    d0 = int_from_bytes(seckey)
+    if not (1 <= d0 <= n - 1):
+        raise ValueError('Secret key out of range 1..n-1.')
+    if len(aux_rand) != 32:
+        raise ValueError('aux_rand must be 32 bytes.')
+    P = point_mul(G, d0)
+    assert P is not None
+    d = d0 if has_even_y(P) else n - d0
+    t = xor_bytes(bytes_from_int(d), tagged_hash("BIP0340/aux", aux_rand))
+    k0 = int_from_bytes(tagged_hash("BIP0340/nonce", t + bytes_from_point(P) + msg)) % n
+    if k0 == 0:
+        raise RuntimeError('Nonce generation failed.')
+    R = point_mul(G, k0)
+    assert R is not None
+    k = n - k0 if not has_even_y(R) else k0
+    e = int_from_bytes(tagged_hash("BIP0340/challenge", bytes_from_point(R) + bytes_from_point(P) + msg)) % n
+    sig = bytes_from_point(R) + bytes_from_int((k + e * d) % n)
+    if not schnorr_verify(msg, bytes_from_point(P), sig):
+        raise RuntimeError('Created BIP-340 signature failed verification.')
+    return sig
+
+def schnorr_verify(msg: bytes, pubkey: bytes, sig: bytes) -> bool:
+    if len(pubkey) != 32 or len(sig) != 64: return False
+    P = lift_x(int_from_bytes(pubkey))
+    r = int_from_bytes(sig[0:32])
+    s = int_from_bytes(sig[32:64])
+    if (P is None) or (r >= p) or (s >= n): return False
+    e = int_from_bytes(tagged_hash("BIP0340/challenge", sig[0:32] + pubkey + msg)) % n
+    R = point_add(point_mul(G, s), point_mul(P, n - e))
+    if (R is None) or (not has_even_y(R)) or (x(R) != r): return False
+    return True
+
+# --- Bech32 Helpers ---
 CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l'
 
 def bech32_decode(bech):
-    if ((any(ord(x) < 33 or ord(x) > 126 for x in bech)) or
+    if ((any(ord(c) < 33 or ord(c) > 126 for c in bech)) or
             (bech.lower() != bech and bech.upper() != bech)):
         return (None, None)
     bech = bech.lower()
     pos = bech.rfind('1')
     if pos < 1 or pos + 7 > len(bech) or len(bech) > 1000:
         return (None, None)
-    if not all(x in CHARSET for x in bech[pos+1:]):
+    if not all(c in CHARSET for c in bech[pos+1:]):
         return (None, None)
     hrp = bech[:pos]
-    data = [CHARSET.find(x) for x in bech[pos+1:]]
+    data = [CHARSET.find(c) for c in bech[pos+1:]]
     return (hrp, data[:-6])
 
 def convertbits(data, frombits, tobits, pad=True):
@@ -39,21 +145,48 @@ def convertbits(data, frombits, tobits, pad=True):
     if pad and bits: ret.append((acc << (tobits - bits)) & maxv)
     return ret
 
+def bech32_encode(hrp, data):
+    def bech32_polymod(values):
+        GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
+        chk = 1
+        for v in values:
+            b = chk >> 25
+            chk = (chk & 0x1ffffff) << 5 ^ v
+            for i in range(5):
+                chk ^= GEN[i] if ((b >> i) & 1) else 0
+        return chk
+
+    def bech32_hrp_expand(s):
+        return [ord(c) >> 5 for c in s] + [0] + [ord(c) & 31 for c in s]
+
+    values = bech32_hrp_expand(hrp) + data
+    polymod = bech32_polymod(values + [0, 0, 0, 0, 0, 0]) ^ 1
+    chk = [(polymod >> 5 * (5 - i)) & 31 for i in range(6)]
+    return hrp + "1" + "".join([CHARSET[d] for d in data + chk])
+
 def get_nsec_bytes(nsec_str):
+    if len(nsec_str) == 64:
+        try:
+            return bytes.fromhex(nsec_str)
+        except ValueError:
+            pass
     hrp, data5 = bech32_decode(nsec_str)
     if hrp != 'nsec':
         raise ValueError('Expected nsec HRP')
     bytes_data = convertbits(data5, 5, 8, False)
     return bytes(bytes_data)
 
-def schnorr_sign(msg_32: bytes, privkey_32: bytes) -> bytes:
-    sk = SigningKey.from_string(privkey_32, curve=SECP256k1)
-    vk = sk.verifying_key
-    # BIP-340 Schnorr signature
-    # In pure python, fallback to pipek1 sign if available or ecdsa
-    return sk.sign_deterministic(msg_32, hashfunc=hashlib.sha256)
+async def broadcast_relay(relay_url, req_str):
+    try:
+        import websockets
+        async with websockets.connect(relay_url, timeout=6) as ws:
+            await ws.send(req_str)
+            resp = await asyncio.wait_for(ws.recv(), timeout=5)
+            return (relay_url, True, resp)
+    except Exception as e:
+        return (relay_url, False, str(e))
 
-def main():
+async def main_async():
     if len(sys.argv) < 2:
         print("Usage: nostr_broadcast.py <digest.txt> [manifest.json]")
         sys.exit(2)
@@ -68,9 +201,8 @@ def main():
         sys.exit(0)
 
     sk_bytes = get_nsec_bytes(nsec)
-    sk = SigningKey.from_string(sk_bytes, curve=SECP256k1)
-    vk = sk.verifying_key
-    pubkey_x = vk.to_string()[:32].hex()
+    pubkey_bytes = pubkey_gen(sk_bytes)
+    pubkey_x = pubkey_bytes.hex()
 
     created_at = int(time.time())
     tags = [
@@ -83,24 +215,11 @@ def main():
     event_data = [0, pubkey_x, created_at, 1, tags, content]
     serialized = json.dumps(event_data, separators=(',', ':'), ensure_ascii=False)
     event_id = hashlib.sha256(serialized.encode('utf-8')).hexdigest()
+    msg_32 = bytes.fromhex(event_id)
 
-    # Sign using pipek1 binary directly for exact BIP-340 compliance
-    pipek1_bin = "/usr/local/bin/pipek1"
-    if not os.path.exists(pipek1_bin):
-        pipek1_bin = "/home/bootlace/dev/pipek1/rust/target/release/pipek1"
-
-    import subprocess
-    cmd = [pipek1_bin, "sign"]
-    env = os.environ.copy()
-    env["PIPEK1_SEC_KEY"] = sk_bytes.hex()
-    res = subprocess.run(cmd, input=serialized.encode('utf-8'), capture_output=True, env=env)
-    if res.returncode != 0:
-        print("Error signing event with pipek1:", res.stderr.decode())
-        sys.exit(1)
-
-    sig_wire = res.stdout
-    # Extract 64-byte Schnorr signature from 105-byte pipek1 payload (bytes 41..105)
-    sig_hex = sig_wire[41:105].hex()
+    # Pure standard BIP-340 Schnorr signature over exact event_id
+    sig = schnorr_sign(msg_32, sk_bytes, os.urandom(32))
+    sig_hex = sig.hex()
 
     event = {
         "id": event_id,
@@ -112,6 +231,10 @@ def main():
         "sig": sig_hex
     }
 
+    # Derive note1 bech32 identifier
+    data5 = convertbits(msg_32, 8, 5, True)
+    note_bech32 = bech32_encode("note", data5)
+
     relays = [
         "wss://relay.damus.io",
         "wss://nos.lol",
@@ -119,20 +242,27 @@ def main():
     ]
 
     req = json.dumps(["EVENT", event])
-    print(f">> Broadcasting Nostr event {event_id} from pubkey {pubkey_x}...")
+    print(f">> Broadcasting Nostr Kind 1 Event:")
+    print(f"   Event ID:  {event_id}")
+    print(f"   Pubkey:    {pubkey_x}")
+    print(f"   Note ID:   {note_bech32}")
+    print(f"   Primal:    https://primal.net/e/{note_bech32}")
+
+    tasks = [broadcast_relay(r, req) for r in relays]
+    results = await asyncio.gather(*tasks)
 
     success_count = 0
-    for r in relays:
-        try:
-            ws = websocket.create_connection(r, timeout=6, sslopt={"cert_reqs": ssl.CERT_NONE})
-            ws.send(req)
-            ws.close()
-            print(f"   ✓ Sent to {r}")
+    for r, ok, detail in results:
+        if ok:
+            print(f"   ✓ Sent to {r} -> {detail}")
             success_count += 1
-        except Exception as e:
-            print(f"   ✗ Failed {r}: {e}")
+        else:
+            print(f"   ✗ Failed {r}: {detail}")
 
-    print(f">> Done. Broadcasted to {success_count}/{len(relays)} relays.")
+    print(f">> Broadcast finished: {success_count}/{len(relays)} accepted.")
+
+def main():
+    asyncio.run(main_async())
 
 if __name__ == "__main__":
     main()
