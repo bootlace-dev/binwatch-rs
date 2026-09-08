@@ -34,6 +34,8 @@ Canonical Merkle Root:
 * **Compressed Audit Manifest (GZIP)**: https://bootlace-dev.github.io/binwatch-rs/manifest.json.gz
 * **Nostr Kind 1 Plaintext Digest**: https://bootlace-dev.github.io/binwatch-rs/digest.txt
 * **GitHub Actions Continuous Audit Log**: https://github.com/bootlace-dev/binwatch-rs/actions/workflows/audit.yml
+* **Nostr Attestation Bot Identity**: `npub1w287u4cfq9tlyjexwnvdjzv0kh4ahf752eahvwllzm3zppngm6vqsme6cm`
+* **Cryptographic Delegation Proof**: [ATTESTATION.md](https://github.com/bootlace-dev/binwatch-rs/blob/master/ATTESTATION.md) (Mutual BIP-340 cross-signing with parent identity)
 
 ---
 
