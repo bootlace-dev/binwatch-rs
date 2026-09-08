@@ -179,10 +179,11 @@ def get_nsec_bytes(nsec_str):
 async def broadcast_relay(relay_url, req_str):
     try:
         import websockets
-        async with websockets.connect(relay_url, timeout=6) as ws:
-            await ws.send(req_str)
-            resp = await asyncio.wait_for(ws.recv(), timeout=5)
-            return (relay_url, True, resp)
+        async with asyncio.timeout(10):
+            async with websockets.connect(relay_url) as ws:
+                await ws.send(req_str)
+                resp = await asyncio.wait_for(ws.recv(), timeout=5)
+                return (relay_url, True, resp)
     except Exception as e:
         return (relay_url, False, str(e))
 
