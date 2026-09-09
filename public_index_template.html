@@ -297,13 +297,13 @@
 
           let badgeHtml = '<span class="status-ok" title="All cryptographic signatures verified and artifact hashes matched.">✅ OK</span>';
           if (worstStatus === 'EXPIRED') {
-            badgeHtml = '<span class="status-expired" title="Signature is cryptographically valid, but the upstream release signing key passed its declared expiration date.">⏳ EXPIRED</span>';
+            badgeHtml = '<span class="status-expired" title="Signature is cryptographically valid, but the upstream release signing key passed its declared expiration date.">❌ EXPIRED</span>';
           } else if (worstStatus === 'BADSIG') {
-            badgeHtml = '<span class="status-badsig" title="Cryptographic signature verification failed or signature is invalid/corrupted.">🖊️ BADSIG</span>';
+            badgeHtml = '<span class="status-badsig" title="Cryptographic signature verification failed or signature is invalid/corrupted.">❌ BADSIG</span>';
           } else if (worstStatus === 'HASH_DRIFT') {
-            badgeHtml = '<span class="status-fail" title="Binary artifact hash does not match signed SHA-256 release manifest.">⚠️ HASH_DRIFT</span>';
+            badgeHtml = '<span class="status-fail" title="Binary artifact hash does not match signed SHA-256 release manifest.">❌ HASH_DRIFT</span>';
           } else if (worstStatus === 'MISSING') {
-            badgeHtml = '<span class="status-fail" title="Release manifest or binary artifact could not be downloaded from upstream (404/Empty).">📭 MISSING</span>';
+            badgeHtml = '<span class="status-fail" title="Release manifest or binary artifact could not be downloaded from upstream (404/Empty).">❌ MISSING</span>';
           }
 
           let verEngine = p.artifacts[0] ? p.artifacts[0].verified_by : 'unknown';

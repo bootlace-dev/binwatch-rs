@@ -150,20 +150,20 @@ impl ManifestAudit {
 
             let badge = match worst_status {
                 "OK" => "✅",
-                "EXPIRED" => "⏳ EXPIRED",
-                "HASH_DRIFT" => "⚠️ HASH_DRIFT",
-                "MISSING" => "📭 MISSING",
-                _ => "🖊️ BADSIG",
+                "EXPIRED" => "❌ EXPIRED:",
+                "HASH_DRIFT" => "❌ HASH_DRIFT:",
+                "MISSING" => "❌ MISSING:",
+                _ => "❌ BADSIG:",
             };
 
             let entry_str = if let Some(detail) = failure_detail {
                 format!(
-                    "  • {} {} ({}) - {}\n",
+                    "{} {} ({}) - {}\n",
                     badge, project_id, project.release_tag, detail
                 )
             } else {
                 format!(
-                    "  • {} {} ({}) - {} artifact(s)\n",
+                    "{} {} ({}) - {} artifact(s)\n",
                     badge,
                     project_id,
                     project.release_tag,
@@ -197,16 +197,16 @@ impl ManifestAudit {
         if total_alerts > 0 {
             let mut alert_parts = Vec::new();
             if expired_keys > 0 {
-                alert_parts.push(format!("⏳ {} Expired Key", expired_keys));
+                alert_parts.push(format!("❌ {} Expired Key", expired_keys));
             }
             if hash_drifts > 0 {
-                alert_parts.push(format!("⚠️ {} Hash Drift", hash_drifts));
+                alert_parts.push(format!("❌ {} Hash Drift", hash_drifts));
             }
             if bad_sigs > 0 {
-                alert_parts.push(format!("🚨 {} Bad Signature", bad_sigs));
+                alert_parts.push(format!("❌ {} Bad Signature", bad_sigs));
             }
             if missing_artifacts > 0 {
-                alert_parts.push(format!("📭 {} Missing", missing_artifacts));
+                alert_parts.push(format!("❌ {} Missing", missing_artifacts));
             }
             out.push_str(&format!(" | {}", alert_parts.join(", ")));
         }
