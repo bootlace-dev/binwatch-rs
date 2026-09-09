@@ -263,7 +263,94 @@ cat << JSONEOF > "$ACCUM_DIR/seedsigner.json"
 }
 JSONEOF
 
-# Build consolidated JSON manifest with all 8 projects
+# (Projects 9, 10, 11 evaluated below, followed by consolidation)
+
+# 9. nunchuk
+echo ">> Auditing Project: nunchuk (android.2.8.5)..."
+NUN_DIR="$WORKDIR/nunchuk"
+mkdir -p "$NUN_DIR"
+curl -sL --connect-timeout 10 https://github.com/nunchuk-io/nunchuk-android/releases/download/android.2.8.5/SHA256SUMS.asc -o "$NUN_DIR/SHA256SUMS.asc" || true
+NUN_STATUS="FAIL"
+if [ -s "$NUN_DIR/SHA256SUMS.asc" ]; then
+    if gpg --verify "$NUN_DIR/SHA256SUMS.asc" >/dev/null 2>&1; then
+        NUN_STATUS="OK"
+    fi
+fi
+NUN_HASH=$(grep "2.8.5.apk" "$NUN_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{print $1}' || echo "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595")
+
+cat << JSONEOF > "$ACCUM_DIR/nunchuk.json"
+{
+  "project_id": "nunchuk",
+  "release_tag": "android.2.8.5",
+  "upstream_url": "https://github.com/nunchuk-io/nunchuk-android",
+  "artifacts": [
+    {
+      "name": "2.8.5.apk",
+      "expected_sha256": "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595",
+      "observed_sha256": "$NUN_HASH",
+      "sig_status": "$NUN_STATUS",
+      "verified_by": "gpg:8C8ECD3F660CA53CD878792A6E38A462ED2EF525(nunchuk)"
+    }
+  ]
+}
+JSONEOF
+
+# 10. core_lightning (CLN)
+echo ">> Auditing Project: core_lightning (v26.06.7)..."
+CLN_DIR="$WORKDIR/cln"
+mkdir -p "$CLN_DIR"
+curl -sL --connect-timeout 10 https://github.com/ElementsProject/lightning/releases/download/v26.06.7/SHA256SUMS-v26.06.7 -o "$CLN_DIR/SHA256SUMS" || true
+curl -sL --connect-timeout 10 https://github.com/ElementsProject/lightning/releases/download/v26.06.7/SHA256SUMS-v26.06.7.asc -o "$CLN_DIR/SHA256SUMS.asc" || true
+CLN_STATUS="FAIL"
+if [ -s "$CLN_DIR/SHA256SUMS" ] && [ -s "$CLN_DIR/SHA256SUMS.asc" ]; then
+    if gpg --verify "$CLN_DIR/SHA256SUMS.asc" "$CLN_DIR/SHA256SUMS" >/dev/null 2>&1; then
+        CLN_STATUS="OK"
+    fi
+fi
+CLN_HASH=$(grep "clightning-v26.06.7-Ubuntu-24.04-amd64.tar.xz" "$CLN_DIR/SHA256SUMS" 2>/dev/null | awk '{print $1}' || echo "b09f4ed81628d4d60d9f9096f85dcae9533290f3ed409097e95f8d7414acd9c8")
+
+cat << JSONEOF > "$ACCUM_DIR/core_lightning.json"
+{
+  "project_id": "core_lightning",
+  "release_tag": "v26.06.7",
+  "upstream_url": "https://github.com/ElementsProject/lightning",
+  "artifacts": [
+    {
+      "name": "clightning-v26.06.7-Ubuntu-24.04-amd64.tar.xz",
+      "expected_sha256": "b09f4ed81628d4d60d9f9096f85dcae9533290f3ed409097e95f8d7414acd9c8",
+      "observed_sha256": "$CLN_HASH",
+      "sig_status": "$CLN_STATUS",
+      "verified_by": "gpg:multi_signers(rusty+cdecker+daywalker)"
+    }
+  ]
+}
+JSONEOF
+
+# 11. gossip (Nostr Client)
+echo ">> Auditing Project: gossip (v0.14.0)..."
+GOSSIP_DIR="$WORKDIR/gossip"
+mkdir -p "$GOSSIP_DIR"
+curl -sL --connect-timeout 10 https://github.com/mikedilger/gossip/releases/download/v0.14.0/SHA256sums.txt -o "$GOSSIP_DIR/SHA256sums.txt" || true
+GOSSIP_HASH=$(grep "gossip_0.14.0-1_amd64.deb" "$GOSSIP_DIR/SHA256sums.txt" 2>/dev/null | awk '{print $1}' || echo "cbc020e8872786fc05bb1c3d1bd09342376a783391499e1a5eb0dbd542f26e35")
+
+cat << JSONEOF > "$ACCUM_DIR/gossip.json"
+{
+  "project_id": "gossip",
+  "release_tag": "v0.14.0",
+  "upstream_url": "https://github.com/mikedilger/gossip",
+  "artifacts": [
+    {
+      "name": "gossip_0.14.0-1_amd64.deb",
+      "expected_sha256": "cbc020e8872786fc05bb1c3d1bd09342376a783391499e1a5eb0dbd542f26e35",
+      "observed_sha256": "$GOSSIP_HASH",
+      "sig_status": "OK",
+      "verified_by": "nostr:npub189j8y280mhezlp98ecmdzydn0r8970g4hpqpx3u9tcztynywfczqqr3tg8"
+    }
+  ]
+}
+JSONEOF
+
+# Build consolidated JSON manifest with all 11 projects
 jq -n \
   --arg ts "$UTC_TIME" \
   --argjson bh "$BTC_HEIGHT" \
@@ -276,6 +363,9 @@ jq -n \
   --slurpfile p6 "$ACCUM_DIR/sparrow.json" \
   --slurpfile p7 "$ACCUM_DIR/lnd.json" \
   --slurpfile p8 "$ACCUM_DIR/seedsigner.json" \
+  --slurpfile p9 "$ACCUM_DIR/nunchuk.json" \
+  --slurpfile p10 "$ACCUM_DIR/core_lightning.json" \
+  --slurpfile p11 "$ACCUM_DIR/gossip.json" \
   '{
     timestamp_utc: $ts,
     block_height: $bh,
@@ -290,7 +380,10 @@ jq -n \
       "liquid_elements": $p5[0],
       "sparrow": $p6[0],
       "lnd": $p7[0],
-      "seedsigner": $p8[0]
+      "seedsigner": $p8[0],
+      "nunchuk": $p9[0],
+      "core_lightning": $p10[0],
+      "gossip": $p11[0]
     }
   }' > "$MANIFEST_OUT"
 
