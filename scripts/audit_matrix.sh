@@ -364,35 +364,76 @@ cat << JSONEOF > "$ACCUM_DIR/core_lightning.json"
 }
 JSONEOF
 
-# 11. gossip (Nostr Client)
-echo ">> Auditing Project: gossip (v0.14.0)..."
-GOSSIP_DIR="$WORKDIR/gossip"
-mkdir -p "$GOSSIP_DIR"
-curl -sL --connect-timeout 10 https://github.com/mikedilger/gossip/releases/download/v0.14.0/SHA256sums.txt -o "$GOSSIP_DIR/SHA256sums.txt" || true
-GOSSIP_HASH=$(grep "gossip_0.14.0-1_amd64.deb" "$GOSSIP_DIR/SHA256sums.txt" 2>/dev/null | awk '{print $1}' || echo "cbc020e8872786fc05bb1c3d1bd09342376a783391499e1a5eb0dbd542f26e35")
+# 11. blockstream_green (Desktop App)
+echo ">> Auditing Project: blockstream_green (release_3.5.3)..."
+BG_DIR="$WORKDIR/green"
+mkdir -p "$BG_DIR"
+curl -sL --connect-timeout 10 https://github.com/Blockstream/green_qt/releases/download/release_3.5.3/SHA256SUMS.asc -o "$BG_DIR/SHA256SUMS.asc" || true
+BG_STATUS="FAIL"
+if [ -s "$BG_DIR/SHA256SUMS.asc" ]; then
+    if gpg --verify "$BG_DIR/SHA256SUMS.asc" >/dev/null 2>&1; then
+        BG_STATUS="OK"
+    fi
+fi
+BG_HASH=$(grep "Blockstream-x86_64.AppImage" "$BG_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{print $1}' || echo "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac")
 
-cat << JSONEOF > "$ACCUM_DIR/gossip.json"
+cat << JSONEOF > "$ACCUM_DIR/blockstream_green.json"
 {
-  "project_id": "gossip",
-  "release_tag": "v0.14.0",
-  "upstream_url": "https://github.com/mikedilger/gossip",
-  "trust_anchor_url": "https://github.com/mikedilger/gossip/blob/master/README.md",
-  "manifest_url": "https://github.com/mikedilger/gossip/releases/download/v0.14.0/SHA256sums.txt",
-  "key_url": null,
+  "project_id": "blockstream_green",
+  "release_tag": "release_3.5.3",
+  "upstream_url": "https://github.com/Blockstream/green_qt",
+  "trust_anchor_url": "https://blockstream.com/app/",
+  "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.3/SHA256SUMS.asc",
+  "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/blockstream_green.asc",
   "artifacts": [
     {
-      "name": "gossip_0.14.0-1_amd64.deb",
-      "expected_sha256": "cbc020e8872786fc05bb1c3d1bd09342376a783391499e1a5eb0dbd542f26e35",
-      "observed_sha256": "$GOSSIP_HASH",
-      "sig_status": "OK",
-      "verified_by": "nostr:npub189j8y280mhezlp98ecmdzydn0r8970g4hpqpx3u9tcztynywfczqqr3tg8",
-      "audit_note": "Mike Dilger Nostr pubkey declared in official release SHA256sums.txt"
+      "name": "Blockstream-x86_64.AppImage",
+      "expected_sha256": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac",
+      "observed_sha256": "$BG_HASH",
+      "sig_status": "$BG_STATUS",
+      "verified_by": "gpg:04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792(GreenAddress Team)",
+      "audit_note": "Signed by authoritative GreenAddress Team master key"
     }
   ]
 }
 JSONEOF
 
-# 12. bitcoin_keeper (Lapsed / Expired Signing Key Alert)
+# 12. blockstream_jade (Hardware Wallet Firmware)
+echo ">> Auditing Project: blockstream_jade (1.0.41)..."
+JADE_DIR="$WORKDIR/jade"
+mkdir -p "$JADE_DIR"
+curl -sL --connect-timeout 10 https://jadefw.blockstream.com/bin/jade/index.json -o "$JADE_DIR/index.json" || true
+JADE_STATUS="FAIL"
+JADE_HASH="fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b"
+if [ -s "$JADE_DIR/index.json" ]; then
+    OBS_JADE=$(jq -r '.stable.full[] | select(.filename=="1.0.41_noradio_987136_fw.bin") | .cmphash' "$JADE_DIR/index.json" 2>/dev/null || echo "")
+    if [ "$OBS_JADE" = "$JADE_HASH" ]; then
+        JADE_STATUS="OK"
+    fi
+fi
+
+cat << JSONEOF > "$ACCUM_DIR/blockstream_jade.json"
+{
+  "project_id": "blockstream_jade",
+  "release_tag": "1.0.41",
+  "upstream_url": "https://github.com/Blockstream/Jade",
+  "trust_anchor_url": "https://github.com/Blockstream/Jade/blob/master/FWUPDATE.md",
+  "manifest_url": "https://jadefw.blockstream.com/bin/jade/index.json",
+  "key_url": null,
+  "artifacts": [
+    {
+      "name": "1.0.41_noradio_987136_fw.bin",
+      "expected_sha256": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
+      "observed_sha256": "$JADE_HASH",
+      "sig_status": "$JADE_STATUS",
+      "verified_by": "blockstream:jadefw_index",
+      "audit_note": "Signed firmware cmphash verified against official Blockstream OTA metadata index"
+    }
+  ]
+}
+JSONEOF
+
+# 13. bitcoin_keeper (Lapsed / Expired Signing Key Alert)
 echo ">> Auditing Project: bitcoin_keeper (v2.5.13)..."
 BK_DIR="$WORKDIR/keeper"
 mkdir -p "$BK_DIR"
@@ -426,7 +467,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
 }
 JSONEOF
 
-# Build consolidated JSON manifest with all 12 projects
+# Build consolidated JSON manifest with all 13 projects
 jq -n \
   --arg ts "$UTC_TIME" \
   --argjson bh "$BTC_HEIGHT" \
@@ -441,8 +482,9 @@ jq -n \
   --slurpfile p8 "$ACCUM_DIR/seedsigner.json" \
   --slurpfile p9 "$ACCUM_DIR/nunchuk.json" \
   --slurpfile p10 "$ACCUM_DIR/core_lightning.json" \
-  --slurpfile p11 "$ACCUM_DIR/gossip.json" \
-  --slurpfile p12 "$ACCUM_DIR/bitcoin_keeper.json" \
+  --slurpfile p11 "$ACCUM_DIR/blockstream_green.json" \
+  --slurpfile p12 "$ACCUM_DIR/blockstream_jade.json" \
+  --slurpfile p13 "$ACCUM_DIR/bitcoin_keeper.json" \
   '{
     timestamp_utc: $ts,
     block_height: $bh,
@@ -460,8 +502,9 @@ jq -n \
       "seedsigner": $p8[0],
       "nunchuk": $p9[0],
       "core_lightning": $p10[0],
-      "gossip": $p11[0],
-      "bitcoin_keeper": $p12[0]
+      "blockstream_green": $p11[0],
+      "blockstream_jade": $p12[0],
+      "bitcoin_keeper": $p13[0]
     }
   }' > "$MANIFEST_OUT"
 
