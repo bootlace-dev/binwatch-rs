@@ -291,7 +291,7 @@ fn main() -> io::Result<()> {
                     upstream_url: "https://github.com/bootlace-dev/pipek1".to_string(),
                     trust_anchor_url: Some("https://github.com/bootlace-dev/pipek1/blob/master/SPECIFICATION.md".to_string()),
                     manifest_url: Some("https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
-                    key_url: Some("https://bootlace-dev.github.io/binwatch-rs/keys/pipek1.asc".to_string()),
+                    key_url: None,
                     artifacts: vec![BinaryArtifact {
                         name: "pipek1-x86_64-linux-musl".to_string(),
                         expected_sha256: "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string(),

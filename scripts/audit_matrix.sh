@@ -67,7 +67,7 @@ cat << JSONEOF > "$ACCUM_DIR/pipek1.json"
   "upstream_url": "https://github.com/bootlace-dev/pipek1",
   "trust_anchor_url": "https://github.com/bootlace-dev/pipek1/blob/master/SPECIFICATION.md",
   "manifest_url": "https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS",
-  "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/pipek1.asc",
+  "key_url": null,
   "artifacts": [
     {
       "name": "pipek1-x86_64-linux-musl",
