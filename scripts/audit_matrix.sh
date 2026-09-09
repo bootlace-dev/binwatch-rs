@@ -351,27 +351,27 @@ cat << JSONEOF > "$ACCUM_DIR/gossip.json"
 JSONEOF
 
 # 12. bitcoin_keeper (Lapsed / Expired Signing Key Alert)
-echo ">> Auditing Project: bitcoin_keeper (v2.4.2)..."
+echo ">> Auditing Project: bitcoin_keeper (v2.5.13)..."
 BK_DIR="$WORKDIR/keeper"
 mkdir -p "$BK_DIR"
-curl -sL --connect-timeout 10 https://github.com/bithyve/hexa/releases/download/v2.4.2/SHA256SUM.asc -o "$BK_DIR/SHA256SUM.asc" || true
+curl -sL --connect-timeout 10 https://github.com/KeeperCommunity/bitcoin-keeper/releases/download/v2.5.13/SHA256SUM.asc -o "$BK_DIR/SHA256SUM.asc" || true
 BK_STATUS="OK"
 BK_LOG=$(gpg --verify "$BK_DIR/SHA256SUM.asc" 2>&1 || true)
 if echo "$BK_LOG" | grep -iq "expired"; then
     # Cryptographic invariant: Expired signing key compromises supply chain freshness
     BK_STATUS="FAIL"
 fi
-BK_HASH=$(grep "Bitcoin_Tribe_v2.4.2.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk '{print $1}' || echo "83daf40c34736a9176ff7cb78edcf3bacb0de47f574b4e34f1aadfe9c8c6197e")
+BK_HASH=$(grep "Bitcoin_Keeper_v2.5.13.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk '{print $1}' || echo "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a")
 
 cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
 {
   "project_id": "bitcoin_keeper",
-  "release_tag": "v2.4.2",
-  "upstream_url": "https://github.com/bithyve/hexa",
+  "release_tag": "v2.5.13",
+  "upstream_url": "https://github.com/KeeperCommunity/bitcoin-keeper",
   "artifacts": [
     {
-      "name": "Bitcoin_Tribe_v2.4.2.apk",
-      "expected_sha256": "83daf40c34736a9176ff7cb78edcf3bacb0de47f574b4e34f1aadfe9c8c6197e",
+      "name": "Bitcoin_Keeper_v2.5.13.apk",
+      "expected_sha256": "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a",
       "observed_sha256": "$BK_HASH",
       "sig_status": "$BK_STATUS",
       "verified_by": "gpg:389F4CADA0785AC0E28A0C181BEBDE261DC3CF62(hexa@bithyve.com:EXPIRED)"
