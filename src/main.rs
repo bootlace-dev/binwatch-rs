@@ -178,9 +178,12 @@ impl ManifestAudit {
             }
         }
 
-        // Output fails at the top
+        // Output fails at the top, then a separating blank line, then passes
         for entry in &failed_entries {
             out.push_str(entry);
+        }
+        if !failed_entries.is_empty() && !passed_entries.is_empty() {
+            out.push('\n');
         }
         for entry in &passed_entries {
             out.push_str(entry);

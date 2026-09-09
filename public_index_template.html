@@ -13,7 +13,7 @@
       --green: #238636;
       --accent: #58a6ff;
       --code-bg: #090d13;
-      --warn: #d29922;
+      --warn: #ff7b72;
       --danger: #f85149;
     }
     body {
@@ -83,19 +83,34 @@
       cursor: help;
     }
     .status-expired {
-      color: var(--warn);
+      color: #ff7b72;
+      background: #ff7b7218;
+      border: 1px solid #ff7b7244;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
       font-weight: bold;
       cursor: help;
+      display: inline-block;
     }
     .status-badsig {
       color: var(--danger);
+      background: #f8514922;
+      border: 1px solid #f8514955;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
       font-weight: bold;
       cursor: help;
+      display: inline-block;
     }
     .status-fail {
       color: var(--danger);
+      background: #f8514922;
+      border: 1px solid #f8514955;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
       font-weight: bold;
       cursor: help;
+      display: inline-block;
     }
     .mono {
       font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
@@ -131,6 +146,16 @@
       font-weight: bold;
       cursor: help;
     }
+    .divider-row td {
+      padding: 0.75rem 0.5rem 0.25rem 0.5rem;
+      background: transparent;
+      border-bottom: 1px dashed #30363d;
+      color: #8b949e;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
     pre {
       background: var(--code-bg);
       border: 1px solid var(--border);
@@ -152,10 +177,6 @@
       color: #8b949e;
       text-align: center;
       margin-top: 3rem;
-    }
-    .tooltip-hint {
-      border-bottom: 1px dotted #8b949e;
-      cursor: help;
     }
   </style>
 </head>
@@ -252,10 +273,23 @@
         });
 
         let idx = 0;
+        let dividerInserted = false;
+        const hasFails = entries.some(e => e.status !== 'OK');
+
         for (const item of entries) {
           idx++;
           const p = item.project;
           const worstStatus = item.status;
+
+          // Insert a clean separator row when transitioning from fails to passes
+          if (hasFails && worstStatus === 'OK' && !dividerInserted) {
+            const divRow = document.createElement('tr');
+            divRow.className = 'divider-row';
+            divRow.innerHTML = `<td colspan="5">✓ Fully Verified & Non-Expired Projects</td>`;
+            tbody.appendChild(divRow);
+            dividerInserted = true;
+          }
+
           const row = document.createElement('tr');
           row.className = 'project-row';
           row.setAttribute('data-target', 'drawer-' + idx);
@@ -311,7 +345,7 @@
                   <div class="drawer-label" title="Mirror of the armored public key file hosted statically on GitHub Pages for independent audits.">Public Key Mirror:</div>
                   <div>${keyLink}</div>
                   <div class="drawer-label" title="Diagnostic findings, signature verification output, and key expiration status.">Audit Diagnostic:</div>
-                  <div style="color: ${worstStatus === 'OK' ? '#3fb950' : (worstStatus === 'EXPIRED' ? 'var(--warn)' : 'var(--danger)')}; font-weight: 500;" title="Live audit log note">${note}</div>
+                  <div style="color: ${worstStatus === 'OK' ? '#3fb950' : '#ff7b72'}; font-weight: 500;" title="Live audit log note">${note}</div>
                 </div>
               </div>
             </td>
