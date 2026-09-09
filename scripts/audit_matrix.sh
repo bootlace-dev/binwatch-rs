@@ -113,7 +113,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_core.json"
   "upstream_url": "https://bitcoincore.org/bin",
   "trust_anchor_url": "https://bitcoincore.org/en/download/",
   "manifest_url": "https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS",
-  "key_url": "https://github.com/bitcoin/bitcoin/tree/master/contrib/builder-keys",
+  "key_url": "https://github.com/bitcoin-core/guix.sigs/tree/main/builder-keys",
   "artifacts": [
     {
       "name": "bitcoin-29.4-x86_64-linux-gnu.tar.gz",
@@ -376,7 +376,7 @@ cat << JSONEOF > "$ACCUM_DIR/gossip.json"
   "project_id": "gossip",
   "release_tag": "v0.14.0",
   "upstream_url": "https://github.com/mikedilger/gossip",
-  "trust_anchor_url": "https://github.com/mikedilger/gossip/blob/master/README.txt",
+  "trust_anchor_url": "https://github.com/mikedilger/gossip/blob/master/README.md",
   "manifest_url": "https://github.com/mikedilger/gossip/releases/download/v0.14.0/SHA256sums.txt",
   "key_url": null,
   "artifacts": [
@@ -420,7 +420,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
       "observed_sha256": "$BK_HASH",
       "sig_status": "$BK_STATUS",
       "verified_by": "gpg:389F4CADA0785AC0E28A0C181BEBDE261DC3CF62(hexa@bithyve.com:EXPIRED)",
-      "audit_note": "Signed by declared key from KeeperCommunity Readme.md; key expired on 2026-08-06"
+      "audit_note": "Signed by declared key from KeeperCommunity README; key expired on 2026-08-06"
     }
   ]
 }
