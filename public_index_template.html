@@ -66,11 +66,11 @@
       word-break: break-word;
       overflow-wrap: break-word;
     }
-    th:nth-child(1) { width: 20%; }
+    th:nth-child(1) { width: 18%; }
     th:nth-child(2) { width: 15%; }
-    th:nth-child(3) { width: 12%; }
-    th:nth-child(4) { width: 33%; }
-    th:nth-child(5) { width: 20%; }
+    th:nth-child(3) { width: 14%; }
+    th:nth-child(4) { width: 38%; }
+    th:nth-child(5) { width: 15%; }
     th {
       color: #8b949e;
       font-size: 0.85rem;
@@ -136,10 +136,50 @@
     }
     .drawer-grid {
       display: grid;
-      grid-template-columns: 150px 1fr;
-      row-gap: 0.5rem;
+      grid-template-columns: 160px 1fr;
+      row-gap: 0.6rem;
       column-gap: 1rem;
       margin-top: 0.5rem;
+    }
+    .hash-badge {
+      font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      background: #21262d;
+      color: #79c0ff;
+      border: 1px solid #30363d;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      display: inline-block;
+      cursor: copy;
+      margin-left: 0.25rem;
+    }
+    .stability-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #3fb950;
+      background: #2386361a;
+      border: 1px solid #23863644;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+    .artifact-list {
+      margin-top: 0.35rem;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #161b2288;
+    }
+    .artifact-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid #21262d;
+      font-size: 0.8rem;
+    }
+    .artifact-item:last-child {
+      border-bottom: none;
     }
     .drawer-label {
       color: #8b949e;
@@ -276,6 +316,22 @@
         let dividerInserted = false;
         const hasFails = entries.some(e => e.status !== 'OK');
 
+        function formatShortEngine(verEngine) {
+          if (!verEngine) return 'unknown';
+          if (verEngine.includes('npub1')) {
+            return verEngine.replace(/(npub1[a-z0-9]{4})[a-z0-9]+([a-z0-9]{6})/, '$1...$2');
+          }
+          const gpgMatch = verEngine.match(/^gpg:([A-Fa-f0-9]{32,40})(\((.*)\))?$/);
+          if (gpgMatch) {
+            const fullFp = gpgMatch[1];
+            const shortId = '0x' + fullFp.substring(fullFp.length - 8).toUpperCase();
+            let tag = gpgMatch[3] ? gpgMatch[3].replace(/:EXPIRED|:OK|:BADSIG/g, '') : '';
+            const tagStr = tag ? ` (${tag})` : '';
+            return `gpg:${shortId}${tagStr}`;
+          }
+          return verEngine;
+        }
+
         for (const item of entries) {
           idx++;
           const p = item.project;
@@ -293,7 +349,7 @@
           const row = document.createElement('tr');
           row.className = 'project-row';
           row.setAttribute('data-target', 'drawer-' + idx);
-          row.title = 'Click to inspect cryptographic chain-of-custody, trust anchor, and signing keys for ' + p.project_id;
+          row.title = 'Click to inspect cryptographic chain-of-custody, stability telemetry, and signing keys for ' + p.project_id;
 
           let badgeHtml = '<span class="status-ok" title="All cryptographic signatures verified and artifact hashes matched.">✅ OK</span>';
           if (worstStatus === 'EXPIRED') {
@@ -307,17 +363,18 @@
           }
 
           let verEngine = p.artifacts[0] ? p.artifacts[0].verified_by : 'unknown';
-          let displayEngine = verEngine;
-          if (verEngine.includes('npub1') && verEngine.length > 28) {
-            displayEngine = verEngine.replace(/(npub1[a-z0-9]{6})[a-z0-9]+([a-z0-9]{6})/, '$1...$2');
-          }
+          let displayEngine = formatShortEngine(verEngine);
+
+          const primaryHash = (p.artifacts[0] && p.artifacts[0].expected_sha256) ? p.artifacts[0].expected_sha256.substring(0, 6) : '';
+          const hashBadge = primaryHash ? `<span class="hash-badge" title="Primary expected SHA-256: ${p.artifacts[0].expected_sha256}">#${primaryHash}</span>` : '';
+          const fileCountLabel = p.artifacts.length === 1 ? '1 file' : `${p.artifacts.length} files`;
 
           const artList = p.artifacts.map(a => `${a.name} (${a.sig_status})`).join('\n');
 
           row.innerHTML = `
             <td><strong><a href="${p.upstream_url}" target="_blank" onclick="event.stopPropagation()" title="Open official ${p.project_id} upstream repository: ${p.upstream_url}">${p.project_id}</a></strong></td>
             <td class="mono" title="Audited release tag: ${p.release_tag}">${p.release_tag}</td>
-            <td title="${p.artifacts.length} file(s) audited:\n${artList}">${p.artifacts.length} file(s)</td>
+            <td title="${p.artifacts.length} file(s) audited:\n${artList}">${fileCountLabel} ${hashBadge}</td>
             <td class="mono" style="font-size:0.75rem" title="Authoritative verification engine:\n${verEngine}">${displayEngine}</td>
             <td>${badgeHtml}</td>
           `;
@@ -333,11 +390,44 @@
           const manifestLink = p.manifest_url ? `<a href="${p.manifest_url}" target="_blank" title="Direct download link to upstream signed checksum manifest or signature.">${p.manifest_url}</a>` : '<span style="color:#8b949e" title="Embedded directly inside release artifacts">Embedded in release</span>';
           const keyLink = p.key_url ? `<a href="${p.key_url}" target="_blank" title="Statically mirrored armored public key on BinWatch GitHub Pages.">${p.key_url}</a>` : '<span style="color:#8b949e" title="BIP-340 Schnorr pubkey or multi-builder quorum key directory">Schnorr npub / Multi-builder Quorum</span>';
 
+          const hist = p.history;
+          const stabilityBadge = hist
+            ? `<span class="stability-badge">🛡️ ${hist.days_stable} days stable</span> <span style="color:#8b949e; font-size:0.8rem;">(${hist.consecutive_epochs} consecutive runs)</span>`
+            : `<span class="stability-badge">🛡️ Live run</span>`;
+
+          const firstObserved = hist
+            ? `${hist.first_seen_utc} ${hist.first_seen_block ? '(BTC Block ' + hist.first_seen_block + ')' : ''}`
+            : `${data.timestamp_utc} (BTC Block ${data.block_height || 'unknown'})`;
+
+          const priorState = (hist && hist.previous_release_tag)
+            ? `Tag: <strong>${hist.previous_release_tag}</strong> | Hash: <span class="hash-badge">#${hist.previous_primary_hash ? hist.previous_primary_hash.substring(0, 6) : 'unknown'}</span> | Mutated: ${hist.last_changed_utc || 'unknown'}`
+            : '<span style="color:#8b949e">Baseline initial observation (no prior mutations)</span>';
+
+          const artifactRows = p.artifacts.map(a => {
+            const h6 = a.expected_sha256.substring(0, 6);
+            const obs = a.observed_sha256 ? a.observed_sha256.substring(0, 10) + '...' : 'manifest-only';
+            const statColor = a.sig_status === 'OK' ? '#3fb950' : '#ff7b72';
+            return `
+              <div class="artifact-item">
+                <div>
+                  <span class="mono" style="font-weight:600;">${a.name}</span>
+                  <span class="hash-badge" title="Expected SHA-256: ${a.expected_sha256}">#${h6}</span>
+                </div>
+                <div>
+                  <span class="mono" style="font-size:0.75rem; color:#8b949e;">${obs}</span>
+                  <span style="margin-left:0.5rem; font-weight:bold; color:${statColor};">${a.sig_status}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+
           drawerRow.innerHTML = `
             <td colspan="5">
               <div class="drawer-content">
-                <div style="margin-bottom: 0.5rem;"><strong title="Unbroken chain from upstream authoritative declaration to artifact verification.">Chain-of-Custody & Cryptographic Provenance:</strong></div>
+                <div style="margin-bottom: 0.5rem;"><strong title="Unbroken chain from upstream authoritative declaration to artifact verification.">Cryptographic Chain-of-Custody:</strong></div>
                 <div class="drawer-grid">
+                  <div class="drawer-label" title="Authoritative verification engine or signing key ID.">Verification Engine:</div>
+                  <div class="mono" style="font-size:0.8rem;">${verEngine}</div>
                   <div class="drawer-label" title="The authoritative upstream document, README, or git tree declaring why this signing key is trusted.">Trust Anchor:</div>
                   <div>${trustAnchorLink}</div>
                   <div class="drawer-label" title="The raw signed checksum manifest (SHA256SUMS / manifest.txt) produced by the project maintainers.">Signed Manifest:</div>
@@ -346,6 +436,21 @@
                   <div>${keyLink}</div>
                   <div class="drawer-label" title="Diagnostic findings, signature verification output, and key expiration status.">Audit Diagnostic:</div>
                   <div style="color: ${worstStatus === 'OK' ? '#3fb950' : '#ff7b72'}; font-weight: 500;" title="Live audit log note">${note}</div>
+                </div>
+
+                <div style="margin-top: 1rem; margin-bottom: 0.5rem;"><strong title="Multi-epoch stability and continuity tracking across verification runs.">Stability & Historical Continuity:</strong></div>
+                <div class="drawer-grid">
+                  <div class="drawer-label" title="Number of days and consecutive verification runs this exact hash and signature have remained unchanged.">Observed Stability:</div>
+                  <div>${stabilityBadge}</div>
+                  <div class="drawer-label" title="UTC timestamp and Bitcoin block height when this exact release was first verified by BinWatch.">First Observed:</div>
+                  <div class="mono" style="font-size:0.8rem;">${firstObserved}</div>
+                  <div class="drawer-label" title="Previous release tag and binary hash observed prior to the latest mutation.">Prior State:</div>
+                  <div style="font-size:0.85rem;">${priorState}</div>
+                </div>
+
+                <div style="margin-top: 1rem; margin-bottom: 0.35rem;"><strong title="Individual binary artifacts and SHA-256 digests audited in this release.">Audited Artifacts (${p.artifacts.length}):</strong></div>
+                <div class="artifact-list">
+                  ${artifactRows}
                 </div>
               </div>
             </td>

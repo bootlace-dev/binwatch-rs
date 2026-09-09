@@ -21,6 +21,21 @@ pub struct BinaryArtifact {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ProjectHistory {
+    pub first_seen_utc: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub first_seen_block: Option<u64>,
+    pub days_stable: u64,
+    pub consecutive_epochs: u64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub previous_release_tag: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub previous_primary_hash: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub last_changed_utc: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProjectAudit {
     pub project_id: String,
     pub release_tag: String,
@@ -31,6 +46,8 @@ pub struct ProjectAudit {
     pub manifest_url: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub key_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub history: Option<ProjectHistory>,
     pub artifacts: Vec<BinaryArtifact>,
 }
 
@@ -156,17 +173,31 @@ impl ManifestAudit {
                 _ => "❌ BADSIG:",
             };
 
+            let primary_hex = project
+                .artifacts
+                .first()
+                .map(|a| {
+                    let h = if a.expected_sha256.len() >= 6 {
+                        &a.expected_sha256[..6]
+                    } else {
+                        &a.expected_sha256
+                    };
+                    format!("#{}", h)
+                })
+                .unwrap_or_default();
+
             let entry_str = if let Some(detail) = failure_detail {
                 format!(
-                    "{} {} ({}) - {}\n",
-                    badge, project_id, project.release_tag, detail
+                    "{} {} ({}) [{}] - {}\n",
+                    badge, project_id, project.release_tag, primary_hex, detail
                 )
             } else {
                 format!(
-                    "{} {} ({}) - {} artifact(s)\n",
+                    "{} {} ({}) [{}] - {} artifact(s)\n",
                     badge,
                     project_id,
                     project.release_tag,
+                    primary_hex,
                     project.artifacts.len()
                 )
             };
@@ -292,6 +323,7 @@ fn main() -> io::Result<()> {
                     trust_anchor_url: Some("https://github.com/bootlace-dev/pipek1/blob/master/SPECIFICATION.md".to_string()),
                     manifest_url: Some("https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
                     key_url: None,
+                    history: None,
                     artifacts: vec![BinaryArtifact {
                         name: "pipek1-x86_64-linux-musl".to_string(),
                         expected_sha256: "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string(),
@@ -313,6 +345,7 @@ fn main() -> io::Result<()> {
                     trust_anchor_url: Some("https://github.com/bootlace-dev/subzero-keyosk".to_string()),
                     manifest_url: None,
                     key_url: None,
+                    history: None,
                     artifacts: vec![BinaryArtifact {
                         name: "subzero-x86_64-musl".to_string(),
                         expected_sha256: "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string(),
@@ -334,6 +367,7 @@ fn main() -> io::Result<()> {
                     trust_anchor_url: Some("https://bitcoincore.org/en/download/".to_string()),
                     manifest_url: Some("https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS.asc".to_string()),
                     key_url: None,
+                    history: None,
                     artifacts: vec![
                         BinaryArtifact {
                             name: "bitcoin-29.4-x86_64-linux-gnu.tar.gz".to_string(),

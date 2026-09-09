@@ -626,6 +626,11 @@ jq -n \
     }
   }' > "$MANIFEST_OUT"
 
+if [ -f "$REPO_DIR/scripts/update_history.py" ]; then
+    echo ">> Updating stability and historical continuity telemetry..."
+    python3 "$REPO_DIR/scripts/update_history.py" "$MANIFEST_OUT" "$REPO_DIR/data/history.json"
+fi
+
 echo ">> Finalizing Merkle root & hex seal with binwatch..."
 $BINWATCH_BIN finalize "$MANIFEST_OUT"
 

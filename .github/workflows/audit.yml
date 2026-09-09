@@ -53,6 +53,14 @@ jobs:
           python3 ./scripts/nostr_profile.py
           python3 ./scripts/nostr_broadcast.py public/digest.txt public/manifest.json
 
+      - name: Commit Updated Historical Telemetry
+        run: |
+          git config user.name "bootlace-dev"
+          git config user.email "bootlace-dev@users.noreply.github.com"
+          git add data/history.json
+          git commit -m "chore(history): update stability telemetry [skip ci]" || true
+          git push origin master || true
+
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
