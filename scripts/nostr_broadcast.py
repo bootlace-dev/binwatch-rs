@@ -205,6 +205,10 @@ async def main_async():
     pubkey_bytes = pubkey_gen(sk_bytes)
     pubkey_x = pubkey_bytes.hex()
 
+    import re
+    seal_match = re.search(r'Merkle Seal:\s*#([A-Fa-f0-9]{6})', content)
+    seal_tag = seal_match.group(1).upper() if seal_match else None
+
     created_at = int(time.time())
     tags = [
         ["t", "binwatch"],
@@ -212,6 +216,8 @@ async def main_async():
         ["t", "supplychain"],
         ["r", "https://bootlace-dev.github.io/binwatch-rs/"]
     ]
+    if seal_tag:
+        tags.insert(1, ["t", seal_tag])
 
     event_data = [0, pubkey_x, created_at, 1, tags, content]
     serialized = json.dumps(event_data, separators=(',', ':'), ensure_ascii=False)

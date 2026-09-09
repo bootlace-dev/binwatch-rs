@@ -182,7 +182,7 @@ impl ManifestAudit {
                     } else {
                         &a.expected_sha256
                     };
-                    format!("#{}", h)
+                    h.to_string()
                 })
                 .unwrap_or_default();
 
@@ -230,26 +230,24 @@ impl ManifestAudit {
             if expired_keys > 0 {
                 alert_parts.push(format!("❌ {} Expired Key", expired_keys));
             }
-            if hash_drifts > 0 {
-                alert_parts.push(format!("❌ {} Hash Drift", hash_drifts));
-            }
             if bad_sigs > 0 {
                 alert_parts.push(format!("❌ {} Bad Signature", bad_sigs));
             }
+            if hash_drifts > 0 {
+                alert_parts.push(format!("❌ {} Hash Drift", hash_drifts));
+            }
             if missing_artifacts > 0 {
-                alert_parts.push(format!("❌ {} Missing", missing_artifacts));
+                alert_parts.push(format!("❌ {} Missing Artifact", missing_artifacts));
             }
             out.push_str(&format!(" | {}", alert_parts.join(", ")));
         }
-        out.push('\n');
+        out.push_str("\n\nCanonical Merkle Root:\n");
+        out.push_str(&format!("{}\n", self.merkle_root_sha256));
 
-        out.push_str(&format!(
-            "\nCanonical Merkle Root:\n{}\n",
-            self.merkle_root_sha256
-        ));
         out.push_str("\nLive Web Dashboard:\nhttps://bootlace-dev.github.io/binwatch-rs/\n");
         out.push_str("\nRaw Cryptographic Manifest:\nhttps://bootlace-dev.github.io/binwatch-rs/manifest.json\n");
         out.push_str("\nSource & Audit Logs:\nhttps://github.com/bootlace-dev/binwatch-rs\n");
+        out.push_str("\n#binwatch #bitcoin #supplychain\n");
 
         out
     }
