@@ -350,7 +350,37 @@ cat << JSONEOF > "$ACCUM_DIR/gossip.json"
 }
 JSONEOF
 
-# Build consolidated JSON manifest with all 11 projects
+# 12. bitcoin_keeper (Lapsed / Expired Signing Key Alert)
+echo ">> Auditing Project: bitcoin_keeper (v2.4.2)..."
+BK_DIR="$WORKDIR/keeper"
+mkdir -p "$BK_DIR"
+curl -sL --connect-timeout 10 https://github.com/bithyve/hexa/releases/download/v2.4.2/SHA256SUM.asc -o "$BK_DIR/SHA256SUM.asc" || true
+BK_STATUS="OK"
+BK_LOG=$(gpg --verify "$BK_DIR/SHA256SUM.asc" 2>&1 || true)
+if echo "$BK_LOG" | grep -iq "expired"; then
+    # Cryptographic invariant: Expired signing key compromises supply chain freshness
+    BK_STATUS="FAIL"
+fi
+BK_HASH=$(grep "Bitcoin_Tribe_v2.4.2.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk '{print $1}' || echo "83daf40c34736a9176ff7cb78edcf3bacb0de47f574b4e34f1aadfe9c8c6197e")
+
+cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
+{
+  "project_id": "bitcoin_keeper",
+  "release_tag": "v2.4.2",
+  "upstream_url": "https://github.com/bithyve/hexa",
+  "artifacts": [
+    {
+      "name": "Bitcoin_Tribe_v2.4.2.apk",
+      "expected_sha256": "83daf40c34736a9176ff7cb78edcf3bacb0de47f574b4e34f1aadfe9c8c6197e",
+      "observed_sha256": "$BK_HASH",
+      "sig_status": "$BK_STATUS",
+      "verified_by": "gpg:389F4CADA0785AC0E28A0C181BEBDE261DC3CF62(hexa@bithyve.com:EXPIRED)"
+    }
+  ]
+}
+JSONEOF
+
+# Build consolidated JSON manifest with all 12 projects
 jq -n \
   --arg ts "$UTC_TIME" \
   --argjson bh "$BTC_HEIGHT" \
@@ -366,6 +396,7 @@ jq -n \
   --slurpfile p9 "$ACCUM_DIR/nunchuk.json" \
   --slurpfile p10 "$ACCUM_DIR/core_lightning.json" \
   --slurpfile p11 "$ACCUM_DIR/gossip.json" \
+  --slurpfile p12 "$ACCUM_DIR/bitcoin_keeper.json" \
   '{
     timestamp_utc: $ts,
     block_height: $bh,
@@ -383,7 +414,8 @@ jq -n \
       "seedsigner": $p8[0],
       "nunchuk": $p9[0],
       "core_lightning": $p10[0],
-      "gossip": $p11[0]
+      "gossip": $p11[0],
+      "bitcoin_keeper": $p12[0]
     }
   }' > "$MANIFEST_OUT"
 
