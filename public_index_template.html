@@ -13,6 +13,8 @@
       --green: #238636;
       --accent: #58a6ff;
       --code-bg: #090d13;
+      --warn: #d29922;
+      --danger: #f85149;
     }
     body {
       background: var(--bg);
@@ -24,7 +26,7 @@
       justify-content: center;
     }
     .container {
-      max-width: 800px;
+      max-width: 960px;
       width: 100%;
     }
     .header {
@@ -55,7 +57,6 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
-      table-layout: fixed;
     }
     th, td {
       text-align: left;
@@ -64,11 +65,11 @@
       word-break: break-word;
       overflow-wrap: break-word;
     }
-    th:nth-child(1) { width: 22%; }
-    th:nth-child(2) { width: 18%; }
-    th:nth-child(3) { width: 14%; }
-    th:nth-child(4) { width: 34%; }
-    th:nth-child(5) { width: 12%; }
+    th:nth-child(1) { width: 20%; }
+    th:nth-child(2) { width: 15%; }
+    th:nth-child(3) { width: 12%; }
+    th:nth-child(4) { width: 33%; }
+    th:nth-child(5) { width: 20%; }
     th {
       color: #8b949e;
       font-size: 0.85rem;
@@ -78,11 +79,50 @@
       color: #3fb950;
       font-weight: bold;
     }
+    .status-expired {
+      color: var(--warn);
+      font-weight: bold;
+    }
+    .status-badsig {
+      color: var(--danger);
+      font-weight: bold;
+    }
+    .status-fail {
+      color: var(--danger);
+      font-weight: bold;
+    }
     .mono {
       font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
       font-size: 0.85rem;
       word-break: break-all;
       overflow-wrap: anywhere;
+    }
+    .project-row {
+      cursor: pointer;
+    }
+    .project-row:hover {
+      background: #21262d55;
+    }
+    .drawer-row td {
+      padding: 0;
+      background: #0d1117aa;
+      border-bottom: 1px solid var(--border);
+    }
+    .drawer-content {
+      padding: 1rem 1.25rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      row-gap: 0.5rem;
+      column-gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .drawer-label {
+      color: #8b949e;
+      font-weight: bold;
     }
     pre {
       background: var(--code-bg);
@@ -119,7 +159,7 @@
     </div>
 
     <div class="card">
-      <h3>Latest Audit Run</h3>
+      <h3>Latest Audit Matrix (12 Core Projects)</h3>
       <div id="meta-display" class="mono" style="margin-bottom: 1rem; color: #8b949e;">Loading...</div>
       <table>
         <thead>
@@ -135,6 +175,9 @@
           <tr><td colspan="5">Loading audit matrix...</td></tr>
         </tbody>
       </table>
+      <div style="font-size: 0.8rem; color: #8b949e; margin-top: 0.75rem;">
+        💡 Click on any project row to inspect its cryptographic Chain-of-Custody (Trust Anchor, Manifest URL, and Hosted Signing Key).
+      </div>
     </div>
 
     <div class="card">
@@ -143,12 +186,13 @@
     </div>
 
     <div class="card">
-      <h3>Raw Cryptographic Manifest</h3>
+      <h3>Raw Cryptographic Manifest & Links</h3>
       <p style="font-size: 0.9rem;">Download full deterministic audit payload:</p>
       <ul style="font-size: 0.9rem;">
         <li><a href="manifest.json">manifest.json</a> (Plaintext JSON)</li>
         <li><a href="manifest.json.gz">manifest.json.gz</a> (Compressed GZIP)</li>
         <li><a href="digest.txt">digest.txt</a> (Nostr Kind 1 Plaintext)</li>
+        <li><a href="keys/">keys/</a> (Public key mirror directory)</li>
       </ul>
     </div>
 
@@ -168,25 +212,100 @@
         
         const tbody = document.getElementById('matrix-body');
         tbody.innerHTML = '';
-        for (const [k, p] of Object.entries(data.projects)) {
+        
+        // Segregate failed projects to the top
+        const entries = Object.entries(data.projects).map(([k, p]) => {
+          let worstStatus = 'OK';
+          for (const a of p.artifacts) {
+            if (a.sig_status === 'EXPIRED') {
+              if (worstStatus === 'OK') worstStatus = 'EXPIRED';
+            } else if (a.sig_status === 'HASH_DRIFT') {
+              worstStatus = 'HASH_DRIFT';
+            } else if (a.sig_status === 'MISSING') {
+              if (worstStatus !== 'BADSIG' && worstStatus !== 'HASH_DRIFT') worstStatus = 'MISSING';
+            } else if (a.sig_status !== 'OK') {
+              worstStatus = 'BADSIG';
+            }
+          }
+          return { key: k, project: p, status: worstStatus };
+        });
+
+        // Fails sorted first, then passes
+        entries.sort((a, b) => {
+          if (a.status !== 'OK' && b.status === 'OK') return -1;
+          if (a.status === 'OK' && b.status !== 'OK') return 1;
+          return a.key.localeCompare(b.key);
+        });
+
+        let idx = 0;
+        for (const item of entries) {
+          idx++;
+          const p = item.project;
+          const worstStatus = item.status;
           const row = document.createElement('tr');
-          const allOk = p.artifacts.every(a => a.sig_status === 'OK');
+          row.className = 'project-row';
+          row.setAttribute('data-target', 'drawer-' + idx);
+
+          let badgeHtml = '<span class="status-ok">✅ OK</span>';
+          if (worstStatus === 'EXPIRED') {
+            badgeHtml = '<span class="status-expired">⏳ EXPIRED</span>';
+          } else if (worstStatus === 'BADSIG') {
+            badgeHtml = '<span class="status-badsig">🖊️ BADSIG</span>';
+          } else if (worstStatus === 'HASH_DRIFT') {
+            badgeHtml = '<span class="status-fail">⚠️ HASH_DRIFT</span>';
+          } else if (worstStatus === 'MISSING') {
+            badgeHtml = '<span class="status-fail">📭 MISSING</span>';
+          }
+
           let verEngine = p.artifacts[0] ? p.artifacts[0].verified_by : 'unknown';
-          
-          // Truncate long npubs nicely for table display while preserving full string in tooltip
           let displayEngine = verEngine;
           if (verEngine.includes('npub1') && verEngine.length > 28) {
             displayEngine = verEngine.replace(/(npub1[a-z0-9]{6})[a-z0-9]+([a-z0-9]{6})/, '$1...$2');
           }
 
           row.innerHTML = `
-            <td><strong><a href="${p.upstream_url}">${p.project_id}</a></strong></td>
+            <td><strong><a href="${p.upstream_url}" target="_blank" onclick="event.stopPropagation()">${p.project_id}</a></strong></td>
             <td class="mono">${p.release_tag}</td>
             <td>${p.artifacts.length} file(s)</td>
             <td class="mono" style="font-size:0.75rem" title="${verEngine}">${displayEngine}</td>
-            <td class="${allOk ? 'status-ok' : ''}">${allOk ? '✅ OK' : '🚨 FAIL'}</td>
+            <td>${badgeHtml}</td>
           `;
+
+          // Drawer row
+          const drawerRow = document.createElement('tr');
+          drawerRow.id = 'drawer-' + idx;
+          drawerRow.className = 'drawer-row';
+          drawerRow.style.display = 'none';
+
+          const note = (p.artifacts[0] && p.artifacts[0].audit_note) ? p.artifacts[0].audit_note : 'Verified against upstream cryptographic declaration';
+          const trustAnchorLink = p.trust_anchor_url ? `<a href="${p.trust_anchor_url}" target="_blank">${p.trust_anchor_url}</a>` : '<span style="color:#8b949e">In-repo specification</span>';
+          const manifestLink = p.manifest_url ? `<a href="${p.manifest_url}" target="_blank">${p.manifest_url}</a>` : '<span style="color:#8b949e">Embedded in release</span>';
+          const keyLink = p.key_url ? `<a href="${p.key_url}" target="_blank">${p.key_url}</a>` : '<span style="color:#8b949e">Schnorr npub / Multi-builder Quorum</span>';
+
+          drawerRow.innerHTML = `
+            <td colspan="5">
+              <div class="drawer-content">
+                <div style="margin-bottom: 0.5rem;"><strong>Chain-of-Custody & Provenance:</strong></div>
+                <div class="drawer-grid">
+                  <div class="drawer-label">Trust Anchor:</div>
+                  <div>${trustAnchorLink}</div>
+                  <div class="drawer-label">Signed Manifest:</div>
+                  <div>${manifestLink}</div>
+                  <div class="drawer-label">Public Key Mirror:</div>
+                  <div>${keyLink}</div>
+                  <div class="drawer-label">Audit Diagnostic:</div>
+                  <div style="color: ${worstStatus === 'OK' ? '#3fb950' : (worstStatus === 'EXPIRED' ? 'var(--warn)' : 'var(--danger)')}; font-weight: 500;">${note}</div>
+                </div>
+              </div>
+            </td>
+          `;
+
+          row.addEventListener('click', () => {
+            drawerRow.style.display = drawerRow.style.display === 'none' ? 'table-row' : 'none';
+          });
+
           tbody.appendChild(row);
+          tbody.appendChild(drawerRow);
         }
       })
       .catch(err => console.error(err));

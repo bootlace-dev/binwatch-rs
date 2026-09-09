@@ -16,6 +16,8 @@ pub struct BinaryArtifact {
     pub observed_sha256: Option<String>,
     pub sig_status: String, // "OK", "FAIL", "UNVERIFIED"
     pub verified_by: String, // "pipek1:bip340", "gpg:rsa4096", "gpg:ed25519"
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub audit_note: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -23,6 +25,12 @@ pub struct ProjectAudit {
     pub project_id: String,
     pub release_tag: String,
     pub upstream_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub trust_anchor_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub manifest_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub key_url: Option<String>,
     pub artifacts: Vec<BinaryArtifact>,
 }
 
@@ -95,36 +103,109 @@ impl ManifestAudit {
 
         let mut total_artifacts = 0;
         let mut passed_artifacts = 0;
-        let mut failed_artifacts = 0;
+        let mut expired_keys = 0;
+        let mut bad_sigs = 0;
+        let mut hash_drifts = 0;
+        let mut missing_artifacts = 0;
+
+        let mut failed_entries = Vec::new();
+        let mut passed_entries = Vec::new();
 
         for (project_id, project) in &self.projects {
-            let mut project_ok = true;
+            let mut worst_status = "OK";
+            let mut failure_detail = None;
+
             for a in &project.artifacts {
                 total_artifacts += 1;
-                if a.sig_status == "OK" {
-                    passed_artifacts += 1;
-                } else {
-                    failed_artifacts += 1;
-                    project_ok = false;
+                match a.sig_status.as_str() {
+                    "OK" => {
+                        passed_artifacts += 1;
+                    }
+                    "EXPIRED" => {
+                        expired_keys += 1;
+                        if worst_status == "OK" {
+                            worst_status = "EXPIRED";
+                            failure_detail = a.audit_note.clone();
+                        }
+                    }
+                    "HASH_DRIFT" => {
+                        hash_drifts += 1;
+                        worst_status = "HASH_DRIFT";
+                        failure_detail = a.audit_note.clone();
+                    }
+                    "MISSING" => {
+                        missing_artifacts += 1;
+                        if worst_status != "BADSIG" && worst_status != "HASH_DRIFT" {
+                            worst_status = "MISSING";
+                            failure_detail = a.audit_note.clone();
+                        }
+                    }
+                    _ => {
+                        bad_sigs += 1;
+                        worst_status = "BADSIG";
+                        failure_detail = a.audit_note.clone();
+                    }
                 }
             }
 
-            let badge = if project_ok { "✅" } else { "🚨 FAIL" };
-            out.push_str(&format!(
-                "  • {} {} ({}) - {} artifacts\n",
-                badge,
-                project_id,
-                project.release_tag,
-                project.artifacts.len()
-            ));
+            let badge = match worst_status {
+                "OK" => "✅",
+                "EXPIRED" => "⏳ EXPIRED",
+                "HASH_DRIFT" => "⚠️ HASH_DRIFT",
+                "MISSING" => "📭 MISSING",
+                _ => "🖊️ BADSIG",
+            };
+
+            let entry_str = if let Some(detail) = failure_detail {
+                format!(
+                    "  • {} {} ({}) - {}\n",
+                    badge, project_id, project.release_tag, detail
+                )
+            } else {
+                format!(
+                    "  • {} {} ({}) - {} artifact(s)\n",
+                    badge,
+                    project_id,
+                    project.release_tag,
+                    project.artifacts.len()
+                )
+            };
+
+            if worst_status == "OK" {
+                passed_entries.push(entry_str);
+            } else {
+                failed_entries.push(entry_str);
+            }
         }
 
+        // Output fails at the top
+        for entry in &failed_entries {
+            out.push_str(entry);
+        }
+        for entry in &passed_entries {
+            out.push_str(entry);
+        }
+
+        let total_alerts = expired_keys + bad_sigs + hash_drifts + missing_artifacts;
         out.push_str(&format!(
             "\nTotal Verified: {}/{} OK",
             passed_artifacts, total_artifacts
         ));
-        if failed_artifacts > 0 {
-            out.push_str(&format!(" | 🚨 {} ALERTS DETECTED!", failed_artifacts));
+        if total_alerts > 0 {
+            let mut alert_parts = Vec::new();
+            if expired_keys > 0 {
+                alert_parts.push(format!("⏳ {} Expired Key", expired_keys));
+            }
+            if hash_drifts > 0 {
+                alert_parts.push(format!("⚠️ {} Hash Drift", hash_drifts));
+            }
+            if bad_sigs > 0 {
+                alert_parts.push(format!("🚨 {} Bad Signature", bad_sigs));
+            }
+            if missing_artifacts > 0 {
+                alert_parts.push(format!("📭 {} Missing", missing_artifacts));
+            }
+            out.push_str(&format!(" | {}", alert_parts.join(", ")));
         }
         out.push('\n');
 
@@ -132,7 +213,9 @@ impl ManifestAudit {
             "\nCanonical Merkle Root:\n{}\n",
             self.merkle_root_sha256
         ));
-        out.push_str("\nFull verifiable audit log & proofs:\nhttps://github.com/bootlace-dev/binwatch-rs\n");
+        out.push_str("\nLive Web Dashboard:\nhttps://bootlace-dev.github.io/binwatch-rs/\n");
+        out.push_str("\nRaw Cryptographic Manifest:\nhttps://bootlace-dev.github.io/binwatch-rs/manifest.json\n");
+        out.push_str("\nSource & Audit Logs:\nhttps://github.com/bootlace-dev/binwatch-rs\n");
 
         out
     }
@@ -203,12 +286,16 @@ fn main() -> io::Result<()> {
                     project_id: "pipek1".to_string(),
                     release_tag: "v0.0.1-rc0".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/pipek1".to_string(),
+                    trust_anchor_url: Some("https://github.com/bootlace-dev/pipek1/blob/master/SPECIFICATION.md".to_string()),
+                    manifest_url: Some("https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
+                    key_url: Some("https://bootlace-dev.github.io/binwatch-rs/keys/pipek1.asc".to_string()),
                     artifacts: vec![BinaryArtifact {
                         name: "pipek1-x86_64-linux-musl".to_string(),
                         expected_sha256: "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string(),
                         observed_sha256: Some("7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string()),
                         sig_status: "OK".to_string(),
                         verified_by: "pipek1:bip340(npub1mvlht...)".to_string(),
+                        audit_note: None,
                     }],
                 },
             );
@@ -220,12 +307,16 @@ fn main() -> io::Result<()> {
                     project_id: "subzero-rs".to_string(),
                     release_tag: "v0.3.0".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/subzero-keyosk".to_string(),
+                    trust_anchor_url: Some("https://github.com/bootlace-dev/subzero-keyosk".to_string()),
+                    manifest_url: None,
+                    key_url: None,
                     artifacts: vec![BinaryArtifact {
                         name: "subzero-x86_64-musl".to_string(),
                         expected_sha256: "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string(),
                         observed_sha256: Some("01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string()),
                         sig_status: "OK".to_string(),
                         verified_by: "sha256sums:signed".to_string(),
+                        audit_note: None,
                     }],
                 },
             );
@@ -237,6 +328,9 @@ fn main() -> io::Result<()> {
                     project_id: "bitcoin_core".to_string(),
                     release_tag: "v29.4".to_string(),
                     upstream_url: "https://bitcoincore.org/bin".to_string(),
+                    trust_anchor_url: Some("https://bitcoincore.org/en/download/".to_string()),
+                    manifest_url: Some("https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS.asc".to_string()),
+                    key_url: None,
                     artifacts: vec![
                         BinaryArtifact {
                             name: "bitcoin-29.4-x86_64-linux-gnu.tar.gz".to_string(),
@@ -244,6 +338,7 @@ fn main() -> io::Result<()> {
                             observed_sha256: Some("cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689".to_string()),
                             sig_status: "OK".to_string(),
                             verified_by: "gpg:guix_signers".to_string(),
+                            audit_note: None,
                         },
                     ],
                 },
