@@ -38,6 +38,7 @@ jobs:
           mkdir -p public
           cp public_index_template.html public/index.html
           cp -r keys public/keys
+          cp -r assets public/assets
           ./scripts/audit_matrix.sh public/manifest.json
           ./target/release/binwatch digest public/manifest.json > public/digest.txt
           gzip -9 -c public/manifest.json > public/manifest.json.gz
