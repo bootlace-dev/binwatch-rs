@@ -82,6 +82,17 @@
       font-weight: bold;
       cursor: help;
     }
+    .status-vulnerable {
+      color: #f85149;
+      background: #f8514922;
+      border: 1px solid #f85149;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: help;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
     .status-expired {
       color: #ff7b72;
       background: #ff7b7218;
@@ -292,7 +303,10 @@
         const entries = Object.entries(data.projects).map(([k, p]) => {
           let worstStatus = 'OK';
           for (const a of p.artifacts) {
-            if (a.sig_status === 'EXPIRED') {
+            if (a.sig_status === 'VULNERABLE') {
+              worstStatus = 'VULNERABLE';
+              break;
+            } else if (a.sig_status === 'EXPIRED') {
               if (worstStatus === 'OK') worstStatus = 'EXPIRED';
             } else if (a.sig_status === 'HASH_DRIFT') {
               worstStatus = 'HASH_DRIFT';
@@ -352,7 +366,9 @@
           row.title = 'Click to inspect cryptographic chain-of-custody, stability telemetry, and signing keys for ' + p.project_id;
 
           let badgeHtml = '<span class="status-ok" title="All cryptographic signatures verified and artifact hashes matched.">✅ OK</span>';
-          if (worstStatus === 'EXPIRED') {
+          if (worstStatus === 'VULNERABLE') {
+            badgeHtml = '<span class="status-vulnerable" title="Known security advisory or active zero-day exploit reported for this package version!">🚨 VULNERABLE</span>';
+          } else if (worstStatus === 'EXPIRED') {
             badgeHtml = '<span class="status-expired" title="Signature is cryptographically valid, but the upstream release signing key passed its declared expiration date.">❌ EXPIRED</span>';
           } else if (worstStatus === 'BADSIG') {
             badgeHtml = '<span class="status-badsig" title="Cryptographic signature verification failed or signature is invalid/corrupted.">❌ BADSIG</span>';

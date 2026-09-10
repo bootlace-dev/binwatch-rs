@@ -626,6 +626,11 @@ jq -n \
     }
   }' > "$MANIFEST_OUT"
 
+if [ -f "$REPO_DIR/scripts/check_advisories.py" ]; then
+    echo ">> Running Gate 2: Security Advisory & Exploit Feeds audit..."
+    python3 "$REPO_DIR/scripts/check_advisories.py" "$MANIFEST_OUT"
+fi
+
 if [ -f "$REPO_DIR/scripts/update_history.py" ]; then
     echo ">> Updating stability and historical continuity telemetry..."
     python3 "$REPO_DIR/scripts/update_history.py" "$MANIFEST_OUT" "$REPO_DIR/data/history.json"

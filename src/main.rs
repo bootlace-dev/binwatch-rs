@@ -124,6 +124,7 @@ impl ManifestAudit {
         let mut bad_sigs = 0;
         let mut hash_drifts = 0;
         let mut missing_artifacts = 0;
+        let mut vulnerable_artifacts = 0;
 
         let mut failed_entries = Vec::new();
         let mut passed_entries = Vec::new();
@@ -138,6 +139,11 @@ impl ManifestAudit {
                     "OK" => {
                         passed_artifacts += 1;
                     }
+                    "VULNERABLE" => {
+                        vulnerable_artifacts += 1;
+                        worst_status = "VULNERABLE";
+                        failure_detail = a.audit_note.clone();
+                    }
                     "EXPIRED" => {
                         expired_keys += 1;
                         if worst_status == "OK" {
@@ -147,26 +153,31 @@ impl ManifestAudit {
                     }
                     "HASH_DRIFT" => {
                         hash_drifts += 1;
-                        worst_status = "HASH_DRIFT";
-                        failure_detail = a.audit_note.clone();
+                        if worst_status != "VULNERABLE" {
+                            worst_status = "HASH_DRIFT";
+                            failure_detail = a.audit_note.clone();
+                        }
                     }
                     "MISSING" => {
                         missing_artifacts += 1;
-                        if worst_status != "BADSIG" && worst_status != "HASH_DRIFT" {
+                        if worst_status != "VULNERABLE" && worst_status != "BADSIG" && worst_status != "HASH_DRIFT" {
                             worst_status = "MISSING";
                             failure_detail = a.audit_note.clone();
                         }
                     }
                     _ => {
                         bad_sigs += 1;
-                        worst_status = "BADSIG";
-                        failure_detail = a.audit_note.clone();
+                        if worst_status != "VULNERABLE" {
+                            worst_status = "BADSIG";
+                            failure_detail = a.audit_note.clone();
+                        }
                     }
                 }
             }
 
             let badge = match worst_status {
                 "OK" => "✅",
+                "VULNERABLE" => "🚨 VULNERABLE:",
                 "EXPIRED" => "❌ EXPIRED:",
                 "HASH_DRIFT" => "❌ HASH_DRIFT:",
                 "MISSING" => "❌ MISSING:",
@@ -220,13 +231,16 @@ impl ManifestAudit {
             out.push_str(entry);
         }
 
-        let total_alerts = expired_keys + bad_sigs + hash_drifts + missing_artifacts;
+        let total_alerts = vulnerable_artifacts + expired_keys + bad_sigs + hash_drifts + missing_artifacts;
         out.push_str(&format!(
             "\nTotal Verified: {}/{} OK",
             passed_artifacts, total_artifacts
         ));
         if total_alerts > 0 {
             let mut alert_parts = Vec::new();
+            if vulnerable_artifacts > 0 {
+                alert_parts.push(format!("🚨 {} Known Vulnerability", vulnerable_artifacts));
+            }
             if expired_keys > 0 {
                 alert_parts.push(format!("❌ {} Expired Key", expired_keys));
             }
