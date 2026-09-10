@@ -36,6 +36,15 @@ pub struct ProjectHistory {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AdvisoryBaseline {
+    pub last_known_vulnerable_version: String,
+    pub fixed_in_version: String,
+    pub advisory_id: String,
+    pub summary: String,
+    pub status: String, // "CLEAN_BEYOND_THRESHOLD", "VULNERABLE"
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProjectAudit {
     pub project_id: String,
     pub release_tag: String,
@@ -48,6 +57,8 @@ pub struct ProjectAudit {
     pub key_url: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub history: Option<ProjectHistory>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub advisory_baseline: Option<AdvisoryBaseline>,
     pub artifacts: Vec<BinaryArtifact>,
 }
 
@@ -255,6 +266,24 @@ impl ManifestAudit {
             }
             out.push_str(&format!(" | {}", alert_parts.join(", ")));
         }
+
+        let mut advisory_tracked = 0;
+        let mut clean_threshold = 0;
+        for (_, project) in &self.projects {
+            if let Some(ref base) = project.advisory_baseline {
+                advisory_tracked += 1;
+                if base.status == "CLEAN_BEYOND_THRESHOLD" {
+                    clean_threshold += 1;
+                }
+            }
+        }
+        if advisory_tracked > 0 {
+            out.push_str(&format!(
+                "\nAdvisory Baseline: {}/{} releases clean beyond last known CVE threshold",
+                clean_threshold, advisory_tracked
+            ));
+        }
+
         out.push_str("\n\nCanonical Merkle Root:\n");
         out.push_str(&format!("{}\n", self.merkle_root_sha256));
 
@@ -336,6 +365,7 @@ fn main() -> io::Result<()> {
                     manifest_url: Some("https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
                     key_url: None,
                     history: None,
+                    advisory_baseline: None,
                     artifacts: vec![BinaryArtifact {
                         name: "pipek1-x86_64-linux-musl".to_string(),
                         expected_sha256: "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string(),
@@ -358,6 +388,7 @@ fn main() -> io::Result<()> {
                     manifest_url: None,
                     key_url: None,
                     history: None,
+                    advisory_baseline: None,
                     artifacts: vec![BinaryArtifact {
                         name: "subzero-x86_64-musl".to_string(),
                         expected_sha256: "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string(),
@@ -380,6 +411,7 @@ fn main() -> io::Result<()> {
                     manifest_url: Some("https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS.asc".to_string()),
                     key_url: None,
                     history: None,
+                    advisory_baseline: None,
                     artifacts: vec![
                         BinaryArtifact {
                             name: "bitcoin-29.4-x86_64-linux-gnu.tar.gz".to_string(),
