@@ -286,7 +286,7 @@ impl ManifestAudit {
         }
         if advisory_tracked > 0 {
             out.push_str(&format!(
-                "\nUpstream Advisories: {}/{} audited versions returned 0 query matches in OSV.dev",
+                "\n\nAdvisory Mirror (OSV.dev):\n{} / {} audited versions returned 0 query matches",
                 clean_threshold, advisory_tracked
             ));
         }
