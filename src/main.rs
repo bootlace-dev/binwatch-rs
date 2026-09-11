@@ -64,6 +64,8 @@ pub struct ProjectAudit {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ManifestAudit {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notice: Option<String>,
     pub timestamp_utc: String,
     pub block_height: Option<u64>,
     pub block_hash: Option<String>,
@@ -75,6 +77,7 @@ pub struct ManifestAudit {
 impl ManifestAudit {
     pub fn new(timestamp_utc: String, block_height: Option<u64>, block_hash: Option<String>) -> Self {
         Self {
+            notice: Some("PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES".to_string()),
             timestamp_utc,
             block_height,
             block_hash,
@@ -86,6 +89,9 @@ impl ManifestAudit {
 
     /// Computes deterministic Merkle root over all project artifacts sorted canonically
     pub fn finalize_seal(&mut self) {
+        if self.notice.is_none() {
+            self.notice = Some("PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES".to_string());
+        }
         let mut hasher = Sha256::new();
 
         // Feed block height if available
@@ -122,6 +128,7 @@ impl ManifestAudit {
             .map(|h| format!(" | BTC Block: {}", h))
             .unwrap_or_default();
 
+        out.push_str("⚠️ DRAFT RESEARCH REPORT • FOR PEER REVIEW ONLY\n");
         out.push_str(&format!(
             "🛡️ BINWATCH AUDIT REPORT: #{}{}\n",
             self.hex_seal, height_str
@@ -279,7 +286,7 @@ impl ManifestAudit {
         }
         if advisory_tracked > 0 {
             out.push_str(&format!(
-                "\nAdvisory Baseline: {}/{} releases clean beyond last known CVE threshold",
+                "\nUpstream Advisories: {}/{} audited versions returned 0 query matches in OSV.dev",
                 clean_threshold, advisory_tracked
             ));
         }
@@ -290,6 +297,7 @@ impl ManifestAudit {
         out.push_str("\nLive Web Dashboard:\nhttps://bootlace-dev.github.io/binwatch-rs/\n");
         out.push_str("\nRaw Cryptographic Manifest:\nhttps://bootlace-dev.github.io/binwatch-rs/manifest.json\n");
         out.push_str("\nSource & Audit Logs:\nhttps://github.com/bootlace-dev/binwatch-rs\n");
+        out.push_str("\nNotice: Experimental pre-release prototype (v0.0.1-rc0). Data mirrored unverified from upstream OSV.dev and project manifests. Provided AS-IS for technical discussion.\n");
         out.push_str("\n#binwatch #bitcoin #supplychain\n");
 
         out

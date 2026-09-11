@@ -233,6 +233,11 @@
 </head>
 <body>
   <div class="container">
+    <div class="research-banner" style="background: #1f6feb18; border: 1px solid #1f6feb55; color: #58a6ff; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1.5rem; font-size: 0.85rem; line-height: 1.4;">
+      <strong>🧪 PRE-RELEASE RESEARCH PROTOTYPE &bull; FOR PEER REVIEW & DISCUSSION ONLY</strong><br>
+      <span style="color: #c9d1d9;">BinWatch is an experimental research harness under active development (<code>v0.0.1-rc0</code>). All outputs, metrics, and advisory strings are published strictly for educational peer review and discussion. This tool is <strong>not</strong> a certified security monitor and must not be used as the sole basis for production custody or infrastructure decisions.</span>
+    </div>
+
     <div class="header">
       <h1>🛡️ BinWatch Integrity Auditor</h1>
       <p>Sovereign, stateless Bitcoin binary integrity verification. Deterministic Merkle hex seals anchored to Bitcoin block headers.</p>
@@ -277,6 +282,19 @@
         <li><a href="digest.txt" title="Verbatim Nostr Kind 1 plaintext note broadcasted to relays.">digest.txt</a> (Nostr Kind 1 Plaintext)</li>
         <li><a href="keys/" title="Directory mirror containing all upstream armored GPG public keys (.asc) used by the auditor.">keys/</a> (Public key mirror directory)</li>
       </ul>
+    </div>
+
+    <div class="card" style="border-left: 3px solid #8b949e; font-size: 0.82rem; color: #8b949e; line-height: 1.5;">
+      <h4 style="color: #c9d1d9; margin-top: 0; margin-bottom: 0.5rem;">⚖️ Passive Conduit Safe Harbor & Limitation of Liability</h4>
+      <p style="margin: 0 0 0.5rem 0;">
+        BinWatch operates strictly as an automated, stateless cryptographic verification engine. BinWatch does <strong>not</strong> conduct software penetration testing, dynamic application analysis, source code vulnerability audits, or security certifications.
+      </p>
+      <p style="margin: 0 0 0.5rem 0;">
+        All advisory references, CVE identifiers, and version thresholds displayed herein are mirrored verbatim and unverified from third-party public databases (including OSV.dev, GitHub Security Advisories, and NVD). BinWatch asserts nothing regarding the security, merchantability, or exploit status of any binary. The absence of an upstream query match indicates solely that no record was returned by the external API at query time; it does not indicate that software is secure, defect-free, or unexploitable.
+      </p>
+      <p style="margin: 0;">
+        Provided strictly "AS-IS" and "AS-AVAILABLE" under the MIT License without warranties of any kind. Authors and contributors disclaim all liability for node compromises, loss of digital assets, or damages arising from reliance upon these experimental research outputs.
+      </p>
     </div>
 
     <div class="footer">
@@ -465,17 +483,17 @@
                 </div>
 
                 ${p.advisory_baseline ? `
-                <div style="margin-top: 1rem; margin-bottom: 0.5rem;"><strong title="Advisory & Exploit Feed baseline verification proving negative assertions beyond historical vulnerability boundaries.">Advisory & CVE Baseline:</strong></div>
+                <div style="margin-top: 1rem; margin-bottom: 0.5rem;"><strong title="Third-party vulnerability advisory query baseline mirrored verbatim from OSV.dev without independent validation.">Third-Party Advisory Mirror (OSV.dev):</strong></div>
                 <div class="drawer-grid">
-                  <div class="drawer-label" title="Current security posture with respect to known upstream exploits.">Advisory Posture:</div>
+                  <div class="drawer-label" title="Unverified upstream API query response.">Upstream Query:</div>
                   <div style="color: ${p.advisory_baseline.status === 'VULNERABLE' ? '#f85149' : '#3fb950'}; font-weight: 600;">
-                    ${p.advisory_baseline.status === 'VULNERABLE' ? '🚨 EXPLOIT DETECTED IN THIS VERSION' : '🛡️ Verified clean beyond last known CVE threshold'}
+                    ${p.advisory_baseline.status === 'VULNERABLE' ? '⚠️ UPSTREAM ADVISORY REPORTED BY OSV.DEV' : '✓ 0 advisory matches returned by OSV.dev'}
                   </div>
-                  <div class="drawer-label" title="Last known vulnerable release version of this package.">Preceding Vulnerable:</div>
+                  <div class="drawer-label" title="Historical upstream advisory record in queried database.">Prior Advisory Record:</div>
                   <div class="mono" style="font-size:0.8rem; color:#ff7b72;">${p.advisory_baseline.last_known_vulnerable_version}</div>
-                  <div class="drawer-label" title="Release version where the upstream vulnerability was officially patched.">Fixed Upstream In:</div>
+                  <div class="drawer-label" title="Upstream reported patch release string.">Upstream Patch Tag:</div>
                   <div class="mono" style="font-size:0.8rem; color:#3fb950;">${p.advisory_baseline.fixed_in_version}</div>
-                  <div class="drawer-label" title="Advisory ID or CVE and brief exploit description.">Vulnerability Reference:</div>
+                  <div class="drawer-label" title="Raw third-party database identifier and description.">Upstream Reference:</div>
                   <div style="font-size:0.85rem;"><span class="mono" style="color:#58a6ff;">${p.advisory_baseline.advisory_id}</span>: ${p.advisory_baseline.summary}</div>
                 </div>
                 ` : ''}
