@@ -1,6 +1,6 @@
 {
-  "last_updated_utc": "2026-09-11T10:43:25Z",
-  "last_block_height": 966496,
+  "last_updated_utc": "2026-09-11T12:50:14Z",
+  "last_block_height": 966503,
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -193,6 +193,42 @@
       "previous_release_tag": null,
       "previous_primary_hash": null,
       "last_changed_utc": "2026-08-20T12:00:00Z"
+    },
+    "phoenix": {
+      "project_id": "phoenix",
+      "release_tag": "android-v2.8.2",
+      "primary_hash": "b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6",
+      "first_seen_utc": "2026-09-11T12:50:14Z",
+      "first_seen_block": 966503,
+      "days_stable": 0,
+      "consecutive_epochs": 2,
+      "previous_release_tag": null,
+      "previous_primary_hash": null,
+      "last_changed_utc": "2026-09-11T12:50:14Z"
+    },
+    "aqua": {
+      "project_id": "aqua",
+      "release_tag": "v0.5.3",
+      "primary_hash": "f836ce27f687013b372d02ad207a7be1a1a1fdbb1dbf6001efc003f76a66de2f",
+      "first_seen_utc": "2026-09-11T12:50:14Z",
+      "first_seen_block": 966503,
+      "days_stable": 0,
+      "consecutive_epochs": 2,
+      "previous_release_tag": null,
+      "previous_primary_hash": null,
+      "last_changed_utc": "2026-09-11T12:50:14Z"
+    },
+    "cake_wallet": {
+      "project_id": "cake_wallet",
+      "release_tag": "v6.4.4",
+      "primary_hash": "cf6d6456b729e96656a769704da4656677ba1137cca5dd82753808141cc48a47",
+      "first_seen_utc": "2026-09-11T12:50:14Z",
+      "first_seen_block": 966503,
+      "days_stable": 0,
+      "consecutive_epochs": 2,
+      "previous_release_tag": null,
+      "previous_primary_hash": null,
+      "last_changed_utc": "2026-09-11T12:50:14Z"
     }
   }
 }

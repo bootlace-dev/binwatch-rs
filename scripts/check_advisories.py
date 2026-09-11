@@ -30,6 +30,9 @@ PACKAGE_MAP = {
     "coldcard": {"ecosystem": "GitHub", "repo": "Coldcard/firmware"},
     "electrum": {"ecosystem": "PyPI", "package": "Electrum", "repo": "spesmilo/electrum"},
     "bitcoin_keeper": {"ecosystem": "GitHub", "repo": "KeeperCommunity/bitcoin-keeper"},
+    "phoenix": {"ecosystem": "GitHub", "repo": "ACINQ/phoenix"},
+    "aqua": {"ecosystem": "GitHub", "repo": "AquaWallet/aqua-wallet"},
+    "cake_wallet": {"ecosystem": "GitHub", "repo": "cake-tech/cake_wallet"},
 }
 
 def query_osv(ecosystem, package, version):
@@ -107,6 +110,12 @@ KNOWN_VULNERABILITY_BASELINES = {
         "fixed_in_version": "v23.0",
         "advisory_id": "CVE-2023-33297",
         "summary": "P2P network memory exhaustion via orphaned unauthenticated transaction flooding"
+    },
+    "cake_wallet": {
+        "last_known_vulnerable_version": "v6.4.3",
+        "fixed_in_version": "v6.4.4",
+        "advisory_id": "GHSA-695v-fhpj-fv8x",
+        "summary": "Malicious deep-link EVM asset incorrect network routing vulnerability"
     }
 }
 
