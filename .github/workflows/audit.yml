@@ -24,11 +24,11 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get update && sudo apt-get install -y jq curl
 
-      - name: Install pipek1 binary
+      - name: Install pipe-k1 binary
         run: |
-          curl -sL https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/pipek1 -o /tmp/pipek1
-          chmod +x /tmp/pipek1
-          sudo mv /tmp/pipek1 /usr/local/bin/pipek1
+          curl -sL https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/pipe-k1 -o /tmp/pipe-k1
+          chmod +x /tmp/pipe-k1
+          sudo mv /tmp/pipe-k1 /usr/local/bin/pipe-k1
 
       - name: Compile binwatch
         run: cargo build --release

@@ -15,7 +15,7 @@ pub struct BinaryArtifact {
     pub expected_sha256: String,
     pub observed_sha256: Option<String>,
     pub sig_status: String, // "OK", "FAIL", "UNVERIFIED"
-    pub verified_by: String, // "pipek1:bip340", "gpg:rsa4096", "gpg:ed25519"
+    pub verified_by: String, // "pipe-k1:bip340", "gpg:rsa4096", "gpg:ed25519"
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audit_note: Option<String>,
 }
@@ -364,13 +364,13 @@ fn main() -> io::Result<()> {
 
             // Project 1: pipek1
             manifest.projects.insert(
-                "pipek1".to_string(),
+                "pipe-k1".to_string(),
                 ProjectAudit {
-                    project_id: "pipek1".to_string(),
+                    project_id: "pipe-k1".to_string(),
                     release_tag: "v0.0.1-rc0".to_string(),
-                    upstream_url: "https://github.com/bootlace-dev/pipek1".to_string(),
-                    trust_anchor_url: Some("https://github.com/bootlace-dev/pipek1/blob/master/SPECIFICATION.md".to_string()),
-                    manifest_url: Some("https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
+                    upstream_url: "https://github.com/bootlace-dev/pipe-k1".to_string(),
+                    trust_anchor_url: Some("https://github.com/bootlace-dev/pipe-k1/blob/master/SPECIFICATION.md".to_string()),
+                    manifest_url: Some("https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
                     key_url: None,
                     history: None,
                     advisory_baseline: None,

@@ -1,12 +1,12 @@
 [
   {
-    "project_id": "pipek1",
+    "project_id": "pipe-k1",
     "release_tag": "v0.0.1-rc0",
-    "upstream_url": "https://github.com/bootlace-dev/pipek1",
-    "verifier_type": "pipek1",
+    "upstream_url": "https://github.com/bootlace-dev/pipe-k1",
+    "verifier_type": "pipe-k1",
     "verifier_key": "npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7",
-    "manifest_url": "https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS",
-    "signature_url": "https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1"
+    "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS",
+    "signature_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1"
   },
   {
     "project_id": "subzero-rs",

@@ -14,7 +14,7 @@ import urllib.error
 
 # Ecosystem & package mapping for BinWatch 16 projects
 PACKAGE_MAP = {
-    "pipek1": {"ecosystem": "crates.io", "package": "pipek1"},
+    "pipe-k1": {"ecosystem": "crates.io", "package": "pipe-k1"},
     "subzero-rs": {"ecosystem": "crates.io", "package": "subzero-rs"},
     "bitcoin_core": {"ecosystem": "Bitcoind", "repo": "bitcoin/bitcoin"},
     "alby_hub": {"ecosystem": "Go", "package": "github.com/getalby/hub", "repo": "getAlby/hub"},

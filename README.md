@@ -10,7 +10,7 @@ UTC Timestamp: 2026-09-08T18:30:00Z
 Merkle Seal: #514DC2
 
   • ✅ bitcoin_core (v29.4) - 1 artifacts
-  • ✅ pipek1 (v0.0.1-rc0) - 1 artifacts
+  • ✅ pipe-k1 (v0.0.1-rc0) - 1 artifacts
   • ✅ subzero-rs (v0.3.0) - 1 artifacts
 
 Total Verified: 3/3 OK
@@ -40,7 +40,7 @@ Canonical Merkle Root:
 ---
 
 ## The `binwatch-rs` Architecture
-* **BIP-340 & PGP Verification**: Verifies release signatures using `pipek1` (Schnorr) and standalone detached PGP signatures without background daemons.
+* **BIP-340 & PGP Verification**: Verifies release signatures using `pipe-k1` (Schnorr) and standalone detached PGP signatures without background daemons.
 * **Canonical Merkle Root**: Hashes the full state of all monitored binaries into a single SHA-256 root.
 * **6-Character Visual Hex Seal**: The first 6 hex characters of the Merkle root act as an immutable visual anchor. If even 1 bit of 1 binary or signature changes upstream, the hex seal immediately changes.
 * **Zero Infrastructure Cost**: Runs deterministically via GitHub Actions and publishes live static dashboards to GitHub Pages.

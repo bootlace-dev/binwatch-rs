@@ -39,23 +39,23 @@ echo "   Height: $BTC_HEIGHT | Hash: $BTC_HASH"
 ACCUM_DIR="$WORKDIR/accum"
 mkdir -p "$ACCUM_DIR"
 
-# 1. pipek1
-echo ">> Auditing Project: pipek1 (v0.0.1-rc0)..."
-PIPEK1_DIR="$WORKDIR/pipek1"
+# 1. pipe-k1
+echo ">> Auditing Project: pipe-k1 (v0.0.1-rc0)..."
+PIPEK1_DIR="$WORKDIR/pipe-k1"
 mkdir -p "$PIPEK1_DIR"
-curl -sL --connect-timeout 10 https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS -o "$PIPEK1_DIR/SHA256SUMS" || true
-curl -sL --connect-timeout 10 https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1 -o "$PIPEK1_DIR/SHA256SUMS.pk1" || true
+curl -sL --connect-timeout 10 https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS -o "$PIPEK1_DIR/SHA256SUMS" || true
+curl -sL --connect-timeout 10 https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1 -o "$PIPEK1_DIR/SHA256SUMS.pk1" || true
 
 PIPEK1_PUB="npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7"
 PIPEK1_SIG_STATUS="FAIL"
 
 if [ -s "$PIPEK1_DIR/SHA256SUMS" ] && [ -s "$PIPEK1_DIR/SHA256SUMS.pk1" ]; then
-    if command -v pipek1 >/dev/null 2>&1; then
-        if pipek1 verify --pub "$PIPEK1_PUB" --sig "$PIPEK1_DIR/SHA256SUMS.pk1" < "$PIPEK1_DIR/SHA256SUMS" >/dev/null 2>&1; then
+    if command -v pipe-k1 >/dev/null 2>&1; then
+        if pipe-k1 verify --pub "$PIPEK1_PUB" --sig "$PIPEK1_DIR/SHA256SUMS.pk1" < "$PIPEK1_DIR/SHA256SUMS" >/dev/null 2>&1; then
             PIPEK1_SIG_STATUS="OK"
         fi
-    elif [ -x "/home/bootlace/dev/pipek1/rust/target/release/pipek1" ]; then
-        if /home/bootlace/dev/pipek1/rust/target/release/pipek1 verify --pub "$PIPEK1_PUB" --sig "$PIPEK1_DIR/SHA256SUMS.pk1" < "$PIPEK1_DIR/SHA256SUMS" >/dev/null 2>&1; then
+    elif [ -x "/home/bootlace/dev/pipe-k1/rust/target/release/pipe-k1" ]; then
+        if /home/bootlace/dev/pipek1/rust/target/release/pipe-k1 verify --pub "$PIPEK1_PUB" --sig "$PIPEK1_DIR/SHA256SUMS.pk1" < "$PIPEK1_DIR/SHA256SUMS" >/dev/null 2>&1; then
             PIPEK1_SIG_STATUS="OK"
         fi
     else
@@ -63,21 +63,21 @@ if [ -s "$PIPEK1_DIR/SHA256SUMS" ] && [ -s "$PIPEK1_DIR/SHA256SUMS.pk1" ]; then
     fi
 fi
 
-cat << JSONEOF > "$ACCUM_DIR/pipek1.json"
+cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
 {
-  "project_id": "pipek1",
+  "project_id": "pipe-k1",
   "release_tag": "v0.0.1-rc0",
-  "upstream_url": "https://github.com/bootlace-dev/pipek1",
-  "trust_anchor_url": "https://github.com/bootlace-dev/pipek1/blob/master/SPECIFICATION.md",
-  "manifest_url": "https://github.com/bootlace-dev/pipek1/releases/download/v0.0.1-rc0/SHA256SUMS",
+  "upstream_url": "https://github.com/bootlace-dev/pipe-k1",
+  "trust_anchor_url": "https://github.com/bootlace-dev/pipe-k1/blob/master/SPECIFICATION.md",
+  "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS",
   "key_url": null,
   "artifacts": [
     {
-      "name": "pipek1-x86_64-linux-musl",
+      "name": "pipe-k1-x86_64-linux-musl",
       "expected_sha256": "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d",
       "observed_sha256": "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d",
       "sig_status": "$PIPEK1_SIG_STATUS",
-      "verified_by": "pipek1:bip340($PIPEK1_PUB)",
+      "verified_by": "pipe-k1:bip340($PIPEK1_PUB)",
       "audit_note": "Signed by primary root identity via BIP-340 Schnorr"
     }
   ]
@@ -684,7 +684,7 @@ jq -n \
   --arg ts "$UTC_TIME" \
   --argjson bh "$BTC_HEIGHT" \
   --arg hash "$BTC_HASH" \
-  --slurpfile p1 "$ACCUM_DIR/pipek1.json" \
+  --slurpfile p1 "$ACCUM_DIR/pipe-k1.json" \
   --slurpfile p2 "$ACCUM_DIR/subzero-rs.json" \
   --slurpfile p3 "$ACCUM_DIR/bitcoin_core.json" \
   --slurpfile p4 "$ACCUM_DIR/alby_hub.json" \
@@ -710,7 +710,7 @@ jq -n \
     merkle_root_sha256: "",
     hex_seal: "",
     projects: {
-      "pipek1": $p1[0],
+      "pipe-k1": $p1[0],
       "subzero-rs": $p2[0],
       "bitcoin_core": $p3[0],
       "alby_hub": $p4[0],

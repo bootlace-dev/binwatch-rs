@@ -1,0 +1,557 @@
+{
+  "notice": "PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
+  "timestamp_utc": "2026-09-12T01:44:38Z",
+  "block_height": 966592,
+  "block_hash": "00000000000000000001c8b1ce689331d07a6d48ffca49a64a24cf575dd92a3d",
+  "merkle_root_sha256": "7c6cb1346b23f8c6e6a7ed5e6fd1411f17c0ddae666ea3c8959233a4e00cb686",
+  "hex_seal": "7C6CB1",
+  "projects": {
+    "alby_hub": {
+      "project_id": "alby_hub",
+      "release_tag": "v1.24.0",
+      "upstream_url": "https://github.com/getAlby/hub",
+      "trust_anchor_url": "https://raw.githubusercontent.com/getalby/hub/master/scripts/keys/rolznz.asc",
+      "manifest_url": "https://github.com/getAlby/hub/releases/download/v1.24.0/manifest.txt",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/alby_rolznz.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v1.16.2",
+        "previous_primary_hash": "b7fb785c4a794cbdb7020fb4662d559fe329caee7b6ee7d130a8a6cf5bb36098",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "v1.18.5",
+        "fixed_in_version": "v1.19.0 / v1.24.0",
+        "advisory_id": "GHSA-alby-hub-auth-bypass",
+        "summary": "Critical unauthenticated remote API management access / fund drain vulnerability",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "albyhub-Server-Linux-x86_64.tar.bz2",
+          "expected_sha256": "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd",
+          "observed_sha256": "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd",
+          "sig_status": "OK",
+          "verified_by": "gpg:5D92185938E6DBF893DCCC5BA5EABD8835092B08(rolznz)",
+          "audit_note": "Signed by Roland Bewick (getAlby official build maintainer)"
+        }
+      ]
+    },
+    "aqua": {
+      "project_id": "aqua",
+      "release_tag": "v0.5.3",
+      "upstream_url": "https://github.com/AquaWallet/aqua-wallet",
+      "trust_anchor_url": "https://github.com/AquaWallet/aqua-wallet/releases/tag/v0.5.3",
+      "manifest_url": "https://api.github.com/repos/AquaWallet/aqua-wallet/releases/tags/v0.5.3",
+      "history": {
+        "first_seen_utc": "2026-09-11T12:50:14Z",
+        "first_seen_block": 966503,
+        "days_stable": 1,
+        "consecutive_epochs": 3,
+        "last_changed_utc": "2026-09-11T12:50:14Z"
+      },
+      "artifacts": [
+        {
+          "name": "aqua-0.5.3-270.apk",
+          "expected_sha256": "f836ce27f687013b372d02ad207a7be1a1a1fdbb1dbf6001efc003f76a66de2f",
+          "observed_sha256": "f836ce27f687013b372d02ad207a7be1a1a1fdbb1dbf6001efc003f76a66de2f",
+          "sig_status": "OK",
+          "verified_by": "sha256:github_release_digest",
+          "audit_note": "SHA-256 binary digest verified against official AquaWallet release asset payload"
+        }
+      ]
+    },
+    "bitcoin_core": {
+      "project_id": "bitcoin_core",
+      "release_tag": "v29.4",
+      "upstream_url": "https://bitcoincore.org/bin",
+      "trust_anchor_url": "https://bitcoincore.org/en/download/",
+      "manifest_url": "https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS",
+      "key_url": "https://github.com/bitcoin-core/guix.sigs/tree/main/builder-keys",
+      "history": {
+        "first_seen_utc": "2026-07-15T10:30:00Z",
+        "first_seen_block": 957800,
+        "days_stable": 59,
+        "consecutive_epochs": 233,
+        "previous_release_tag": "v29.3",
+        "previous_primary_hash": "68a2bc57e930fca69be99525e64a4fe8742b78a9c372dc4ab85bb34dbffec123",
+        "last_changed_utc": "2026-07-15T10:30:00Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "v22.0",
+        "fixed_in_version": "v23.0",
+        "advisory_id": "CVE-2023-33297",
+        "summary": "P2P network memory exhaustion via orphaned unauthenticated transaction flooding",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "bitcoin-29.4-x86_64-linux-gnu.tar.gz",
+          "expected_sha256": "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689",
+          "observed_sha256": "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689",
+          "sig_status": "OK",
+          "verified_by": "gpg:guix_signers",
+          "audit_note": "Multi-party Guix reproducible build attestation quorum"
+        }
+      ]
+    },
+    "bitcoin_keeper": {
+      "project_id": "bitcoin_keeper",
+      "release_tag": "v2.5.13",
+      "upstream_url": "https://github.com/KeeperCommunity/bitcoin-keeper",
+      "trust_anchor_url": "https://github.com/KeeperCommunity/bitcoin-keeper/blob/sprint/Readme.md#pgp",
+      "manifest_url": "https://github.com/KeeperCommunity/bitcoin-keeper/releases/download/v2.5.13/SHA256SUM.asc",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/bitcoin_keeper.asc",
+      "history": {
+        "first_seen_utc": "2026-08-06T14:22:01Z",
+        "first_seen_block": 960800,
+        "days_stable": 37,
+        "consecutive_epochs": 145,
+        "previous_release_tag": "v2.5.12",
+        "previous_primary_hash": "b7a941582e01df608432a188f61530e79124beaf190284e58a2d1f9301daec60",
+        "last_changed_utc": "2026-08-06T14:22:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "Bitcoin_Keeper_v2.5.13.apk",
+          "expected_sha256": "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a",
+          "observed_sha256": "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a",
+          "sig_status": "EXPIRED",
+          "verified_by": "gpg:389F4CADA0785AC0E28A0C181BEBDE261DC3CF62(hexa@bithyve.com:EXPIRED)",
+          "audit_note": "Signed by declared key from KeeperCommunity README; key expired on 2026-08-06"
+        }
+      ]
+    },
+    "blockstream_green": {
+      "project_id": "blockstream_green",
+      "release_tag": "release_3.5.3",
+      "upstream_url": "https://github.com/Blockstream/green_qt",
+      "trust_anchor_url": "https://blockstream.com/app/",
+      "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.3/SHA256SUMS.asc",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/blockstream_green.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "release_3.5.3",
+        "previous_primary_hash": "9e7091656cff3b2072186716075ce6544a499a0d8437937d57e0eb37f59dffec",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "Blockstream-x86_64.AppImage",
+          "expected_sha256": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac",
+          "observed_sha256": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac",
+          "sig_status": "OK",
+          "verified_by": "gpg:04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792(GreenAddress Team)",
+          "audit_note": "Signed by authoritative GreenAddress Team master key"
+        }
+      ]
+    },
+    "blockstream_jade": {
+      "project_id": "blockstream_jade",
+      "release_tag": "1.0.41",
+      "upstream_url": "https://github.com/Blockstream/Jade",
+      "trust_anchor_url": "https://github.com/Blockstream/Jade/blob/master/FWUPDATE.md",
+      "manifest_url": "https://jadefw.blockstream.com/bin/jade/index.json",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "1.0.41",
+        "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "1.0.41_noradio_987136_fw.bin",
+          "expected_sha256": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
+          "observed_sha256": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
+          "sig_status": "OK",
+          "verified_by": "blockstream:jadefw_index",
+          "audit_note": "Signed firmware cmphash verified against official Blockstream OTA metadata index"
+        }
+      ]
+    },
+    "cake_wallet": {
+      "project_id": "cake_wallet",
+      "release_tag": "v6.4.4",
+      "upstream_url": "https://github.com/cake-tech/cake_wallet",
+      "trust_anchor_url": "https://raw.githubusercontent.com/cake-tech/cake_wallet/main/README.md",
+      "manifest_url": "https://github.com/cake-tech/cake_wallet/releases/tag/v6.4.4",
+      "history": {
+        "first_seen_utc": "2026-09-11T12:50:14Z",
+        "first_seen_block": 966503,
+        "days_stable": 1,
+        "consecutive_epochs": 3,
+        "last_changed_utc": "2026-09-11T12:50:14Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "v6.4.3",
+        "fixed_in_version": "v6.4.4",
+        "advisory_id": "GHSA-695v-fhpj-fv8x",
+        "summary": "Malicious deep-link EVM asset incorrect network routing vulnerability",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "Cake_Wallet_v6.4.4-arm64-v8a.apk",
+          "expected_sha256": "cf6d6456b729e96656a769704da4656677ba1137cca5dd82753808141cc48a47",
+          "observed_sha256": "cf6d6456b729e96656a769704da4656677ba1137cca5dd82753808141cc48a47",
+          "sig_status": "OK",
+          "verified_by": "sha256:release_notes_manifest",
+          "audit_note": "SHA-256 checksum verified against official Cake Wallet release notes manifest"
+        }
+      ]
+    },
+    "coldcard": {
+      "project_id": "coldcard",
+      "release_tag": "v5.6.2",
+      "upstream_url": "https://github.com/Coldcard/firmware",
+      "trust_anchor_url": "https://coldcard.com/downloads",
+      "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v5.6.2",
+        "previous_primary_hash": "938b81628dcfef1f8bbcf3d5ba4b9e2c695bc8bf8c69136c3427ecff72b14510",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "2026-09-03T1541-v5.6.2-mk-coldcard.dfu",
+          "expected_sha256": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
+          "observed_sha256": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
+          "sig_status": "OK",
+          "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
+          "audit_note": "Signed by Coinkite Peter Gray master release key"
+        }
+      ]
+    },
+    "core_lightning": {
+      "project_id": "core_lightning",
+      "release_tag": "v26.06.7",
+      "upstream_url": "https://github.com/ElementsProject/lightning",
+      "trust_anchor_url": "https://github.com/ElementsProject/lightning/tree/master/contrib/keys",
+      "manifest_url": "https://github.com/ElementsProject/lightning/releases/download/v26.06.7/SHA256SUMS-v26.06.7",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/cln_rusty.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v25.05",
+        "previous_primary_hash": "9d02636d7a4699f1ff4d7159fc56561f55f2ef6c41b8c2be0b4fa5c464efbe10",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "v0.10.1",
+        "fixed_in_version": "v0.10.2",
+        "advisory_id": "CVE-2021-35938",
+        "summary": "Channel state desynchronization via corrupted onion payload",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "clightning-v26.06.7-Ubuntu-24.04-amd64.tar.xz",
+          "expected_sha256": "b09f4ed81628d4d60d9f9096f85dcae9533290f3ed409097e95f8d7414acd9c8",
+          "observed_sha256": "b09f4ed81628d4d60d9f9096f85dcae9533290f3ed409097e95f8d7414acd9c8",
+          "sig_status": "OK",
+          "verified_by": "gpg:multi_signers(rusty+cdecker+daywalker)",
+          "audit_note": "Core Lightning multi-party developer quorum"
+        }
+      ]
+    },
+    "electrum": {
+      "project_id": "electrum",
+      "release_tag": "4.8.1",
+      "upstream_url": "https://github.com/spesmilo/electrum",
+      "trust_anchor_url": "https://electrum.org/#download",
+      "manifest_url": "https://download.electrum.org/4.8.1/Electrum-4.8.1.tar.gz.ThomasV.asc",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/electrum_thomasv.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "4.8.1",
+        "previous_primary_hash": "39f3796bb9230559eb564344d57c3d2583857d4722ce949826f5825ae7c1db27",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "3.3.3",
+        "fixed_in_version": "3.3.4",
+        "advisory_id": "CVE-2019-14322",
+        "summary": "Malicious Electrum server phishing popup modal exploit",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "Electrum-4.8.1.tar.gz",
+          "expected_sha256": "ef5b7f61d2c8b5983a0f9c851556e3a6f78a9dc22fe611bba49c6eebb6bdfdbe",
+          "observed_sha256": "ef5b7f61d2c8b5983a0f9c851556e3a6f78a9dc22fe611bba49c6eebb6bdfdbe",
+          "sig_status": "OK",
+          "verified_by": "gpg:6694D8DE7BE8EE5631BED9502BD5824B7F9470E6(ThomasV)",
+          "audit_note": "Signed by Thomas Voegtlin release key"
+        }
+      ]
+    },
+    "krux": {
+      "project_id": "krux",
+      "release_tag": "v26.08.0",
+      "upstream_url": "https://github.com/selfcustody/krux",
+      "trust_anchor_url": "https://selfcustody.github.io/krux/getting-started/installing/from-pre-built-release.en/",
+      "manifest_url": "https://github.com/selfcustody/krux/releases/download/v26.08.0/krux-v26.08.0.zip.sha256.txt",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/krux_selfcustody.pem",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v26.08.0",
+        "previous_primary_hash": "e228be3f3604f323c93ee5ecb0ec5fc4f7bbd7b2e3e570ee28a3f89839ae6724",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "krux-v26.08.0.zip",
+          "expected_sha256": "65b99bf6adf67b8105f665e5ae3fb34f183a53235debebc75250f8c815159b06",
+          "observed_sha256": "65b99bf6adf67b8105f665e5ae3fb34f183a53235debebc75250f8c815159b06",
+          "sig_status": "OK",
+          "verified_by": "ecdsa:secp256k1(selfcustody.pem)",
+          "audit_note": "Firmware package signature verified via official Krux secp256k1 root key"
+        }
+      ]
+    },
+    "liquid_elements": {
+      "project_id": "liquid_elements",
+      "release_tag": "elements-23.3.3",
+      "upstream_url": "https://github.com/ElementsProject/elements",
+      "trust_anchor_url": "https://github.com/ElementsProject/elements/releases/tag/elements-23.3.3",
+      "manifest_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.3/SHA256SUMS.asc",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/elements_pgreco.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v23.2.1",
+        "previous_primary_hash": "2d4ff788cb54ec4ff9cf17d2a9aa7fa838e1b945d8bcf51774e14f9aa123bbef",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "elements-23.3.3-x86_64-linux-gnu.tar.gz",
+          "expected_sha256": "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1",
+          "observed_sha256": "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1",
+          "sig_status": "OK",
+          "verified_by": "gpg:BD0F3062F87842410B06A0432F656B0610604482(pgreco)",
+          "audit_note": "Signed by Pablo Greco (Blockstream Elements release signer)"
+        }
+      ]
+    },
+    "lnd": {
+      "project_id": "lnd",
+      "release_tag": "v0.21.3-beta",
+      "upstream_url": "https://github.com/lightningnetwork/lnd",
+      "trust_anchor_url": "https://github.com/lightningnetwork/lnd/tree/master/scripts/keys",
+      "manifest_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta/manifest-v0.21.3-beta.txt",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/lnd_roasbeef.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v0.19.4-beta",
+        "previous_primary_hash": "c38ef1f211da3fdfb06f8fe9cb463c6a495dae4a5d893a2e37976e53c4371908",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "v0.17.0",
+        "fixed_in_version": "v0.17.1",
+        "advisory_id": "CVE-2023-40232",
+        "summary": "Witness parser DoS / transaction replacement griefing vector",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "lnd-linux-amd64-v0.21.3-beta.tar.gz",
+          "expected_sha256": "aad62005d25bb0d974c5c1b135decc269d8f3e69ee9cde8bb6b32998100bc3fd",
+          "observed_sha256": "aad62005d25bb0d974c5c1b135decc269d8f3e69ee9cde8bb6b32998100bc3fd",
+          "sig_status": "OK",
+          "verified_by": "gpg:multi_signers(roasbeef+builders)",
+          "audit_note": "Multi-signature manifest verified against Lightning Labs builders"
+        }
+      ]
+    },
+    "nunchuk": {
+      "project_id": "nunchuk",
+      "release_tag": "android.2.8.5",
+      "upstream_url": "https://github.com/nunchuk-io/nunchuk-android",
+      "trust_anchor_url": "https://nunchuk.io",
+      "manifest_url": "https://github.com/nunchuk-io/nunchuk-android/releases/download/android.2.8.5/SHA256SUMS.asc",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/nunchuk.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "v0.0.51",
+        "previous_primary_hash": "e228945cf4597b833215286ce17bb8b66e927c9ef5b46e3e5606fcb666a4bc4a",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "2.8.5.apk",
+          "expected_sha256": "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595",
+          "observed_sha256": "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595",
+          "sig_status": "FAIL",
+          "verified_by": "gpg:8C8ECD3F660CA53CD878792A6E38A462ED2EF525(nunchuk)",
+          "audit_note": "Signed by Ta Tat Tai (Nunchuk binary release signing key)"
+        }
+      ]
+    },
+    "phoenix": {
+      "project_id": "phoenix",
+      "release_tag": "android-v2.8.2",
+      "upstream_url": "https://github.com/ACINQ/phoenix",
+      "trust_anchor_url": "https://acinq.co/pgp/padioupm.asc",
+      "manifest_url": "https://github.com/ACINQ/phoenix/releases/download/android-v2.8.2/SHA256SUMS.asc",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/phoenix_padioupm.asc",
+      "history": {
+        "first_seen_utc": "2026-09-11T12:50:14Z",
+        "first_seen_block": 966503,
+        "days_stable": 1,
+        "consecutive_epochs": 3,
+        "last_changed_utc": "2026-09-11T12:50:14Z"
+      },
+      "artifacts": [
+        {
+          "name": "phoenix-118-2.8.2-mainnet.apk",
+          "expected_sha256": "b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6",
+          "observed_sha256": "b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6",
+          "sig_status": "OK",
+          "verified_by": "gpg:6AA45A4C209A2D3064CF66BEE434ED292E85643A(Pierre-Marie PADIOU)",
+          "audit_note": "Signed by Pierre-Marie Padiou (ACINQ Phoenix lead developer release key)"
+        }
+      ]
+    },
+    "pipe-k1": {
+      "project_id": "pipe-k1",
+      "release_tag": "v0.0.1-rc0",
+      "upstream_url": "https://github.com/bootlace-dev/pipe-k1",
+      "trust_anchor_url": "https://github.com/bootlace-dev/pipe-k1/blob/master/SPECIFICATION.md",
+      "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS",
+      "history": {
+        "first_seen_utc": "2026-09-08T18:00:00Z",
+        "first_seen_block": 965215,
+        "days_stable": 4,
+        "consecutive_epochs": 14,
+        "last_changed_utc": "2026-09-08T18:00:00Z"
+      },
+      "artifacts": [
+        {
+          "name": "pipe-k1-x86_64-linux-musl",
+          "expected_sha256": "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d",
+          "observed_sha256": "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d",
+          "sig_status": "FAIL",
+          "verified_by": "pipe-k1:bip340(npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7)",
+          "audit_note": "Signed by primary root identity via BIP-340 Schnorr"
+        }
+      ]
+    },
+    "seedsigner": {
+      "project_id": "seedsigner",
+      "release_tag": "v0.8.7",
+      "upstream_url": "https://github.com/SeedSigner/seedsigner",
+      "trust_anchor_url": "https://seedsigner.com",
+      "manifest_url": "https://github.com/SeedSigner/seedsigner/releases/download/0.8.7/seedsigner.0.8.7.sha256.txt",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/seedsigner.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "0.8.6",
+        "previous_primary_hash": "2984a9e5399557b7f14b620ce994ffed121dbfa0dbf533f5d5fb833a6122d2b5",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "artifacts": [
+        {
+          "name": "seedsigner_os.0.8.7.pi0.img",
+          "expected_sha256": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9",
+          "observed_sha256": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9",
+          "sig_status": "OK",
+          "verified_by": "gpg:46739B74B56AD88F14B0882EC7EF709007260119(seedsigner)",
+          "audit_note": "Signed by SeedSigner release signing key"
+        }
+      ]
+    },
+    "sparrow": {
+      "project_id": "sparrow",
+      "release_tag": "v2.5.4",
+      "upstream_url": "https://github.com/sparrowwallet/sparrow",
+      "trust_anchor_url": "https://sparrowwallet.com/download/",
+      "manifest_url": "https://github.com/sparrowwallet/sparrow/releases/download/2.5.4/sparrow-2.5.4-manifest.txt",
+      "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/sparrow.asc",
+      "history": {
+        "first_seen_utc": "2026-09-09T13:46:15Z",
+        "first_seen_block": 966214,
+        "days_stable": 3,
+        "consecutive_epochs": 9,
+        "previous_release_tag": "2.2.4",
+        "previous_primary_hash": "11d752f9cce956891eb10a24ef4bcae3cbff380df141d5b169d7b42784534ef0",
+        "last_changed_utc": "2026-09-09T13:46:15Z"
+      },
+      "advisory_baseline": {
+        "last_known_vulnerable_version": "v1.7.0",
+        "fixed_in_version": "v1.7.1",
+        "advisory_id": "GHSA-sparrow-hwi-bridge",
+        "summary": "Hardware wallet bridge USB device descriptor race condition",
+        "status": "CLEAN_BEYOND_THRESHOLD"
+      },
+      "artifacts": [
+        {
+          "name": "sparrowwallet-2.5.4-x86_64.tar.gz",
+          "expected_sha256": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e",
+          "observed_sha256": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e",
+          "sig_status": "OK",
+          "verified_by": "gpg:D4D0D3202FC06849A257B38DE94618334C674B40(craigraw)",
+          "audit_note": "Signed by Craig Raw (Sparrow Wallet creator / lead dev)"
+        }
+      ]
+    },
+    "subzero-rs": {
+      "project_id": "subzero-rs",
+      "release_tag": "v0.3.0",
+      "upstream_url": "https://github.com/bootlace-dev/subzero-keyosk",
+      "trust_anchor_url": "https://github.com/bootlace-dev/subzero-keyosk",
+      "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/tag/v0.3.0",
+      "history": {
+        "first_seen_utc": "2026-08-20T12:00:00Z",
+        "first_seen_block": 962500,
+        "days_stable": 23,
+        "consecutive_epochs": 89,
+        "last_changed_utc": "2026-08-20T12:00:00Z"
+      },
+      "artifacts": [
+        {
+          "name": "subzero-x86_64-musl",
+          "expected_sha256": "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c",
+          "observed_sha256": "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c",
+          "sig_status": "OK",
+          "verified_by": "sha256sums:signed",
+          "audit_note": "Deterministic build sha256 checksum verified"
+        }
+      ]
+    }
+  }
+}
