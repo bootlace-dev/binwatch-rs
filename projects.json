@@ -1,0 +1,128 @@
+[
+  {
+    "project_id": "pipe-k1",
+    "release_tag": "v0.0.1-rc0",
+    "upstream_url": "https://github.com/bootlace-dev/pipe-k1",
+    "verifier_type": "pipe-k1",
+    "verifier_key": "npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7",
+    "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS",
+    "signature_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1"
+  },
+  {
+    "project_id": "subzero-rs",
+    "release_tag": "v0.3.0",
+    "upstream_url": "https://github.com/bootlace-dev/subzero-keyosk",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "bootlace-dev",
+    "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.3.0/SHA256SUMS",
+    "signature_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.3.0/SHA256SUMS.asc"
+  },
+  {
+    "project_id": "noble-curves",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/noble-curves",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/noble-curves/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "noble-hashes",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/noble-hashes",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/noble-hashes/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "scure-bip39",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/scure-bip39",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/scure-bip39/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "scure-bip32",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/scure-bip32",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/scure-bip32/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "scure-btc-signer",
+    "release_tag": "2.4.1",
+    "upstream_url": "https://github.com/paulmillr/scure-btc-signer",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/scure-btc-signer/git/refs/tags/2.4.1",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "noble-secp256k1",
+    "release_tag": "3.2.0",
+    "upstream_url": "https://github.com/paulmillr/noble-secp256k1",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/noble-secp256k1/git/refs/tags/3.2.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "libsecp256k1",
+    "release_tag": "v0.8.0",
+    "upstream_url": "https://github.com/bitcoin-core/secp256k1",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "6A8F9C266528E25AEB1D7731C2371D91CB716EA7",
+    "manifest_url": "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/v0.8.0",
+    "signature_url": "https://github.com/theuni.gpg"
+  },
+  {
+    "project_id": "openssh-portable",
+    "release_tag": "V_10_5_P1",
+    "upstream_url": "https://github.com/openssh/openssh-portable",
+    "verifier_type": "git_tag_ssh",
+    "verifier_key": "djm@mindrot.org",
+    "manifest_url": "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/V_10_5_P1",
+    "signature_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers"
+  },
+  {
+    "project_id": "wasabi",
+    "release_tag": "v2.8.2",
+    "upstream_url": "https://github.com/WalletWasabi/WalletWasabi",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "6FB3872B5D42292F59920797856348328949861E",
+    "manifest_url": "https://github.com/WalletWasabi/WalletWasabi/releases/download/v2.8.2/SHA256SUMS",
+    "signature_url": "https://github.com/WalletWasabi/WalletWasabi/releases/download/v2.8.2/SHA256SUMS.asc"
+  },
+  {
+    "project_id": "ginger-wallet",
+    "release_tag": "v2.0.26",
+    "upstream_url": "https://github.com/GingerPrivacy/GingerWallet",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "FA0B017A3E75CE65CBF7838FA8FF3767EDF5DCE9",
+    "manifest_url": "https://github.com/GingerPrivacy/GingerWallet/releases/download/v2.0.26/SHA256SUMS.asc",
+    "signature_url": "https://github.com/GingerPrivacy/GingerWallet/releases/download/v2.0.26/SHA256SUMS.asc"
+  },
+  {
+    "project_id": "joinmarket",
+    "release_tag": "v0.9.12",
+    "upstream_url": "https://github.com/JoinMarket-Org/joinmarket-clientserver",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "JoinMarket-Org",
+    "manifest_url": "https://api.github.com/repos/JoinMarket-Org/joinmarket-clientserver/git/refs/tags/v0.9.12",
+    "signature_url": "https://github.com/JoinMarket-Org/joinmarket-clientserver/releases/download/v0.9.12/kristapsk-joinmarket-clientserver-0.9.12.tar.gz.asc"
+  },
+  {
+    "project_id": "ashigaru",
+    "release_tag": "v1.0.0",
+    "upstream_url": "https://github.com/dennysubke/ashigaru-terminal",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "dennysubke",
+    "manifest_url": "https://api.github.com/repos/dennysubke/ashigaru-terminal/git/refs/tags/v1.0.0",
+    "signature_url": "https://github.com/dennysubke.gpg"
+  }
+]
