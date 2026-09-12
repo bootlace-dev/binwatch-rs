@@ -1,10 +1,10 @@
 {
   "notice": "PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
-  "timestamp_utc": "2026-09-12T01:44:38Z",
+  "timestamp_utc": "2026-09-12T01:50:01Z",
   "block_height": 966592,
   "block_hash": "00000000000000000001c8b1ce689331d07a6d48ffca49a64a24cf575dd92a3d",
-  "merkle_root_sha256": "7c6cb1346b23f8c6e6a7ed5e6fd1411f17c0ddae666ea3c8959233a4e00cb686",
-  "hex_seal": "7C6CB1",
+  "merkle_root_sha256": "084fa27bbfae7978cec8a30d43bdb0ed88ae54c951d957ef48ae3ed2cc248a42",
+  "hex_seal": "084FA2",
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -17,7 +17,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v1.16.2",
         "previous_primary_hash": "b7fb785c4a794cbdb7020fb4662d559fe329caee7b6ee7d130a8a6cf5bb36098",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -50,7 +50,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 1,
-        "consecutive_epochs": 3,
+        "consecutive_epochs": 4,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "artifacts": [
@@ -75,7 +75,7 @@
         "first_seen_utc": "2026-07-15T10:30:00Z",
         "first_seen_block": 957800,
         "days_stable": 59,
-        "consecutive_epochs": 233,
+        "consecutive_epochs": 234,
         "previous_release_tag": "v29.3",
         "previous_primary_hash": "68a2bc57e930fca69be99525e64a4fe8742b78a9c372dc4ab85bb34dbffec123",
         "last_changed_utc": "2026-07-15T10:30:00Z"
@@ -109,7 +109,7 @@
         "first_seen_utc": "2026-08-06T14:22:01Z",
         "first_seen_block": 960800,
         "days_stable": 37,
-        "consecutive_epochs": 145,
+        "consecutive_epochs": 146,
         "previous_release_tag": "v2.5.12",
         "previous_primary_hash": "b7a941582e01df608432a188f61530e79124beaf190284e58a2d1f9301daec60",
         "last_changed_utc": "2026-08-06T14:22:01Z"
@@ -136,7 +136,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "release_3.5.3",
         "previous_primary_hash": "9e7091656cff3b2072186716075ce6544a499a0d8437937d57e0eb37f59dffec",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -162,7 +162,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "1.0.41",
         "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -188,7 +188,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 1,
-        "consecutive_epochs": 3,
+        "consecutive_epochs": 4,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "advisory_baseline": {
@@ -220,7 +220,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v5.6.2",
         "previous_primary_hash": "938b81628dcfef1f8bbcf3d5ba4b9e2c695bc8bf8c69136c3427ecff72b14510",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -247,7 +247,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v25.05",
         "previous_primary_hash": "9d02636d7a4699f1ff4d7159fc56561f55f2ef6c41b8c2be0b4fa5c464efbe10",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -281,7 +281,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "4.8.1",
         "previous_primary_hash": "39f3796bb9230559eb564344d57c3d2583857d4722ce949826f5825ae7c1db27",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -315,7 +315,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v26.08.0",
         "previous_primary_hash": "e228be3f3604f323c93ee5ecb0ec5fc4f7bbd7b2e3e570ee28a3f89839ae6724",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -342,7 +342,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v23.2.1",
         "previous_primary_hash": "2d4ff788cb54ec4ff9cf17d2a9aa7fa838e1b945d8bcf51774e14f9aa123bbef",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -369,7 +369,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v0.19.4-beta",
         "previous_primary_hash": "c38ef1f211da3fdfb06f8fe9cb463c6a495dae4a5d893a2e37976e53c4371908",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -392,6 +392,81 @@
         }
       ]
     },
+    "noble-curves": {
+      "project_id": "noble-curves",
+      "release_tag": "2.4.0",
+      "upstream_url": "https://github.com/paulmillr/noble-curves",
+      "trust_anchor_url": "https://github.com/paulmillr.gpg",
+      "manifest_url": "https://api.github.com/repos/paulmillr/noble-curves/git/refs/tags/2.4.0",
+      "key_url": "https://github.com/paulmillr.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T01:50:01Z",
+        "first_seen_block": 966592,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T01:50:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "noble-curves-2.4.0.tar.gz",
+          "expected_sha256": "bf43f3fc23ef644406f463f1580f8b78e13e0b6a",
+          "observed_sha256": "bf43f3fc23ef644406f463f1580f8b78e13e0b6a",
+          "sig_status": "OK",
+          "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+        }
+      ]
+    },
+    "noble-hashes": {
+      "project_id": "noble-hashes",
+      "release_tag": "2.4.0",
+      "upstream_url": "https://github.com/paulmillr/noble-hashes",
+      "trust_anchor_url": "https://github.com/paulmillr.gpg",
+      "manifest_url": "https://api.github.com/repos/paulmillr/noble-hashes/git/refs/tags/2.4.0",
+      "key_url": "https://github.com/paulmillr.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T01:50:01Z",
+        "first_seen_block": 966592,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T01:50:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "noble-hashes-2.4.0.tar.gz",
+          "expected_sha256": "cbb9aed9154101899b3f362d87983f465f4157be",
+          "observed_sha256": "cbb9aed9154101899b3f362d87983f465f4157be",
+          "sig_status": "OK",
+          "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+        }
+      ]
+    },
+    "noble-secp256k1": {
+      "project_id": "noble-secp256k1",
+      "release_tag": "3.2.0",
+      "upstream_url": "https://github.com/paulmillr/noble-secp256k1",
+      "trust_anchor_url": "https://github.com/paulmillr.gpg",
+      "manifest_url": "https://api.github.com/repos/paulmillr/noble-secp256k1/git/refs/tags/3.2.0",
+      "key_url": "https://github.com/paulmillr.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T01:50:01Z",
+        "first_seen_block": 966592,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T01:50:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "noble-secp256k1-3.2.0.tar.gz",
+          "expected_sha256": "02d0705114a4d81d08b77bbb3faaa8691b8d9561",
+          "observed_sha256": "02d0705114a4d81d08b77bbb3faaa8691b8d9561",
+          "sig_status": "OK",
+          "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+        }
+      ]
+    },
     "nunchuk": {
       "project_id": "nunchuk",
       "release_tag": "android.2.8.5",
@@ -403,7 +478,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "v0.0.51",
         "previous_primary_hash": "e228945cf4597b833215286ce17bb8b66e927c9ef5b46e3e5606fcb666a4bc4a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -413,7 +488,7 @@
           "name": "2.8.5.apk",
           "expected_sha256": "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595",
           "observed_sha256": "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595",
-          "sig_status": "FAIL",
+          "sig_status": "OK",
           "verified_by": "gpg:8C8ECD3F660CA53CD878792A6E38A462ED2EF525(nunchuk)",
           "audit_note": "Signed by Ta Tat Tai (Nunchuk binary release signing key)"
         }
@@ -430,7 +505,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 1,
-        "consecutive_epochs": 3,
+        "consecutive_epochs": 4,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "artifacts": [
@@ -454,7 +529,7 @@
         "first_seen_utc": "2026-09-08T18:00:00Z",
         "first_seen_block": 965215,
         "days_stable": 4,
-        "consecutive_epochs": 14,
+        "consecutive_epochs": 15,
         "last_changed_utc": "2026-09-08T18:00:00Z"
       },
       "artifacts": [
@@ -465,6 +540,81 @@
           "sig_status": "FAIL",
           "verified_by": "pipe-k1:bip340(npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7)",
           "audit_note": "Signed by primary root identity via BIP-340 Schnorr"
+        }
+      ]
+    },
+    "scure-bip32": {
+      "project_id": "scure-bip32",
+      "release_tag": "2.4.0",
+      "upstream_url": "https://github.com/paulmillr/scure-bip32",
+      "trust_anchor_url": "https://github.com/paulmillr.gpg",
+      "manifest_url": "https://api.github.com/repos/paulmillr/scure-bip32/git/refs/tags/2.4.0",
+      "key_url": "https://github.com/paulmillr.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T01:50:01Z",
+        "first_seen_block": 966592,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T01:50:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "scure-bip32-2.4.0.tar.gz",
+          "expected_sha256": "5256db12ebd7f555d8a8f83d1c3264ae7d675253",
+          "observed_sha256": "5256db12ebd7f555d8a8f83d1c3264ae7d675253",
+          "sig_status": "OK",
+          "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+        }
+      ]
+    },
+    "scure-bip39": {
+      "project_id": "scure-bip39",
+      "release_tag": "2.4.0",
+      "upstream_url": "https://github.com/paulmillr/scure-bip39",
+      "trust_anchor_url": "https://github.com/paulmillr.gpg",
+      "manifest_url": "https://api.github.com/repos/paulmillr/scure-bip39/git/refs/tags/2.4.0",
+      "key_url": "https://github.com/paulmillr.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T01:50:01Z",
+        "first_seen_block": 966592,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T01:50:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "scure-bip39-2.4.0.tar.gz",
+          "expected_sha256": "358e540e61a56248add0f1810705b70bf15a584b",
+          "observed_sha256": "358e540e61a56248add0f1810705b70bf15a584b",
+          "sig_status": "OK",
+          "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+        }
+      ]
+    },
+    "scure-btc-signer": {
+      "project_id": "scure-btc-signer",
+      "release_tag": "2.4.1",
+      "upstream_url": "https://github.com/paulmillr/scure-btc-signer",
+      "trust_anchor_url": "https://github.com/paulmillr.gpg",
+      "manifest_url": "https://api.github.com/repos/paulmillr/scure-btc-signer/git/refs/tags/2.4.1",
+      "key_url": "https://github.com/paulmillr.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T01:50:01Z",
+        "first_seen_block": 966592,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T01:50:01Z"
+      },
+      "artifacts": [
+        {
+          "name": "scure-btc-signer-2.4.1.tar.gz",
+          "expected_sha256": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
+          "observed_sha256": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
+          "sig_status": "OK",
+          "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
         }
       ]
     },
@@ -479,7 +629,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "0.8.6",
         "previous_primary_hash": "2984a9e5399557b7f14b620ce994ffed121dbfa0dbf533f5d5fb833a6122d2b5",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -506,7 +656,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 9,
+        "consecutive_epochs": 10,
         "previous_release_tag": "2.2.4",
         "previous_primary_hash": "11d752f9cce956891eb10a24ef4bcae3cbff380df141d5b169d7b42784534ef0",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -539,7 +689,7 @@
         "first_seen_utc": "2026-08-20T12:00:00Z",
         "first_seen_block": 962500,
         "days_stable": 23,
-        "consecutive_epochs": 89,
+        "consecutive_epochs": 90,
         "last_changed_utc": "2026-08-20T12:00:00Z"
       },
       "artifacts": [

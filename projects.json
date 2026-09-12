@@ -16,5 +16,59 @@
     "verifier_key": "bootlace-dev",
     "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.3.0/SHA256SUMS",
     "signature_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.3.0/SHA256SUMS.asc"
+  },
+  {
+    "project_id": "noble-curves",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/noble-curves",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/noble-curves/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "noble-hashes",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/noble-hashes",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/noble-hashes/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "scure-bip39",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/scure-bip39",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/scure-bip39/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "scure-bip32",
+    "release_tag": "2.4.0",
+    "upstream_url": "https://github.com/paulmillr/scure-bip32",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/scure-bip32/git/refs/tags/2.4.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "scure-btc-signer",
+    "release_tag": "2.4.1",
+    "upstream_url": "https://github.com/paulmillr/scure-btc-signer",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/scure-btc-signer/git/refs/tags/2.4.1",
+    "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "noble-secp256k1",
+    "release_tag": "3.2.0",
+    "upstream_url": "https://github.com/paulmillr/noble-secp256k1",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "manifest_url": "https://api.github.com/repos/paulmillr/noble-secp256k1/git/refs/tags/3.2.0",
+    "signature_url": "https://github.com/paulmillr.gpg"
   }
 ]

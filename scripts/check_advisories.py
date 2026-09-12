@@ -15,6 +15,12 @@ import urllib.error
 # Ecosystem & package mapping for BinWatch 16 projects
 PACKAGE_MAP = {
     "pipe-k1": {"ecosystem": "crates.io", "package": "pipe-k1"},
+    "noble-curves": {"ecosystem": "npm", "package": "@noble/curves"},
+    "noble-hashes": {"ecosystem": "npm", "package": "@noble/hashes"},
+    "scure-bip39": {"ecosystem": "npm", "package": "@scure/bip39"},
+    "scure-bip32": {"ecosystem": "npm", "package": "@scure/bip32"},
+    "scure-btc-signer": {"ecosystem": "npm", "package": "@scure/btc-signer"},
+    "noble-secp256k1": {"ecosystem": "npm", "package": "@noble/secp256k1"},
     "subzero-rs": {"ecosystem": "crates.io", "package": "subzero-rs"},
     "bitcoin_core": {"ecosystem": "Bitcoind", "repo": "bitcoin/bitcoin"},
     "alby_hub": {"ecosystem": "Go", "package": "github.com/getalby/hub", "repo": "getAlby/hub"},
