@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BinWatch — Public Key Trust Anchor Directory</title>
+  <style>
+    :root {
+      --bg: #090d13;
+      --card-bg: #111823;
+      --border: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #22c55e;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      font-family: var(--mono);
+    }
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #0d141e;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    tr:hover td {
+      background: #172234;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: #1e293b;
+      color: var(--green);
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      font-family: var(--mono);
+    }
+  </style>
+</head>
+<body>
+  <a href="../" class="back-link">&larr; Back to BinWatch Live Monitor</a>
+  <h1>Upstream Public Key Trust Anchor Directory</h1>
+  <p>Mirror of authoritative, armored OpenPGP public keys and PEM certificates used by BinWatch to cryptographically assert release provenance.</p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Key Artifact</th>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Direct Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="alby_rolznz.asc">alby_rolznz.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.1K</td>
+          <td><a href="alby_rolznz.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="bitcoin_keeper.asc">bitcoin_keeper.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.9K</td>
+          <td><a href="bitcoin_keeper.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="blockstream_green.asc">blockstream_green.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>5.0K</td>
+          <td><a href="blockstream_green.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_amyers.asc">cln_amyers.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>1.1K</td>
+          <td><a href="cln_amyers.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_cdecker.asc">cln_cdecker.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>46K</td>
+          <td><a href="cln_cdecker.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_cln.asc">cln_cln.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.1K</td>
+          <td><a href="cln_cln.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_daywalker.asc">cln_daywalker.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>673</td>
+          <td><a href="cln_daywalker.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_lagrang3.asc">cln_lagrang3.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>400</td>
+          <td><a href="cln_lagrang3.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_madel.asc">cln_madel.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.1K</td>
+          <td><a href="cln_madel.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_ngoline.asc">cln_ngoline.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>1.6K</td>
+          <td><a href="cln_ngoline.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_niftynei.asc">cln_niftynei.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>8.4K</td>
+          <td><a href="cln_niftynei.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_pneuroth.asc">cln_pneuroth.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>643</td>
+          <td><a href="cln_pneuroth.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_rusty.asc">cln_rusty.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>24K</td>
+          <td><a href="cln_rusty.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_sangbida.asc">cln_sangbida.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.1K</td>
+          <td><a href="cln_sangbida.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="cln_sfarooqui.asc">cln_sfarooqui.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.2K</td>
+          <td><a href="cln_sfarooqui.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="coldcard_peter.asc">coldcard_peter.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>5.4K</td>
+          <td><a href="coldcard_peter.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="electrum_thomasv.asc">electrum_thomasv.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>4.7K</td>
+          <td><a href="electrum_thomasv.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="elements_pgreco.asc">elements_pgreco.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>4.9K</td>
+          <td><a href="elements_pgreco.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="krux_selfcustody.pem">krux_selfcustody.pem</a></td>
+          <td><span class="badge">PEM</span></td>
+          <td>130</td>
+          <td><a href="krux_selfcustody.pem" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="lnd_roasbeef.asc">lnd_roasbeef.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>1.3K</td>
+          <td><a href="lnd_roasbeef.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="nunchuk.asc">nunchuk.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.9K</td>
+          <td><a href="nunchuk.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="phoenix_padioupm.asc">phoenix_padioupm.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>3.1K</td>
+          <td><a href="phoenix_padioupm.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="seedsigner.asc">seedsigner.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>2.4K</td>
+          <td><a href="seedsigner.asc" download>download</a></td>
+        </tr>
+        <tr>
+          <td><a href="sparrow.asc">sparrow.asc</a></td>
+          <td><span class="badge">ASC</span></td>
+          <td>5.5K</td>
+          <td><a href="sparrow.asc" download>download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    BinWatch Engine &middot; Cryptographic Supply Chain Integrity Sentinel &middot; Zero-Privilege Verification
+  </footer>
+</body>
+</html>
