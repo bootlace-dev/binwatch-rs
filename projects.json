@@ -70,5 +70,23 @@
     "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
     "manifest_url": "https://api.github.com/repos/paulmillr/noble-secp256k1/git/refs/tags/3.2.0",
     "signature_url": "https://github.com/paulmillr.gpg"
+  },
+  {
+    "project_id": "libsecp256k1",
+    "release_tag": "v0.8.0",
+    "upstream_url": "https://github.com/bitcoin-core/secp256k1",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "6A8F9C266528E25AEB1D7731C2371D91CB716EA7",
+    "manifest_url": "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/v0.8.0",
+    "signature_url": "https://github.com/theuni.gpg"
+  },
+  {
+    "project_id": "openssh-portable",
+    "release_tag": "V_10_5_P1",
+    "upstream_url": "https://github.com/openssh/openssh-portable",
+    "verifier_type": "git_tag_ssh",
+    "verifier_key": "djm@mindrot.org",
+    "manifest_url": "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/V_10_5_P1",
+    "signature_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers"
   }
 ]

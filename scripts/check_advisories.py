@@ -15,6 +15,8 @@ import urllib.error
 # Ecosystem & package mapping for BinWatch 16 projects
 PACKAGE_MAP = {
     "pipe-k1": {"ecosystem": "crates.io", "package": "pipe-k1"},
+    "libsecp256k1": {"ecosystem": "crates.io", "package": "secp256k1"},
+    "openssh-portable": {"ecosystem": "OSS-Fuzz", "package": "openssh"},
     "noble-curves": {"ecosystem": "npm", "package": "@noble/curves"},
     "noble-hashes": {"ecosystem": "npm", "package": "@noble/hashes"},
     "scure-bip39": {"ecosystem": "npm", "package": "@scure/bip39"},

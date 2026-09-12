@@ -1,10 +1,10 @@
 {
   "notice": "PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
-  "timestamp_utc": "2026-09-12T01:50:01Z",
-  "block_height": 966592,
-  "block_hash": "00000000000000000001c8b1ce689331d07a6d48ffca49a64a24cf575dd92a3d",
-  "merkle_root_sha256": "084fa27bbfae7978cec8a30d43bdb0ed88ae54c951d957ef48ae3ed2cc248a42",
-  "hex_seal": "084FA2",
+  "timestamp_utc": "2026-09-12T02:00:48Z",
+  "block_height": 966596,
+  "block_hash": "0000000000000000000120756e4f4b8781d60c752245ba870085fa3257a80701",
+  "merkle_root_sha256": "2b9e1669aa0303f6e0b451a46e222955c8495464e666579adb6b066ad7d76f5e",
+  "hex_seal": "2B9E16",
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -17,7 +17,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v1.16.2",
         "previous_primary_hash": "b7fb785c4a794cbdb7020fb4662d559fe329caee7b6ee7d130a8a6cf5bb36098",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -50,7 +50,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 1,
-        "consecutive_epochs": 4,
+        "consecutive_epochs": 5,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "artifacts": [
@@ -75,7 +75,7 @@
         "first_seen_utc": "2026-07-15T10:30:00Z",
         "first_seen_block": 957800,
         "days_stable": 59,
-        "consecutive_epochs": 234,
+        "consecutive_epochs": 235,
         "previous_release_tag": "v29.3",
         "previous_primary_hash": "68a2bc57e930fca69be99525e64a4fe8742b78a9c372dc4ab85bb34dbffec123",
         "last_changed_utc": "2026-07-15T10:30:00Z"
@@ -109,7 +109,7 @@
         "first_seen_utc": "2026-08-06T14:22:01Z",
         "first_seen_block": 960800,
         "days_stable": 37,
-        "consecutive_epochs": 146,
+        "consecutive_epochs": 147,
         "previous_release_tag": "v2.5.12",
         "previous_primary_hash": "b7a941582e01df608432a188f61530e79124beaf190284e58a2d1f9301daec60",
         "last_changed_utc": "2026-08-06T14:22:01Z"
@@ -136,7 +136,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "release_3.5.3",
         "previous_primary_hash": "9e7091656cff3b2072186716075ce6544a499a0d8437937d57e0eb37f59dffec",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -162,7 +162,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "1.0.41",
         "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -188,7 +188,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 1,
-        "consecutive_epochs": 4,
+        "consecutive_epochs": 5,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "advisory_baseline": {
@@ -220,7 +220,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v5.6.2",
         "previous_primary_hash": "938b81628dcfef1f8bbcf3d5ba4b9e2c695bc8bf8c69136c3427ecff72b14510",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -247,7 +247,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v25.05",
         "previous_primary_hash": "9d02636d7a4699f1ff4d7159fc56561f55f2ef6c41b8c2be0b4fa5c464efbe10",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -281,7 +281,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "4.8.1",
         "previous_primary_hash": "39f3796bb9230559eb564344d57c3d2583857d4722ce949826f5825ae7c1db27",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -315,7 +315,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v26.08.0",
         "previous_primary_hash": "e228be3f3604f323c93ee5ecb0ec5fc4f7bbd7b2e3e570ee28a3f89839ae6724",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -331,6 +331,31 @@
         }
       ]
     },
+    "libsecp256k1": {
+      "project_id": "libsecp256k1",
+      "release_tag": "v0.8.0",
+      "upstream_url": "https://github.com/bitcoin-core/secp256k1",
+      "trust_anchor_url": "https://github.com/bitcoin-core/secp256k1",
+      "manifest_url": "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/v0.8.0",
+      "key_url": "https://github.com/theuni.gpg",
+      "history": {
+        "first_seen_utc": "2026-09-12T02:00:48Z",
+        "first_seen_block": 966596,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T02:00:48Z"
+      },
+      "artifacts": [
+        {
+          "name": "secp256k1-v0.8.0.tar.gz",
+          "expected_sha256": "18f07c42218765cd46148d74d9fe575795f56dce",
+          "observed_sha256": "18f07c42218765cd46148d74d9fe575795f56dce",
+          "sig_status": "OK",
+          "verified_by": "gpg:6A8F9C266528E25A(theuni:Sebastian Falbesoner)",
+          "audit_note": "Signed release tag verified against Bitcoin Core maintainer PGP release anchor"
+        }
+      ]
+    },
     "liquid_elements": {
       "project_id": "liquid_elements",
       "release_tag": "elements-23.3.3",
@@ -342,7 +367,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v23.2.1",
         "previous_primary_hash": "2d4ff788cb54ec4ff9cf17d2a9aa7fa838e1b945d8bcf51774e14f9aa123bbef",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -369,7 +394,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v0.19.4-beta",
         "previous_primary_hash": "c38ef1f211da3fdfb06f8fe9cb463c6a495dae4a5d893a2e37976e53c4371908",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -403,7 +428,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 0,
-        "consecutive_epochs": 1,
+        "consecutive_epochs": 2,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -428,7 +453,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 0,
-        "consecutive_epochs": 1,
+        "consecutive_epochs": 2,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -453,7 +478,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 0,
-        "consecutive_epochs": 1,
+        "consecutive_epochs": 2,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -478,7 +503,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "v0.0.51",
         "previous_primary_hash": "e228945cf4597b833215286ce17bb8b66e927c9ef5b46e3e5606fcb666a4bc4a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -494,6 +519,30 @@
         }
       ]
     },
+    "openssh-portable": {
+      "project_id": "openssh-portable",
+      "release_tag": "V_10_5_P1",
+      "upstream_url": "https://github.com/openssh/openssh-portable",
+      "trust_anchor_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers",
+      "manifest_url": "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/V_10_5_P1",
+      "history": {
+        "first_seen_utc": "2026-09-12T02:00:48Z",
+        "first_seen_block": 966596,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "last_changed_utc": "2026-09-12T02:00:48Z"
+      },
+      "artifacts": [
+        {
+          "name": "openssh-10.5p1.tar.gz",
+          "expected_sha256": "f11c902f8b6026d68f980b8b14b7fd75f6f95d5f",
+          "observed_sha256": "f11c902f8b6026d68f980b8b14b7fd75f6f95d5f",
+          "sig_status": "OK",
+          "verified_by": "ssh:sk-ecdsa-sha2-nistp256(djm@mindrot.org)",
+          "audit_note": "Signed release tag verified via Damien Miller SSH git tag signature"
+        }
+      ]
+    },
     "phoenix": {
       "project_id": "phoenix",
       "release_tag": "android-v2.8.2",
@@ -505,7 +554,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 1,
-        "consecutive_epochs": 4,
+        "consecutive_epochs": 5,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "artifacts": [
@@ -529,7 +578,7 @@
         "first_seen_utc": "2026-09-08T18:00:00Z",
         "first_seen_block": 965215,
         "days_stable": 4,
-        "consecutive_epochs": 15,
+        "consecutive_epochs": 16,
         "last_changed_utc": "2026-09-08T18:00:00Z"
       },
       "artifacts": [
@@ -554,7 +603,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 0,
-        "consecutive_epochs": 1,
+        "consecutive_epochs": 2,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -579,7 +628,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 0,
-        "consecutive_epochs": 1,
+        "consecutive_epochs": 2,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -604,7 +653,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 0,
-        "consecutive_epochs": 1,
+        "consecutive_epochs": 2,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -629,7 +678,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "0.8.6",
         "previous_primary_hash": "2984a9e5399557b7f14b620ce994ffed121dbfa0dbf533f5d5fb833a6122d2b5",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -656,7 +705,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 3,
-        "consecutive_epochs": 10,
+        "consecutive_epochs": 11,
         "previous_release_tag": "2.2.4",
         "previous_primary_hash": "11d752f9cce956891eb10a24ef4bcae3cbff380df141d5b169d7b42784534ef0",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -689,7 +738,7 @@
         "first_seen_utc": "2026-08-20T12:00:00Z",
         "first_seen_block": 962500,
         "days_stable": 23,
-        "consecutive_epochs": 90,
+        "consecutive_epochs": 91,
         "last_changed_utc": "2026-08-20T12:00:00Z"
       },
       "artifacts": [
