@@ -1,6 +1,11 @@
 name: BinWatch Integrity Audit
 
 on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'data/history.json'
   schedule:
     # Run every 6 hours
     - cron: '0 */6 * * *'
