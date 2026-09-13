@@ -21,7 +21,7 @@
   },
   {
     "project_id": "bitcoin_core",
-    "release_tag": "v29.4",
+    "release_tag": "v31.1",
     "upstream_url": "https://bitcoincore.org/bin",
     "trust_anchor_url": "https://bitcoincore.org/en/download/",
     "manifest_url": "https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS",
@@ -43,11 +43,11 @@
   },
   {
     "project_id": "liquid_elements",
-    "release_tag": "elements-23.3.3",
+    "release_tag": "elements-23.3.4",
     "upstream_url": "https://github.com/ElementsProject/elements",
     "trust_anchor_url": "https://github.com/ElementsProject/elements/releases/tag/elements-23.3.3",
-    "manifest_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.3/SHA256SUMS.asc",
-    "signature_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.3/SHA256SUMS.asc",
+    "manifest_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.4/SHA256SUMS.asc",
+    "signature_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.4/SHA256SUMS.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/elements_pgreco.asc",
     "verifier_type": "sha256_manifest",
     "verifier_key": "BD0F3062F87842410B06A0432F656B0610604482"
@@ -65,11 +65,11 @@
   },
   {
     "project_id": "lnd",
-    "release_tag": "v0.21.3-beta",
+    "release_tag": "v0.21.3-beta.rc1",
     "upstream_url": "https://github.com/lightningnetwork/lnd",
     "trust_anchor_url": "https://github.com/lightningnetwork/lnd/tree/master/scripts/keys",
-    "manifest_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta/manifest-v0.21.3-beta.txt",
-    "signature_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta/manifest-v0.21.3-beta.txt",
+    "manifest_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta.rc1/manifest-v0.21.3-beta.rc1.txt",
+    "signature_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta.rc1/manifest-v0.21.3-beta.rc1.txt",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/lnd_roasbeef.asc",
     "verifier_type": "sha256_manifest",
     "verifier_key": "roasbeef"
@@ -109,11 +109,11 @@
   },
   {
     "project_id": "blockstream_green",
-    "release_tag": "release_3.5.3",
+    "release_tag": "release_3.5.4",
     "upstream_url": "https://github.com/Blockstream/green_qt",
     "trust_anchor_url": "https://blockstream.com/app/",
-    "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.3/SHA256SUMS.asc",
-    "signature_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.3/SHA256SUMS.asc",
+    "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.4/SHA256SUMS.asc",
+    "signature_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.4/SHA256SUMS.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/blockstream_green.asc",
     "verifier_type": "sha256_manifest",
     "verifier_key": "04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792"
@@ -142,7 +142,7 @@
   },
   {
     "project_id": "coldcard",
-    "release_tag": "v5.6.2",
+    "release_tag": "2026-08-31T1606-v6.6.1X",
     "upstream_url": "https://github.com/Coldcard/firmware",
     "trust_anchor_url": "https://coldcard.com/downloads",
     "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
