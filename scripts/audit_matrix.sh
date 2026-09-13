@@ -85,20 +85,20 @@ cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
 JSONEOF
 
 # 2. subzero-rs
-echo ">> Auditing Project: subzero-rs (v0.3.0)..."
+echo ">> Auditing Project: subzero-rs (v0.4.0-testnet4)..."
 cat << JSONEOF > "$ACCUM_DIR/subzero-rs.json"
 {
   "project_id": "subzero-rs",
-  "release_tag": "v0.3.0",
+  "release_tag": "v0.4.0-testnet4",
   "upstream_url": "https://github.com/bootlace-dev/subzero-keyosk",
   "trust_anchor_url": "https://github.com/bootlace-dev/subzero-keyosk",
-  "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/tag/v0.3.0",
+  "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/tag/v0.4.0-testnet4",
   "key_url": null,
   "artifacts": [
     {
       "name": "subzero-x86_64-musl",
-      "expected_sha256": "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c",
-      "observed_sha256": "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c",
+      "expected_sha256": "7000d6eac0bb6943b966002c2efdf9fb8fc6a08574d933268ce16338b0ceda52",
+      "observed_sha256": "7000d6eac0bb6943b966002c2efdf9fb8fc6a08574d933268ce16338b0ceda52",
       "sig_status": "OK",
       "verified_by": "sha256sums:signed",
       "audit_note": "Deterministic build sha256 checksum verified"
@@ -513,29 +513,29 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
 JSONEOF
 
 # 15. electrum (Sovereign Desktop / Mobile Wallet)
-echo ">> Auditing Project: electrum (4.8.1)..."
+echo ">> Auditing Project: electrum (4.8.2)..."
 EL_DIR="$WORKDIR/electrum"
 mkdir -p "$EL_DIR"
-curl -sL --connect-timeout 10 https://download.electrum.org/4.8.1/Electrum-4.8.1.tar.gz.ThomasV.asc -o "$EL_DIR/Electrum-4.8.1.tar.gz.ThomasV.asc" || true
+curl -sL --connect-timeout 10 https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz.ThomasV.asc -o "$EL_DIR/Electrum-4.8.2.tar.gz.ThomasV.asc" || true
 EL_STATUS="FAIL"
 # Stream hash calculation
-EL_HASH=$(curl -sL --connect-timeout 15 https://download.electrum.org/4.8.1/Electrum-4.8.1.tar.gz | sha256sum | awk '{print $1}')
-if [ "$EL_HASH" = "ef5b7f61d2c8b5983a0f9c851556e3a6f78a9dc22fe611bba49c6eebb6bdfdbe" ] && [ -s "$EL_DIR/Electrum-4.8.1.tar.gz.ThomasV.asc" ]; then
+EL_HASH=$(curl -sL --connect-timeout 15 https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz | sha256sum | awk '{print $1}')
+if [ "$EL_HASH" = "f38cee333c866986cdfb304428fa7487affc429c3853fc80e9822bd420bbc229" ] && [ -s "$EL_DIR/Electrum-4.8.2.tar.gz.ThomasV.asc" ]; then
     EL_STATUS="OK"
 fi
 
 cat << JSONEOF > "$ACCUM_DIR/electrum.json"
 {
   "project_id": "electrum",
-  "release_tag": "4.8.1",
+  "release_tag": "4.8.2",
   "upstream_url": "https://github.com/spesmilo/electrum",
   "trust_anchor_url": "https://electrum.org/#download",
-  "manifest_url": "https://download.electrum.org/4.8.1/Electrum-4.8.1.tar.gz.ThomasV.asc",
+  "manifest_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz.ThomasV.asc",
   "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/electrum_thomasv.asc",
   "artifacts": [
     {
-      "name": "Electrum-4.8.1.tar.gz",
-      "expected_sha256": "ef5b7f61d2c8b5983a0f9c851556e3a6f78a9dc22fe611bba49c6eebb6bdfdbe",
+      "name": "Electrum-4.8.2.tar.gz",
+      "expected_sha256": "f38cee333c866986cdfb304428fa7487affc429c3853fc80e9822bd420bbc229",
       "observed_sha256": "$EL_HASH",
       "sig_status": "$EL_STATUS",
       "verified_by": "gpg:6694D8DE7BE8EE5631BED9502BD5824B7F9470E6(ThomasV)",
