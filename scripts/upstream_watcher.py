@@ -59,8 +59,22 @@ SOVEREIGN_RULES = {
     ],
 }
 
+def get_tag_prefix(curr_tag):
+    if not curr_tag:
+        return ""
+    m = re.match(r"^([a-zA-Z_-]+[._-]?(?:v)?)", curr_tag)
+    if m:
+        return m.group(1)
+    return ""
+
 def semver_key(tag):
-    clean = re.sub(r"^refs/tags/", "", tag).lstrip("vV")
+    clean = re.sub(r"^refs/tags/", "", tag)
+    if clean.startswith(("V_", "v_")):
+        clean = clean[2:]
+    clean = re.sub(r"^.*-(?=v)", "", clean)
+    clean = re.sub(r"^(android[.-]v?|release[_-]|elements[_-])", "", clean)
+    clean = clean.lstrip("vV")
+    clean = clean.replace("_", ".")
     # Matches: major.minor[.patch][-extra]
     m = re.match(r"^(\d+)\.(\d+)(?:\.(\d+))?(?:[.-](.*))?$", clean)
     if not m:
@@ -74,7 +88,7 @@ def semver_key(tag):
     is_stable = 1 - is_subordinate
     return (major, minor, patch, is_stable, extra)
 
-def query_upstream_tags(git_url, allow_prerelease=False):
+def query_upstream_tags(git_url, curr_tag=None, allow_prerelease=False):
     """Query remote git tags via git ls-remote (zero API rate limits)."""
     try:
         cmd = ["git", "ls-remote", "--tags", "--refs", git_url]
@@ -88,7 +102,15 @@ def query_upstream_tags(git_url, allow_prerelease=False):
                 ref = parts[1].replace("refs/tags/", "")
                 tags.append(ref)
         
-        valid = [t for t in tags if semver_key(t)[0] != -1]
+        prefix = get_tag_prefix(curr_tag) if curr_tag else ""
+        if prefix:
+            filtered = [t for t in tags if t.startswith(prefix)]
+        elif curr_tag and re.match(r'^\d', curr_tag):
+            filtered = [t for t in tags if re.match(r'^\d', t)]
+        else:
+            filtered = tags
+
+        valid = [t for t in filtered if semver_key(t)[0] != -1]
         if not allow_prerelease:
             stable = [t for t in valid if not re.search(r'(beta|alpha|rc|pre)', t, re.I)]
             if stable:
@@ -156,12 +178,15 @@ def main():
         if args.project and pid != args.project:
             continue
 
-        curr_tag = p.get("release_tag", "")
+        curr_tag = p.get("git_tag") or p.get("release_tag", "")
         upstream_url = p.get("upstream_url", "")
-        git_url = upstream_url.rstrip("/") + ".git"
+        git_url = p.get("git_url") or (upstream_url.rstrip("/") + ".git")
+        if not git_url.endswith(".git"):
+            git_url += ".git"
 
         print(f"[*] Checking {pid} (pinned: {curr_tag})...", end=" ", flush=True)
-        latest_tag = query_upstream_tags(git_url, allow_prerelease=args.prerelease)
+        is_prerelease = args.prerelease or bool(re.search(r'(beta|alpha|rc|pre|testnet)', curr_tag, re.I))
+        latest_tag = query_upstream_tags(git_url, curr_tag=curr_tag, allow_prerelease=is_prerelease)
 
         if not latest_tag:
             print("[UNAVAILABLE]")

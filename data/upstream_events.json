@@ -27,5 +27,75 @@
     "diff_bytes": 0,
     "detected_smells": [],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-13T00:44:23.056670+00:00",
+    "project_id": "liquid_elements",
+    "upstream_url": "https://github.com/ElementsProject/elements",
+    "previous_tag": "elements-23.3.3",
+    "detected_tag": "elements-23.3.4",
+    "diff_bytes": 4132607,
+    "detected_smells": [
+      "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "CRYPTO.PROOF_CACHE_KEY_COLLISION_REUSE",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-13T00:44:24.051972+00:00",
+    "project_id": "lnd",
+    "upstream_url": "https://github.com/lightningnetwork/lnd",
+    "previous_tag": "v0.21.3-beta",
+    "detected_tag": "v0.21.3-beta.rc1",
+    "diff_bytes": 0,
+    "detected_smells": [],
+    "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-13T00:44:25.728910+00:00",
+    "project_id": "blockstream_green",
+    "upstream_url": "https://github.com/Blockstream/green_qt",
+    "previous_tag": "release_3.5.3",
+    "detected_tag": "release_3.5.4",
+    "diff_bytes": 23388,
+    "detected_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-13T00:44:52.637092+00:00",
+    "project_id": "bitcoin_core",
+    "upstream_url": "https://bitcoincore.org/bin",
+    "previous_tag": "v29.4",
+    "detected_tag": "v31.1",
+    "diff_bytes": 0,
+    "detected_smells": [],
+    "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-13T00:44:55.298635+00:00",
+    "project_id": "coldcard",
+    "upstream_url": "https://github.com/Coldcard/firmware",
+    "previous_tag": "2026-09-03T1541-v5.6.2",
+    "detected_tag": "2026-08-31T1606-v6.6.1X",
+    "diff_bytes": 8057449,
+    "detected_smells": [
+      "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "CRYPTO.PROOF_CACHE_KEY_COLLISION_REUSE",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
