@@ -1,0 +1,31 @@
+[
+  {
+    "timestamp_utc": "2026-09-13T00:27:08.761976+00:00",
+    "project_id": "subzero-rs",
+    "upstream_url": "https://github.com/bootlace-dev/subzero-keyosk",
+    "previous_tag": "v0.3.0",
+    "detected_tag": "v0.4.0-testnet4",
+    "diff_bytes": 3281054,
+    "detected_smells": [
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-13T00:27:12.353614+00:00",
+    "project_id": "wasabi",
+    "upstream_url": "https://github.com/WalletWasabi/WalletWasabi",
+    "previous_tag": "v2.8.2",
+    "detected_tag": "v99.99.01",
+    "diff_bytes": 0,
+    "detected_smells": [],
+    "status": "UNATTESTED_NEW_RELEASE"
+  }
+]
