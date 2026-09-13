@@ -12,6 +12,8 @@ use std::io::{self, Read};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BinaryArtifact {
     pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub origin: Option<String>, // "github_release", "git_tag", "f-droid", "upstream_download", "ota_firmware"
     pub expected_sha256: String,
     pub observed_sha256: Option<String>,
     pub sig_status: String, // "OK", "FAIL", "UNVERIFIED"
@@ -49,6 +51,8 @@ pub struct ProjectAudit {
     pub project_id: String,
     pub release_tag: String,
     pub upstream_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub origin: Option<String>, // Primary distribution origin/channel
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub trust_anchor_url: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -103,8 +107,14 @@ impl ManifestAudit {
         for (project_id, project) in &self.projects {
             hasher.update(project_id.as_bytes());
             hasher.update(project.release_tag.as_bytes());
+            if let Some(ref o) = project.origin {
+                hasher.update(o.as_bytes());
+            }
             for art in &project.artifacts {
                 hasher.update(art.name.as_bytes());
+                if let Some(ref o) = art.origin {
+                    hasher.update(o.as_bytes());
+                }
                 hasher.update(art.expected_sha256.as_bytes());
                 if let Some(ref obs) = art.observed_sha256 {
                     hasher.update(obs.as_bytes());
@@ -215,17 +225,25 @@ impl ManifestAudit {
                 })
                 .unwrap_or_default();
 
+            let origin_tag = project
+                .origin
+                .as_deref()
+                .or_else(|| project.artifacts.first().and_then(|a| a.origin.as_deref()))
+                .map(|o| format!(" [{}]", o))
+                .unwrap_or_default();
+
             let entry_str = if let Some(detail) = failure_detail {
                 format!(
-                    "{} {} ({}) [{}] - {}\n",
-                    badge, project_id, project.release_tag, primary_hex, detail
+                    "{} {} ({}){}{{#{}}} - {}\n",
+                    badge, project_id, project.release_tag, origin_tag, primary_hex, detail
                 )
             } else {
                 format!(
-                    "{} {} ({}) [{}] - {} artifact(s)\n",
+                    "{} {} ({}){}{{#{}}} - {} artifact(s)\n",
                     badge,
                     project_id,
                     project.release_tag,
+                    origin_tag,
                     primary_hex,
                     project.artifacts.len()
                 )
@@ -369,6 +387,7 @@ fn main() -> io::Result<()> {
                     project_id: "pipe-k1".to_string(),
                     release_tag: "v0.0.1-rc0".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/pipe-k1".to_string(),
+                    origin: Some("github_release".to_string()),
                     trust_anchor_url: Some("https://github.com/bootlace-dev/pipe-k1/blob/master/SPECIFICATION.md".to_string()),
                     manifest_url: Some("https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS".to_string()),
                     key_url: None,
@@ -376,6 +395,7 @@ fn main() -> io::Result<()> {
                     advisory_baseline: None,
                     artifacts: vec![BinaryArtifact {
                         name: "pipek1-x86_64-linux-musl".to_string(),
+                        origin: Some("github_release".to_string()),
                         expected_sha256: "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string(),
                         observed_sha256: Some("7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string()),
                         sig_status: "OK".to_string(),
@@ -392,6 +412,7 @@ fn main() -> io::Result<()> {
                     project_id: "subzero-rs".to_string(),
                     release_tag: "v0.3.0".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/subzero-keyosk".to_string(),
+                    origin: Some("github_release".to_string()),
                     trust_anchor_url: Some("https://github.com/bootlace-dev/subzero-keyosk".to_string()),
                     manifest_url: None,
                     key_url: None,
@@ -399,6 +420,7 @@ fn main() -> io::Result<()> {
                     advisory_baseline: None,
                     artifacts: vec![BinaryArtifact {
                         name: "subzero-x86_64-musl".to_string(),
+                        origin: Some("github_release".to_string()),
                         expected_sha256: "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string(),
                         observed_sha256: Some("01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string()),
                         sig_status: "OK".to_string(),
@@ -415,6 +437,7 @@ fn main() -> io::Result<()> {
                     project_id: "bitcoin_core".to_string(),
                     release_tag: "v29.4".to_string(),
                     upstream_url: "https://bitcoincore.org/bin".to_string(),
+                    origin: Some("upstream_download".to_string()),
                     trust_anchor_url: Some("https://bitcoincore.org/en/download/".to_string()),
                     manifest_url: Some("https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS.asc".to_string()),
                     key_url: None,
@@ -423,6 +446,7 @@ fn main() -> io::Result<()> {
                     artifacts: vec![
                         BinaryArtifact {
                             name: "bitcoin-29.4-x86_64-linux-gnu.tar.gz".to_string(),
+                            origin: Some("upstream_download".to_string()),
                             expected_sha256: "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689".to_string(),
                             observed_sha256: Some("cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689".to_string()),
                             sig_status: "OK".to_string(),

@@ -174,6 +174,43 @@
       padding: 0.15rem 0.45rem;
       border-radius: 4px;
     }
+    .origin-badge {
+      font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+      font-size: 0.68rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      margin-left: 0.35rem;
+      font-weight: 600;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+    .origin-github_release {
+      background: #23863622;
+      color: #3fb950;
+      border: 1px solid #23863655;
+    }
+    .origin-git_tag {
+      background: #8957e522;
+      color: #a371f7;
+      border: 1px solid #8957e555;
+    }
+    .origin-f-droid {
+      background: #1f6feb22;
+      color: #58a6ff;
+      border: 1px solid #1f6feb55;
+    }
+    .origin-upstream_download {
+      background: #d2992222;
+      color: #e3b341;
+      border: 1px solid #d2992255;
+    }
+    .origin-ota_firmware {
+      background: #da363322;
+      color: #f85149;
+      border: 1px solid #da363355;
+    }
     .artifact-list {
       margin-top: 0.35rem;
       border: 1px solid #30363d;
@@ -405,8 +442,15 @@
 
           const artList = p.artifacts.map(a => `${a.name} (${a.sig_status})`).join('\n');
 
+          const originBadge = p.origin ? `<span class="origin-badge origin-${p.origin}" title="Distribution Origin / Channel: ${p.origin}">${p.origin}</span>` : '';
+
           row.innerHTML = `
-            <td><strong><a href="${p.upstream_url}" target="_blank" onclick="event.stopPropagation()" title="Open official ${p.project_id} upstream repository: ${p.upstream_url}">${p.project_id}</a></strong></td>
+            <td>
+              <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                <strong><a href="${p.upstream_url}" target="_blank" onclick="event.stopPropagation()" title="Open official ${p.project_id} upstream repository: ${p.upstream_url}">${p.project_id}</a></strong>
+                ${originBadge}
+              </div>
+            </td>
             <td class="mono" title="Audited release tag: ${p.release_tag}">${p.release_tag}</td>
             <td title="${p.artifacts.length} file(s) audited:\n${artList}">${fileCountLabel} ${hashBadge}</td>
             <td class="mono" style="font-size:0.75rem" title="Authoritative verification engine:\n${verEngine}">${displayEngine}</td>
@@ -441,10 +485,13 @@
             const h6 = a.expected_sha256.substring(0, 6);
             const obs = a.observed_sha256 ? a.observed_sha256.substring(0, 10) + '...' : 'manifest-only';
             const statColor = a.sig_status === 'OK' ? '#3fb950' : '#ff7b72';
+            const artOrigin = a.origin || p.origin;
+            const artOriginBadge = artOrigin ? `<span class="origin-badge origin-${artOrigin}" style="font-size:0.62rem; margin-left:0.35rem;">${artOrigin}</span>` : '';
             return `
               <div class="artifact-item">
                 <div>
                   <span class="mono" style="font-weight:600;">${a.name}</span>
+                  ${artOriginBadge}
                   <span class="hash-badge" title="Expected SHA-256: ${a.expected_sha256}">#${h6}</span>
                 </div>
                 <div>
@@ -460,6 +507,8 @@
               <div class="drawer-content">
                 <div style="margin-bottom: 0.5rem;"><strong title="Unbroken chain from upstream authoritative declaration to artifact verification.">Cryptographic Chain-of-Custody:</strong></div>
                 <div class="drawer-grid">
+                  <div class="drawer-label" title="Sovereign distribution channel or origin repository where artifacts and signatures are sourced.">Distribution Origin:</div>
+                  <div><span class="origin-badge origin-${p.origin || 'upstream'}">${p.origin || 'unknown'}</span></div>
                   <div class="drawer-label" title="Authoritative verification engine or signing key ID.">Verification Engine:</div>
                   <div class="mono" style="font-size:0.8rem;">${verEngine}</div>
                   <div class="drawer-label" title="The authoritative upstream document, README, or git tree declaring why this signing key is trusted.">Trust Anchor:</div>

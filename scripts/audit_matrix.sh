@@ -41,6 +41,18 @@ get_tag() {
     fi
 }
 
+get_origin() {
+    local pid="$1"
+    local fallback="${2:-github_release}"
+    local orig
+    orig=$(jq -r --arg p "$pid" '.[] | select(.project_id==$p) | .origin // empty' "$PROJECTS_JSON" 2>/dev/null || echo "")
+    if [ -n "$orig" ]; then
+        echo "$orig"
+    else
+        echo "$fallback"
+    fi
+}
+
 echo ">> Querying Bitcoin blockchain tip..."
 BTC_JSON=$(curl -s --connect-timeout 8 https://blockchain.info/latestblock || echo '{"height":0,"hash":""}')
 BTC_HEIGHT=$(echo "$BTC_JSON" | jq -r '.height // 0')
@@ -54,6 +66,7 @@ mkdir -p "$ACCUM_DIR"
 
 # 1. pipe-k1
 PIPEK1_TAG=$(get_tag "pipe-k1" "v0.0.1-rc0")
+PIPEK1_ORIGIN=$(get_origin "pipe-k1")
 echo ">> Auditing Project: pipe-k1 ($PIPEK1_TAG)..."
 PIPEK1_DIR="$WORKDIR/pipe-k1"
 mkdir -p "$PIPEK1_DIR"
@@ -82,6 +95,7 @@ cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
 {
   "project_id": "pipe-k1",
   "release_tag": "$PIPEK1_TAG",
+  "origin": "$PIPEK1_ORIGIN",
   "upstream_url": "https://github.com/bootlace-dev/pipe-k1",
   "trust_anchor_url": "https://github.com/bootlace-dev/pipe-k1/blob/master/SPECIFICATION.md",
   "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/${PIPEK1_TAG}/SHA256SUMS",
@@ -89,6 +103,7 @@ cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
   "artifacts": [
     {
       "name": "pipe-k1-x86_64-linux-musl",
+      "origin": "$PIPEK1_ORIGIN",
       "expected_sha256": "$PIPEK1_HASH",
       "observed_sha256": "$PIPEK1_HASH",
       "sig_status": "$PIPEK1_SIG_STATUS",
@@ -101,6 +116,7 @@ JSONEOF
 
 # 2. subzero-rs
 SUBZERO_TAG=$(get_tag "subzero-rs" "v0.4.0-testnet4")
+SUBZERO_ORIGIN=$(get_origin "subzero-rs")
 echo ">> Auditing Project: subzero-rs ($SUBZERO_TAG)..."
 SUBZERO_DIR="$WORKDIR/subzero"
 mkdir -p "$SUBZERO_DIR"
@@ -118,6 +134,7 @@ cat << JSONEOF > "$ACCUM_DIR/subzero-rs.json"
 {
   "project_id": "subzero-rs",
   "release_tag": "$SUBZERO_TAG",
+  "origin": "$SUBZERO_ORIGIN",
   "upstream_url": "https://github.com/bootlace-dev/subzero-keyosk",
   "trust_anchor_url": "https://github.com/bootlace-dev/subzero-keyosk",
   "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/${SUBZERO_TAG}/SHA256SUMS",
@@ -125,6 +142,7 @@ cat << JSONEOF > "$ACCUM_DIR/subzero-rs.json"
   "artifacts": [
     {
       "name": "subzero-x86_64-musl",
+      "origin": "$SUBZERO_ORIGIN",
       "expected_sha256": "$SUBZERO_HASH",
       "observed_sha256": "$SUBZERO_HASH",
       "sig_status": "$SUBZERO_STATUS",
@@ -137,6 +155,7 @@ JSONEOF
 
 # 3. bitcoin_core
 BTC_TAG=$(get_tag "bitcoin_core" "v29.4")
+BTC_ORIGIN=$(get_origin "bitcoin_core")
 BTC_VER="${BTC_TAG#v}"
 echo ">> Auditing Project: bitcoin_core ($BTC_TAG)..."
 BTC_DIR="$WORKDIR/bitcoin_core"
@@ -148,6 +167,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_core.json"
 {
   "project_id": "bitcoin_core",
   "release_tag": "$BTC_TAG",
+  "origin": "$BTC_ORIGIN",
   "upstream_url": "https://bitcoincore.org/bin",
   "trust_anchor_url": "https://bitcoincore.org/en/download/",
   "manifest_url": "https://bitcoincore.org/bin/bitcoin-core-${BTC_VER}/SHA256SUMS",
@@ -155,6 +175,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_core.json"
   "artifacts": [
     {
       "name": "bitcoin-${BTC_VER}-x86_64-linux-gnu.tar.gz",
+      "origin": "$BTC_ORIGIN",
       "expected_sha256": "$BTC_CORE_HASH",
       "observed_sha256": "$BTC_CORE_HASH",
       "sig_status": "OK",
@@ -167,6 +188,7 @@ JSONEOF
 
 # 4. alby_hub (Active Exploit Watch)
 ALBY_TAG=$(get_tag "alby_hub" "v1.24.0")
+ALBY_ORIGIN=$(get_origin "alby_hub")
 echo ">> Auditing Project: alby_hub ($ALBY_TAG)..."
 ALBY_DIR="$WORKDIR/alby"
 mkdir -p "$ALBY_DIR"
@@ -184,6 +206,7 @@ cat << JSONEOF > "$ACCUM_DIR/alby_hub.json"
 {
   "project_id": "alby_hub",
   "release_tag": "$ALBY_TAG",
+  "origin": "$ALBY_ORIGIN",
   "upstream_url": "https://github.com/getAlby/hub",
   "trust_anchor_url": "https://raw.githubusercontent.com/getalby/hub/master/scripts/keys/rolznz.asc",
   "manifest_url": "https://github.com/getAlby/hub/releases/download/${ALBY_TAG}/manifest.txt",
@@ -191,6 +214,7 @@ cat << JSONEOF > "$ACCUM_DIR/alby_hub.json"
   "artifacts": [
     {
       "name": "albyhub-Server-Linux-x86_64.tar.bz2",
+      "origin": "$ALBY_ORIGIN",
       "expected_sha256": "$ALBY_HASH",
       "observed_sha256": "$ALBY_HASH",
       "sig_status": "$ALBY_STATUS",
@@ -203,6 +227,7 @@ JSONEOF
 
 # 5. liquid_elements
 ELEM_TAG=$(get_tag "liquid_elements" "elements-23.3.3")
+ELEM_ORIGIN=$(get_origin "liquid_elements")
 echo ">> Auditing Project: liquid_elements ($ELEM_TAG)..."
 ELEM_DIR="$WORKDIR/elements"
 mkdir -p "$ELEM_DIR"
@@ -220,6 +245,7 @@ cat << JSONEOF > "$ACCUM_DIR/liquid_elements.json"
 {
   "project_id": "liquid_elements",
   "release_tag": "$ELEM_TAG",
+  "origin": "$ELEM_ORIGIN",
   "upstream_url": "https://github.com/ElementsProject/elements",
   "trust_anchor_url": "https://github.com/ElementsProject/elements/releases/tag/${ELEM_TAG}",
   "manifest_url": "https://github.com/ElementsProject/elements/releases/download/${ELEM_TAG}/SHA256SUMS.asc",
@@ -227,6 +253,7 @@ cat << JSONEOF > "$ACCUM_DIR/liquid_elements.json"
   "artifacts": [
     {
       "name": "${ELEM_TAG}-x86_64-linux-gnu.tar.gz",
+      "origin": "$ELEM_ORIGIN",
       "expected_sha256": "$ELEM_HASH",
       "observed_sha256": "$ELEM_HASH",
       "sig_status": "$ELEM_STATUS",
@@ -239,6 +266,7 @@ JSONEOF
 
 # 6. sparrow
 SPARROW_TAG=$(get_tag "sparrow" "2.5.4")
+SPARROW_ORIGIN=$(get_origin "sparrow")
 SPARROW_VER="${SPARROW_TAG#v}"
 echo ">> Auditing Project: sparrow ($SPARROW_TAG)..."
 SPARROW_DIR="$WORKDIR/sparrow"
@@ -264,6 +292,7 @@ cat << JSONEOF > "$ACCUM_DIR/sparrow.json"
   "artifacts": [
     {
       "name": "sparrowwallet-${SPARROW_VER}-x86_64.tar.gz",
+      "origin": "$SPARROW_ORIGIN",
       "expected_sha256": "$SPARROW_HASH",
       "observed_sha256": "$SPARROW_HASH",
       "sig_status": "$SPARROW_STATUS",
@@ -276,6 +305,7 @@ JSONEOF
 
 # 7. lnd
 LND_TAG=$(get_tag "lnd" "v0.21.3-beta")
+LND_ORIGIN=$(get_origin "lnd")
 echo ">> Auditing Project: lnd ($LND_TAG)..."
 LND_DIR="$WORKDIR/lnd"
 mkdir -p "$LND_DIR"
@@ -286,6 +316,7 @@ cat << JSONEOF > "$ACCUM_DIR/lnd.json"
 {
   "project_id": "lnd",
   "release_tag": "$LND_TAG",
+  "origin": "$LND_ORIGIN",
   "upstream_url": "https://github.com/lightningnetwork/lnd",
   "trust_anchor_url": "https://github.com/lightningnetwork/lnd/tree/master/scripts/keys",
   "manifest_url": "https://github.com/lightningnetwork/lnd/releases/download/${LND_TAG}/manifest-${LND_TAG}.txt",
@@ -293,6 +324,7 @@ cat << JSONEOF > "$ACCUM_DIR/lnd.json"
   "artifacts": [
     {
       "name": "lnd-linux-amd64-${LND_TAG}.tar.gz",
+      "origin": "$LND_ORIGIN",
       "expected_sha256": "$LND_HASH",
       "observed_sha256": "$LND_HASH",
       "sig_status": "OK",
@@ -305,6 +337,7 @@ JSONEOF
 
 # 8. seedsigner
 SS_TAG=$(get_tag "seedsigner" "0.8.7")
+SS_ORIGIN=$(get_origin "seedsigner")
 SS_VER="${SS_TAG#v}"
 echo ">> Auditing Project: seedsigner ($SS_TAG)..."
 SS_DIR="$WORKDIR/seedsigner"
@@ -330,6 +363,7 @@ cat << JSONEOF > "$ACCUM_DIR/seedsigner.json"
   "artifacts": [
     {
       "name": "seedsigner_os.${SS_VER}.pi0.img",
+      "origin": "$SS_ORIGIN",
       "expected_sha256": "$SS_HASH",
       "observed_sha256": "$SS_HASH",
       "sig_status": "$SS_STATUS",
@@ -342,6 +376,7 @@ JSONEOF
 
 # 9. nunchuk
 NUN_TAG=$(get_tag "nunchuk" "android.2.8.5")
+NUN_ORIGIN=$(get_origin "nunchuk")
 NUN_VER="${NUN_TAG#android.}"
 echo ">> Auditing Project: nunchuk ($NUN_TAG)..."
 NUN_DIR="$WORKDIR/nunchuk"
@@ -359,6 +394,7 @@ cat << JSONEOF > "$ACCUM_DIR/nunchuk.json"
 {
   "project_id": "nunchuk",
   "release_tag": "$NUN_TAG",
+  "origin": "$NUN_ORIGIN",
   "upstream_url": "https://github.com/nunchuk-io/nunchuk-android",
   "trust_anchor_url": "https://nunchuk.io",
   "manifest_url": "https://github.com/nunchuk-io/nunchuk-android/releases/download/${NUN_TAG}/SHA256SUMS.asc",
@@ -366,6 +402,7 @@ cat << JSONEOF > "$ACCUM_DIR/nunchuk.json"
   "artifacts": [
     {
       "name": "${NUN_VER}.apk",
+      "origin": "$NUN_ORIGIN",
       "expected_sha256": "$NUN_HASH",
       "observed_sha256": "$NUN_HASH",
       "sig_status": "$NUN_STATUS",
@@ -378,6 +415,7 @@ JSONEOF
 
 # 10. core_lightning (CLN)
 CLN_TAG=$(get_tag "core_lightning" "v26.06.7")
+CLN_ORIGIN=$(get_origin "core_lightning")
 echo ">> Auditing Project: core_lightning ($CLN_TAG)..."
 CLN_DIR="$WORKDIR/cln"
 mkdir -p "$CLN_DIR"
@@ -395,6 +433,7 @@ cat << JSONEOF > "$ACCUM_DIR/core_lightning.json"
 {
   "project_id": "core_lightning",
   "release_tag": "$CLN_TAG",
+  "origin": "$CLN_ORIGIN",
   "upstream_url": "https://github.com/ElementsProject/lightning",
   "trust_anchor_url": "https://github.com/ElementsProject/lightning/tree/master/contrib/keys",
   "manifest_url": "https://github.com/ElementsProject/lightning/releases/download/${CLN_TAG}/SHA256SUMS-${CLN_TAG}",
@@ -402,6 +441,7 @@ cat << JSONEOF > "$ACCUM_DIR/core_lightning.json"
   "artifacts": [
     {
       "name": "clightning-${CLN_TAG}-Ubuntu-24.04-amd64.tar.xz",
+      "origin": "$CLN_ORIGIN",
       "expected_sha256": "$CLN_HASH",
       "observed_sha256": "$CLN_HASH",
       "sig_status": "$CLN_STATUS",
@@ -414,6 +454,7 @@ JSONEOF
 
 # 11. blockstream_green (Desktop App)
 BG_TAG=$(get_tag "blockstream_green" "release_3.5.3")
+BG_ORIGIN=$(get_origin "blockstream_green")
 echo ">> Auditing Project: blockstream_green ($BG_TAG)..."
 BG_DIR="$WORKDIR/green"
 mkdir -p "$BG_DIR"
@@ -430,6 +471,7 @@ cat << JSONEOF > "$ACCUM_DIR/blockstream_green.json"
 {
   "project_id": "blockstream_green",
   "release_tag": "$BG_TAG",
+  "origin": "$BG_ORIGIN",
   "upstream_url": "https://github.com/Blockstream/green_qt",
   "trust_anchor_url": "https://blockstream.com/app/",
   "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/${BG_TAG}/SHA256SUMS.asc",
@@ -437,6 +479,7 @@ cat << JSONEOF > "$ACCUM_DIR/blockstream_green.json"
   "artifacts": [
     {
       "name": "Blockstream-x86_64.AppImage",
+      "origin": "$BG_ORIGIN",
       "expected_sha256": "$BG_HASH",
       "observed_sha256": "$BG_HASH",
       "sig_status": "$BG_STATUS",
@@ -449,6 +492,7 @@ JSONEOF
 
 # 12. blockstream_jade (Hardware Wallet Firmware)
 JADE_TAG=$(get_tag "blockstream_jade" "1.0.41")
+JADE_ORIGIN=$(get_origin "blockstream_jade")
 echo ">> Auditing Project: blockstream_jade ($JADE_TAG)..."
 JADE_DIR="$WORKDIR/jade"
 mkdir -p "$JADE_DIR"
@@ -466,6 +510,7 @@ cat << JSONEOF > "$ACCUM_DIR/blockstream_jade.json"
 {
   "project_id": "blockstream_jade",
   "release_tag": "$JADE_TAG",
+  "origin": "$JADE_ORIGIN",
   "upstream_url": "https://github.com/Blockstream/Jade",
   "trust_anchor_url": "https://github.com/Blockstream/Jade/blob/master/FWUPDATE.md",
   "manifest_url": "https://jadefw.blockstream.com/bin/jade/index.json",
@@ -473,6 +518,7 @@ cat << JSONEOF > "$ACCUM_DIR/blockstream_jade.json"
   "artifacts": [
     {
       "name": "$JADE_ENTRY_NAME",
+      "origin": "$JADE_ORIGIN",
       "expected_sha256": "$JADE_HASH",
       "observed_sha256": "$JADE_HASH",
       "sig_status": "$JADE_STATUS",
@@ -485,6 +531,7 @@ JSONEOF
 
 # 13. krux (DIY Hardware Wallet Firmware)
 KRUX_TAG=$(get_tag "krux" "v26.08.0")
+KRUX_ORIGIN=$(get_origin "krux")
 echo ">> Auditing Project: krux ($KRUX_TAG)..."
 KRUX_DIR="$WORKDIR/krux"
 mkdir -p "$KRUX_DIR"
@@ -513,6 +560,7 @@ cat << JSONEOF > "$ACCUM_DIR/krux.json"
 {
   "project_id": "krux",
   "release_tag": "$KRUX_TAG",
+  "origin": "$KRUX_ORIGIN",
   "upstream_url": "https://github.com/selfcustody/krux",
   "trust_anchor_url": "https://selfcustody.github.io/krux/getting-started/installing/from-pre-built-release.en/",
   "manifest_url": "https://github.com/selfcustody/krux/releases/download/${KRUX_TAG}/krux-${KRUX_TAG}.zip.sha256.txt",
@@ -520,6 +568,7 @@ cat << JSONEOF > "$ACCUM_DIR/krux.json"
   "artifacts": [
     {
       "name": "krux-${KRUX_TAG}.zip",
+      "origin": "$KRUX_ORIGIN",
       "expected_sha256": "$KRUX_HASH",
       "observed_sha256": "$KRUX_HASH",
       "sig_status": "$KRUX_STATUS",
@@ -532,6 +581,7 @@ JSONEOF
 
 # 14. coldcard (Hardware Wallet Firmware)
 CC_TAG=$(get_tag "coldcard" "v5.6.2")
+CC_ORIGIN=$(get_origin "coldcard")
 echo ">> Auditing Project: coldcard ($CC_TAG)..."
 CC_DIR="$WORKDIR/coldcard"
 mkdir -p "$CC_DIR"
@@ -555,6 +605,7 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
 {
   "project_id": "coldcard",
   "release_tag": "$CC_TAG",
+  "origin": "$CC_ORIGIN",
   "upstream_url": "https://github.com/Coldcard/firmware",
   "trust_anchor_url": "https://coldcard.com/downloads",
   "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
@@ -562,6 +613,7 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
   "artifacts": [
     {
       "name": "$CC_FILE",
+      "origin": "$CC_ORIGIN",
       "expected_sha256": "$CC_HASH",
       "observed_sha256": "$CC_HASH",
       "sig_status": "$CC_STATUS",
@@ -574,6 +626,7 @@ JSONEOF
 
 # 15. electrum (Sovereign Desktop / Mobile Wallet)
 EL_TAG=$(get_tag "electrum" "4.8.2")
+EL_ORIGIN=$(get_origin "electrum")
 echo ">> Auditing Project: electrum ($EL_TAG)..."
 EL_DIR="$WORKDIR/electrum"
 mkdir -p "$EL_DIR"
@@ -597,6 +650,7 @@ cat << JSONEOF > "$ACCUM_DIR/electrum.json"
 {
   "project_id": "electrum",
   "release_tag": "$EL_TAG",
+  "origin": "$EL_ORIGIN",
   "upstream_url": "https://github.com/spesmilo/electrum",
   "trust_anchor_url": "https://electrum.org/#download",
   "manifest_url": "https://download.electrum.org/${EL_TAG}/Electrum-${EL_TAG}.tar.gz.ThomasV.asc",
@@ -604,6 +658,7 @@ cat << JSONEOF > "$ACCUM_DIR/electrum.json"
   "artifacts": [
     {
       "name": "Electrum-${EL_TAG}.tar.gz",
+      "origin": "$EL_ORIGIN",
       "expected_sha256": "$EL_HASH",
       "observed_sha256": "$EL_HASH",
       "sig_status": "$EL_STATUS",
@@ -616,6 +671,7 @@ JSONEOF
 
 # 16. bitcoin_keeper (Lapsed / Expired Signing Key Alert)
 BK_TAG=$(get_tag "bitcoin_keeper" "v2.5.13")
+BK_ORIGIN=$(get_origin "bitcoin_keeper")
 echo ">> Auditing Project: bitcoin_keeper ($BK_TAG)..."
 BK_DIR="$WORKDIR/keeper"
 mkdir -p "$BK_DIR"
@@ -632,6 +688,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
 {
   "project_id": "bitcoin_keeper",
   "release_tag": "$BK_TAG",
+  "origin": "$BK_ORIGIN",
   "upstream_url": "https://github.com/KeeperCommunity/bitcoin-keeper",
   "trust_anchor_url": "https://github.com/KeeperCommunity/bitcoin-keeper/blob/sprint/Readme.md#pgp",
   "manifest_url": "https://github.com/KeeperCommunity/bitcoin-keeper/releases/download/${BK_TAG}/SHA256SUM.asc",
@@ -639,6 +696,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
   "artifacts": [
     {
       "name": "$BK_NAME",
+      "origin": "$BK_ORIGIN",
       "expected_sha256": "$BK_HASH",
       "observed_sha256": "$BK_HASH",
       "sig_status": "$BK_STATUS",
@@ -651,6 +709,7 @@ JSONEOF
 
 # 17. phoenix (ACINQ Lightning Wallet)
 PHX_TAG=$(get_tag "phoenix" "android-v2.8.2")
+PHX_ORIGIN=$(get_origin "phoenix")
 echo ">> Auditing Project: phoenix ($PHX_TAG)..."
 PHX_DIR="$WORKDIR/phoenix"
 mkdir -p "$PHX_DIR"
@@ -674,6 +733,7 @@ cat << JSONEOF > "$ACCUM_DIR/phoenix.json"
 {
   "project_id": "phoenix",
   "release_tag": "$PHX_TAG",
+  "origin": "$PHX_ORIGIN",
   "upstream_url": "https://github.com/ACINQ/phoenix",
   "trust_anchor_url": "https://acinq.co/pgp/padioupm.asc",
   "manifest_url": "https://github.com/ACINQ/phoenix/releases/download/${PHX_TAG}/SHA256SUMS.asc",
@@ -681,6 +741,7 @@ cat << JSONEOF > "$ACCUM_DIR/phoenix.json"
   "artifacts": [
     {
       "name": "$PHX_FILE",
+      "origin": "$PHX_ORIGIN",
       "expected_sha256": "$PHX_HASH",
       "observed_sha256": "$PHX_HASH",
       "sig_status": "$PHX_STATUS",
@@ -693,6 +754,7 @@ JSONEOF
 
 # 18. aqua (JAN3 Sovereign Lightning & Liquid Wallet)
 AQUA_TAG=$(get_tag "aqua" "v0.5.3")
+AQUA_ORIGIN=$(get_origin "aqua")
 echo ">> Auditing Project: aqua ($AQUA_TAG)..."
 AQUA_DIR="$WORKDIR/aqua"
 mkdir -p "$AQUA_DIR"
@@ -709,6 +771,7 @@ cat << JSONEOF > "$ACCUM_DIR/aqua.json"
 {
   "project_id": "aqua",
   "release_tag": "$AQUA_TAG",
+  "origin": "$AQUA_ORIGIN",
   "upstream_url": "https://github.com/AquaWallet/aqua-wallet",
   "trust_anchor_url": "https://github.com/AquaWallet/aqua-wallet/releases/tag/${AQUA_TAG}",
   "manifest_url": "https://api.github.com/repos/AquaWallet/aqua-wallet/releases/tags/${AQUA_TAG}",
@@ -716,6 +779,7 @@ cat << JSONEOF > "$ACCUM_DIR/aqua.json"
   "artifacts": [
     {
       "name": "$AQUA_ASSET_NAME",
+      "origin": "$AQUA_ORIGIN",
       "expected_sha256": "$AQUA_OBS_HASH",
       "observed_sha256": "$AQUA_OBS_HASH",
       "sig_status": "$AQUA_STATUS",
@@ -728,6 +792,7 @@ JSONEOF
 
 # 19. cake_wallet (Non-Custodial Multi-Currency / Monero & Bitcoin Wallet)
 CAKE_TAG=$(get_tag "cake_wallet" "v6.4.4")
+CAKE_ORIGIN=$(get_origin "cake_wallet")
 echo ">> Auditing Project: cake_wallet ($CAKE_TAG)..."
 CAKE_DIR="$WORKDIR/cake"
 mkdir -p "$CAKE_DIR"
@@ -744,6 +809,7 @@ cat << JSONEOF > "$ACCUM_DIR/cake_wallet.json"
 {
   "project_id": "cake_wallet",
   "release_tag": "$CAKE_TAG",
+  "origin": "$CAKE_ORIGIN",
   "upstream_url": "https://github.com/cake-tech/cake_wallet",
   "trust_anchor_url": "https://raw.githubusercontent.com/cake-tech/cake_wallet/main/README.md",
   "manifest_url": "https://github.com/cake-tech/cake_wallet/releases/tag/${CAKE_TAG}",
@@ -751,6 +817,7 @@ cat << JSONEOF > "$ACCUM_DIR/cake_wallet.json"
   "artifacts": [
     {
       "name": "$CAKE_ASSET_NAME",
+      "origin": "$CAKE_ORIGIN",
       "expected_sha256": "$CAKE_OBS_HASH",
       "observed_sha256": "$CAKE_OBS_HASH",
       "sig_status": "$CAKE_STATUS",
@@ -783,7 +850,8 @@ fi
 for entry in "${NOBLE_REPOS[@]}"; do
     IFS=":" read -r repo outfile <<< "$entry"
     tag=$(get_tag "$repo" "2.4.0")
-    echo ">> Auditing Supply-Chain Target: $repo ($tag)..."
+    orig=$(get_origin "$repo" "git_tag")
+    echo ">> Auditing Supply-Chain Target: $repo ($tag) [$orig]..."
     
     # Query GitHub API for verified tag object
     TAG_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/paulmillr/$repo/git/refs/tags/$tag" || echo '{}')
@@ -808,6 +876,7 @@ for entry in "${NOBLE_REPOS[@]}"; do
 {
   "project_id": "$repo",
   "release_tag": "$tag",
+  "origin": "$orig",
   "upstream_url": "https://github.com/paulmillr/$repo",
   "trust_anchor_url": "https://github.com/paulmillr.gpg",
   "manifest_url": "https://api.github.com/repos/paulmillr/$repo/git/refs/tags/$tag",
@@ -815,6 +884,7 @@ for entry in "${NOBLE_REPOS[@]}"; do
   "artifacts": [
     {
       "name": "$repo-$tag.tar.gz",
+      "origin": "$orig",
       "expected_sha256": "$EXP_HASH",
       "observed_sha256": "$OBS_HASH",
       "sig_status": "$SIG_STATUS",
@@ -828,6 +898,7 @@ done
 
 # 26. libsecp256k1 (Bitcoin Core Cryptographic Bedrock)
 SECP_TAG=$(get_tag "libsecp256k1" "v0.8.0")
+SECP_ORIGIN=$(get_origin "libsecp256k1" "git_tag")
 echo ">> Auditing Supply-Chain Target: libsecp256k1 ($SECP_TAG)..."
 SECP_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/${SECP_TAG}" || echo '{}')
 SECP_SHA=$(echo "$SECP_JSON" | jq -r '.object.sha // ""')
@@ -843,6 +914,7 @@ cat << JSONEOF > "$ACCUM_DIR/libsecp256k1.json"
 {
   "project_id": "libsecp256k1",
   "release_tag": "$SECP_TAG",
+  "origin": "$SECP_ORIGIN",
   "upstream_url": "https://github.com/bitcoin-core/secp256k1",
   "trust_anchor_url": "https://github.com/bitcoin-core/secp256k1",
   "manifest_url": "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/${SECP_TAG}",
@@ -850,6 +922,7 @@ cat << JSONEOF > "$ACCUM_DIR/libsecp256k1.json"
   "artifacts": [
     {
       "name": "secp256k1-${SECP_TAG}.tar.gz",
+      "origin": "$SECP_ORIGIN",
       "expected_sha256": "$SECP_SHA",
       "observed_sha256": "$SECP_SHA",
       "sig_status": "$SECP_STATUS",
@@ -862,6 +935,7 @@ JSONEOF
 
 # 27. openssh-portable (Industry Standard OpenSSH Portable)
 SSH_TAG=$(get_tag "openssh-portable" "V_10_5_P1")
+SSH_ORIGIN=$(get_origin "openssh-portable" "git_tag")
 echo ">> Auditing Supply-Chain Target: openssh-portable ($SSH_TAG)..."
 SSH_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/${SSH_TAG}" || echo '{}')
 SSH_SHA=$(echo "$SSH_JSON" | jq -r '.object.sha // ""')
@@ -877,6 +951,7 @@ cat << JSONEOF > "$ACCUM_DIR/openssh_portable.json"
 {
   "project_id": "openssh-portable",
   "release_tag": "$SSH_TAG",
+  "origin": "$SSH_ORIGIN",
   "upstream_url": "https://github.com/openssh/openssh-portable",
   "trust_anchor_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers",
   "manifest_url": "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/${SSH_TAG}",
@@ -884,6 +959,7 @@ cat << JSONEOF > "$ACCUM_DIR/openssh_portable.json"
   "artifacts": [
     {
       "name": "openssh-portable-${SSH_TAG}.tar.gz",
+      "origin": "$SSH_ORIGIN",
       "expected_sha256": "$SSH_SHA",
       "observed_sha256": "$SSH_SHA",
       "sig_status": "$SSH_STATUS",

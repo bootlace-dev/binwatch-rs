@@ -7,7 +7,8 @@
     "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS",
     "signature_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1",
     "verifier_type": "pipe-k1",
-    "verifier_key": "npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7"
+    "verifier_key": "npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7",
+    "origin": "github_release"
   },
   {
     "project_id": "subzero-rs",
@@ -17,7 +18,8 @@
     "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.4.0-testnet4/SHA256SUMS",
     "signature_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.4.0-testnet4/SHA256SUMS.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "bootlace-dev"
+    "verifier_key": "bootlace-dev",
+    "origin": "github_release"
   },
   {
     "project_id": "bitcoin_core",
@@ -28,7 +30,8 @@
     "key_url": "https://github.com/bitcoin-core/guix.sigs/tree/main/builder-keys",
     "verifier_type": "guix_manifest",
     "verifier_key": "guix_signers",
-    "git_url": "https://github.com/bitcoin/bitcoin"
+    "git_url": "https://github.com/bitcoin/bitcoin",
+    "origin": "upstream_download"
   },
   {
     "project_id": "alby_hub",
@@ -39,7 +42,8 @@
     "signature_url": "https://github.com/getAlby/hub/releases/download/v1.24.0/manifest.txt.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/alby_rolznz.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "5D92185938E6DBF893DCCC5BA5EABD8835092B08"
+    "verifier_key": "5D92185938E6DBF893DCCC5BA5EABD8835092B08",
+    "origin": "github_release"
   },
   {
     "project_id": "liquid_elements",
@@ -50,7 +54,8 @@
     "signature_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.4/SHA256SUMS.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/elements_pgreco.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "BD0F3062F87842410B06A0432F656B0610604482"
+    "verifier_key": "BD0F3062F87842410B06A0432F656B0610604482",
+    "origin": "github_release"
   },
   {
     "project_id": "sparrow",
@@ -61,7 +66,8 @@
     "signature_url": "https://github.com/sparrowwallet/sparrow/releases/download/2.5.4/sparrow-2.5.4-manifest.txt.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/sparrow.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "D4D0D3202FC06849A257B38DE94618334C674B40"
+    "verifier_key": "D4D0D3202FC06849A257B38DE94618334C674B40",
+    "origin": "github_release"
   },
   {
     "project_id": "lnd",
@@ -72,7 +78,8 @@
     "signature_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta.rc1/manifest-v0.21.3-beta.rc1.txt",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/lnd_roasbeef.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "roasbeef"
+    "verifier_key": "roasbeef",
+    "origin": "github_release"
   },
   {
     "project_id": "seedsigner",
@@ -83,7 +90,8 @@
     "signature_url": "https://github.com/SeedSigner/seedsigner/releases/download/0.8.7/seedsigner.0.8.7.sha256.txt.sig",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/seedsigner.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "46739B74B56AD88F14B0882EC7EF709007260119"
+    "verifier_key": "46739B74B56AD88F14B0882EC7EF709007260119",
+    "origin": "github_release"
   },
   {
     "project_id": "nunchuk",
@@ -94,7 +102,8 @@
     "signature_url": "https://github.com/nunchuk-io/nunchuk-android/releases/download/android.2.8.5/SHA256SUMS.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/nunchuk.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "8C8ECD3F660CA53CD878792A6E38A462ED2EF525"
+    "verifier_key": "8C8ECD3F660CA53CD878792A6E38A462ED2EF525",
+    "origin": "github_release"
   },
   {
     "project_id": "core_lightning",
@@ -105,7 +114,8 @@
     "signature_url": "https://github.com/ElementsProject/lightning/releases/download/v26.06.7/SHA256SUMS-v26.06.7.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/cln_rusty.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "rusty"
+    "verifier_key": "rusty",
+    "origin": "github_release"
   },
   {
     "project_id": "blockstream_green",
@@ -116,7 +126,8 @@
     "signature_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.4/SHA256SUMS.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/blockstream_green.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792"
+    "verifier_key": "04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792",
+    "origin": "github_release"
   },
   {
     "project_id": "blockstream_jade",
@@ -127,7 +138,8 @@
     "signature_url": "https://jadefw.blockstream.com/bin/jade/index.json",
     "key_url": null,
     "verifier_type": "jadefw_index",
-    "verifier_key": "blockstream"
+    "verifier_key": "blockstream",
+    "origin": "ota_firmware"
   },
   {
     "project_id": "krux",
@@ -138,7 +150,8 @@
     "signature_url": "https://github.com/selfcustody/krux/releases/download/v26.08.0/krux-v26.08.0.zip.sig",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/krux_selfcustody.pem",
     "verifier_type": "krux_secp256k1",
-    "verifier_key": "krux_selfcustody.pem"
+    "verifier_key": "krux_selfcustody.pem",
+    "origin": "github_release"
   },
   {
     "project_id": "coldcard",
@@ -150,7 +163,8 @@
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
     "verifier_type": "sha256_manifest",
     "verifier_key": "4589779ADFC14F3327534EA8A3A31BAD5A2A5B10",
-    "git_tag": "2026-09-03T1541-v5.6.2"
+    "git_tag": "2026-09-03T1541-v5.6.2",
+    "origin": "github_release"
   },
   {
     "project_id": "electrum",
@@ -162,7 +176,8 @@
     "download_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/electrum_thomasv.asc",
     "verifier_type": "detached_gpg",
-    "verifier_key": "6694D8DE7BE8EE5631BED9502BD5824B7F9470E6"
+    "verifier_key": "6694D8DE7BE8EE5631BED9502BD5824B7F9470E6",
+    "origin": "upstream_download"
   },
   {
     "project_id": "bitcoin_keeper",
@@ -173,7 +188,8 @@
     "signature_url": "https://github.com/KeeperCommunity/bitcoin-keeper/releases/download/v2.5.13/SHA256SUM.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/bitcoin_keeper.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "389F4CADA0785AC0E28A0C181BEBDE261DC3CF62"
+    "verifier_key": "389F4CADA0785AC0E28A0C181BEBDE261DC3CF62",
+    "origin": "github_release"
   },
   {
     "project_id": "phoenix",
@@ -184,7 +200,8 @@
     "signature_url": "https://github.com/ACINQ/phoenix/releases/download/android-v2.8.2/SHA256SUMS.asc",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/phoenix_padioupm.asc",
     "verifier_type": "sha256_manifest",
-    "verifier_key": "6AA45A4C209A2D3064CF66BEE434ED292E85643A"
+    "verifier_key": "6AA45A4C209A2D3064CF66BEE434ED292E85643A",
+    "origin": "github_release"
   },
   {
     "project_id": "aqua",
@@ -195,7 +212,8 @@
     "signature_url": "https://api.github.com/repos/AquaWallet/aqua-wallet/releases/tags/v0.5.3",
     "key_url": null,
     "verifier_type": "github_release_digest",
-    "verifier_key": "sha256"
+    "verifier_key": "sha256",
+    "origin": "github_release"
   },
   {
     "project_id": "cake_wallet",
@@ -206,7 +224,8 @@
     "signature_url": "https://github.com/cake-tech/cake_wallet/releases/tag/v6.4.4",
     "key_url": null,
     "verifier_type": "github_release_digest",
-    "verifier_key": "sha256"
+    "verifier_key": "sha256",
+    "origin": "github_release"
   },
   {
     "project_id": "noble-curves",
@@ -217,7 +236,8 @@
     "signature_url": "https://github.com/paulmillr.gpg",
     "key_url": "https://github.com/paulmillr.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B"
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "origin": "git_tag"
   },
   {
     "project_id": "noble-hashes",
@@ -228,7 +248,8 @@
     "signature_url": "https://github.com/paulmillr.gpg",
     "key_url": "https://github.com/paulmillr.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B"
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "origin": "git_tag"
   },
   {
     "project_id": "scure-bip39",
@@ -239,7 +260,8 @@
     "signature_url": "https://github.com/paulmillr.gpg",
     "key_url": "https://github.com/paulmillr.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B"
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "origin": "git_tag"
   },
   {
     "project_id": "scure-bip32",
@@ -250,7 +272,8 @@
     "signature_url": "https://github.com/paulmillr.gpg",
     "key_url": "https://github.com/paulmillr.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B"
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "origin": "git_tag"
   },
   {
     "project_id": "scure-btc-signer",
@@ -261,7 +284,8 @@
     "signature_url": "https://github.com/paulmillr.gpg",
     "key_url": "https://github.com/paulmillr.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B"
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "origin": "git_tag"
   },
   {
     "project_id": "noble-secp256k1",
@@ -272,7 +296,8 @@
     "signature_url": "https://github.com/paulmillr.gpg",
     "key_url": "https://github.com/paulmillr.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B"
+    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
+    "origin": "git_tag"
   },
   {
     "project_id": "libsecp256k1",
@@ -283,7 +308,8 @@
     "signature_url": "https://github.com/theuni.gpg",
     "key_url": "https://github.com/theuni.gpg",
     "verifier_type": "git_tag_pgp",
-    "verifier_key": "6A8F9C266528E25AEB1D7731C2371D91CB716EA7"
+    "verifier_key": "6A8F9C266528E25AEB1D7731C2371D91CB716EA7",
+    "origin": "git_tag"
   },
   {
     "project_id": "openssh-portable",
@@ -294,6 +320,7 @@
     "signature_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers",
     "key_url": null,
     "verifier_type": "git_tag_ssh",
-    "verifier_key": "djm@mindrot.org"
+    "verifier_key": "djm@mindrot.org",
+    "origin": "git_tag"
   }
 ]
