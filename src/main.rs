@@ -157,7 +157,7 @@ impl ManifestAudit {
         let mut failed_entries = Vec::new();
         let mut passed_entries = Vec::new();
 
-        for (project_id, project) in &self.projects {
+        for (_cvo_id, project) in &self.projects {
             let mut worst_status = "OK";
             let mut failure_detail = None;
 
@@ -235,13 +235,13 @@ impl ManifestAudit {
             let entry_str = if let Some(detail) = failure_detail {
                 format!(
                     "{} {} ({}){}{{#{}}} - {}\n",
-                    badge, project_id, project.release_tag, origin_tag, primary_hex, detail
+                    badge, project.project_id, project.release_tag, origin_tag, primary_hex, detail
                 )
             } else {
                 format!(
                     "{} {} ({}){}{{#{}}} - {} artifact(s)\n",
                     badge,
-                    project_id,
+                    project.project_id,
                     project.release_tag,
                     origin_tag,
                     primary_hex,

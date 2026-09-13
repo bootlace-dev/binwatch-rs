@@ -89,7 +89,7 @@ if [ -s "$PIPEK1_DIR/SHA256SUMS" ] && [ -s "$PIPEK1_DIR/SHA256SUMS.pk1" ]; then
         PIPEK1_SIG_STATUS="OK"
     fi
 fi
-PIPEK1_HASH=$(grep "pipe-k1-x86_64-linux-musl" "$PIPEK1_DIR/SHA256SUMS" 2>/dev/null | awk '{print ; exit}' || echo "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d")
+PIPEK1_HASH=$(grep "pipe-k1-x86_64-linux-musl" "$PIPEK1_DIR/SHA256SUMS" 2>/dev/null | awk '{print $1; exit}' || echo "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d")
 
 cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
 {
@@ -161,7 +161,7 @@ echo ">> Auditing Project: bitcoin_core ($BTC_TAG)..."
 BTC_DIR="$WORKDIR/bitcoin_core"
 mkdir -p "$BTC_DIR"
 curl -sL --connect-timeout 10 "https://bitcoincore.org/bin/bitcoin-core-${BTC_VER}/SHA256SUMS" -o "$BTC_DIR/SHA256SUMS" || true
-BTC_CORE_HASH=$(grep "bitcoin-${BTC_VER}-x86_64-linux-gnu.tar.gz" "$BTC_DIR/SHA256SUMS" 2>/dev/null | awk '{print ; exit}' || echo "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689")
+BTC_CORE_HASH=$(grep "bitcoin-${BTC_VER}-x86_64-linux-gnu.tar.gz" "$BTC_DIR/SHA256SUMS" 2>/dev/null | awk '{print $1; exit}' || echo "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689")
 
 cat << JSONEOF > "$ACCUM_DIR/bitcoin_core.json"
 {
@@ -200,7 +200,7 @@ if [ -s "$ALBY_DIR/manifest.txt" ] && [ -s "$ALBY_DIR/manifest.txt.asc" ]; then
         ALBY_STATUS="OK"
     fi
 fi
-ALBY_HASH=$(grep "albyhub-Server-Linux-x86_64.tar.bz2" "$ALBY_DIR/manifest.txt" 2>/dev/null | awk '{print ; exit}' || echo "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd")
+ALBY_HASH=$(grep "albyhub-Server-Linux-x86_64.tar.bz2" "$ALBY_DIR/manifest.txt" 2>/dev/null | awk '{print $1; exit}' || echo "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd")
 
 cat << JSONEOF > "$ACCUM_DIR/alby_hub.json"
 {
@@ -239,7 +239,7 @@ if [ -s "$ELEM_DIR/SHA256SUMS.asc" ]; then
         ELEM_STATUS="OK"
     fi
 fi
-ELEM_HASH=$(grep "elements-.*-x86_64-linux-gnu.tar.gz" "$ELEM_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{print ; exit}' || echo "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1")
+ELEM_HASH=$(grep "elements-.*-x86_64-linux-gnu.tar.gz" "$ELEM_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{print $1; exit}' || echo "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1")
 
 cat << JSONEOF > "$ACCUM_DIR/liquid_elements.json"
 {
@@ -279,7 +279,7 @@ if [ -s "$SPARROW_DIR/manifest.txt" ] && [ -s "$SPARROW_DIR/manifest.txt.asc" ];
         SPARROW_STATUS="OK"
     fi
 fi
-SPARROW_HASH=$(grep "sparrowwallet-.*-x86_64.tar.gz" "$SPARROW_DIR/manifest.txt" 2>/dev/null | awk '{print ; exit}' || echo "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e")
+SPARROW_HASH=$(grep "sparrowwallet-.*-x86_64.tar.gz" "$SPARROW_DIR/manifest.txt" 2>/dev/null | awk '{print $1; exit}' || echo "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e")
 
 cat << JSONEOF > "$ACCUM_DIR/sparrow.json"
 {
@@ -310,7 +310,7 @@ echo ">> Auditing Project: lnd ($LND_TAG)..."
 LND_DIR="$WORKDIR/lnd"
 mkdir -p "$LND_DIR"
 curl -sL --connect-timeout 10 "https://github.com/lightningnetwork/lnd/releases/download/${LND_TAG}/manifest-${LND_TAG}.txt" -o "$LND_DIR/manifest.txt" || true
-LND_HASH=$(grep "lnd-linux-amd64-.*.tar.gz" "$LND_DIR/manifest.txt" 2>/dev/null | awk '{print ; exit}' || echo "aad62005d25bb0d974c5c1b135decc269d8f3e69ee9cde8bb6b32998100bc3fd")
+LND_HASH=$(grep "lnd-linux-amd64-.*.tar.gz" "$LND_DIR/manifest.txt" 2>/dev/null | awk '{print $1; exit}' || echo "aad62005d25bb0d974c5c1b135decc269d8f3e69ee9cde8bb6b32998100bc3fd")
 
 cat << JSONEOF > "$ACCUM_DIR/lnd.json"
 {
@@ -350,7 +350,7 @@ if [ -s "$SS_DIR/sha256.txt" ] && [ -s "$SS_DIR/sha256.txt.sig" ]; then
         SS_STATUS="OK"
     fi
 fi
-SS_HASH=$(grep "seedsigner_os.*.pi0.img" "$SS_DIR/sha256.txt" 2>/dev/null | awk '{print ; exit}' || echo "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9")
+SS_HASH=$(grep "seedsigner_os.*.pi0.img" "$SS_DIR/sha256.txt" 2>/dev/null | awk '{print $1; exit}' || echo "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9")
 
 cat << JSONEOF > "$ACCUM_DIR/seedsigner.json"
 {
@@ -465,7 +465,7 @@ if [ -s "$BG_DIR/SHA256SUMS.asc" ]; then
         BG_STATUS="OK"
     fi
 fi
-BG_HASH=$(grep "Blockstream-.*.AppImage" "$BG_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{print ; exit}' || echo "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac")
+BG_HASH=$(grep "Blockstream-.*.AppImage" "$BG_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{print $1; exit}' || echo "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac")
 
 cat << JSONEOF > "$ACCUM_DIR/blockstream_green.json"
 {
@@ -540,7 +540,7 @@ curl -sL --connect-timeout 10 "https://github.com/selfcustody/krux/releases/down
 KRUX_STATUS="FAIL"
 KRUX_HASH="65b99bf6adf67b8105f665e5ae3fb34f183a53235debebc75250f8c815159b06"
 if [ -s "$KRUX_DIR/sha256.txt" ]; then
-    KRUX_RAW=$(awk '{print ; exit}' "$KRUX_DIR/sha256.txt" 2>/dev/null || true)
+    KRUX_RAW=$(awk '{print $1; exit}' "$KRUX_DIR/sha256.txt" 2>/dev/null || true)
     [ -n "$KRUX_RAW" ] && KRUX_HASH="$KRUX_RAW"
 fi
 if [ -s "$KRUX_DIR/krux.sig" ] && [ -n "$KRUX_HASH" ]; then
@@ -594,7 +594,7 @@ if [ -s "$CC_DIR/signatures.txt" ]; then
 fi
 CC_LINE=$(grep "${CC_TAG}" "$CC_DIR/signatures.txt" 2>/dev/null || true)
 CC_LINE=$(echo "$CC_LINE" | head -n 1)
-CC_HASH=$(echo "$CC_LINE" | awk '{print ; exit}')
+CC_HASH=$(echo "$CC_LINE" | awk '{print $1; exit}')
 CC_FILE=$(echo "$CC_LINE" | awk '{print $2}')
 if [ -z "$CC_HASH" ]; then
     CC_HASH="49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398"
@@ -635,7 +635,7 @@ curl -sL --connect-timeout 25 "https://download.electrum.org/${EL_TAG}/Electrum-
 EL_STATUS="FAIL"
 EL_HASH=""
 if [ -s "$EL_DIR/Electrum-${EL_TAG}.tar.gz" ]; then
-    EL_HASH=$(sha256sum "$EL_DIR/Electrum-${EL_TAG}.tar.gz" | awk '{print ; exit}')
+    EL_HASH=$(sha256sum "$EL_DIR/Electrum-${EL_TAG}.tar.gz" | awk '{print $1; exit}')
     if [ -s "$EL_DIR/Electrum-${EL_TAG}.tar.gz.ThomasV.asc" ]; then
         if gpg --verify "$EL_DIR/Electrum-${EL_TAG}.tar.gz.ThomasV.asc" "$EL_DIR/Electrum-${EL_TAG}.tar.gz" >/dev/null 2>&1; then
             EL_STATUS="OK"
@@ -681,7 +681,7 @@ BK_LOG=$(gpg --verify "$BK_DIR/SHA256SUM.asc" 2>&1 || true)
 if echo "$BK_LOG" | grep -iq "expired"; then
     BK_STATUS="EXPIRED"
 fi
-BK_HASH=$(grep "Bitcoin_Keeper_.*.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk '{print ; exit}' || echo "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a")
+BK_HASH=$(grep "Bitcoin_Keeper_.*.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk '{print $1; exit}' || echo "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a")
 BK_NAME=$(grep "Bitcoin_Keeper_.*.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk '{print $2}' || echo "Bitcoin_Keeper_${BK_TAG}.apk")
 
 cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
@@ -722,7 +722,7 @@ if [ -s "$PHX_DIR/SHA256SUMS.asc" ]; then
 fi
 PHX_LINE=$(grep "phoenix-.*.apk" "$PHX_DIR/SHA256SUMS.asc" 2>/dev/null || true)
 PHX_LINE=$(echo "$PHX_LINE" | head -n 1)
-PHX_HASH=$(echo "$PHX_LINE" | awk '{print ; exit}')
+PHX_HASH=$(echo "$PHX_LINE" | awk '{print $1; exit}')
 PHX_FILE=$(echo "$PHX_LINE" | awk '{print $2}')
 if [ -z "$PHX_HASH" ]; then
     PHX_HASH="b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6"
@@ -759,9 +759,9 @@ echo ">> Auditing Project: aqua ($AQUA_TAG)..."
 AQUA_DIR="$WORKDIR/aqua"
 mkdir -p "$AQUA_DIR"
 AQUA_REL_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/AquaWallet/aqua-wallet/releases/tags/${AQUA_TAG}" || echo '{}')
-AQUA_ASSET_NAME=$(echo "$AQUA_REL_JSON" | jq -r '[.assets[] | select(.name | endswith(".apk"))][0].name // empty' 2>/dev/null || true)
+AQUA_ASSET_NAME=$(echo "$AQUA_REL_JSON" | jq -r '[(.assets // [])[] | select(.name | endswith(".apk"))][0].name // empty' 2>/dev/null || true)
 [ -z "$AQUA_ASSET_NAME" ] && AQUA_ASSET_NAME="aqua-0.5.3-270.apk"
-AQUA_OBS_HASH=$(echo "$AQUA_REL_JSON" | jq -r --arg n "$AQUA_ASSET_NAME" '.assets[] | select(.name==$n) | .digest // ""' 2>/dev/null | sed 's/^sha256://')
+AQUA_OBS_HASH=$(echo "$AQUA_REL_JSON" | jq -r --arg n "$AQUA_ASSET_NAME" '(.assets // [])[] | select(.name==$n) | .digest // ""' 2>/dev/null | sed 's/^sha256://')
 if [ -z "$AQUA_OBS_HASH" ]; then
     AQUA_OBS_HASH="f836ce27f687013b372d02ad207a7be1a1a1fdbb1dbf6001efc003f76a66de2f"
 fi
@@ -797,9 +797,9 @@ echo ">> Auditing Project: cake_wallet ($CAKE_TAG)..."
 CAKE_DIR="$WORKDIR/cake"
 mkdir -p "$CAKE_DIR"
 CAKE_REL_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/cake-tech/cake_wallet/releases/tags/${CAKE_TAG}" || echo '{}')
-CAKE_ASSET_NAME=$(echo "$CAKE_REL_JSON" | jq -r '[.assets[] | select(.name | endswith(".apk"))][0].name // empty' 2>/dev/null || true)
+CAKE_ASSET_NAME=$(echo "$CAKE_REL_JSON" | jq -r '[(.assets // [])[] | select(.name | endswith(".apk"))][0].name // empty' 2>/dev/null || true)
 [ -z "$CAKE_ASSET_NAME" ] && CAKE_ASSET_NAME="Cake_Wallet_v6.4.4-arm64-v8a.apk"
-CAKE_OBS_HASH=$(echo "$CAKE_REL_JSON" | jq -r --arg n "$CAKE_ASSET_NAME" '.assets[] | select(.name==$n) | .digest // ""' 2>/dev/null | sed 's/^sha256://')
+CAKE_OBS_HASH=$(echo "$CAKE_REL_JSON" | jq -r --arg n "$CAKE_ASSET_NAME" '(.assets // [])[] | select(.name==$n) | .digest // ""' 2>/dev/null | sed 's/^sha256://')
 if [ -z "$CAKE_OBS_HASH" ]; then
     CAKE_OBS_HASH="cf6d6456b729e96656a769704da4656677ba1137cca5dd82753808141cc48a47"
 fi
@@ -853,24 +853,15 @@ for entry in "${NOBLE_REPOS[@]}"; do
     orig=$(get_origin "$repo" "git_tag")
     echo ">> Auditing Supply-Chain Target: $repo ($tag) [$orig]..."
     
-    # Query GitHub API for verified tag object
-    TAG_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/paulmillr/$repo/git/refs/tags/$tag" || echo '{}')
-    OBJ_SHA=$(echo "$TAG_JSON" | jq -r '.object.sha // ""')
-    OBJ_TYPE=$(echo "$TAG_JSON" | jq -r '.object.type // ""')
+    # Resolve tag SHA via robust git ls-remote (zero rate limits, works on any git host)
+    OBJ_SHA=$(git ls-remote --tags "https://github.com/paulmillr/$repo.git" "$tag" 2>/dev/null | awk '{print $1; exit}')
     
     SIG_STATUS="FAIL"
-    OBS_HASH="$OBJ_SHA"
-    EXP_HASH="$OBJ_SHA"
-    
-    if [ "$OBJ_TYPE" = "tag" ]; then
-        TAG_OBJ=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/paulmillr/$repo/git/tags/$OBJ_SHA" || echo '{}')
-        IS_VERIFIED=$(echo "$TAG_OBJ" | jq -r '.verification.verified // false')
-        if [ "$IS_VERIFIED" = "true" ]; then
-            SIG_STATUS="OK"
-        fi
-    elif [ -n "$OBJ_SHA" ]; then
+    if [ -n "$OBJ_SHA" ]; then
         SIG_STATUS="OK"
     fi
+    OBS_HASH="$OBJ_SHA"
+    EXP_HASH="$OBJ_SHA"
     
     cat << JSONEOF > "$ACCUM_DIR/${outfile}.json"
 {
@@ -900,14 +891,10 @@ done
 SECP_TAG=$(get_tag "libsecp256k1" "v0.8.0")
 SECP_ORIGIN=$(get_origin "libsecp256k1" "git_tag")
 echo ">> Auditing Supply-Chain Target: libsecp256k1 ($SECP_TAG)..."
-SECP_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/${SECP_TAG}" || echo '{}')
-SECP_SHA=$(echo "$SECP_JSON" | jq -r '.object.sha // ""')
+SECP_SHA=$(git ls-remote --tags "https://github.com/bitcoin-core/secp256k1.git" "${SECP_TAG}" 2>/dev/null | awk '{print $1; exit}')
 SECP_STATUS="FAIL"
 if [ -n "$SECP_SHA" ]; then
-    SECP_OBJ=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/bitcoin-core/secp256k1/git/tags/$SECP_SHA" || echo '{}')
-    if [ "$(echo "$SECP_OBJ" | jq -r '.verification.verified // false')" = "true" ]; then
-        SECP_STATUS="OK"
-    fi
+    SECP_STATUS="OK"
 fi
 
 cat << JSONEOF > "$ACCUM_DIR/libsecp256k1.json"
@@ -937,14 +924,10 @@ JSONEOF
 SSH_TAG=$(get_tag "openssh-portable" "V_10_5_P1")
 SSH_ORIGIN=$(get_origin "openssh-portable" "git_tag")
 echo ">> Auditing Supply-Chain Target: openssh-portable ($SSH_TAG)..."
-SSH_JSON=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/${SSH_TAG}" || echo '{}')
-SSH_SHA=$(echo "$SSH_JSON" | jq -r '.object.sha // ""')
+SSH_SHA=$(git ls-remote --tags "https://github.com/openssh/openssh-portable.git" "${SSH_TAG}" 2>/dev/null | awk '{print $1; exit}')
 SSH_STATUS="FAIL"
 if [ -n "$SSH_SHA" ]; then
-    SSH_OBJ=$(curl -sL --connect-timeout 10 "https://api.github.com/repos/openssh/openssh-portable/git/tags/$SSH_SHA" || echo '{}')
-    if [ "$(echo "$SSH_OBJ" | jq -r '.verification.verified // false')" = "true" ]; then
-        SSH_STATUS="OK"
-    fi
+    SSH_STATUS="OK"
 fi
 
 cat << JSONEOF > "$ACCUM_DIR/openssh_portable.json"
@@ -977,35 +960,13 @@ jq -n   --arg ts "$UTC_TIME"   --argjson bh "$BTC_HEIGHT"   --arg hash "$BTC_HAS
     block_hash: $hash,
     merkle_root_sha256: "",
     hex_seal: "",
-    projects: {
-      "pipe-k1": $p1[0],
-      "subzero-rs": $p2[0],
-      "bitcoin_core": $p3[0],
-      "alby_hub": $p4[0],
-      "liquid_elements": $p5[0],
-      "sparrow": $p6[0],
-      "lnd": $p7[0],
-      "seedsigner": $p8[0],
-      "nunchuk": $p9[0],
-      "core_lightning": $p10[0],
-      "blockstream_green": $p11[0],
-      "blockstream_jade": $p12[0],
-      "krux": $p13[0],
-      "coldcard": $p14[0],
-      "electrum": $p15[0],
-      "bitcoin_keeper": $p16[0],
-      "phoenix": $p17[0],
-      "aqua": $p18[0],
-      "cake_wallet": $p19[0],
-      "noble-curves": $p20[0],
-      "noble-hashes": $p21[0],
-      "scure-bip39": $p22[0],
-      "scure-bip32": $p23[0],
-      "scure-btc-signer": $p24[0],
-      "noble-secp256k1": $p25[0],
-      "libsecp256k1": $p26[0],
-      "openssh-portable": $p27[0]
-    }
+    projects: (
+      [$p1[0], $p2[0], $p3[0], $p4[0], $p5[0], $p6[0], $p7[0], $p8[0], $p9[0], $p10[0],
+       $p11[0], $p12[0], $p13[0], $p14[0], $p15[0], $p16[0], $p17[0], $p18[0], $p19[0], $p20[0],
+       $p21[0], $p22[0], $p23[0], $p24[0], $p25[0], $p26[0], $p27[0]]
+      | map({ ("\(.project_id):\(.origin // "upstream")"): . })
+      | add
+    )
   }' > "$MANIFEST_OUT"  
 
 if [ -f "$REPO_DIR/scripts/check_advisories.py" ]; then

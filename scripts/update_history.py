@@ -76,12 +76,18 @@ def main():
     history_projects = history_data.setdefault("projects", {})
 
     for proj_id, proj in projects.items():
+        base_id = proj.get("project_id", proj_id.split(":")[0])
+        origin = proj.get("origin", "")
         release_tag = proj.get("release_tag", "")
         artifacts = proj.get("artifacts", [])
         primary_hash = artifacts[0].get("expected_sha256", "") if artifacts else ""
 
-        if proj_id in history_projects:
-            prev = history_projects[proj_id]
+        lookup_key = proj_id
+        if lookup_key not in history_projects and base_id in history_projects:
+            lookup_key = base_id
+
+        if lookup_key in history_projects:
+            prev = history_projects[lookup_key]
             prev_hash = prev.get("primary_hash", "")
             prev_tag = prev.get("release_tag", "")
 
@@ -93,7 +99,9 @@ def main():
                 consecutive_epochs = prev.get("consecutive_epochs", 1) + 1
 
                 entry = {
-                    "project_id": proj_id,
+                    "cvo_id": proj_id,
+                    "project_id": base_id,
+                    "origin": origin,
                     "release_tag": release_tag,
                     "primary_hash": primary_hash,
                     "first_seen_utc": first_seen_iso,
@@ -107,7 +115,9 @@ def main():
             else:
                 # Mutation detected: release updated or hash drifted!
                 entry = {
-                    "project_id": proj_id,
+                    "cvo_id": proj_id,
+                    "project_id": base_id,
+                    "origin": origin,
                     "release_tag": release_tag,
                     "primary_hash": primary_hash,
                     "first_seen_utc": now_iso,
@@ -121,7 +131,9 @@ def main():
         else:
             # First observation of this project
             entry = {
-                "project_id": proj_id,
+                "cvo_id": proj_id,
+                "project_id": base_id,
+                "origin": origin,
                 "release_tag": release_tag,
                 "primary_hash": primary_hash,
                 "first_seen_utc": now_iso,

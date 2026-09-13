@@ -140,10 +140,11 @@ def audit_manifest(manifest_path):
 
     print(f">> Gate 2: Checking Security Advisories & Exploit Feeds across {len(projects)} projects...")
 
-    for project_id, p in projects.items():
+    for key, p in projects.items():
+        comp_id = p.get("project_id", key.split(":")[0])
         rel_tag = p.get("release_tag", "")
         clean_tag = rel_tag.lstrip("v")
-        cfg = PACKAGE_MAP.get(project_id)
+        cfg = PACKAGE_MAP.get(comp_id)
         if not cfg:
             continue
 
@@ -160,7 +161,7 @@ def audit_manifest(manifest_path):
 
         # 2. Known contextual exploit rules
         # Alby Hub < v1.24.0 (critical remote API exposure exploit)
-        if project_id == "alby_hub":
+        if comp_id == "alby_hub":
             parts = [int(x) for x in clean_tag.split(".") if x.isdigit()]
             if len(parts) >= 2:
                 major, minor = parts[0], parts[1]
@@ -168,7 +169,7 @@ def audit_manifest(manifest_path):
                     active_vulns.append("CVE-ALERT: Critical unauthenticated remote management API fund drain vulnerability (Fixed in v1.24.0)")
 
         # 3. Attach Historical Vulnerability Baseline for verification transparency
-        base = KNOWN_VULNERABILITY_BASELINES.get(project_id)
+        base = KNOWN_VULNERABILITY_BASELINES.get(comp_id)
         if base:
             p["advisory_baseline"] = {
                 "last_known_vulnerable_version": base["last_known_vulnerable_version"],
@@ -182,17 +183,18 @@ def audit_manifest(manifest_path):
         if active_vulns:
             advisory_summary["vulnerable_count"] += 1
             advisory_summary["advisories_found"].append({
-                "project_id": project_id,
+                "project_id": comp_id,
+                "cvo_id": key,
                 "release_tag": rel_tag,
                 "vulns": active_vulns
             })
-            print(f"   [FAIL] {project_id} ({rel_tag}): {len(active_vulns)} advisory/exploit alert(s)!")
+            print(f"   [FAIL] {key} ({rel_tag}): {len(active_vulns)} advisory/exploit alert(s)!")
             for a in p.get("artifacts", []):
                 a["sig_status"] = "VULNERABLE"
                 a["audit_note"] = "; ".join(active_vulns)
         else:
             base_info = f" (Verified clean beyond {base['last_known_vulnerable_version']})" if base else ""
-            print(f"   [PASS] {project_id} ({rel_tag}): 0 known advisories{base_info}")
+            print(f"   [PASS] {key} ({rel_tag}): 0 known advisories{base_info}")
 
     # Write updated manifest back
     with open(manifest_path, "w") as f:
