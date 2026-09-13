@@ -124,5 +124,50 @@
     "verifier_key": "dennysubke",
     "manifest_url": "https://api.github.com/repos/dennysubke/ashigaru-terminal/git/refs/tags/v1.0.0",
     "signature_url": "https://github.com/dennysubke.gpg"
+  },
+  {
+    "project_id": "electrum",
+    "release_tag": "4.8.2",
+    "upstream_url": "https://github.com/spesmilo/electrum",
+    "verifier_type": "git_tag_pgp",
+    "verifier_key": "6694D8DE7BE8EE5631BED9502BD5824B7F9470E6",
+    "manifest_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz",
+    "signature_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz.ThomasV.asc"
+  },
+  {
+    "project_id": "simplex-chat",
+    "release_tag": "v7.0.2",
+    "upstream_url": "https://github.com/simplex-chat/simplex-chat",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "simplex-chat",
+    "manifest_url": "https://github.com/simplex-chat/simplex-chat/releases/download/v7.0.2/sha256sums.txt",
+    "signature_url": "https://github.com/simplex-chat/simplex-chat/releases/download/v7.0.2/sha256sums.txt"
+  },
+  {
+    "project_id": "bitcoin-keeper",
+    "release_tag": "v2.5.13",
+    "upstream_url": "https://github.com/KeeperCommunity/bitcoin-keeper",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "KeeperCommunity",
+    "manifest_url": "https://github.com/KeeperCommunity/bitcoin-keeper/releases/download/v2.5.13/sha256sum.txt",
+    "signature_url": "https://github.com/KeeperCommunity/bitcoin-keeper/releases/download/v2.5.13/sha256sum.txt"
+  },
+  {
+    "project_id": "zeus",
+    "release_tag": "v13.2.1",
+    "upstream_url": "https://github.com/ZeusLN/zeus",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "ZeusLN",
+    "manifest_url": "https://github.com/ZeusLN/zeus/releases/download/v13.2.1/sha256sums.txt",
+    "signature_url": "https://github.com/ZeusLN/zeus/releases/download/v13.2.1/sha256sums.txt"
+  },
+  {
+    "project_id": "aegis",
+    "release_tag": "v3.4.3",
+    "upstream_url": "https://github.com/beemdevelopment/Aegis",
+    "verifier_type": "sha256_manifest",
+    "verifier_key": "beemdevelopment",
+    "manifest_url": "https://github.com/beemdevelopment/Aegis/releases/download/v3.4.3/aegis-v3.4.3.apk",
+    "signature_url": "https://github.com/beemdevelopment/Aegis/releases/download/v3.4.3/aegis-v3.4.3.apk"
   }
 ]

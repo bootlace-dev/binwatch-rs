@@ -20,8 +20,9 @@ BINWATCH_TARGETS = [
     ("getAlby", "hub", "go"),
     ("ElementsProject", "elements", "cpp"),
     ("sparrowwallet", "sparrow", "java"),
-    ("selfcustody", "krux", "python"),
-    ("BitHyve", "hexa", "typescript"),
+    ("KeeperCommunity", "bitcoin-keeper", "typescript"),
+    ("spesmilo", "electrum", "python"),
+    ("simplex-chat", "simplex-chat", "kotlin"),
     # Core Cryptographic Primitives & SubZero Dependencies
     ("bitcoin-core", "secp256k1", "c"),
     ("rust-bitcoin", "rust-bitcoin", "rust"),
