@@ -1,5 +1,5 @@
 {
-  "notice": "PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
+  "notice": "PRE-RELEASE RESEARCH PROTOTYPE \u2022 FOR DISCUSSION ONLY \u2022 PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
   "timestamp_utc": "2026-09-13T01:15:55Z",
   "block_height": 966747,
   "block_hash": "00000000000000000001314ae47582ceafc3380e91f509b64367a6743a5cc55b",
@@ -38,7 +38,11 @@
           "observed_sha256": "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd",
           "sig_status": "OK",
           "verified_by": "gpg:5D92185938E6DBF893DCCC5BA5EABD8835092B08(rolznz)",
-          "audit_note": "Signed by Roland Bewick (getAlby official build maintainer)"
+          "audit_note": "Signed by Roland Bewick (getAlby official build maintainer)",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -64,7 +68,11 @@
           "observed_sha256": "f836ce27f687013b372d02ad207a7be1a1a1fdbb1dbf6001efc003f76a66de2f",
           "sig_status": "OK",
           "verified_by": "sha256:github_release_digest",
-          "audit_note": "SHA-256 binary digest verified against official AquaWallet release asset payload"
+          "audit_note": "SHA-256 binary digest verified against official AquaWallet release asset payload",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -100,7 +108,11 @@
           "observed_sha256": "b80d9c3e04da78fb6f0569685673418cf686fadba9042d926d13fb87ff503f9e",
           "sig_status": "OK",
           "verified_by": "gpg:guix_signers",
-          "audit_note": "Multi-party Guix reproducible build attestation quorum"
+          "audit_note": "Multi-party Guix reproducible build attestation quorum",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -129,7 +141,11 @@
           "observed_sha256": "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a",
           "sig_status": "EXPIRED",
           "verified_by": "gpg:389F4CADA0785AC0E28A0C181BEBDE261DC3CF62(hexa@bithyve.com:EXPIRED)",
-          "audit_note": "Signed by declared key from KeeperCommunity README; key expired on 2026-08-06"
+          "audit_note": "Signed by declared key from KeeperCommunity README; key expired on 2026-08-06",
+          "status_vector": {
+            "mask": 4031,
+            "warn_mask": 64
+          }
         }
       ]
     },
@@ -158,7 +174,11 @@
           "observed_sha256": "24536607e6d0824a276c0d77442ae7b5ecfed257b1e40438f411a1859c85385c",
           "sig_status": "OK",
           "verified_by": "gpg:04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792(GreenAddress Team)",
-          "audit_note": "Signed by authoritative GreenAddress Team master key"
+          "audit_note": "Signed by authoritative GreenAddress Team master key",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -186,7 +206,11 @@
           "observed_sha256": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
           "sig_status": "OK",
           "verified_by": "blockstream:jadefw_index",
-          "audit_note": "Signed firmware cmphash verified against official Blockstream OTA metadata index"
+          "audit_note": "Signed firmware cmphash verified against official Blockstream OTA metadata index",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -219,7 +243,11 @@
           "observed_sha256": "cf6d6456b729e96656a769704da4656677ba1137cca5dd82753808141cc48a47",
           "sig_status": "OK",
           "verified_by": "sha256:release_notes_manifest",
-          "audit_note": "SHA-256 checksum verified against official Cake Wallet release notes manifest"
+          "audit_note": "SHA-256 checksum verified against official Cake Wallet release notes manifest",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -248,7 +276,11 @@
           "observed_sha256": "43561b2cf57600316e66c58169efd98be14bfc6005b4bca745926c808b219f2c",
           "sig_status": "OK",
           "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
-          "audit_note": "Signed by Coinkite Peter Gray master release key"
+          "audit_note": "Signed by Coinkite Peter Gray master release key",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -284,7 +316,11 @@
           "observed_sha256": "b09f4ed81628d4d60d9f9096f85dcae9533290f3ed409097e95f8d7414acd9c8",
           "sig_status": "OK",
           "verified_by": "gpg:multi_signers(rusty+cdecker+daywalker)",
-          "audit_note": "Core Lightning multi-party developer quorum"
+          "audit_note": "Core Lightning multi-party developer quorum",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -320,7 +356,11 @@
           "observed_sha256": "f38cee333c866986cdfb304428fa7487affc429c3853fc80e9822bd420bbc229",
           "sig_status": "OK",
           "verified_by": "gpg:6694D8DE7BE8EE5631BED9502BD5824B7F9470E6(ThomasV)",
-          "audit_note": "Signed by Thomas Voegtlin release key"
+          "audit_note": "Signed by Thomas Voegtlin release key",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -349,7 +389,11 @@
           "observed_sha256": "65b99bf6adf67b8105f665e5ae3fb34f183a53235debebc75250f8c815159b06",
           "sig_status": "OK",
           "verified_by": "ecdsa:secp256k1(selfcustody.pem)",
-          "audit_note": "Firmware package signature verified via official Krux secp256k1 root key"
+          "audit_note": "Firmware package signature verified via official Krux secp256k1 root key",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -378,7 +422,11 @@
           "observed_sha256": "18f07c42218765cd46148d74d9fe575795f56dce",
           "sig_status": "OK",
           "verified_by": "gpg:6A8F9C266528E25A(theuni:Sebastian Falbesoner)",
-          "audit_note": "Signed release tag verified against Bitcoin Core maintainer PGP release anchor"
+          "audit_note": "Signed release tag verified against Bitcoin Core maintainer PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -407,7 +455,11 @@
           "observed_sha256": "a758151ace3f21008ab162067ffce9e0e526a1b5d55995e2c30d9cd7ccda41a0",
           "sig_status": "OK",
           "verified_by": "gpg:BD0F3062F87842410B06A0432F656B0610604482(pgreco)",
-          "audit_note": "Signed by Pablo Greco (Blockstream Elements release signer)"
+          "audit_note": "Signed by Pablo Greco (Blockstream Elements release signer)",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -443,7 +495,11 @@
           "observed_sha256": "57527c7c5d30b6faa6f0020efe73fb2a9e99698f521791f653adedfd12cff365",
           "sig_status": "OK",
           "verified_by": "gpg:multi_signers(roasbeef+builders)",
-          "audit_note": "Multi-signature manifest verified against Lightning Labs builders"
+          "audit_note": "Multi-signature manifest verified against Lightning Labs builders",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -470,7 +526,11 @@
           "observed_sha256": "bf43f3fc23ef644406f463f1580f8b78e13e0b6a",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
-          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -497,7 +557,11 @@
           "observed_sha256": "cbb9aed9154101899b3f362d87983f465f4157be",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
-          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -526,7 +590,11 @@
           "observed_sha256": "02d0705114a4d81d08b77bbb3faaa8691b8d9561",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
-          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -555,7 +623,11 @@
           "observed_sha256": "2ebae7e70d3e6c538b11db5d927a1a18bfcefb5beab6d9e4188d9c7acbed7595",
           "sig_status": "OK",
           "verified_by": "gpg:8C8ECD3F660CA53CD878792A6E38A462ED2EF525(nunchuk)",
-          "audit_note": "Signed by Ta Tat Tai (Nunchuk binary release signing key)"
+          "audit_note": "Signed by Ta Tat Tai (Nunchuk binary release signing key)",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -583,7 +655,11 @@
           "observed_sha256": "f11c902f8b6026d68f980b8b14b7fd75f6f95d5f",
           "sig_status": "OK",
           "verified_by": "ssh:sk-ecdsa-sha2-nistp256(djm@mindrot.org)",
-          "audit_note": "Signed release tag verified via Damien Miller SSH git tag signature"
+          "audit_note": "Signed release tag verified via Damien Miller SSH git tag signature",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -612,7 +688,11 @@
           "observed_sha256": "b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6",
           "sig_status": "OK",
           "verified_by": "gpg:6AA45A4C209A2D3064CF66BEE434ED292E85643A(Pierre-Marie PADIOU)",
-          "audit_note": "Signed by Pierre-Marie Padiou (ACINQ Phoenix lead developer release key)"
+          "audit_note": "Signed by Pierre-Marie Padiou (ACINQ Phoenix lead developer release key)",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -638,7 +718,11 @@
           "observed_sha256": "7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d",
           "sig_status": "OK",
           "verified_by": "pipe-k1:bip340(npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7)",
-          "audit_note": "Signed by primary root identity via BIP-340 Schnorr"
+          "audit_note": "Signed by primary root identity via BIP-340 Schnorr",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -667,7 +751,11 @@
           "observed_sha256": "5256db12ebd7f555d8a8f83d1c3264ae7d675253",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
-          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -696,7 +784,11 @@
           "observed_sha256": "358e540e61a56248add0f1810705b70bf15a584b",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
-          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -725,7 +817,11 @@
           "observed_sha256": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
-          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
+          "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -753,7 +849,11 @@
           "observed_sha256": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9",
           "sig_status": "OK",
           "verified_by": "gpg:46739B74B56AD88F14B0882EC7EF709007260119(seedsigner)",
-          "audit_note": "Signed by SeedSigner release signing key"
+          "audit_note": "Signed by SeedSigner release signing key",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -788,7 +888,11 @@
           "observed_sha256": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e",
           "sig_status": "OK",
           "verified_by": "gpg:D4D0D3202FC06849A257B38DE94618334C674B40(craigraw)",
-          "audit_note": "Signed by Craig Raw (Sparrow Wallet creator / lead dev)"
+          "audit_note": "Signed by Craig Raw (Sparrow Wallet creator / lead dev)",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     },
@@ -817,7 +921,11 @@
           "observed_sha256": "7000d6eac0bb6943b966002c2efdf9fb8fc6a08574d933268ce16338b0ceda52",
           "sig_status": "OK",
           "verified_by": "sha256sums:signed",
-          "audit_note": "Deterministic build sha256 checksum verified against bootlace-dev release anchor"
+          "audit_note": "Deterministic build sha256 checksum verified against bootlace-dev release anchor",
+          "status_vector": {
+            "mask": 4095,
+            "warn_mask": 0
+          }
         }
       ]
     }
