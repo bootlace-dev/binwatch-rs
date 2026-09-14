@@ -10,7 +10,10 @@ use std::fs::File;
 use std::io::{self, Read};
 
 mod status_vector;
+pub mod walletscrutiny;
 pub use status_vector::{PipelineStage, PipelineStatusVector};
+pub use walletscrutiny::{ReproducibleStatus, WalletScrutinyAttestation, WalletScrutinyStore};
+
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BinaryArtifact {
