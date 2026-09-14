@@ -318,9 +318,9 @@
     </div>
 
     <div class="card" style="border-top: 3px solid #1f6feb;">
-      <h3 style="margin-top: 0;" title="Technical specification and operator remediation key for the 12-stage status vector ribbon [DTHS-MKEX-HRPA].">📖 12-Stage Pipeline Status Vector Legend & Operator Guide</h3>
+      <h3 style="margin-top: 0;" title="Technical specification and operator remediation key for the 12-stage status vector ribbon [DTHS-MKEX-BRPA].">📖 12-Stage Pipeline Status Vector Legend & Operator Guide</h3>
       <p style="font-size: 0.88rem; color: #c9d1d9; line-height: 1.5;">
-        Every audited release is assigned a deterministic 12-stage status vector (<code>[DTHS-MKEX-HRPA]</code>). Each letter position represents a distinct isolation boundary in the supply-chain verification pipeline. Green badges (<code>✓</code>) indicate passed stages, yellow badges (<code>!</code>) indicate governance warnings, and red badges (<code>0</code>) indicate hard failures.
+        Every audited release is assigned a deterministic 12-stage status vector (<code>[DTHS-MKEX-BRPA]</code>). Each letter position represents a distinct isolation boundary in the supply-chain verification pipeline. Green badges (<code>✓</code>) indicate passed stages, yellow badges (<code>!</code>) indicate governance warnings, and red badges (<code>0</code>) indicate hard failures.
       </p>
       
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; font-size: 0.84rem;">
@@ -347,7 +347,7 @@
         <div style="background: #0d1117; padding: 0.8rem; border-radius: 6px; border: 1px solid #30363d;">
           <h4 style="color: #34d399; margin: 0 0 0.4rem 0;">📦 Group 3: Payload & Blockchain Anchor</h4>
           <ul style="margin: 0; padding-left: 1.2rem; color: #8b949e; line-height: 1.5;">
-            <li><strong style="color: #34d399;">H</strong> — <strong>Binary Hash Match:</strong> Asserts <code>SHA256(payload) == manifest_hash</code>. <em>(Operator: Hard <code>HASH_DRIFT</code> if failed).</em></li>
+            <li><strong style="color: #34d399;">B</strong> — <strong>Build & Hash Determinism:</strong> Asserts SHA-256 hash match AND ingests WalletScrutiny source-to-binary build attestation (<code>BW-WS-INGEST-v1</code>). <em>(Operator: Hard <code>HASH_DRIFT</code> / build mismatch if failed).</em></li>
             <li><strong style="color: #fbbf24;">R</strong> — <strong>Freshness TTL:</strong> Asserts manifest age &le; 180 days. <em>(Operator: Flags yellow <code>!</code> if release mirror stale).</em></li>
             <li><strong style="color: #34d399;">P</strong> — <strong>Peer Mirror Fetch:</strong> Multi-vantage secondary fetch. <em>(Operator: Rejects dynamic geofence swaps).</em></li>
             <li><strong style="color: #34d399;">A</strong> — <strong>Bitcoin Chain Anchor:</strong> OpenTimestamps Merkle proof anchored to BTC block height. <em>(Operator: Verifies state seal).</em></li>
@@ -355,6 +355,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="card">
       <h3 title="Deterministic cryptographic manifests and mirror files for offline auditing.">Raw Cryptographic Manifest & Links</h3>
