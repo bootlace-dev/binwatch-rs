@@ -427,8 +427,9 @@ fn main() -> io::Result<()> {
                 "subzero-rs".to_string(),
                 ProjectAudit {
                     project_id: "subzero-rs".to_string(),
-                    release_tag: "v0.3.0".to_string(),
+                    release_tag: "v0.4.0-testnet4".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/subzero-keyosk".to_string(),
+
                     origin: Some("github_release".to_string()),
                     trust_anchor_url: Some("https://github.com/bootlace-dev/subzero-keyosk".to_string()),
                     manifest_url: None,
