@@ -25,15 +25,25 @@ pub struct WalletScrutinyAttestation {
     pub verification_id: Option<String>,
 }
 
+pub const WALLETSCRUTINY_OFFICIAL_PUBKEY: &str = "1f9e547c2f31942623b8ad1d07713282e8640fd8cf474e9f79f18ace8af216ed";
+
 impl WalletScrutinyAttestation {
     /// Ingests raw WalletScrutiny Nostr Kind 1 / NIP-89 note text and extracts attestation metrics
+    /// Requires pubkey matching official WalletScrutiny authority (`1f9e547c...`)
     pub fn parse_nostr_note(pubkey: &str, content: &str, timestamp: u64) -> Option<Self> {
         if !content.contains("WalletScrutiny.com") {
             return None;
         }
 
+        // Validate signer pubkey matches official WalletScrutiny authority
+        let is_trusted_signer = pubkey == WALLETSCRUTINY_OFFICIAL_PUBKEY;
+
         let result = if content.contains("Verified:") && content.contains("rebuilds byte-for-byte identical") {
-            ReproducibleStatus::Reproducible
+            if is_trusted_signer {
+                ReproducibleStatus::Reproducible
+            } else {
+                ReproducibleStatus::Unknown // Untrusted pubkey claim ignored
+            }
         } else if content.contains("NonReproducible") || content.contains("mismatch") {
             ReproducibleStatus::NonReproducible
         } else if content.contains("FTBFS") || content.contains("Failed to build") {
@@ -59,6 +69,7 @@ impl WalletScrutinyAttestation {
         })
     }
 }
+
 
 /// Ingestion store mapping project target versions to WalletScrutiny attestations
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]

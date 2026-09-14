@@ -209,6 +209,21 @@ async def main_async():
     seal_match = re.search(r'Merkle Seal:\s*#([A-Fa-f0-9]{6})', content)
     seal_tag = seal_match.group(1).upper() if seal_match else None
 
+    # Check state mutation cache to prevent relay spam
+    cache_file = "/tmp/last_nostr_seal.txt"
+    force_broadcast = "--force" in sys.argv or "-f" in sys.argv
+    if os.path.exists(cache_file) and not force_broadcast:
+        with open(cache_file, "r") as f:
+            last_seal = f.read().strip()
+        if last_seal == seal_tag and seal_tag is not None:
+            print(f">> State Unchanged (Merkle Seal #{seal_tag} matches previous broadcast). Skipping Nostr feed spam.")
+            sys.exit(0)
+
+    if seal_tag:
+        with open(cache_file, "w") as f:
+            f.write(seal_tag)
+
+
     created_at = int(time.time())
     tags = [
         ["t", "binwatch"],
