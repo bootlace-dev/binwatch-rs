@@ -23,7 +23,8 @@ pub enum PipelineStage {
     ChainAnchor        = 1 << 11, // 'A' - 0x800 (Anchor to BTC block)
 }
 
-const STAGE_CHARS: [char; 12] = ['D', 'T', 'H', 'S', 'M', 'K', 'E', 'X', 'H', 'R', 'P', 'A'];
+const STAGE_CHARS: [char; 12] = ['D', 'T', 'H', 'S', 'M', 'K', 'E', 'X', 'B', 'R', 'P', 'A'];
+
 
 /// Granular Pipeline Status Vector Wrapper
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -89,12 +90,12 @@ mod tests {
     #[test]
     fn test_status_vector_ribbon() {
         let mut v = PipelineStatusVector::full_pass();
-        assert_eq!(v.to_ribbon(), "DTHS-MKEX-HRPA");
+        assert_eq!(v.to_ribbon(), "DTHS-MKEX-BRPA");
         assert_eq!(v.to_hex(), "FFF");
 
         // Simulate Key Expiration warning (Stage 6)
         v.warn_mask |= PipelineStage::KeyExpiration as u16;
-        assert_eq!(v.to_ribbon(), "DTHS-MK!X-HRPA");
+        assert_eq!(v.to_ribbon(), "DTHS-MK!X-BRPA");
         assert_eq!(v.to_hex(), "FFF");
         assert!(!v.is_fully_verified());
 

@@ -490,9 +490,9 @@
 
           const originBadge = p.origin ? `<span class="origin-badge origin-${p.origin}" title="Distribution Origin / Channel: ${p.origin}">${p.origin}</span>` : '';
 
-          let vectorRibbon = p.artifacts[0] && p.artifacts[0].status_vector ? p.artifacts[0].status_vector.mask : (worstStatus === 'EXPIRED' ? 'DTHS-MK!X-HRPA' : (worstStatus === 'BADSIG' ? 'DTHS-0000-0000' : 'DTHS-MKEX-HRPA'));
+          let vectorRibbon = p.artifacts[0] && p.artifacts[0].status_vector ? p.artifacts[0].status_vector.mask : (worstStatus === 'EXPIRED' ? 'DTHS-MK!X-BRPA' : (worstStatus === 'BADSIG' ? 'DTHS-0000-0000' : 'DTHS-MKEX-BRPA'));
           if (typeof vectorRibbon === 'object' && vectorRibbon.mask) {
-            vectorRibbon = 'DTHS-MKEX-HRPA';
+            vectorRibbon = 'DTHS-MKEX-BRPA';
           }
           
           let ribbonHtml = `<div class="ribbon-container" style="display:inline-flex; gap:2px; font-family:monospace; font-size:11px; background:#030712; padding:3px 6px; border-radius:4px; border:1px solid #374151;">`;
@@ -505,10 +505,12 @@
             'K': { name: 'Stage K: Declared Trust Anchor Fingerprint Match', passMsg: 'PASSED - Key matches in-tree trust anchor', actionMsg: 'Operator Action: Check if maintainer updated signing key in Readme.md.' },
             'E': { name: 'Stage E: Key Lifetime & Expiration Audit', passMsg: 'PASSED - Key non-expired', actionMsg: 'Operator Action: Maintainer key expired! Prompt maintainers for key extension.' },
             'X': 'Stage X: Key Revocation CRL & KMS Check - PASSED',
+            'B': 'Stage B: Build Determinism & Hash Match (WalletScrutiny Ingested) - PASSED',
             'R': 'Stage R: Manifest Freshness TTL Audit - PASSED',
             'P': 'Stage P: Multi-Vantage Peer Mirror Verification - PASSED',
             'A': 'Stage A: Bitcoin Blockchain Anchor - PASSED'
           };
+
           for (let c of vectorRibbon) {
             if (c === '-') {
               ribbonHtml += `<span style="width:3px;"></span>`;
