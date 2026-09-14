@@ -458,13 +458,13 @@
           
           let ribbonHtml = `<div class="ribbon-container" style="display:inline-flex; gap:2px; font-family:monospace; font-size:11px; background:#030712; padding:3px 6px; border-radius:4px; border:1px solid #374151;">`;
           const stageNames = {
-            'D': 'Stage D: DNSSEC & IP Pinning Integrity - PASSED',
-            'T': 'Stage T: TLS Handshake & Root CA Whitelist - PASSED',
-            'H': 'Stage H: HTTP Transport & Header Determinism - PASSED',
-            'S': 'Stage S: Manifest Schema Syntax Parsing - PASSED',
-            'M': 'Stage M: Manifest Signature Structure - PASSED',
-            'K': 'Stage K: Declared Trust Anchor Fingerprint Match - PASSED',
-            'E': 'Stage E: Key Lifetime & Expiration Audit - PASSED',
+            'D': { name: 'Stage D: DNSSEC & IP Pinning Integrity', passMsg: 'PASSED - Transport route secure', actionMsg: 'Operator Action: Check local DNSSEC or Tor SOCKS5 proxy if failing.' },
+            'T': { name: 'Stage T: TLS Handshake & Root CA Whitelist', passMsg: 'PASSED - TLS 1.3 certificate chain verified', actionMsg: 'Operator Action: Verify server TLS certificate or CA whitelist.' },
+            'H': { name: 'Stage H: HTTP Transport & Header Determinism', passMsg: 'PASSED - HTTP 200 OK & byte range verified', actionMsg: 'Operator Action: Check HTTP headers or CDN edge caching.' },
+            'S': { name: 'Stage S: Manifest Schema Syntax Parsing', passMsg: 'PASSED - Manifest JSON/Ascii canonical', actionMsg: 'Operator Action: Inspect manifest syntax format.' },
+            'M': { name: 'Stage M: Manifest Signature Structure', passMsg: 'PASSED - PGP/Schnorr signature parsed', actionMsg: 'Operator Action: Check if PGP signature block is corrupted.' },
+            'K': { name: 'Stage K: Declared Trust Anchor Fingerprint Match', passMsg: 'PASSED - Key matches in-tree trust anchor', actionMsg: 'Operator Action: Check if maintainer updated signing key in Readme.md.' },
+            'E': { name: 'Stage E: Key Lifetime & Expiration Audit', passMsg: 'PASSED - Key non-expired', actionMsg: 'Operator Action: Maintainer key expired! Prompt maintainers for key extension.' },
             'X': 'Stage X: Key Revocation CRL & KMS Check - PASSED',
             'R': 'Stage R: Manifest Freshness TTL Audit - PASSED',
             'P': 'Stage P: Multi-Vantage Peer Mirror Verification - PASSED',
@@ -474,12 +474,13 @@
             if (c === '-') {
               ribbonHtml += `<span style="width:3px;"></span>`;
             } else if (c === '!') {
-              ribbonHtml += `<span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0 3px; border-radius:2px;" title="Stage E: Key Expiration Warning - Key Passed Declared Expiry Date">!</span>`;
+              ribbonHtml += `<span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0 3px; border-radius:2px; cursor:pointer;" onclick="event.stopPropagation(); toggleDrawer('drawer-${idx}');" title="Stage E Warning: Key Expired! Click to inspect operator remediation steps.">!</span>`;
             } else if (c === '0') {
-              ribbonHtml += `<span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0 3px; border-radius:2px;" title="Stage Failure / Dropped">0</span>`;
+              ribbonHtml += `<span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0 3px; border-radius:2px; cursor:pointer;" onclick="event.stopPropagation(); toggleDrawer('drawer-${idx}');" title="Stage Failure! Click to inspect operator remediation steps.">0</span>`;
             } else {
-              const stageTitle = stageNames[c] || `Stage ${c}: PASSED`;
-              ribbonHtml += `<span style="background:#064e3b; color:#34d399; border:1px solid #059669; padding:0 3px; border-radius:2px;" title="${stageTitle}">${c}</span>`;
+              const stageData = stageNames[c] || { name: `Stage ${c}`, passMsg: 'PASSED', actionMsg: '' };
+              const titleText = typeof stageData === 'string' ? stageData : `${stageData.name} - ${stageData.passMsg}. Click for operator details.`;
+              ribbonHtml += `<span style="background:#064e3b; color:#34d399; border:1px solid #059669; padding:0 3px; border-radius:2px; cursor:pointer;" onclick="event.stopPropagation(); toggleDrawer('drawer-${idx}');" title="${titleText}">${c}</span>`;
             }
           }
           ribbonHtml += `</div>`;
