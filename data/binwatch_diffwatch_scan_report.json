@@ -131,8 +131,8 @@
     "diff_lines": 480,
     "matched_smells": [
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "COINJOIN.UNBLINDED_INPUT_DEANON",
-      "CRYPTO.PROOF_CACHE_KEY_COLLISION_REUSE"
+      "CRYPTO.PROOF_CACHE_KEY_COLLISION_REUSE",
+      "COINJOIN.UNBLINDED_INPUT_DEANON"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -168,8 +168,8 @@
     "message": "Merge pull request #7012 from KeeperCommunity/docs/add-secur",
     "diff_lines": 120,
     "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION"
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -179,8 +179,8 @@
     "message": "Update SECURITY.md for formatting and clarity",
     "diff_lines": 174,
     "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION"
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -190,8 +190,8 @@
     "message": "Add SECURITY.md for vulnerability reporting and guidelines",
     "diff_lines": 74,
     "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION"
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -271,29 +271,29 @@
   },
   {
     "repo": "rust-bitcoin/rust-bitcoin",
-    "sha": "b58b6067",
-    "message": "Merge rust-bitcoin/rust-bitcoin#6873: ci: skip 7 very long m",
-    "diff_lines": 24,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "rust-bitcoin/rust-bitcoin",
-    "sha": "4cc6f0d2",
-    "message": "Merge rust-bitcoin/rust-bitcoin#6856: hashes: Fix Hkdf::expa",
-    "diff_lines": 76,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "rust-bitcoin/rust-bitcoin",
-    "sha": "cb240433",
-    "message": "Merge rust-bitcoin/rust-bitcoin#6847: Manual weekly update t",
-    "diff_lines": 219,
+    "sha": "d6a9b71b",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6859: units: fix `Target::fr",
+    "diff_lines": 45,
     "matched_smells": [
-      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE"
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "61626a16",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6871: Remove uses of `Index`",
+    "diff_lines": 35,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "e19739bc",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6865: units: fix relative lo",
+    "diff_lines": 55,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
   },
   {
     "repo": "bitcoindevkit/bdk",
@@ -471,6 +471,14 @@
   },
   {
     "repo": "RustCrypto/elliptic-curves",
+    "sha": "69308431",
+    "message": "bignp256: fix/pass original prehash to `bign-genk` (#1932)",
+    "diff_lines": 26,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "RustCrypto/elliptic-curves",
     "sha": "b6f9b7bd",
     "message": "bp384 v0.14.0 (#1929)",
     "diff_lines": 93,
@@ -486,16 +494,6 @@
     "diff_lines": 13,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "RustCrypto/elliptic-curves",
-    "sha": "36339450",
-    "message": "bp256 v0.14.0 (#1927)",
-    "diff_lines": 75,
-    "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
-    ],
-    "verdict": "FLAGGED_FOR_INSPECTION"
   },
   {
     "repo": "RustCrypto/AEADs",
@@ -541,11 +539,11 @@
     "matched_smells": [
       "LIGHTNING.REPLACEMENT_CYCLING_RACE",
       "HW.TRNG_SILENT_FALLBACK_PRNG",
-      "NWC.BUDGET_ALLOWANCE_RACE",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
       "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "NWC.BUDGET_ALLOWANCE_RACE",
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
       "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
-      "HW.CHANGE_DESCRIPTOR_DESYNC",
       "COINJOIN.UNBLINDED_INPUT_DEANON"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
@@ -558,11 +556,11 @@
     "matched_smells": [
       "LIGHTNING.REPLACEMENT_CYCLING_RACE",
       "HW.TRNG_SILENT_FALLBACK_PRNG",
-      "NWC.BUDGET_ALLOWANCE_RACE",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
       "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "NWC.BUDGET_ALLOWANCE_RACE",
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
       "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
-      "HW.CHANGE_DESCRIPTOR_DESYNC",
       "COINJOIN.UNBLINDED_INPUT_DEANON"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
@@ -593,6 +591,14 @@
   },
   {
     "repo": "cake-tech/cake_wallet",
+    "sha": "21c73d00",
+    "message": "change arbitrum default node [skip ci]",
+    "diff_lines": 476,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "cake-tech/cake_wallet",
     "sha": "3bb64b71",
     "message": "Add more guards to amounts being zero or infinity (#3612)",
     "diff_lines": 307,
@@ -606,14 +612,6 @@
     "sha": "8d75c3f0",
     "message": "minor fix [skip ci]",
     "diff_lines": 25,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "cake-tech/cake_wallet",
-    "sha": "6687e478",
-    "message": "fix: monero silently ignoring wallet opens (#3621)",
-    "diff_lines": 175,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
@@ -693,6 +691,14 @@
   },
   {
     "repo": "WalletWasabi/WalletWasabi",
+    "sha": "e29afe93",
+    "message": "Make PJ use TR as well (#15045)",
+    "diff_lines": 112,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "WalletWasabi/WalletWasabi",
     "sha": "690fa3ae",
     "message": "Global: `ConfigureBitcoinRpcClient` \u2013 report more user-frien",
     "diff_lines": 26,
@@ -704,14 +710,6 @@
     "sha": "43d8b5f4",
     "message": "xUnit: Modernize `IntegrationTestFixture` (#14980)",
     "diff_lines": 86,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "WalletWasabi/WalletWasabi",
-    "sha": "f14f98b9",
-    "message": "Allow PJ with taproot (#15044)",
-    "diff_lines": 96,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
