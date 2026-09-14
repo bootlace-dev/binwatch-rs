@@ -1,0 +1,794 @@
+[
+  {
+    "repo": "bitcoin/bitcoin",
+    "sha": "17817818",
+    "message": "Merge bitcoin/bitcoin#36228: ci, iwyu: generate embedded ASM",
+    "diff_lines": 127,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "bitcoin/bitcoin",
+    "sha": "1cbbf64e",
+    "message": "ci, iwyu: generate embedded ASMap header explicitly",
+    "diff_lines": 102,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "bitcoin/bitcoin",
+    "sha": "1afa0cd7",
+    "message": "cmake: add raw data header generation target",
+    "diff_lines": 25,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "lightningnetwork/lnd",
+    "sha": "606321b6",
+    "message": "Merge pull request #11179 from ziggie1984/fix-kv-graph-migra",
+    "diff_lines": 275,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "BOUNDARY.EMPTY_ZERO_LENIENCY"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "lightningnetwork/lnd",
+    "sha": "d29a3224",
+    "message": "docs: move graph migration fix note to v0.21.4",
+    "diff_lines": 37,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "lightningnetwork/lnd",
+    "sha": "1e947458",
+    "message": "docs: note legacy graph feature migration fix",
+    "diff_lines": 15,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "ElementsProject/lightning",
+    "sha": "a34b9758",
+    "message": "doc: document error 313 on every command which can return it",
+    "diff_lines": 132,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "ElementsProject/lightning",
+    "sha": "d7d1e78c",
+    "message": "doc: fix wording of the min-emergency-msat error description",
+    "diff_lines": 70,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "ElementsProject/lightning",
+    "sha": "78f4cd72",
+    "message": "docs: remove old references to pay, use xpay",
+    "diff_lines": 77,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "getAlby/hub",
+    "sha": "3e55ecac",
+    "message": "chore: clarify self-hosting network setup in docs and exampl",
+    "diff_lines": 254,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "getAlby/hub",
+    "sha": "05c0d42f",
+    "message": "feat: add extensions field to the NWC event info (#2567)",
+    "diff_lines": 202,
+    "matched_smells": [
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "getAlby/hub",
+    "sha": "6a6d2d89",
+    "message": "chore: improve test coverage on http service (#2579)",
+    "diff_lines": 154,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "ElementsProject/elements",
+    "sha": "c7e856fa",
+    "message": "Merge ElementsProject/elements#1597: build: fix depends Qt d",
+    "diff_lines": 25,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "ElementsProject/elements",
+    "sha": "7fd79014",
+    "message": "build: fix depends Qt download link",
+    "diff_lines": 25,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "ElementsProject/elements",
+    "sha": "4ddaefc8",
+    "message": "Merge ElementsProject/elements#1593: Fix RPC return errors f",
+    "diff_lines": 480,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "CRYPTO.PROOF_CACHE_KEY_COLLISION_REUSE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "sparrowwallet/sparrow",
+    "sha": "e63e4b27",
+    "message": "pay the silent payment address of a resolved instruction whe",
+    "diff_lines": 162,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "sparrowwallet/sparrow",
+    "sha": "8e9661a6",
+    "message": "verify psbt silent payment metadata against the input hash o",
+    "diff_lines": 7,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "sparrowwallet/sparrow",
+    "sha": "b43f24f9",
+    "message": "hide the gap limit and request a birth date for a silent pay",
+    "diff_lines": 134,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "KeeperCommunity/bitcoin-keeper",
+    "sha": "3a7b53cc",
+    "message": "Merge pull request #7012 from KeeperCommunity/docs/add-secur",
+    "diff_lines": 120,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "KeeperCommunity/bitcoin-keeper",
+    "sha": "ee747a8d",
+    "message": "Update SECURITY.md for formatting and clarity",
+    "diff_lines": 174,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "KeeperCommunity/bitcoin-keeper",
+    "sha": "db547956",
+    "message": "Add SECURITY.md for vulnerability reporting and guidelines",
+    "diff_lines": 74,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "spesmilo/electrum",
+    "sha": "79d27b76",
+    "message": "release notes: add credits for private sec disclosures",
+    "diff_lines": 40,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "spesmilo/electrum",
+    "sha": "7bac552b",
+    "message": "release notes: add \"security update\" markers",
+    "diff_lines": 74,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "spesmilo/electrum",
+    "sha": "39cab571",
+    "message": "Merge pull request #10966 from f321x/appimage_runtime_nocach",
+    "diff_lines": 138,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "simplex-chat/simplex-chat",
+    "sha": "4df04bdb",
+    "message": "7.0.2: android 375, desktop 159, ios 351",
+    "diff_lines": 305,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "simplex-chat/simplex-chat",
+    "sha": "39b0e059",
+    "message": "core: 7.0.0.12",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "simplex-chat/simplex-chat",
+    "sha": "2961fecc",
+    "message": "ui: update strings",
+    "diff_lines": 26,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "bitcoin-core/secp256k1",
+    "sha": "46db7871",
+    "message": "Merge bitcoin-core/secp256k1#1918: refactor: split `ge_parse",
+    "diff_lines": 324,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "bitcoin-core/secp256k1",
+    "sha": "de02108c",
+    "message": "tests: cover compressed pubkey parsing/serialization in `_ec",
+    "diff_lines": 82,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "bitcoin-core/secp256k1",
+    "sha": "d01de271",
+    "message": "Merge bitcoin-core/secp256k1#1935: tests: generate scalars_n",
+    "diff_lines": 84,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "b58b6067",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6873: ci: skip 7 very long m",
+    "diff_lines": 24,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "4cc6f0d2",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6856: hashes: Fix Hkdf::expa",
+    "diff_lines": 76,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "cb240433",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6847: Manual weekly update t",
+    "diff_lines": 219,
+    "matched_smells": [
+      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "bitcoindevkit/bdk",
+    "sha": "c6a60737",
+    "message": "Merge bitcoindevkit/bdk#2246: feat(chain)!: taint-aware `Can",
+    "diff_lines": 2274,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "bitcoindevkit/bdk",
+    "sha": "e2dad373",
+    "message": "bench(chain): benchmark classify_outpoints across canonical ",
+    "diff_lines": 503,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "bitcoindevkit/bdk",
+    "sha": "01b46601",
+    "message": "test(chain): cover taint propagation and eligibility classif",
+    "diff_lines": 720,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "paulmillr/noble-curves",
+    "sha": "e7316eb2",
+    "message": "Improve FROST dict storage",
+    "diff_lines": 296,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-curves",
+    "sha": "466703e1",
+    "message": "Fix new issue spotted by jsbt/random",
+    "diff_lines": 38,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-curves",
+    "sha": "2ff72c1e",
+    "message": "Upgrade devdeps. Switch to jsbt/random for prop testing.",
+    "diff_lines": 689,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-hashes",
+    "sha": "17cbd0b0",
+    "message": "Fix dos tests",
+    "diff_lines": 41,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-hashes",
+    "sha": "477e0b6b",
+    "message": "Upgrade devdeps. Switch to jsbt/random for prop testing.",
+    "diff_lines": 612,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-hashes",
+    "sha": "663c2aee",
+    "message": "Release 2.4.0.",
+    "diff_lines": 58,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-bip39",
+    "sha": "a337acac",
+    "message": "Upgrade devdeps",
+    "diff_lines": 512,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-bip39",
+    "sha": "2c8cf46f",
+    "message": "Release 2.4.0.",
+    "diff_lines": 68,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-bip39",
+    "sha": "af5414c9",
+    "message": "Update devdeps, add changelog",
+    "diff_lines": 213,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-bip32",
+    "sha": "f9b23d46",
+    "message": "Upgrade devdeps",
+    "diff_lines": 519,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-bip32",
+    "sha": "ab00d7f7",
+    "message": "Release 2.4.0.",
+    "diff_lines": 51,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-bip32",
+    "sha": "d76c8e70",
+    "message": "Upgrade deps, add changelog",
+    "diff_lines": 287,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-btc-signer",
+    "sha": "22770eb8",
+    "message": "Update devdeps",
+    "diff_lines": 509,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-btc-signer",
+    "sha": "373d2f3e",
+    "message": "Release 2.4.1.",
+    "diff_lines": 55,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/scure-btc-signer",
+    "sha": "997af7c4",
+    "message": "Bump micro-packed",
+    "diff_lines": 86,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-secp256k1",
+    "sha": "04c95fb6",
+    "message": "Release 3.2.0.",
+    "diff_lines": 45,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-secp256k1",
+    "sha": "58810d51",
+    "message": "readme",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "paulmillr/noble-secp256k1",
+    "sha": "9a797bec",
+    "message": "Clarify benchmark",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "RustCrypto/elliptic-curves",
+    "sha": "b6f9b7bd",
+    "message": "bp384 v0.14.0 (#1929)",
+    "diff_lines": 93,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "RustCrypto/elliptic-curves",
+    "sha": "f8ac5adf",
+    "message": "p521: fix incorrect exponent in sqrt comment (#1928)",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "RustCrypto/elliptic-curves",
+    "sha": "36339450",
+    "message": "bp256 v0.14.0 (#1927)",
+    "diff_lines": 75,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "RustCrypto/AEADs",
+    "sha": "9716ed73",
+    "message": "belt-dwp: tweak bundled `ghash`, use `ghash::GHash` as inner",
+    "diff_lines": 420,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "RustCrypto/AEADs",
+    "sha": "677cf651",
+    "message": "ascon-aead128: build against the released `ascon` v0.5.0 (#8",
+    "diff_lines": 117,
+    "matched_smells": [
+      "HW.CHANGE_DESCRIPTOR_DESYNC"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "RustCrypto/AEADs",
+    "sha": "c47c71ef",
+    "message": "build(deps): bump chacha20 from 0.10.1 to 0.10.2 (#883)",
+    "diff_lines": 16,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "proto-at-block/bitkey",
+    "sha": "4ba8c4c8",
+    "message": "Publish non-app source 2026-08-12-2119",
+    "diff_lines": 275,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "proto-at-block/bitkey",
+    "sha": "434ce7b1",
+    "message": "Publish non-app source 2026-08-11-1832",
+    "diff_lines": 46848,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "NWC.BUDGET_ALLOWANCE_RACE",
+      "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "COINJOIN.UNBLINDED_INPUT_DEANON"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "proto-at-block/bitkey",
+    "sha": "d627742f",
+    "message": "Publish source 2026-08-05",
+    "diff_lines": 45142,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "NWC.BUDGET_ALLOWANCE_RACE",
+      "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "COINJOIN.UNBLINDED_INPUT_DEANON"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "ACINQ/phoenix",
+    "sha": "ae2d351f",
+    "message": "(ios) Increment build code (104)",
+    "diff_lines": 40,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "ACINQ/phoenix",
+    "sha": "b6129d52",
+    "message": "(android) Increment build code (118)",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "ACINQ/phoenix",
+    "sha": "21502078",
+    "message": "Clarify spend instructions for cancelled swap-ins and final ",
+    "diff_lines": 437,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "cake-tech/cake_wallet",
+    "sha": "3bb64b71",
+    "message": "Add more guards to amounts being zero or infinity (#3612)",
+    "diff_lines": 307,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "cake-tech/cake_wallet",
+    "sha": "8d75c3f0",
+    "message": "minor fix [skip ci]",
+    "diff_lines": 25,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "cake-tech/cake_wallet",
+    "sha": "6687e478",
+    "message": "fix: monero silently ignoring wallet opens (#3621)",
+    "diff_lines": 175,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/hardened_malloc",
+    "sha": "903ed643",
+    "message": "replace MAP_FIXED and fix MREMAP_FIXED ENOMEM handling",
+    "diff_lines": 271,
+    "matched_smells": [
+      "HW.TRNG_SILENT_FALLBACK_PRNG"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "GrapheneOS/hardened_malloc",
+    "sha": "9cbfa6d4",
+    "message": "avoid unnecessary purging end guard for shrinking large allo",
+    "diff_lines": 53,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/hardened_malloc",
+    "sha": "f2feaa86",
+    "message": "always set VMA name for quarantined large allocation",
+    "diff_lines": 15,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/Auditor",
+    "sha": "f1bb2ac9",
+    "message": "Bump actions/setup-java from 5.7.0 to 6.0.0",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/Auditor",
+    "sha": "94c9d6b0",
+    "message": "update Guava to 33.7.1",
+    "diff_lines": 63,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/Auditor",
+    "sha": "0581ab1e",
+    "message": "update Guava to 33.7.0",
+    "diff_lines": 138,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "openssh/openssh-portable",
+    "sha": "7fe3b24c",
+    "message": "set -Wno-error=discarded-qualifiers",
+    "diff_lines": 12,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "openssh/openssh-portable",
+    "sha": "769728b8",
+    "message": "seccomp sandbox: restrict mremap flags",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "openssh/openssh-portable",
+    "sha": "8e964781",
+    "message": "upstream: reenable ssh-mldsa44-ed25519 at a low priority pos",
+    "diff_lines": 28,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "WalletWasabi/WalletWasabi",
+    "sha": "690fa3ae",
+    "message": "Global: `ConfigureBitcoinRpcClient` \u2013 report more user-frien",
+    "diff_lines": 26,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "WalletWasabi/WalletWasabi",
+    "sha": "43d8b5f4",
+    "message": "xUnit: Modernize `IntegrationTestFixture` (#14980)",
+    "diff_lines": 86,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "WalletWasabi/WalletWasabi",
+    "sha": "f14f98b9",
+    "message": "Allow PJ with taproot (#15044)",
+    "diff_lines": 96,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GingerPrivacy/GingerWallet",
+    "sha": "fe6b1c29",
+    "message": "Merge pull request #202 from molnard/ci/trim-unit-test-workf",
+    "diff_lines": 37,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GingerPrivacy/GingerWallet",
+    "sha": "95980b09",
+    "message": "Skip unused runtime packs in unit-test CI",
+    "diff_lines": 37,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GingerPrivacy/GingerWallet",
+    "sha": "b8f65e8c",
+    "message": "Merge pull request #201 from molnard/fix/coinjoin-test-timin",
+    "diff_lines": 133,
+    "matched_smells": [
+      "COINJOIN.UNBLINDED_INPUT_DEANON"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "JoinMarket-Org/joinmarket-clientserver",
+    "sha": "c2dd2534",
+    "message": "add archiving note",
+    "diff_lines": 12,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "JoinMarket-Org/joinmarket-clientserver",
+    "sha": "77a426c5",
+    "message": "add release notes for 0.9.12",
+    "diff_lines": 197,
+    "matched_smells": [
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "JoinMarket-Org/joinmarket-clientserver",
+    "sha": "5252017f",
+    "message": "Merge JoinMarket-Org/joinmarket-clientserver#1838: Fix case ",
+    "diff_lines": 177,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "dennysubke/ashigaru-terminal",
+    "sha": "2e6e54e2",
+    "message": "Update README.md",
+    "diff_lines": 26,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "dennysubke/ashigaru-terminal",
+    "sha": "1c254e2b",
+    "message": "Update README.md",
+    "diff_lines": 26,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "dennysubke/ashigaru-terminal",
+    "sha": "2d1ce2ba",
+    "message": "Delete build_arm_deb_in_docker.sh",
+    "diff_lines": 24,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  }
+]

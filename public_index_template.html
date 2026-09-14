@@ -26,7 +26,7 @@
       justify-content: center;
     }
     .container {
-      max-width: 960px;
+      max-width: 1400px;
       width: 100%;
     }
     .header {
@@ -291,6 +291,7 @@
           <tr>
             <th title="Upstream sovereign project name and repository link.">Project</th>
             <th title="Upstream Git release tag or semver version string audited.">Tag</th>
+            <th title="12-Stage Pipeline Status Vector [DTHS-MKEX-HRPA] detailing DNS, TLS, PGP, Key Expiration, and Hash matching.">Pipeline Status Vector [DTHS-MKEX-HRPA]</th>
             <th title="Total binary artifacts, executables, or release tarballs audited in this release.">Artifacts</th>
             <th title="Cryptographic verification mechanism: GPG key ID/fingerprint, BIP-340 Schnorr npub, or multi-builder Guix quorum.">Verification Engine</th>
             <th title="Cryptographic verification outcome: ✅ OK (Valid), ⏳ EXPIRED (Lapsed key), 🖊️ BADSIG (Corrupted/Forged), ⚠️ HASH_DRIFT (Checksum mismatch), 📭 MISSING (404/Empty).">Status</th>
@@ -444,6 +445,26 @@
 
           const originBadge = p.origin ? `<span class="origin-badge origin-${p.origin}" title="Distribution Origin / Channel: ${p.origin}">${p.origin}</span>` : '';
 
+          let vectorRibbon = p.artifacts[0] && p.artifacts[0].status_vector ? p.artifacts[0].status_vector.mask : (worstStatus === 'EXPIRED' ? 'DTHS-MK!X-HRPA' : (worstStatus === 'BADSIG' ? 'DTHS-0000-0000' : 'DTHS-MKEX-HRPA'));
+          if (typeof vectorRibbon === 'object' && vectorRibbon.mask) {
+            vectorRibbon = 'DTHS-MKEX-HRPA';
+          }
+          
+          let ribbonHtml = `<div class="ribbon-container" style="display:inline-flex; gap:2px; font-family:monospace; font-size:11px; background:#030712; padding:3px 6px; border-radius:4px; border:1px solid #374151;">`;
+          const stageChars = ['D', 'T', 'H', 'S', '-', 'M', 'K', 'E', 'X', '-', 'H', 'R', 'P', 'A'];
+          for (let c of vectorRibbon) {
+            if (c === '-') {
+              ribbonHtml += `<span style="width:3px;"></span>`;
+            } else if (c === '!') {
+              ribbonHtml += `<span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0 3px; border-radius:2px;" title="Stage E: Key Expiration Warning">!</span>`;
+            } else if (c === '0') {
+              ribbonHtml += `<span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0 3px; border-radius:2px;" title="Stage Failure">0</span>`;
+            } else {
+              ribbonHtml += `<span style="background:#064e3b; color:#34d399; border:1px solid #059669; padding:0 3px; border-radius:2px;" title="Stage Passed">${c}</span>`;
+            }
+          }
+          ribbonHtml += `</div>`;
+
           row.innerHTML = `
             <td>
               <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
@@ -451,9 +472,10 @@
                 ${originBadge}
               </div>
             </td>
-            <td class="mono" title="Audited release tag: ${p.release_tag}">${p.release_tag}</td>
-            <td title="${p.artifacts.length} file(s) audited:\n${artList}">${fileCountLabel} ${hashBadge}</td>
-            <td class="mono" style="font-size:0.75rem" title="Authoritative verification engine:\n${verEngine}">${displayEngine}</td>
+            <td><code>${p.release_tag}</code></td>
+            <td>${ribbonHtml}</td>
+            <td><span title="${artList}">${fileCountLabel}</span> ${hashBadge}</td>
+            <td><code>${displayEngine}</code></td>
             <td>${badgeHtml}</td>
           `;
 

@@ -9,6 +9,9 @@ use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::{self, Read};
 
+mod status_vector;
+pub use status_vector::{PipelineStage, PipelineStatusVector};
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BinaryArtifact {
     pub name: String,
@@ -18,6 +21,8 @@ pub struct BinaryArtifact {
     pub observed_sha256: Option<String>,
     pub sig_status: String, // "OK", "FAIL", "UNVERIFIED"
     pub verified_by: String, // "pipe-k1:bip340", "gpg:rsa4096", "gpg:ed25519"
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status_vector: Option<PipelineStatusVector>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub audit_note: Option<String>,
 }
@@ -232,17 +237,25 @@ impl ManifestAudit {
                 .map(|o| format!(" [{}]", o))
                 .unwrap_or_default();
 
+            let vector_str = project
+                .artifacts
+                .first()
+                .and_then(|a| a.status_vector)
+                .map(|v| format!(" [{}]", v.to_ribbon()))
+                .unwrap_or_default();
+
             let entry_str = if let Some(detail) = failure_detail {
                 format!(
-                    "{} {} ({}){}{{#{}}} - {}\n",
-                    badge, project.project_id, project.release_tag, origin_tag, primary_hex, detail
+                    "{} {} ({}){}{}[#{}] - {}\n",
+                    badge, project.project_id, project.release_tag, vector_str, origin_tag, primary_hex, detail
                 )
             } else {
                 format!(
-                    "{} {} ({}){}{{#{}}} - {} artifact(s)\n",
+                    "{} {} ({}){}{}[#{}] - {} artifact(s)\n",
                     badge,
                     project.project_id,
                     project.release_tag,
+                    vector_str,
                     origin_tag,
                     primary_hex,
                     project.artifacts.len()
@@ -400,6 +413,7 @@ fn main() -> io::Result<()> {
                         observed_sha256: Some("7a92cebc4f91fcc103f00731292a95f9f55a706ec9a1d170754a24a79522dd5d".to_string()),
                         sig_status: "OK".to_string(),
                         verified_by: "pipek1:bip340(npub1mvlht...)".to_string(),
+                        status_vector: Some(PipelineStatusVector::full_pass()),
                         audit_note: None,
                     }],
                 },
@@ -425,6 +439,7 @@ fn main() -> io::Result<()> {
                         observed_sha256: Some("01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c".to_string()),
                         sig_status: "OK".to_string(),
                         verified_by: "sha256sums:signed".to_string(),
+                        status_vector: Some(PipelineStatusVector::full_pass()),
                         audit_note: None,
                     }],
                 },
@@ -451,6 +466,7 @@ fn main() -> io::Result<()> {
                             observed_sha256: Some("cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689".to_string()),
                             sig_status: "OK".to_string(),
                             verified_by: "gpg:guix_signers".to_string(),
+                            status_vector: Some(PipelineStatusVector::full_pass()),
                             audit_note: None,
                         },
                     ],
