@@ -322,5 +322,41 @@
     "verifier_type": "git_tag_ssh",
     "verifier_key": "djm@mindrot.org",
     "origin": "git_tag"
+  },
+  {
+    "project_id": "opencoordinator_api",
+    "release_tag": "wabisabi-mainnet",
+    "upstream_url": "https://api.opencoordinator.org/wabisabi/human-monitor",
+    "trust_anchor_url": "https://api.opencoordinator.org/",
+    "manifest_url": "https://api.opencoordinator.org/wabisabi/human-monitor",
+    "signature_url": "https://api.opencoordinator.org/wabisabi/human-monitor",
+    "key_url": null,
+    "verifier_type": "privacy_coordinator_fee",
+    "verifier_key": "0.0%_fee_assertion",
+    "origin": "privacy_coordinator"
+  },
+  {
+    "project_id": "kruw_wabisabi",
+    "release_tag": "wabisabi-mainnet",
+    "upstream_url": "https://coinjoin.kruw.io/wabisabi/human-monitor",
+    "trust_anchor_url": "https://kruw.io/",
+    "manifest_url": "https://coinjoin.kruw.io/wabisabi/human-monitor",
+    "signature_url": "https://coinjoin.kruw.io/wabisabi/human-monitor",
+    "key_url": null,
+    "verifier_type": "privacy_coordinator_fee",
+    "verifier_key": "0.0%_fee_assertion",
+    "origin": "privacy_coordinator"
+  },
+  {
+    "project_id": "coinjoin_nl",
+    "release_tag": "wabisabi-mainnet",
+    "upstream_url": "https://coinjoin.nl/wabisabi/human-monitor",
+    "trust_anchor_url": "https://coinjoin.nl/",
+    "manifest_url": "https://coinjoin.nl/wabisabi/human-monitor",
+    "signature_url": "https://coinjoin.nl/wabisabi/human-monitor",
+    "key_url": null,
+    "verifier_type": "privacy_coordinator_fee",
+    "verifier_key": "0.0%_fee_assertion",
+    "origin": "privacy_coordinator"
   }
 ]
