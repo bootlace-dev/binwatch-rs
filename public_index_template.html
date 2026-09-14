@@ -312,6 +312,28 @@
       </div>
     </div>
 
+    <div class="card" style="border-top: 3px solid #34d399;">
+      <h3 style="margin-top: 0;" title="Real-time monitoring sentinel for WabiSabi & CoinJoin privacy coordinator zero-fee assertions and endpoint transport.">⚡ Privacy Coordinator Real-Time Sentinel</h3>
+      <p style="font-size: 0.88rem; color: #c9d1d9; line-height: 1.4; margin-bottom: 1rem;">
+        Continuous state and fee verification for WabiSabi / CoinJoin privacy coordinator endpoints. Asserts 0.0% coordination fee rates, transport availability, and active round input volume.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th title="Privacy coordinator endpoint name and service target.">Coordinator Target</th>
+            <th title="Audited network protocol state tag.">Protocol</th>
+            <th title="12-Stage Pipeline Status Vector [DTHS-MKEX-HRPA] detailing transport, schema, and fee rate assertion.">Status Vector [DTHS-MKEX-HRPA]</th>
+            <th title="Live monitoring payload asset.">Payload</th>
+            <th title="Verification rule applied (0.0% Fee Assertion).">Verification Engine</th>
+            <th title="Real-time status assertion outcome.">Status</th>
+          </tr>
+        </thead>
+        <tbody id="coordinator-matrix-body">
+          <tr><td colspan="6">Loading coordinator sentinel...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="card">
       <h3 title="Stateless Kind 1 note broadcasted to Nostr relays (wss://relay.damus.io, wss://nos.lol, wss://relay.primal.net) following every audit run.">Nostr Kind 1 Digest Note</h3>
       <pre id="digest-box">Loading digest...</pre>
@@ -427,39 +449,28 @@
           return a.key.localeCompare(b.key);
         });
 
-        let idx = 0;
-        let dividerInserted = false;
-        const hasFails = entries.some(e => e.status !== 'OK');
+        // Filter entries into Software Releases vs Privacy Coordinators
+        const releaseEntries = entries.filter(e => (e.project.origin || '') !== 'privacy_coordinator');
+        const coordinatorEntries = entries.filter(e => (e.project.origin || '') === 'privacy_coordinator');
 
-        function formatShortEngine(verEngine) {
-          if (!verEngine) return 'unknown';
-          if (verEngine.includes('npub1')) {
-            return verEngine.replace(/(npub1[a-z0-9]{4})[a-z0-9]+([a-z0-9]{6})/, '$1...$2');
-          }
-          const gpgMatch = verEngine.match(/^gpg:([A-Fa-f0-9]{32,40})(\((.*)\))?$/);
-          if (gpgMatch) {
-            const fullFp = gpgMatch[1];
-            const shortId = '0x' + fullFp.substring(fullFp.length - 8).toUpperCase();
-            let tag = gpgMatch[3] ? gpgMatch[3].replace(/:EXPIRED|:OK|:BADSIG/g, '') : '';
-            const tagStr = tag ? ` (${tag})` : '';
-            return `gpg:${shortId}${tagStr}`;
-          }
-          return verEngine;
-        }
+        function renderRows(items, targetTbody) {
+          let localIdx = 0;
+          let dividerInserted = false;
+          const hasFails = items.some(e => e.status !== 'OK');
 
-        for (const item of entries) {
-          idx++;
-          const p = item.project;
-          const worstStatus = item.status;
+          for (const item of items) {
+            idx++;
+            localIdx++;
+            const p = item.project;
+            const worstStatus = item.status;
 
-          // Insert a clean separator row when transitioning from fails to passes
-          if (hasFails && worstStatus === 'OK' && !dividerInserted) {
-            const divRow = document.createElement('tr');
-            divRow.className = 'divider-row';
-            divRow.innerHTML = `<td colspan="5">✓ Fully Verified & Non-Expired Projects</td>`;
-            tbody.appendChild(divRow);
-            dividerInserted = true;
-          }
+            if (hasFails && worstStatus === 'OK' && !dividerInserted) {
+              const divRow = document.createElement('tr');
+              divRow.className = 'divider-row';
+              divRow.innerHTML = `<td colspan="5">✓ Fully Verified & Non-Expired Targets</td>`;
+              targetTbody.appendChild(divRow);
+              dividerInserted = true;
+            }
 
           const row = document.createElement('tr');
           row.className = 'project-row';
@@ -640,9 +651,22 @@
             drawerRow.style.display = drawerRow.style.display === 'none' ? 'table-row' : 'none';
           });
 
-          tbody.appendChild(row);
-          tbody.appendChild(drawerRow);
+          targetTbody.appendChild(row);
+          targetTbody.appendChild(drawerRow);
         }
+      }
+
+      // Render software releases table
+      const releaseTbody = document.getElementById('matrix-body');
+      releaseTbody.innerHTML = '';
+      renderRows(releaseEntries, releaseTbody);
+
+      // Render privacy coordinators table
+      const coordTbody = document.getElementById('coordinator-matrix-body');
+      if (coordTbody) {
+        coordTbody.innerHTML = '';
+        renderRows(coordinatorEntries, coordTbody);
+      }
       })
       .catch(err => console.error(err));
 
