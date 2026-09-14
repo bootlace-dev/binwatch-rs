@@ -317,6 +317,45 @@
       <pre id="digest-box">Loading digest...</pre>
     </div>
 
+    <div class="card" style="border-top: 3px solid #1f6feb;">
+      <h3 style="margin-top: 0;" title="Technical specification and operator remediation key for the 12-stage status vector ribbon [DTHS-MKEX-HRPA].">📖 12-Stage Pipeline Status Vector Legend & Operator Guide</h3>
+      <p style="font-size: 0.88rem; color: #c9d1d9; line-height: 1.5;">
+        Every audited release is assigned a deterministic 12-stage status vector (<code>[DTHS-MKEX-HRPA]</code>). Each letter position represents a distinct isolation boundary in the supply-chain verification pipeline. Green badges (<code>✓</code>) indicate passed stages, yellow badges (<code>!</code>) indicate governance warnings, and red badges (<code>0</code>) indicate hard failures.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; font-size: 0.84rem;">
+        <div style="background: #0d1117; padding: 0.8rem; border-radius: 6px; border: 1px solid #30363d;">
+          <h4 style="color: #58a6ff; margin: 0 0 0.4rem 0;">🌐 Group 1: Transport & Network Layer</h4>
+          <ul style="margin: 0; padding-left: 1.2rem; color: #8b949e; line-height: 1.5;">
+            <li><strong style="color: #34d399;">D</strong> — <strong>DNSSEC & IP Pinning:</strong> Asserts transport IP route stability and DNSSEC integrity. <em>(Operator: Check DNS/SOCKS5 proxy).</em></li>
+            <li><strong style="color: #34d399;">T</strong> — <strong>TLS Handshake:</strong> Validates TLS 1.3 certificate chain against strict Root CA whitelist. <em>(Operator: Verify TLS cert/CA).</em></li>
+            <li><strong style="color: #34d399;">H</strong> — <strong>HTTP Transport:</strong> Validates HTTP 200 OK & byte-range determinism. <em>(Operator: Check edge cache/CDN).</em></li>
+            <li><strong style="color: #34d399;">S</strong> — <strong>Schema Syntax:</strong> Parses canonical manifest ordering (<code>SHA256SUMS.asc</code>). <em>(Operator: Inspect manifest formatting).</em></li>
+          </ul>
+        </div>
+
+        <div style="background: #0d1117; padding: 0.8rem; border-radius: 6px; border: 1px solid #30363d;">
+          <h4 style="color: #fbbf24; margin: 0 0 0.4rem 0;">🔑 Group 2: Key & Governance Layer</h4>
+          <ul style="margin: 0; padding-left: 1.2rem; color: #8b949e; line-height: 1.5;">
+            <li><strong style="color: #34d399;">M</strong> — <strong>Manifest Signature:</strong> Validates OpenPGP or BIP-340 Schnorr signature math. <em>(Operator: Hard <code>BADSIG</code> if failed).</em></li>
+            <li><strong style="color: #34d399;">K</strong> — <strong>Declared Key Match:</strong> Verifies fingerprint matches in-tree Trust Anchor URL. <em>(Operator: Check <code>Readme.md#pgp</code> key ID).</em></li>
+            <li><strong style="color: #fbbf24;">E</strong> — <strong>Key Expiration:</strong> Audits primary/subkey validity timestamps. <em>(Operator: Flags yellow <code>!</code> if maintainer key expired).</em></li>
+            <li><strong style="color: #34d399;">X</strong> — <strong>Key Revocation:</strong> Checks CRL / inline <code>0x20</code>/<code>0x30</code> revocation certificates. <em>(Operator: Rejects revoked keys).</em></li>
+          </ul>
+        </div>
+
+        <div style="background: #0d1117; padding: 0.8rem; border-radius: 6px; border: 1px solid #30363d;">
+          <h4 style="color: #34d399; margin: 0 0 0.4rem 0;">📦 Group 3: Payload & Blockchain Anchor</h4>
+          <ul style="margin: 0; padding-left: 1.2rem; color: #8b949e; line-height: 1.5;">
+            <li><strong style="color: #34d399;">H</strong> — <strong>Binary Hash Match:</strong> Asserts <code>SHA256(payload) == manifest_hash</code>. <em>(Operator: Hard <code>HASH_DRIFT</code> if failed).</em></li>
+            <li><strong style="color: #fbbf24;">R</strong> — <strong>Freshness TTL:</strong> Asserts manifest age &le; 180 days. <em>(Operator: Flags yellow <code>!</code> if release mirror stale).</em></li>
+            <li><strong style="color: #34d399;">P</strong> — <strong>Peer Mirror Fetch:</strong> Multi-vantage secondary fetch. <em>(Operator: Rejects dynamic geofence swaps).</em></li>
+            <li><strong style="color: #34d399;">A</strong> — <strong>Bitcoin Chain Anchor:</strong> OpenTimestamps Merkle proof anchored to BTC block height. <em>(Operator: Verifies state seal).</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h3 title="Deterministic cryptographic manifests and mirror files for offline auditing.">Raw Cryptographic Manifest & Links</h3>
       <p style="font-size: 0.9rem;">Download full deterministic audit payload:</p>
