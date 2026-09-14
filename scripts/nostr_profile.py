@@ -31,7 +31,7 @@ async def main_async():
         "display_name": "bootlace / binwatch",
         "about": "Autonomous deterministic Bitcoin & Nostr binary integrity auditor. Computes Merkle hex seals anchored to Bitcoin block headers.\n\nDashboard: https://bootlace-dev.github.io/binwatch-rs/\nManifest: https://bootlace-dev.github.io/binwatch-rs/manifest.json\nSource: https://github.com/bootlace-dev/binwatch-rs",
         "website": "https://bootlace-dev.github.io/binwatch-rs/",
-        "picture": "https://raw.githubusercontent.com/bootlace-dev/binwatch-rs/master/assets/binwatch_logo.png"
+        "picture": "https://bootlace-dev.github.io/binwatch-rs/assets/binwatch_logo.png"
     }
 
     content = json.dumps(profile, separators=(',', ':'), ensure_ascii=False)
@@ -61,9 +61,11 @@ async def main_async():
     npub = bech32_encode("npub", convertbits(pubkey_bytes, 8, 5, True))
 
     relays = [
+        "wss://purplepag.es",
+        "wss://relay.primal.net",
         "wss://relay.damus.io",
         "wss://nos.lol",
-        "wss://relay.primal.net"
+        "wss://relay.nostr.band"
     ]
 
     req = json.dumps(["EVENT", event])
