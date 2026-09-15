@@ -1,0 +1,56 @@
+[
+  {
+    "project_id": "ledger_live",
+    "name": "Ledger Live Desktop",
+    "category": "Hardware Companion",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Closed SE blobs & missing standalone detached GPG manifest",
+    "cure_requirement": "Publish reproducible, unencumbered SHA256SUMS + detached GPG .asc in root release assets",
+    "upstream_url": "https://github.com/LedgerHQ/ledger-live"
+  },
+  {
+    "project_id": "bluewallet",
+    "name": "BlueWallet",
+    "category": "Mobile / Lightning",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "App Store lock-in; standalone APKs lack detached GPG signatures",
+    "cure_requirement": "Sign raw GitHub APK releases with persistent developer GPG key and detached .asc signature",
+    "upstream_url": "https://github.com/BlueWallet/BlueWallet"
+  },
+  {
+    "project_id": "trezor_suite",
+    "name": "Trezor Suite",
+    "category": "Hardware Companion",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Proprietary embedded device certificate chain rather than standard decoupled open GPG tarball",
+    "cure_requirement": "Provide decoupled, standardized open GPG-signed checksum manifest for all target assets",
+    "upstream_url": "https://github.com/trezor/trezor-suite"
+  },
+  {
+    "project_id": "muun_wallet",
+    "name": "Muun Wallet",
+    "category": "Mobile Multi-Sig",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Closed mobile distribution; zero standalone verifiable APK or desktop release assets on git",
+    "cure_requirement": "Publish reproducible, open-source APK binaries with signed checksums to git release tags",
+    "upstream_url": "https://github.com/muun/apollo"
+  },
+  {
+    "project_id": "bitbox02_firmware",
+    "name": "BitBox02 Firmware",
+    "category": "Hardware Firmware",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Brittle multi-sig quorum ceremony requiring custom python scripts across internal employee YubiKeys",
+    "cure_requirement": "Publish standardized single-root or threshold detached GPG manifest verifiable with standard tooling",
+    "upstream_url": "https://github.com/digitalbitbox/bitbox02-firmware"
+  },
+  {
+    "project_id": "passport_firmware",
+    "name": "Foundation Passport",
+    "category": "Air-Gapped Hardware",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Raw MicroSD .bin updates distributed without detached GPG .asc signatures signed by developer key",
+    "cure_requirement": "Publish signed SHA256SUMS.asc with firmware binaries on public release tags",
+    "upstream_url": "https://github.com/Foundation-Devices/passport-firmware"
+  }
+]

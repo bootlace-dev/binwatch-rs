@@ -354,8 +354,75 @@
           </ul>
         </div>
       </div>
+    <div class="card" style="border-top: 3px solid #d29922;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <h3 style="margin:0;" title="Projects evaluated for BinWatch inclusion but declined due to non-standard, brittle, or proprietary release delivery.">
+          ⚠️ Declined Candidate Registry: Upstream Release Hygiene Backlog
+        </h3>
+        <span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:700;">
+          CLASS B / BRITTLE EXCLUSIONS
+        </span>
+      </div>
+      <p style="font-size:0.86rem; color:#8b949e; margin-top:0.75rem; margin-bottom:1rem; line-height:1.5;">
+        <strong>The Inverted Trust Arrow Invariant:</strong> BinWatch verifies low-hanging, deterministic key-artifact pairings. If an upstream project's public key or signed manifest is not discoverable through standard root git paths (e.g., in-tree <code>PGP-KEY.asc</code>, detached <code>.asc</code> signatures on GitHub releases, or signed Nostr announcements), that is classified as an <em>upstream discoverability defect</em>. BinWatch refuses to hunt down multi-hop forum keys or obscure manual quorums. These candidates remain excluded until upstream maintainers establish frictionless cryptographic release hygiene.
+      </p>
+      
+      <table style="font-size:0.82rem; margin-top:0.5rem;">
+        <thead>
+          <tr style="border-bottom:1px solid #30363d; text-align:left; color:#8b949e;">
+            <th style="width:20%;">Candidate Target</th>
+            <th style="width:15%;">Category</th>
+            <th style="width:15%;">Classification</th>
+            <th style="width:25%;">Upstream Hygiene Defect</th>
+            <th style="width:25%;">Cure Requirement for Ingestion</th>
+          </tr>
+        </thead>
+        <tbody id="declined-body">
+          <tr>
+            <td><strong><a href="https://github.com/LedgerHQ/ledger-live" target="_blank" style="color:#58a6ff;">Ledger Live Desktop</a></strong></td>
+            <td><code>Hardware Companion</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Closed SE blobs & missing standalone detached GPG manifest</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible, unencumbered SHA256SUMS + detached GPG .asc in root release assets</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/BlueWallet/BlueWallet" target="_blank" style="color:#58a6ff;">BlueWallet</a></strong></td>
+            <td><code>Mobile / Lightning</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">App Store lock-in; standalone APKs lack detached GPG signatures</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Sign raw GitHub APK releases with persistent developer GPG key and detached .asc signature</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/trezor/trezor-suite" target="_blank" style="color:#58a6ff;">Trezor Suite</a></strong></td>
+            <td><code>Hardware Companion</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Proprietary embedded device certificate chain rather than standard decoupled open GPG tarball</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Provide decoupled, standardized open GPG-signed checksum manifest for all target assets</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/muun/apollo" target="_blank" style="color:#58a6ff;">Muun Wallet</a></strong></td>
+            <td><code>Mobile Multi-Sig</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Closed mobile distribution; zero standalone verifiable APK or desktop release assets on git</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible, open-source APK binaries with signed checksums to git release tags</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/digitalbitbox/bitbox02-firmware" target="_blank" style="color:#58a6ff;">BitBox02 Firmware</a></strong></td>
+            <td><code>Hardware Firmware</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Brittle multi-sig quorum ceremony requiring custom python scripts across internal employee YubiKeys</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish standardized single-root or threshold detached GPG manifest verifiable with standard tooling</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/Foundation-Devices/passport-firmware" target="_blank" style="color:#58a6ff;">Foundation Passport</a></strong></td>
+            <td><code>Air-Gapped Hardware</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Raw MicroSD .bin updates distributed without detached GPG .asc signatures signed by developer key</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish signed SHA256SUMS.asc with firmware binaries on public release tags</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
 
     <div class="card">
       <h3 title="Deterministic cryptographic manifests and mirror files for offline auditing.">Raw Cryptographic Manifest & Links</h3>
