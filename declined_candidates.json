@@ -52,5 +52,14 @@
     "upstream_hygiene_defect": "Raw MicroSD .bin updates distributed without detached GPG .asc signatures signed by developer key",
     "cure_requirement": "Publish signed SHA256SUMS.asc with firmware binaries on public release tags",
     "upstream_url": "https://github.com/Foundation-Devices/passport-firmware"
+  },
+  {
+    "project_id": "bitkey",
+    "name": "Bitkey (Block)",
+    "category": "Hardware / Mobile 2-of-3",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Unsigned naked .sha256 text files on APKs; zero detached GPG .asc signatures; firmware cloud-tethered via proprietary OTA",
+    "cure_requirement": "Sign release checksums with declared developer PGP/BIP-340 key; publish decoupled, signed standalone firmware binaries",
+    "upstream_url": "https://github.com/proto-at-block/bitkey"
   }
 ]
