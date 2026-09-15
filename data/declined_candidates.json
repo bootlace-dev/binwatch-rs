@@ -79,5 +79,41 @@
     "upstream_hygiene_defect": "Centralized SaaS API / closed custodial backend; zero verifiable standalone release binaries or OpenPGP signed manifests",
     "cure_requirement": "Publish self-hostable, deterministic server/client binaries with detached OpenPGP signatures and in-tree public key anchors",
     "upstream_url": "https://swiss-bitcoin-pay.ch"
+  },
+  {
+    "project_id": "btcpayserver",
+    "name": "BTCPay Server",
+    "category": "Self-Hosted Payment Gateway",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Container/source distribution only; zero detached OpenPGP-signed release tarballs or binary checksum manifests on GitHub tags",
+    "cure_requirement": "Publish reproducible standalone release binaries or root container digest manifests signed with developer OpenPGP key",
+    "upstream_url": "https://github.com/btcpayserver/btcpayserver"
+  },
+  {
+    "project_id": "boltz_client",
+    "name": "Boltz Client",
+    "category": "Submarine Swap Client",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Custom detached minisign/sig format lacking standardized root in-tree GPG/BIP-340 trust anchor declaration",
+    "cure_requirement": "Publish clear in-repo trust anchor specification and standardized OpenPGP/BIP-340 signed manifest",
+    "upstream_url": "https://github.com/BoltzExchange/boltz-client"
+  },
+  {
+    "project_id": "pocket_bitcoin",
+    "name": "Pocket Bitcoin",
+    "category": "Broker / Fiat Gateway",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Centralized Swiss brokerage service; closed backend linking banking IBANs to xpubs without verifiable client binaries",
+    "cure_requirement": "Publish open-source, reproducible client applications with detached OpenPGP/BIP-340 verification manifests",
+    "upstream_url": "https://pocketbitcoin.com"
+  },
+  {
+    "project_id": "revolut",
+    "name": "Revolut",
+    "category": "TradFi Banking / Synthetic Crypto",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Closed proprietary banking app; synthetic ledger, no self-custody or verifiable binary supply chain",
+    "cure_requirement": "Provide full self-custody withdrawal proofs and open-source, verifiable binary builds",
+    "upstream_url": "https://revolut.com"
   }
 ]

@@ -441,6 +441,34 @@
             <td style="color:#fca5a5;">Centralized SaaS / closed custodial backend; zero verifiable standalone release binaries or OpenPGP signed manifests</td>
             <td style="color:#8b949e; font-size:0.8rem;">Publish self-hostable, deterministic server/client binaries with detached OpenPGP signatures and in-tree public key anchors</td>
           </tr>
+          <tr>
+            <td><strong><a href="https://github.com/btcpayserver/btcpayserver" target="_blank" style="color:#58a6ff;">BTCPay Server</a></strong></td>
+            <td><code>Self-Hosted Gateway</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Container/source distribution only; zero detached OpenPGP-signed release tarballs or binary checksum manifests on GitHub tags</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible standalone release binaries or root container digest manifests signed with developer OpenPGP key</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/BoltzExchange/boltz-client" target="_blank" style="color:#58a6ff;">Boltz Client</a></strong></td>
+            <td><code>Submarine Swaps</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Custom detached minisign/sig format lacking standardized root in-tree GPG/BIP-340 trust anchor declaration</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish clear in-repo trust anchor specification and standardized OpenPGP/BIP-340 signed manifest</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://pocketbitcoin.com" target="_blank" style="color:#58a6ff;">Pocket Bitcoin</a></strong></td>
+            <td><code>Broker / Gateway</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Centralized Swiss brokerage service; closed backend linking banking IBANs to xpubs without verifiable client binaries</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish open-source, reproducible client applications with detached OpenPGP/BIP-340 verification manifests</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://revolut.com" target="_blank" style="color:#58a6ff;">Revolut</a></strong></td>
+            <td><code>TradFi / Synthetic</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
+            <td style="color:#fca5a5;">Closed proprietary banking app; synthetic ledger, no self-custody or verifiable binary supply chain</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Provide full self-custody withdrawal proofs and open-source, verifiable binary builds</td>
+          </tr>
         </tbody>
       </table>
     </div>
