@@ -70,5 +70,14 @@
     "upstream_hygiene_defect": "Unsigned application package; upstream relies on PyPI/Docker tags without detached OpenPGP signed checksum manifests or verifiable binary release anchors",
     "cure_requirement": "Publish reproducible standalone release binaries with detached developer OpenPGP signatures and root in-tree keyring",
     "upstream_url": "https://github.com/lnbits/lnbits"
+  },
+  {
+    "project_id": "swiss_bitcoin_pay",
+    "name": "Swiss Bitcoin Pay",
+    "category": "Merchant / Custodial Gateway",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Centralized SaaS API / closed custodial backend; zero verifiable standalone release binaries or OpenPGP signed manifests",
+    "cure_requirement": "Publish self-hostable, deterministic server/client binaries with detached OpenPGP signatures and in-tree public key anchors",
+    "upstream_url": "https://swiss-bitcoin-pay.ch"
   }
 ]
