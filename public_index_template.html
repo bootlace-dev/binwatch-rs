@@ -364,7 +364,7 @@
         </span>
       </div>
       <p style="font-size:0.86rem; color:#8b949e; margin-top:0.75rem; margin-bottom:1rem; line-height:1.5;">
-        <strong>The Inverted Trust Arrow Invariant:</strong> BinWatch verifies low-hanging, deterministic key-artifact pairings. If an upstream project's public key or signed manifest is not discoverable through standard root git paths (e.g., in-tree <code>PGP-KEY.asc</code>, detached <code>.asc</code> signatures on GitHub releases, or signed Nostr announcements), that is classified as an <em>upstream discoverability defect</em>. BinWatch refuses to hunt down multi-hop forum keys or obscure manual quorums. These candidates remain excluded until upstream maintainers establish frictionless cryptographic release hygiene.
+        <strong>The Inverted Trust Arrow Invariant:</strong> BinWatch verifies decoupled, deterministic key-artifact pairings without grading on a curve. If a project does not publish standardized, machine-verifiable detached manifests at the release boundary, it is categorized below. We strictly decouple <strong>insecure supply-chain hygiene</strong> (e.g. naked unsigned checksums, opaque OTA) from <strong>non-standard modern cryptographic attestation</strong> (hardware multi-sig quorums, Minisign) and <strong>container-only web stacks</strong>.
       </p>
       
       <table style="font-size:0.82rem; margin-top:0.5rem;">
@@ -372,102 +372,81 @@
           <tr style="border-bottom:1px solid #30363d; text-align:left; color:#8b949e;">
             <th style="width:20%;">Candidate Target</th>
             <th style="width:15%;">Category</th>
-            <th style="width:15%;">Classification</th>
-            <th style="width:25%;">Upstream Hygiene Defect</th>
-            <th style="width:25%;">Cure Requirement for Ingestion</th>
+            <th style="width:18%;">Supply Chain Status</th>
+            <th style="width:24%;">Attestation / Architecture Profile</th>
+            <th style="width:23%;">Verification Pathway</th>
           </tr>
         </thead>
         <tbody id="declined-body">
           <tr>
-            <td><strong><a href="https://github.com/LedgerHQ/ledger-live" target="_blank" style="color:#58a6ff;">Ledger Live Desktop</a></strong></td>
-            <td><code>Hardware Companion</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Closed SE blobs & missing standalone detached GPG manifest</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible, unencumbered SHA256SUMS + detached GPG .asc in root release assets</td>
+            <td><strong><a href="https://github.com/proto-at-block/bitkey" target="_blank" style="color:#58a6ff;">Bitkey (Block)</a></strong></td>
+            <td><code>Hardware / Mobile 2-of-3</code></td>
+            <td><span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">⚠️ INSECURE_TRANSPORT</span></td>
+            <td style="color:#fca5a5;">Unsigned naked .sha256 text files on APKs; zero detached signatures; cloud-tethered OTA firmware without standalone downloads</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Sign release checksums with declared developer PGP/BIP-340 key; publish decoupled standalone firmware binaries</td>
           </tr>
           <tr>
             <td><strong><a href="https://github.com/BlueWallet/BlueWallet" target="_blank" style="color:#58a6ff;">BlueWallet</a></strong></td>
             <td><code>Mobile / Lightning</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">App Store lock-in; standalone APKs lack detached GPG signatures</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Sign raw GitHub APK releases with persistent developer GPG key and detached .asc signature</td>
+            <td><span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">⚠️ INSECURE_TRANSPORT</span></td>
+            <td style="color:#fca5a5;">App Store lock-in; standalone APKs lack detached cryptographic signatures on GitHub releases</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Sign raw GitHub APK releases with persistent developer GPG/minisign key and detached signature</td>
           </tr>
           <tr>
-            <td><strong><a href="https://github.com/trezor/trezor-suite" target="_blank" style="color:#58a6ff;">Trezor Suite</a></strong></td>
-            <td><code>Hardware Companion</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Proprietary embedded device certificate chain rather than standard decoupled open GPG tarball</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Provide decoupled, standardized open GPG-signed checksum manifest for all target assets</td>
+            <td><strong><a href="https://github.com/Foundation-Devices/passport-firmware" target="_blank" style="color:#58a6ff;">Foundation Passport</a></strong></td>
+            <td><code>Air-Gapped Hardware</code></td>
+            <td><span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">⚠️ INSECURE_TRANSPORT</span></td>
+            <td style="color:#fca5a5;">Raw MicroSD .bin updates distributed without detached cryptographic signatures signed by developer key</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish signed SHA256SUMS.asc with firmware binaries on public release tags</td>
           </tr>
           <tr>
             <td><strong><a href="https://github.com/muun/apollo" target="_blank" style="color:#58a6ff;">Muun Wallet</a></strong></td>
             <td><code>Mobile Multi-Sig</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Closed mobile distribution; zero standalone verifiable APK or desktop release assets on git</td>
+            <td><span style="background:#7f1d1d; color:#fca5a5; border:1px solid #dc2626; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">⚠️ INSECURE_TRANSPORT</span></td>
+            <td style="color:#fca5a5;">Closed mobile distribution; zero standalone verifiable APK or desktop release assets on git tags</td>
             <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible, open-source APK binaries with signed checksums to git release tags</td>
           </tr>
           <tr>
             <td><strong><a href="https://github.com/digitalbitbox/bitbox02-firmware" target="_blank" style="color:#58a6ff;">BitBox02 Firmware</a></strong></td>
             <td><code>Hardware Firmware</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Brittle multi-sig quorum ceremony requiring custom python scripts across internal employee YubiKeys</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish standardized single-root or threshold detached GPG manifest verifiable with standard tooling</td>
-          </tr>
-          <tr>
-            <td><strong><a href="https://github.com/Foundation-Devices/passport-firmware" target="_blank" style="color:#58a6ff;">Foundation Passport</a></strong></td>
-            <td><code>Air-Gapped Hardware</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Raw MicroSD .bin updates distributed without detached GPG .asc signatures signed by developer key</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish signed SHA256SUMS.asc with firmware binaries on public release tags</td>
-          </tr>
-          <tr>
-            <td><strong><a href="https://github.com/proto-at-block/bitkey" target="_blank" style="color:#58a6ff;">Bitkey (Block)</a></strong></td>
-            <td><code>Hardware / Mobile 2-of-3</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Unsigned naked .sha256 text files on APKs; zero detached GPG .asc signatures; firmware cloud-tethered via proprietary OTA</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Sign release checksums with declared developer PGP/BIP-340 key; publish decoupled, signed standalone firmware binaries</td>
-          </tr>
-          <tr>
-            <td><strong><a href="https://github.com/lnbits/lnbits" target="_blank" style="color:#58a6ff;">LNbits</a></strong></td>
-            <td><code>Lightning Node Hub</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Unsigned web app; relies on PyPI/Docker tags without detached OpenPGP signed checksum manifests or verifiable binary anchors</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible standalone release binaries with detached developer OpenPGP signatures and in-tree root keyring</td>
-          </tr>
-          <tr>
-            <td><strong><a href="https://swiss-bitcoin-pay.ch" target="_blank" style="color:#58a6ff;">Swiss Bitcoin Pay</a></strong></td>
-            <td><code>Merchant / Gateway</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Centralized SaaS / closed custodial backend; zero verifiable standalone release binaries or OpenPGP signed manifests</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish self-hostable, deterministic server/client binaries with detached OpenPGP signatures and in-tree public key anchors</td>
-          </tr>
-          <tr>
-            <td><strong><a href="https://github.com/btcpayserver/btcpayserver" target="_blank" style="color:#58a6ff;">BTCPay Server</a></strong></td>
-            <td><code>Self-Hosted Gateway</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Container/source distribution only; zero detached OpenPGP-signed release tarballs or binary checksum manifests on GitHub tags</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish reproducible standalone release binaries or root container digest manifests signed with developer OpenPGP key</td>
+            <td><span style="background:#1e3a8a; color:#93c5fd; border:1px solid #3b82f6; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">ℹ️ HARDWARE_QUORUM</span></td>
+            <td style="color:#93c5fd;">Hardware-enforced m-of-n YubiKey/FIDO2 threshold ceremony requiring custom Python quorum validator</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Incorporate native ShiftCrypto threshold quorum parser into BinWatch engine (Backlog)</td>
           </tr>
           <tr>
             <td><strong><a href="https://github.com/BoltzExchange/boltz-client" target="_blank" style="color:#58a6ff;">Boltz Client</a></strong></td>
             <td><code>Submarine Swaps</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Custom detached minisign/sig format lacking standardized root in-tree GPG/BIP-340 trust anchor declaration</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish clear in-repo trust anchor specification and standardized OpenPGP/BIP-340 signed manifest</td>
+            <td><span style="background:#1e3a8a; color:#93c5fd; border:1px solid #3b82f6; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">ℹ️ MINISIGN_ED25519</span></td>
+            <td style="color:#93c5fd;">Modern Minisign (Ed25519) detached signature format; requires Minisign parser and in-tree pubkey anchor specification</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Add native Minisign verification module to BinWatch core auditor</td>
           </tr>
           <tr>
-            <td><strong><a href="https://pocketbitcoin.com" target="_blank" style="color:#58a6ff;">Pocket Bitcoin</a></strong></td>
-            <td><code>Broker / Gateway</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Centralized Swiss brokerage service; closed backend linking banking IBANs to xpubs without verifiable client binaries</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Publish open-source, reproducible client applications with detached OpenPGP/BIP-340 verification manifests</td>
+            <td><strong><a href="https://github.com/trezor/trezor-suite" target="_blank" style="color:#58a6ff;">Trezor Suite</a></strong></td>
+            <td><code>Hardware Companion</code></td>
+            <td><span style="background:#1e3a8a; color:#93c5fd; border:1px solid #3b82f6; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">ℹ️ MULTI_TIER_SIGNING</span></td>
+            <td style="color:#93c5fd;">Desktop Electron client uses OS Authenticode/Apple certs + GPG, while MCU bootloader enforces on-chip OTP root-of-trust</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Implement dual-pipeline auditor distinguishing desktop Electron binaries from embedded bootloader signatures</td>
           </tr>
           <tr>
-            <td><strong><a href="https://revolut.com" target="_blank" style="color:#58a6ff;">Revolut</a></strong></td>
-            <td><code>TradFi / Synthetic</code></td>
-            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.75rem; font-weight:700;">⚠️ BRITTLE</span></td>
-            <td style="color:#fca5a5;">Closed proprietary banking app; synthetic ledger, no self-custody or verifiable binary supply chain</td>
-            <td style="color:#8b949e; font-size:0.8rem;">Provide full self-custody withdrawal proofs and open-source, verifiable binary builds</td>
+            <td><strong><a href="https://github.com/btcpayserver/btcpayserver" target="_blank" style="color:#58a6ff;">BTCPay Server</a></strong></td>
+            <td><code>Self-Hosted Gateway</code></td>
+            <td><span style="background:#14532d; color:#86efac; border:1px solid #22c55e; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">📦 CONTAINER_STACK</span></td>
+            <td style="color:#86efac;">Microservices daemon distributed via Docker Compose; lacks standalone flat CLI binary tarballs on release tags</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Add OCI container registry digest attestation (Cosign/Sigstore) parser to BinWatch engine</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/lnbits/lnbits" target="_blank" style="color:#58a6ff;">LNbits</a></strong></td>
+            <td><code>Lightning Node Hub</code></td>
+            <td><span style="background:#14532d; color:#86efac; border:1px solid #22c55e; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">📦 CONTAINER_STACK</span></td>
+            <td style="color:#86efac;">Web application framework distributed via PyPI / Docker; lacks detached cryptographically signed binary manifests</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Support Python package hash pinning and OCI container digest verification</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://github.com/LedgerHQ/ledger-live" target="_blank" style="color:#58a6ff;">Ledger Live Desktop</a></strong></td>
+            <td><code>Hardware Companion</code></td>
+            <td><span style="background:#78350f; color:#fbbf24; border:1px solid #d97706; padding:0.15rem 0.45rem; border-radius:4px; font-size:0.72rem; font-weight:700;">⚠️ CLOSED_SE_BLOBS</span></td>
+            <td style="color:#fca5a5;">Closed-source Secure Element (BOLOS) firmware blobs and non-standard release manifest distribution</td>
+            <td style="color:#8b949e; font-size:0.8rem;">Publish fully open, reproducible build manifests with detached open cryptographic signatures</td>
           </tr>
         </tbody>
       </table>
