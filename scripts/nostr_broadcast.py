@@ -209,22 +209,65 @@ async def main_async():
     seal_match = re.search(r'Merkle Seal:\s*#([A-Fa-f0-9]{6})', content)
     seal_tag = seal_match.group(1).upper() if seal_match else None
 
-    # Check state mutation cache to prevent relay spam
-    cache_file = "/tmp/last_nostr_seal.txt"
+    # Check state mutation cache and daily heartbeat interval
+    cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "last_broadcast_state.json")
     force_broadcast = "--force" in sys.argv or "-f" in sys.argv
-    if os.path.exists(cache_file) and not force_broadcast:
-        with open(cache_file, "r") as f:
-            last_seal = f.read().strip()
-        if last_seal == seal_tag and seal_tag is not None:
-            print(f">> State Unchanged (Merkle Seal #{seal_tag} matches previous broadcast). Skipping Nostr feed spam.")
-            sys.exit(0)
+    last_state = {}
+    if os.path.exists(cache_file):
+        try:
+            with open(cache_file, "r") as f:
+                last_state = json.load(f)
+        except Exception:
+            pass
 
-    if seal_tag:
+    last_seal = last_state.get("seal")
+    last_time = last_state.get("timestamp", 0)
+    now = int(time.time())
+    time_since_last = now - last_time
+    one_day = 86400  # 24 hours
+
+    has_mutation = (seal_tag != last_seal) and (last_seal is not None)
+    is_daily_heartbeat = time_since_last >= one_day
+
+    if not has_mutation and not is_daily_heartbeat and not force_broadcast and last_seal is not None:
+        hours_ago = round(time_since_last / 3600, 1)
+        print(f">> State Unchanged (Merkle Seal #{seal_tag} matches previous broadcast {hours_ago}h ago). Skipping until 24h heartbeat or state mutation.")
+        sys.exit(0)
+
+    # Format bold mutation / continuity status banner
+    status_banner = ""
+    if has_mutation:
+        prev_seal = last_state.get("seal", "UNKNOWN")
+        status_banner = f"🟡 SUPPLY CHAIN MUTATION DETECTED\nPrior Seal: #{prev_seal} ➔ New Seal: #{seal_tag}\n\n"
+    elif last_seal is not None:
+        last_date = last_state.get("date_utc", "previous run")
+        last_block = last_state.get("block", "")
+        block_str = f" (BTC Block {last_block})" if last_block else ""
+        status_banner = f"🟢 AUDIT CONTINUITY: NO MUTATIONS SINCE {last_date}{block_str}\nAll monitored upstream binaries verified bit-for-bit unchanged.\n\n"
+    else:
+        status_banner = "🛡️ INITIAL AUDIT BASELINE BROADCAST\n\n"
+
+    # Prepend banner to note content
+    content = status_banner + content
+
+    block_match = re.search(r'BTC Block:\s*([0-9]+)', content)
+    current_block = int(block_match.group(1)) if block_match else None
+
+    # Update state cache
+    new_state = {
+        "seal": seal_tag,
+        "timestamp": now,
+        "date_utc": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(now)),
+        "block": current_block
+    }
+    try:
+        os.makedirs(os.path.dirname(cache_file), exist_ok=True)
         with open(cache_file, "w") as f:
-            f.write(seal_tag)
+            json.dump(new_state, f, indent=2)
+    except Exception as e:
+        print(f"Warning: could not write broadcast cache: {e}")
 
-
-    created_at = int(time.time())
+    created_at = now
     tags = [
         ["t", "binwatch"],
         ["t", "bitcoin"],
