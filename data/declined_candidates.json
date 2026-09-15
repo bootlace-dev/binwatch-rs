@@ -61,5 +61,14 @@
     "upstream_hygiene_defect": "Unsigned naked .sha256 text files on APKs; zero detached GPG .asc signatures; firmware cloud-tethered via proprietary OTA",
     "cure_requirement": "Sign release checksums with declared developer PGP/BIP-340 key; publish decoupled, signed standalone firmware binaries",
     "upstream_url": "https://github.com/proto-at-block/bitkey"
+  },
+  {
+    "project_id": "lnbits",
+    "name": "LNbits",
+    "category": "Lightning Node Accounting / Hub",
+    "status": "DECLINED_BRITTLE",
+    "upstream_hygiene_defect": "Unsigned application package; upstream relies on PyPI/Docker tags without detached OpenPGP signed checksum manifests or verifiable binary release anchors",
+    "cure_requirement": "Publish reproducible standalone release binaries with detached developer OpenPGP signatures and root in-tree keyring",
+    "upstream_url": "https://github.com/lnbits/lnbits"
   }
 ]
