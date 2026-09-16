@@ -192,26 +192,10 @@
       letter-spacing: 0.04em;
       vertical-align: middle;
     }
-    .origin-github_release {
-      background: #23863622;
-      color: #3fb950;
-      border: 1px solid #23863655;
-    }
-    .origin-git_tag {
-      background: #8957e522;
-      color: #a371f7;
-      border: 1px solid #8957e555;
-    }
-    .origin-f-droid {
-      background: #1f6feb22;
-      color: #58a6ff;
-      border: 1px solid #1f6feb55;
-    }
-    .origin-upstream_download {
-      background: #d2992222;
-      color: #e3b341;
-      border: 1px solid #d2992255;
-    }
+    .origin-github_release,
+    .origin-git_tag,
+    .origin-f-droid,
+    .origin-upstream_download,
     .origin-ota_firmware {
       background: #164e6322;
       color: #22d3ee;
@@ -364,63 +348,21 @@
           <p style="margin-top: 0;">This audit log records explicit architectural mutations, schema updates, upstream release discoveries, and key status changes that required recalculation of the canonical Merkle root seal (<code>#HEXSEAL</code>) across historical evaluation epochs.</p>
           
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #3fb950; font-weight: bold;">1. Merkle Seal <code>#989299</code> (2026-09-16T00:42:39Z | BTC Block <code>#967206</code>) [ACTIVE]</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Live Matrix Recalculation, API Rate-Limiting Hardening & Multi-Artifact Determinism Verification.</div>
-            <div>&bull; <strong>Mutations</strong>: Re-ran full live audit matrix (<code>audit_matrix.sh</code>) across all 27 sovereign targets. Hardened <code>check_advisories.py</code> error handling to prevent false-positive clean passes on rate-limiting. Added multi-artifact leaf sorting tests.</div>
+            <div style="color: #3fb950; font-weight: bold;">Merkle Seal <code>#75B5FE</code> (2026-09-16T14:44:22Z | BTC Block <code>#967292</code>) [ACTIVE]</div>
+            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: 5 Sovereign Core Target Matrix Scope Lock & Telemetry Refactor.</div>
+            <div>&bull; <strong>Mutations</strong>: Streamlined audit matrix strictly to 5 sovereign core targets (<code>bitcoin_core</code>, <code>sparrow</code>, <code>coldcard</code>, <code>blockstream_jade</code>, <code>seedsigner</code>). Disabled automatic public Nostr broadcasting without explicit CLI flags. Added multi-artifact <code>(multi)</code> indicators and primary hash badges.</div>
           </div>
 
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">2. Merkle Seal <code>#222E65</code> (2026-09-15T17:57:53Z | BTC Block <code>#967173</code>)</div>
+            <div style="color: #79c0ff; font-weight: bold;">Merkle Seal <code>#222E65</code> (2026-09-15T17:57:53Z | BTC Block <code>#967173</code>)</div>
             <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Upstream GPG Key Expiration Sentinel Alert (<code>bitcoin_keeper</code> v2.5.13 broadcast).</div>
-            <div>&bull; <strong>Mutations</strong>: Broadcast Nostr Kind 1 supply-chain mutation alert (<code>🟡 SUPPLY CHAIN MUTATION DETECTED</code>) for expired upstream GPG key (<code>2026-08-06</code>) on <code>bitcoin_keeper</code> (<code>#e0dcf2</code>). Transitioned artifact <code>sig_status</code> from <code>OK</code> to <code>EXPIRED</code>.</div>
+            <div>&bull; <strong>Mutations</strong>: Broadcast Nostr Kind 1 supply-chain mutation alert for expired upstream GPG key on <code>bitcoin_keeper</code>. Transitioned artifact <code>sig_status</code> from <code>OK</code> to <code>EXPIRED</code>.</div>
           </div>
 
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">3. Merkle Seal <code>#C40EB0</code> (2026-09-15T09:59:00Z | BTC Block <code>#967128</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Nostr Telemetry Cadence & Status Vector Alignment.</div>
-            <div>&bull; <strong>Mutations</strong>: Configured <code>NOSTR_BOT_NSEC</code> broadcast pipeline and 24-hour heartbeat state tracking in <code>scripts/nostr_broadcast.py</code>. Embedded 8-stage Detex status vectors (<code>[S1-S8]</code>) across all 27 audited project entries in <code>manifest.json</code>.</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">4. Merkle Seal <code>#15EC8A</code> (2026-09-13T20:57:12Z | BTC Block <code>#966893</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: WalletScrutiny Build Attestation & Nostr Kind 30078 Ingestion.</div>
-            <div>&bull; <strong>Mutations</strong>: Integrated WalletScrutiny reproducible build status vectors and parsed Nostr build attestations (<code>Kind 1</code> / <code>Kind 30078</code>). Updated <code>walletscrutiny.rs</code> module and matrix bindings.</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">5. Merkle Seal <code>#68B733</code> (2026-09-13T01:15:55Z | BTC Block <code>#966747</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Full Matrix Pipeline Expansion & Initial GPG Expiration Discovery (<code>bitcoin_keeper</code>).</div>
-            <div>&bull; <strong>Mutations</strong>: Added <code>alby_hub</code> (v1.24.0), <code>pipe-k1</code> (v0.0.1-rc0), <code>noble-curves</code> (2.4.0), <code>scure-btc-signer</code> (2.4.1), and <code>subzero-rs</code> (v0.4.0-testnet4). Discovered expired <code>bitcoin_keeper</code> key (<code>2026-08-06</code>). Added OSV.dev vulnerability baseline queries (<code>check_advisories.py</code>).</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">6. Merkle Seal <code>#D9A2F1</code> (2026-09-12T21:16:00Z | BTC Block <code>#966720</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Composite Origin Keying (<code>project_id:origin</code>) Schema Migration.</div>
-            <div>&bull; <strong>Mutations</strong>: Refactored <code>manifest.json</code> schema from plain <code>project_id</code> map keys to composite <code>project_id:origin</code> keys (e.g. <code>bitcoin_core:upstream_download</code>) to prevent key collisions across distribution channels.</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">7. Merkle Seal <code>#4F8E12</code> (2026-09-12T20:26:00Z | BTC Block <code>#966715</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Integration of DiffWatch Upstream Zero-Day Sentinel.</div>
-            <div>&bull; <strong>Mutations</strong>: Added <code>upstream_watcher.py</code> zero-day tag watcher and static diff vulnerability smell scanner (<code>diffwatch_sentinel.py</code>) to auto-detect upstream tag increments.</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">8. Merkle Seal <code>#8A3D09</code> (2026-09-11T21:45:00Z | BTC Block <code>#966580</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: BIP-340 Schnorr Signature Verification (<code>pipe-k1</code>).</div>
-            <div>&bull; <strong>Mutations</strong>: Added native BIP-340 Schnorr signature validation support for binary checksum manifests (<code>SHA256SUMS.pk1</code>) alongside traditional GPG OpenPGP signatures.</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">9. Merkle Seal <code>#E311B4</code> (2026-09-10T22:29:00Z | BTC Block <code>#966440</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Architectural Scope Lock & Governance Decision (ADR-001).</div>
-            <div>&bull; <strong>Mutations</strong>: Formally locked scope to deterministic binary integrity verification (<code>DECISIONS.md</code>). Excluded probabilistic LLM code scanning in favor of zero-maintenance deterministic attestation.</div>
-          </div>
-
-          <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #79c0ff; font-weight: bold;">10. Merkle Seal <code>#0A91F5</code> (2026-09-08T18:24:00Z | BTC Block <code>#966130</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Initial Rust Engine Release (<code>v0.0.1-rc0</code>).</div>
-            <div>&bull; <strong>Mutations</strong>: Initialized <code>binwatch-rs</code> codebase, <code>ManifestAudit</code> Merkle tree calculation engine, and GitHub Pages template renderer.</div>
+            <div style="color: #79c0ff; font-weight: bold;">Merkle Seal <code>#15EC8A</code> (2026-09-13T20:57:12Z | BTC Block <code>#966893</code>)</div>
+            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: WalletScrutiny Build Attestation & Status Vector Integration.</div>
+            <div>&bull; <strong>Mutations</strong>: Integrated WalletScrutiny reproducible build status vectors and parsed Nostr build attestations. Updated <code>walletscrutiny.rs</code> module and matrix bindings.</div>
           </div>
         </div>
       </details>
