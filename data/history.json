@@ -392,7 +392,7 @@
       "first_seen_block": 967216,
       "days_stable": 0,
       "consecutive_epochs": 11,
-      "previous_release_tag": "elements-23.3.4",
+      "previous_release_tag": null,
       "previous_primary_hash": "a758151ace3f21008ab162067ffce9e0e526a1b5d55995e2c30d9cd7ccda41a0",
       "last_changed_utc": "2026-09-16T02:56:01Z"
     },
@@ -476,7 +476,7 @@
       "first_seen_block": 967216,
       "days_stable": 0,
       "consecutive_epochs": 11,
-      "previous_release_tag": "release_3.5.4",
+      "previous_release_tag": null,
       "previous_primary_hash": "24536607e6d0824a276c0d77442ae7b5ecfed257b1e40438f411a1859c85385c",
       "last_changed_utc": "2026-09-16T02:56:01Z"
     },
@@ -518,7 +518,7 @@
       "first_seen_block": 967216,
       "days_stable": 0,
       "consecutive_epochs": 10,
-      "previous_release_tag": "2026-09-03T1541-v5.6.2",
+      "previous_release_tag": null,
       "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "last_changed_utc": "2026-09-16T02:57:24Z"
     },
@@ -658,7 +658,7 @@
       "first_seen_block": 967216,
       "days_stable": 0,
       "consecutive_epochs": 11,
-      "previous_release_tag": "2.4.1",
+      "previous_release_tag": null,
       "previous_primary_hash": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
       "last_changed_utc": "2026-09-16T02:56:01Z"
     },
