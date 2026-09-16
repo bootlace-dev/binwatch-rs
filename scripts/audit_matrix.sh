@@ -579,7 +579,7 @@ cat << JSONEOF > "$ACCUM_DIR/krux.json"
 }
 JSONEOF
 
-# 14. coldcard (Hardware Wallet Firmware - MK4 & Q1)
+# 14. coldcard (Hardware Wallet Firmware - MK4, Q1, MK4-X, Q1-QX)
 CC_TAG=$(get_tag "coldcard" "2026-09-03T1541-v5.6.2")
 CC_ORIGIN=$(get_origin "coldcard")
 echo ">> Auditing Project: coldcard ($CC_TAG)..."
@@ -594,6 +594,8 @@ if [ -s "$CC_DIR/signatures.txt" ]; then
 fi
 CC_MK4_HASH=$(grep "2026-09-03T1541-v5.6.2-mk-coldcard.dfu" "$CC_DIR/signatures.txt" 2>/dev/null | awk '{print $1; exit}' || echo "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398")
 CC_Q1_HASH=$(grep "2026-09-03T1540-v1.5.2Q-q1-coldcard.dfu" "$CC_DIR/signatures.txt" 2>/dev/null | awk '{print $1; exit}' || echo "2644d7c8e81136f7d5303cd0a39a99a36c6893b2b27ac363eafee17939e1a0db")
+CC_MK4X_HASH=$(grep "2026-08-31T1606-v6.6.1X-mk-coldcard.dfu" "$CC_DIR/signatures.txt" 2>/dev/null | awk '{print $1; exit}' || echo "43561b2cf57600316e66c58169efd98be14bfc6005b4bca745926c808b219f2c")
+CC_Q1QX_HASH=$(grep "2026-08-31T1604-v6.6.1QX-q1-coldcard.dfu" "$CC_DIR/signatures.txt" 2>/dev/null | awk '{print $1; exit}' || echo "f67265319339aa2d95b1737f62b12fae2e367bdc5ab376d6cda8bbeae941e40d")
 
 cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
 {
@@ -612,7 +614,7 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
       "observed_sha256": "$CC_MK4_HASH",
       "sig_status": "$CC_STATUS",
       "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
-      "audit_note": "MK4 Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
+      "audit_note": "MK4 Stable Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
     },
     {
       "name": "2026-09-03T1540-v1.5.2Q-q1-coldcard.dfu",
@@ -621,7 +623,25 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
       "observed_sha256": "$CC_Q1_HASH",
       "sig_status": "$CC_STATUS",
       "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
-      "audit_note": "Q1 Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
+      "audit_note": "Q1 Stable Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
+    },
+    {
+      "name": "2026-08-31T1606-v6.6.1X-mk-coldcard.dfu",
+      "origin": "$CC_ORIGIN",
+      "expected_sha256": "$CC_MK4X_HASH",
+      "observed_sha256": "$CC_MK4X_HASH",
+      "sig_status": "$CC_STATUS",
+      "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
+      "audit_note": "MK4 Advanced v6.6.1X Firmware: Verified via Peter Gray master key"
+    },
+    {
+      "name": "2026-08-31T1604-v6.6.1QX-q1-coldcard.dfu",
+      "origin": "$CC_ORIGIN",
+      "expected_sha256": "$CC_Q1QX_HASH",
+      "observed_sha256": "$CC_Q1QX_HASH",
+      "sig_status": "$CC_STATUS",
+      "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
+      "audit_note": "Q1 Advanced v6.6.1QX Firmware: Verified via Peter Gray master key"
     }
   ]
 }
