@@ -13,45 +13,6 @@
     "origin": "upstream_download"
   },
   {
-    "purl": "pkg:github/bitcoin-core/secp256k1@v0.8.0",
-    "project_id": "libsecp256k1",
-    "release_tag": "v0.8.0",
-    "upstream_url": "https://github.com/bitcoin-core/secp256k1",
-    "trust_anchor_url": "https://github.com/bitcoin-core/secp256k1",
-    "manifest_url": "https://api.github.com/repos/bitcoin-core/secp256k1/git/refs/tags/v0.8.0",
-    "signature_url": "https://github.com/theuni.gpg",
-    "key_url": "https://github.com/theuni.gpg",
-    "verifier_type": "git_tag_pgp",
-    "verifier_key": "6A8F9C266528E25AEB1D7731C2371D91CB716EA7",
-    "origin": "git_tag"
-  },
-  {
-    "purl": "pkg:github/lightningnetwork/lnd@v0.21.3-beta.rc1",
-    "project_id": "lnd",
-    "release_tag": "v0.21.3-beta.rc1",
-    "upstream_url": "https://github.com/lightningnetwork/lnd",
-    "trust_anchor_url": "https://github.com/lightningnetwork/lnd/tree/master/scripts/keys",
-    "manifest_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta.rc1/manifest-v0.21.3-beta.rc1.txt",
-    "signature_url": "https://github.com/lightningnetwork/lnd/releases/download/v0.21.3-beta.rc1/manifest-v0.21.3-beta.rc1.txt",
-    "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/lnd_roasbeef.asc",
-    "verifier_type": "sha256_manifest",
-    "verifier_key": "F7FC7741",
-    "origin": "github_release"
-  },
-  {
-    "purl": "pkg:github/elementsproject/lightning@v26.06.7",
-    "project_id": "core_lightning",
-    "release_tag": "v26.06.7",
-    "upstream_url": "https://github.com/ElementsProject/lightning",
-    "trust_anchor_url": "https://github.com/ElementsProject/lightning/tree/master/contrib/keys",
-    "manifest_url": "https://github.com/ElementsProject/lightning/releases/download/v26.06.7/SHA256SUMS-v26.06.7",
-    "signature_url": "https://github.com/ElementsProject/lightning/releases/download/v26.06.7/SHA256SUMS-v26.06.7.asc",
-    "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/cln_rusty.asc",
-    "verifier_type": "sha256_manifest",
-    "verifier_key": "rusty",
-    "origin": "github_release"
-  },
-  {
     "purl": "pkg:github/sparrowwallet/sparrow@2.5.4",
     "project_id": "sparrow",
     "release_tag": "2.5.4",
@@ -102,82 +63,5 @@
     "verifier_type": "sha256_manifest",
     "verifier_key": "46739B74B56AD88F14B0882EC7EF709007260119",
     "origin": "github_release"
-  },
-  {
-    "purl": "pkg:github/spesmilo/electrum@4.8.2",
-    "project_id": "electrum",
-    "release_tag": "4.8.2",
-    "upstream_url": "https://github.com/spesmilo/electrum",
-    "trust_anchor_url": "https://electrum.org/#download",
-    "manifest_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz.ThomasV.asc",
-    "signature_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz.ThomasV.asc",
-    "download_url": "https://download.electrum.org/4.8.2/Electrum-4.8.2.tar.gz",
-    "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/electrum_thomasv.asc",
-    "verifier_type": "detached_gpg",
-    "verifier_key": "6694D8DE7BE8EE5631BED9502BD5824B7F9470E6",
-    "origin": "upstream_download"
-  },
-  {
-    "purl": "pkg:github/openssh/openssh-portable@V_10_5_P1",
-    "project_id": "openssh-portable",
-    "release_tag": "V_10_5_P1",
-    "upstream_url": "https://github.com/openssh/openssh-portable",
-    "trust_anchor_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers",
-    "manifest_url": "https://api.github.com/repos/openssh/openssh-portable/git/refs/tags/V_10_5_P1",
-    "signature_url": "https://raw.githubusercontent.com/openssh/openssh-portable/master/.github/allowed_signers",
-    "key_url": null,
-    "verifier_type": "git_tag_ssh",
-    "verifier_key": "djm@mindrot.org",
-    "origin": "git_tag"
-  },
-  {
-    "purl": "pkg:github/bootlace-dev/pipe-k1@v0.0.1-rc0",
-    "project_id": "pipe-k1",
-    "release_tag": "v0.0.1-rc0",
-    "upstream_url": "https://github.com/bootlace-dev/pipe-k1",
-    "trust_anchor_url": "https://github.com/bootlace-dev/pipe-k1/blob/master/SPECIFICATION.md",
-    "manifest_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS",
-    "signature_url": "https://github.com/bootlace-dev/pipe-k1/releases/download/v0.0.1-rc0/SHA256SUMS.pk1",
-    "verifier_type": "pipe-k1",
-    "verifier_key": "npub1mvlht4wj3lvfmw96qxakaln862r27nn7z84ak089zjuvavkppeeq79a4j7",
-    "origin": "github_release"
-  },
-  {
-    "purl": "pkg:github/bootlace-dev/subzero-keyosk@v0.4.0-testnet4",
-    "project_id": "subzero-rs",
-    "release_tag": "v0.4.0-testnet4",
-    "upstream_url": "https://github.com/bootlace-dev/subzero-keyosk",
-    "trust_anchor_url": "https://github.com/bootlace-dev/subzero-keyosk",
-    "manifest_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.4.0-testnet4/SHA256SUMS",
-    "signature_url": "https://github.com/bootlace-dev/subzero-keyosk/releases/download/v0.4.0-testnet4/SHA256SUMS.asc",
-    "verifier_type": "sha256_manifest",
-    "verifier_key": "bootlace-dev",
-    "origin": "github_release"
-  },
-  {
-    "purl": "pkg:github/getalby/hub@v1.24.0",
-    "project_id": "alby_hub",
-    "release_tag": "v1.24.0",
-    "upstream_url": "https://github.com/getAlby/hub",
-    "trust_anchor_url": "https://raw.githubusercontent.com/getalby/hub/master/scripts/keys/rolznz.asc",
-    "manifest_url": "https://github.com/getAlby/hub/releases/download/v1.24.0/manifest.txt",
-    "signature_url": "https://github.com/getAlby/hub/releases/download/v1.24.0/manifest.txt.asc",
-    "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/alby_rolznz.asc",
-    "verifier_type": "sha256_manifest",
-    "verifier_key": "5D92185938E6DBF893DCCC5BA5EABD8835092B08",
-    "origin": "github_release"
-  },
-  {
-    "purl": "pkg:github/paulmillr/noble-secp256k1@3.2.0",
-    "project_id": "noble-secp256k1",
-    "release_tag": "3.2.0",
-    "upstream_url": "https://github.com/paulmillr/noble-secp256k1",
-    "trust_anchor_url": "https://github.com/paulmillr.gpg",
-    "manifest_url": "https://api.github.com/repos/paulmillr/noble-secp256k1/git/refs/tags/3.2.0",
-    "signature_url": "https://github.com/paulmillr.gpg",
-    "key_url": "https://github.com/paulmillr.gpg",
-    "verifier_type": "git_tag_pgp",
-    "verifier_key": "78A89CD10959782E23FF8447697079DA6878B89B",
-    "origin": "git_tag"
   }
 ]

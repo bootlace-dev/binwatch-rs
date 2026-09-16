@@ -1037,17 +1037,24 @@ cat << JSONEOF > "$ACCUM_DIR/openssh_portable.json"
 }
 JSONEOF
 
-# Build consolidated JSON manifest with all 27 projects
-jq -n   --arg ts "$UTC_TIME"   --argjson bh "$BTC_HEIGHT"   --arg hash "$BTC_HASH"   --slurpfile p1 "$ACCUM_DIR/pipe-k1.json"   --slurpfile p2 "$ACCUM_DIR/subzero-rs.json"   --slurpfile p3 "$ACCUM_DIR/bitcoin_core.json"   --slurpfile p4 "$ACCUM_DIR/alby_hub.json"   --slurpfile p5 "$ACCUM_DIR/liquid_elements.json"   --slurpfile p6 "$ACCUM_DIR/sparrow.json"   --slurpfile p7 "$ACCUM_DIR/lnd.json"   --slurpfile p8 "$ACCUM_DIR/seedsigner.json"   --slurpfile p9 "$ACCUM_DIR/nunchuk.json"   --slurpfile p10 "$ACCUM_DIR/core_lightning.json"   --slurpfile p11 "$ACCUM_DIR/blockstream_green.json"   --slurpfile p12 "$ACCUM_DIR/blockstream_jade.json"   --slurpfile p13 "$ACCUM_DIR/krux.json"   --slurpfile p14 "$ACCUM_DIR/coldcard.json"   --slurpfile p15 "$ACCUM_DIR/electrum.json"   --slurpfile p16 "$ACCUM_DIR/bitcoin_keeper.json"   --slurpfile p17 "$ACCUM_DIR/phoenix.json"   --slurpfile p18 "$ACCUM_DIR/aqua.json"   --slurpfile p19 "$ACCUM_DIR/cake_wallet.json"   --slurpfile p20 "$ACCUM_DIR/noble_curves.json"   --slurpfile p21 "$ACCUM_DIR/noble_hashes.json"   --slurpfile p22 "$ACCUM_DIR/scure_bip39.json"   --slurpfile p23 "$ACCUM_DIR/scure_bip32.json"   --slurpfile p24 "$ACCUM_DIR/scure_btc_signer.json"   --slurpfile p25 "$ACCUM_DIR/noble_secp256k1.json"   --slurpfile p26 "$ACCUM_DIR/libsecp256k1.json"   --slurpfile p27 "$ACCUM_DIR/openssh_portable.json"   '{
+# Build consolidated JSON manifest with 5 Core Sovereign Targets
+jq -n \
+  --arg ts "$UTC_TIME" \
+  --argjson bh "$BTC_HEIGHT" \
+  --arg hash "$BTC_HASH" \
+  --slurpfile p1 "$ACCUM_DIR/bitcoin_core.json" \
+  --slurpfile p2 "$ACCUM_DIR/sparrow.json" \
+  --slurpfile p3 "$ACCUM_DIR/coldcard.json" \
+  --slurpfile p4 "$ACCUM_DIR/blockstream_jade.json" \
+  --slurpfile p5 "$ACCUM_DIR/seedsigner.json" \
+  '{
     timestamp_utc: $ts,
     block_height: $bh,
     block_hash: $hash,
     merkle_root_sha256: "",
     hex_seal: "",
     projects: (
-      [$p1[0], $p2[0], $p3[0], $p4[0], $p5[0], $p6[0], $p7[0], $p8[0], $p9[0], $p10[0],
-       $p11[0], $p12[0], $p13[0], $p14[0], $p15[0], $p16[0], $p17[0], $p18[0], $p19[0], $p20[0],
-       $p21[0], $p22[0], $p23[0], $p24[0], $p25[0], $p26[0], $p27[0]]
+      [$p1[0], $p2[0], $p3[0], $p4[0], $p5[0]]
       | map({ ("\(.project_id):\(.origin // "upstream")"): (. + { purl: .purl }) })
       | add
     )
