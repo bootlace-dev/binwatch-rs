@@ -1,10 +1,10 @@
 {
   "notice": "PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
-  "timestamp_utc": "2026-09-16T02:08:08Z",
-  "block_height": 967213,
-  "block_hash": "000000000000000000015f0c4bbb8bea1687de0124e03bd577553f85e8ece6ff",
-  "merkle_root_sha256": "673d6772e3e508fc48af7fff0acca09748cf87f04beb2a6bfc39d51af63d36de",
-  "hex_seal": "673D67",
+  "timestamp_utc": "2026-09-16T02:56:01Z",
+  "block_height": 967216,
+  "block_hash": "00000000000000000001a83ee684330acf4084c594b6bcf1b8da56b23911b9c9",
+  "merkle_root_sha256": "0f781334fa2fdf506fd281ffa86b87f42c5621e81dd236959471eb4a902e1840",
+  "hex_seal": "0F7813",
   "projects": {
     "alby_hub:github_release": {
       "project_id": "alby_hub",
@@ -18,7 +18,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v1.24.0",
         "previous_primary_hash": "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd  ./albyhub-Server-Linux-x86_64.tar.bz2",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -53,7 +53,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 5,
-        "consecutive_epochs": 54,
+        "consecutive_epochs": 56,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "artifacts": [
@@ -80,7 +80,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v29.4",
         "previous_primary_hash": "e15bff6f6d21a315c4af25d2e8ae933a22bd51e924e0e90ab0474e1e11516331  bitcoin-29.4-x86_64-linux-gnu.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -116,7 +116,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v2.5.13",
         "previous_primary_hash": "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a  Bitcoin_Keeper_v2.5.13.apk",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -135,27 +135,27 @@
     },
     "blockstream_green:github_release": {
       "project_id": "blockstream_green",
-      "release_tag": "release_3.5.4",
+      "release_tag": "release_3.5.3",
       "upstream_url": "https://github.com/Blockstream/green_qt",
       "origin": "github_release",
       "trust_anchor_url": "https://blockstream.com/app/",
-      "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.4/SHA256SUMS.asc",
+      "manifest_url": "https://github.com/Blockstream/green_qt/releases/download/release_3.5.3/SHA256SUMS.asc",
       "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/blockstream_green.asc",
       "history": {
-        "first_seen_utc": "2026-09-13T01:14:00Z",
-        "first_seen_block": 966747,
-        "days_stable": 3,
-        "consecutive_epochs": 38,
-        "previous_release_tag": "release_3.5.3",
-        "previous_primary_hash": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac  ./Blockstream-x86_64.AppImage",
-        "last_changed_utc": "2026-09-13T01:14:00Z"
+        "first_seen_utc": "2026-09-16T02:56:01Z",
+        "first_seen_block": 967216,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "previous_release_tag": "release_3.5.4",
+        "previous_primary_hash": "24536607e6d0824a276c0d77442ae7b5ecfed257b1e40438f411a1859c85385c",
+        "last_changed_utc": "2026-09-16T02:56:01Z"
       },
       "artifacts": [
         {
           "name": "Blockstream-x86_64.AppImage",
           "origin": "github_release",
-          "expected_sha256": "24536607e6d0824a276c0d77442ae7b5ecfed257b1e40438f411a1859c85385c",
-          "observed_sha256": "24536607e6d0824a276c0d77442ae7b5ecfed257b1e40438f411a1859c85385c",
+          "expected_sha256": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac",
+          "observed_sha256": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac",
           "sig_status": "OK",
           "verified_by": "gpg:04BEBF2E35A2AF2FFDF1FA5DE7F054AA2E76E792(GreenAddress Team)",
           "audit_note": "Signed by authoritative GreenAddress Team master key"
@@ -173,7 +173,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 7,
-        "consecutive_epochs": 60,
+        "consecutive_epochs": 62,
         "previous_release_tag": "1.0.41",
         "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -201,7 +201,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 5,
-        "consecutive_epochs": 54,
+        "consecutive_epochs": 56,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "advisory_baseline": {
@@ -232,13 +232,13 @@
       "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
       "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
       "history": {
-        "first_seen_utc": "2026-09-16T02:08:08Z",
-        "first_seen_block": 967213,
+        "first_seen_utc": "2026-09-16T02:56:01Z",
+        "first_seen_block": 967216,
         "days_stable": 0,
         "consecutive_epochs": 1,
         "previous_release_tag": "2026-08-31T1606-v6.6.1X",
-        "previous_primary_hash": "43561b2cf57600316e66c58169efd98be14bfc6005b4bca745926c808b219f2c",
-        "last_changed_utc": "2026-09-16T02:08:08Z"
+        "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
+        "last_changed_utc": "2026-09-16T02:56:01Z"
       },
       "artifacts": [
         {
@@ -291,7 +291,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 7,
-        "consecutive_epochs": 60,
+        "consecutive_epochs": 62,
         "previous_release_tag": "v25.05",
         "previous_primary_hash": "9d02636d7a4699f1ff4d7159fc56561f55f2ef6c41b8c2be0b4fa5c464efbe10",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -327,7 +327,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "4.8.2",
         "previous_primary_hash": "f38cee333c866986cdfb304428fa7487affc429c3853fc80e9822bd420bbc229  /tmp/binwatch_run.hsDTx1/electrum/Electrum-4.8.2.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -363,7 +363,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v26.08.0",
         "previous_primary_hash": "65b99bf6adf67b8105f665e5ae3fb34f183a53235debebc75250f8c815159b06  krux-v26.08.0.zip",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -392,7 +392,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 37,
+        "consecutive_epochs": 39,
         "previous_release_tag": "v0.8.0",
         "previous_primary_hash": "18f07c42218765cd46148d74d9fe575795f56dce",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -411,27 +411,27 @@
     },
     "liquid_elements:github_release": {
       "project_id": "liquid_elements",
-      "release_tag": "elements-23.3.4",
+      "release_tag": "elements-23.3.3",
       "upstream_url": "https://github.com/ElementsProject/elements",
       "origin": "github_release",
-      "trust_anchor_url": "https://github.com/ElementsProject/elements/releases/tag/elements-23.3.4",
-      "manifest_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.4/SHA256SUMS.asc",
+      "trust_anchor_url": "https://github.com/ElementsProject/elements/releases/tag/elements-23.3.3",
+      "manifest_url": "https://github.com/ElementsProject/elements/releases/download/elements-23.3.3/SHA256SUMS.asc",
       "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/elements_pgreco.asc",
       "history": {
-        "first_seen_utc": "2026-09-13T01:14:00Z",
-        "first_seen_block": 966747,
-        "days_stable": 3,
-        "consecutive_epochs": 38,
-        "previous_release_tag": "elements-23.3.3",
-        "previous_primary_hash": "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1  elements-23.3.3-x86_64-linux-gnu.tar.gz",
-        "last_changed_utc": "2026-09-13T01:14:00Z"
+        "first_seen_utc": "2026-09-16T02:56:01Z",
+        "first_seen_block": 967216,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "previous_release_tag": "elements-23.3.4",
+        "previous_primary_hash": "a758151ace3f21008ab162067ffce9e0e526a1b5d55995e2c30d9cd7ccda41a0",
+        "last_changed_utc": "2026-09-16T02:56:01Z"
       },
       "artifacts": [
         {
-          "name": "elements-23.3.4-x86_64-linux-gnu.tar.gz",
+          "name": "elements-23.3.3-x86_64-linux-gnu.tar.gz",
           "origin": "github_release",
-          "expected_sha256": "a758151ace3f21008ab162067ffce9e0e526a1b5d55995e2c30d9cd7ccda41a0",
-          "observed_sha256": "a758151ace3f21008ab162067ffce9e0e526a1b5d55995e2c30d9cd7ccda41a0",
+          "expected_sha256": "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1",
+          "observed_sha256": "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1",
           "sig_status": "OK",
           "verified_by": "gpg:BD0F3062F87842410B06A0432F656B0610604482(pgreco)",
           "audit_note": "Signed by Pablo Greco (Blockstream Elements release signer)"
@@ -450,7 +450,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v0.21.3-beta",
         "previous_primary_hash": "aad62005d25bb0d974c5c1b135decc269d8f3e69ee9cde8bb6b32998100bc3fd  lnd-linux-amd64-v0.21.3-beta.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -486,7 +486,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 4,
-        "consecutive_epochs": 51,
+        "consecutive_epochs": 53,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -513,7 +513,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 4,
-        "consecutive_epochs": 51,
+        "consecutive_epochs": 53,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -540,7 +540,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 37,
+        "consecutive_epochs": 39,
         "previous_release_tag": "3.2.0",
         "previous_primary_hash": "02d0705114a4d81d08b77bbb3faaa8691b8d9561",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -569,7 +569,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 7,
-        "consecutive_epochs": 60,
+        "consecutive_epochs": 62,
         "previous_release_tag": "v0.0.51",
         "previous_primary_hash": "e228945cf4597b833215286ce17bb8b66e927c9ef5b46e3e5606fcb666a4bc4a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -597,7 +597,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 37,
+        "consecutive_epochs": 39,
         "previous_release_tag": "V_10_5_P1",
         "previous_primary_hash": "f11c902f8b6026d68f980b8b14b7fd75f6f95d5f",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -626,7 +626,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "android-v2.8.2",
         "previous_primary_hash": "b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6 *phoenix-118-2.8.2-mainnet.apk",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -654,7 +654,7 @@
         "first_seen_utc": "2026-09-08T18:00:00Z",
         "first_seen_block": 965215,
         "days_stable": 8,
-        "consecutive_epochs": 65,
+        "consecutive_epochs": 67,
         "last_changed_utc": "2026-09-08T18:00:00Z"
       },
       "artifacts": [
@@ -681,7 +681,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 37,
+        "consecutive_epochs": 39,
         "previous_release_tag": "2.4.0",
         "previous_primary_hash": "5256db12ebd7f555d8a8f83d1c3264ae7d675253",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -710,7 +710,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 37,
+        "consecutive_epochs": 39,
         "previous_release_tag": "2.4.0",
         "previous_primary_hash": "358e540e61a56248add0f1810705b70bf15a584b",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -729,27 +729,27 @@
     },
     "scure-btc-signer:git_tag": {
       "project_id": "scure-btc-signer",
-      "release_tag": "2.4.1",
+      "release_tag": "2.4.0",
       "upstream_url": "https://github.com/paulmillr/scure-btc-signer",
       "origin": "git_tag",
       "trust_anchor_url": "https://github.com/paulmillr.gpg",
-      "manifest_url": "https://api.github.com/repos/paulmillr/scure-btc-signer/git/refs/tags/2.4.1",
+      "manifest_url": "https://api.github.com/repos/paulmillr/scure-btc-signer/git/refs/tags/2.4.0",
       "key_url": "https://github.com/paulmillr.gpg",
       "history": {
-        "first_seen_utc": "2026-09-13T01:15:55Z",
-        "first_seen_block": 966747,
-        "days_stable": 3,
-        "consecutive_epochs": 37,
+        "first_seen_utc": "2026-09-16T02:56:01Z",
+        "first_seen_block": 967216,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
         "previous_release_tag": "2.4.1",
         "previous_primary_hash": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
-        "last_changed_utc": "2026-09-13T01:15:55Z"
+        "last_changed_utc": "2026-09-16T02:56:01Z"
       },
       "artifacts": [
         {
-          "name": "scure-btc-signer-2.4.1.tar.gz",
+          "name": "scure-btc-signer-2.4.0.tar.gz",
           "origin": "git_tag",
-          "expected_sha256": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
-          "observed_sha256": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
+          "expected_sha256": "8a9d4623faa2ab764cbc57c0500c825b6c4d820f",
+          "observed_sha256": "8a9d4623faa2ab764cbc57c0500c825b6c4d820f",
           "sig_status": "OK",
           "verified_by": "gpg:78A89CD10959782E(paul@paulmillr.com:Cure53_Audited)",
           "audit_note": "Signed release tag verified against Paul Miller Cure53 PGP release anchor"
@@ -767,7 +767,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v0.8.7",
         "previous_primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9  seedsigner_os.0.8.7.pi0.img",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -795,7 +795,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 40,
         "previous_release_tag": "v2.5.4",
         "previous_primary_hash": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e *sparrowwallet-2.5.4-x86_64.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -831,7 +831,7 @@
         "first_seen_utc": "2026-09-13T00:33:36Z",
         "first_seen_block": 966741,
         "days_stable": 3,
-        "consecutive_epochs": 42,
+        "consecutive_epochs": 44,
         "previous_release_tag": "v0.3.0",
         "previous_primary_hash": "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c",
         "last_changed_utc": "2026-09-13T00:33:36Z"

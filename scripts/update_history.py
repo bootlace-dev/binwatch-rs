@@ -146,6 +146,12 @@ def main():
             }
 
         history_projects[proj_id] = entry
+        new_proj = {}
+        if "purl" in proj:
+            new_proj["purl"] = proj["purl"]
+        for k, v in proj.items():
+            if k != "purl":
+                new_proj[k] = v
         proj["history"] = entry
 
     history_data["last_updated_utc"] = now_iso

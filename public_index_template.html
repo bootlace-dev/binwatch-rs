@@ -687,6 +687,7 @@
               <div style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
                 <strong><a href="${p.upstream_url}" target="_blank" onclick="event.stopPropagation()" title="Open official ${p.project_id} upstream repository: ${p.upstream_url}">${p.project_id}</a></strong>
                 ${originBadge}
+                ${p.purl ? `<span class="mono" style="font-size:0.68rem; color:#8b949e; background:#0d1117; border:1px solid #30363d; padding:1px 5px; border-radius:3px;" title="Package URL (PURL) Specifier: ${p.purl}">${p.purl}</span>` : ""}
               </div>
             </td>
             <td><code>${p.release_tag}</code></td>
@@ -750,8 +751,9 @@
                   <div><span class="origin-badge origin-${p.origin || 'upstream'}">${p.origin || 'unknown'}</span></div>
                   <div class="drawer-label" title="Authoritative verification engine or signing key ID.">Verification Engine:</div>
                   <div class="mono" style="font-size:0.8rem;">${verEngine}</div>
+                  ${p.purl ? `<div class="drawer-label" title="Standard Package URL (PURL) specifier for software supply-chain tracking.">Package URL (PURL):</div><div class="mono" style="font-size:0.8rem; color:#58a6ff;">${p.purl}</div>` : ""}
                   <div class="drawer-label" title="The authoritative upstream document, README, or git tree declaring why this signing key is trusted.">Trust Anchor:</div>
-                  <div>${trustAnchorLink}</div>
+                  <div>${trustAnchorLink} ${p.anchor_content_sha256 ? `<span class="hash-badge" title="SHA-256 digest of untrusted upstream HTML page content stability: ${p.anchor_content_sha256}">HTML Hash: #${p.anchor_content_sha256.substring(0,8)}</span>` : ""}</div>
                   <div class="drawer-label" title="The raw signed checksum manifest (SHA256SUMS / manifest.txt) produced by the project maintainers.">Signed Manifest:</div>
                   <div>${manifestLink}</div>
                   <div class="drawer-label" title="Mirror of the armored public key file hosted statically on GitHub Pages for independent audits.">Public Key Mirror:</div>

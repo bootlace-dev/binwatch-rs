@@ -53,6 +53,17 @@ get_origin() {
     fi
 }
 
+get_purl() {
+    local pid="$1"
+    local purl
+    purl=$(jq -r --arg p "$pid" '.[] | select(.project_id==$p) | .purl // empty' "$PROJECTS_JSON" 2>/dev/null || echo "")
+    if [ -n "$purl" ]; then
+        echo "$purl"
+    else
+        echo "pkg:generic/$pid"
+    fi
+}
+
 echo ">> Querying Bitcoin blockchain tip..."
 BTC_JSON=$(curl -s --connect-timeout 8 https://blockchain.info/latestblock || echo '{"height":0,"hash":""}')
 BTC_HEIGHT=$(echo "$BTC_JSON" | jq -r '.height // 0')
@@ -65,6 +76,7 @@ ACCUM_DIR="$WORKDIR/accum"
 mkdir -p "$ACCUM_DIR"
 
 # 1. pipe-k1
+PIPEK1_PURL=$(get_purl "pipe-k1")
 PIPEK1_TAG=$(get_tag "pipe-k1" "v0.0.1-rc0")
 PIPEK1_ORIGIN=$(get_origin "pipe-k1")
 echo ">> Auditing Project: pipe-k1 ($PIPEK1_TAG)..."
@@ -93,6 +105,7 @@ PIPEK1_HASH=$(grep "pipe-k1-x86_64-linux-musl" "$PIPEK1_DIR/SHA256SUMS" 2>/dev/n
 
 cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
 {
+  "purl": "$PIPEK1_PURL",
   "project_id": "pipe-k1",
   "release_tag": "$PIPEK1_TAG",
   "origin": "$PIPEK1_ORIGIN",
@@ -115,6 +128,7 @@ cat << JSONEOF > "$ACCUM_DIR/pipe-k1.json"
 JSONEOF
 
 # 2. subzero-rs
+SUBZERO_PURL=$(get_purl "subzero-rs")
 SUBZERO_TAG=$(get_tag "subzero-rs" "v0.4.0-testnet4")
 SUBZERO_ORIGIN=$(get_origin "subzero-rs")
 echo ">> Auditing Project: subzero-rs ($SUBZERO_TAG)..."
@@ -132,6 +146,7 @@ SUBZERO_HASH=$(grep "subzero-x86_64-musl" "$SUBZERO_DIR/SHA256SUMS" 2>/dev/null 
 
 cat << JSONEOF > "$ACCUM_DIR/subzero-rs.json"
 {
+  "purl": "$SUBZERO_PURL",
   "project_id": "subzero-rs",
   "release_tag": "$SUBZERO_TAG",
   "origin": "$SUBZERO_ORIGIN",
@@ -154,6 +169,7 @@ cat << JSONEOF > "$ACCUM_DIR/subzero-rs.json"
 JSONEOF
 
 # 3. bitcoin_core
+BTC_PURL=$(get_purl "bitcoin_core")
 BTC_TAG=$(get_tag "bitcoin_core" "v29.4")
 BTC_ORIGIN=$(get_origin "bitcoin_core")
 BTC_VER="${BTC_TAG#v}"
@@ -165,6 +181,7 @@ BTC_CORE_HASH=$(grep "bitcoin-${BTC_VER}-x86_64-linux-gnu.tar.gz" "$BTC_DIR/SHA2
 
 cat << JSONEOF > "$ACCUM_DIR/bitcoin_core.json"
 {
+  "purl": "$BTC_PURL",
   "project_id": "bitcoin_core",
   "release_tag": "$BTC_TAG",
   "origin": "$BTC_ORIGIN",
@@ -187,6 +204,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_core.json"
 JSONEOF
 
 # 4. alby_hub (Active Exploit Watch)
+ALBY_PURL=$(get_purl "alby_hub")
 ALBY_TAG=$(get_tag "alby_hub" "v1.24.0")
 ALBY_ORIGIN=$(get_origin "alby_hub")
 echo ">> Auditing Project: alby_hub ($ALBY_TAG)..."
@@ -204,6 +222,7 @@ ALBY_HASH=$(grep "albyhub-Server-Linux-x86_64.tar.bz2" "$ALBY_DIR/manifest.txt" 
 
 cat << JSONEOF > "$ACCUM_DIR/alby_hub.json"
 {
+  "purl": "$ALBY_PURL",
   "project_id": "alby_hub",
   "release_tag": "$ALBY_TAG",
   "origin": "$ALBY_ORIGIN",
@@ -226,6 +245,7 @@ cat << JSONEOF > "$ACCUM_DIR/alby_hub.json"
 JSONEOF
 
 # 5. liquid_elements
+ELEM_PURL=$(get_purl "liquid_elements")
 ELEM_TAG=$(get_tag "liquid_elements" "elements-23.3.3")
 ELEM_ORIGIN=$(get_origin "liquid_elements")
 echo ">> Auditing Project: liquid_elements ($ELEM_TAG)..."
@@ -243,6 +263,7 @@ ELEM_HASH=$(grep "elements-.*-x86_64-linux-gnu.tar.gz" "$ELEM_DIR/SHA256SUMS.asc
 
 cat << JSONEOF > "$ACCUM_DIR/liquid_elements.json"
 {
+  "purl": "$ELEM_PURL",
   "project_id": "liquid_elements",
   "release_tag": "$ELEM_TAG",
   "origin": "$ELEM_ORIGIN",
@@ -265,6 +286,7 @@ cat << JSONEOF > "$ACCUM_DIR/liquid_elements.json"
 JSONEOF
 
 # 6. sparrow
+SPARROW_PURL=$(get_purl "sparrow")
 SPARROW_TAG=$(get_tag "sparrow" "2.5.4")
 SPARROW_ORIGIN=$(get_origin "sparrow")
 SPARROW_VER="${SPARROW_TAG#v}"
@@ -283,6 +305,7 @@ SPARROW_HASH=$(grep "sparrowwallet-.*-x86_64.tar.gz" "$SPARROW_DIR/manifest.txt"
 
 cat << JSONEOF > "$ACCUM_DIR/sparrow.json"
 {
+  "purl": "$SPARROW_PURL",
   "project_id": "sparrow",
   "release_tag": "v${SPARROW_VER}",
   "upstream_url": "https://github.com/sparrowwallet/sparrow",
@@ -304,6 +327,7 @@ cat << JSONEOF > "$ACCUM_DIR/sparrow.json"
 JSONEOF
 
 # 7. lnd
+LND_PURL=$(get_purl "lnd")
 LND_TAG=$(get_tag "lnd" "v0.21.3-beta")
 LND_ORIGIN=$(get_origin "lnd")
 echo ">> Auditing Project: lnd ($LND_TAG)..."
@@ -314,6 +338,7 @@ LND_HASH=$(grep "lnd-linux-amd64-.*.tar.gz" "$LND_DIR/manifest.txt" 2>/dev/null 
 
 cat << JSONEOF > "$ACCUM_DIR/lnd.json"
 {
+  "purl": "$LND_PURL",
   "project_id": "lnd",
   "release_tag": "$LND_TAG",
   "origin": "$LND_ORIGIN",
@@ -336,6 +361,7 @@ cat << JSONEOF > "$ACCUM_DIR/lnd.json"
 JSONEOF
 
 # 8. seedsigner
+SS_PURL=$(get_purl "seedsigner")
 SS_TAG=$(get_tag "seedsigner" "0.8.7")
 SS_ORIGIN=$(get_origin "seedsigner")
 SS_VER="${SS_TAG#v}"
@@ -354,6 +380,7 @@ SS_HASH=$(grep "seedsigner_os.*.pi0.img" "$SS_DIR/sha256.txt" 2>/dev/null | awk 
 
 cat << JSONEOF > "$ACCUM_DIR/seedsigner.json"
 {
+  "purl": "$SS_PURL",
   "project_id": "seedsigner",
   "release_tag": "v${SS_VER}",
   "upstream_url": "https://github.com/SeedSigner/seedsigner",
@@ -375,6 +402,7 @@ cat << JSONEOF > "$ACCUM_DIR/seedsigner.json"
 JSONEOF
 
 # 9. nunchuk
+NUN_PURL=$(get_purl "nunchuk")
 NUN_TAG=$(get_tag "nunchuk" "android.2.8.5")
 NUN_ORIGIN=$(get_origin "nunchuk")
 NUN_VER="${NUN_TAG#android.}"
@@ -392,6 +420,7 @@ NUN_HASH=$(grep "${NUN_VER}.apk" "$NUN_DIR/SHA256SUMS.asc" 2>/dev/null | awk '{p
 
 cat << JSONEOF > "$ACCUM_DIR/nunchuk.json"
 {
+  "purl": "$NUN_PURL",
   "project_id": "nunchuk",
   "release_tag": "$NUN_TAG",
   "origin": "$NUN_ORIGIN",
@@ -414,6 +443,7 @@ cat << JSONEOF > "$ACCUM_DIR/nunchuk.json"
 JSONEOF
 
 # 10. core_lightning (CLN)
+CLN_PURL=$(get_purl "core_lightning")
 CLN_TAG=$(get_tag "core_lightning" "v26.06.7")
 CLN_ORIGIN=$(get_origin "core_lightning")
 echo ">> Auditing Project: core_lightning ($CLN_TAG)..."
@@ -431,6 +461,7 @@ CLN_HASH=$(grep "clightning-.*-Ubuntu-24.04-amd64.tar.xz" "$CLN_DIR/SHA256SUMS" 
 
 cat << JSONEOF > "$ACCUM_DIR/core_lightning.json"
 {
+  "purl": "$CLN_PURL",
   "project_id": "core_lightning",
   "release_tag": "$CLN_TAG",
   "origin": "$CLN_ORIGIN",
@@ -453,6 +484,7 @@ cat << JSONEOF > "$ACCUM_DIR/core_lightning.json"
 JSONEOF
 
 # 11. blockstream_green (Desktop App)
+BG_PURL=$(get_purl "blockstream_green")
 BG_TAG=$(get_tag "blockstream_green" "release_3.5.3")
 BG_ORIGIN=$(get_origin "blockstream_green")
 echo ">> Auditing Project: blockstream_green ($BG_TAG)..."
@@ -469,6 +501,7 @@ BG_HASH=$(grep "Blockstream-.*.AppImage" "$BG_DIR/SHA256SUMS.asc" 2>/dev/null | 
 
 cat << JSONEOF > "$ACCUM_DIR/blockstream_green.json"
 {
+  "purl": "$BG_PURL",
   "project_id": "blockstream_green",
   "release_tag": "$BG_TAG",
   "origin": "$BG_ORIGIN",
@@ -491,6 +524,7 @@ cat << JSONEOF > "$ACCUM_DIR/blockstream_green.json"
 JSONEOF
 
 # 12. blockstream_jade (Hardware Wallet Firmware)
+JADE_PURL=$(get_purl "blockstream_jade")
 JADE_TAG=$(get_tag "blockstream_jade" "1.0.41")
 JADE_ORIGIN=$(get_origin "blockstream_jade")
 echo ">> Auditing Project: blockstream_jade ($JADE_TAG)..."
@@ -508,6 +542,7 @@ fi
 
 cat << JSONEOF > "$ACCUM_DIR/blockstream_jade.json"
 {
+  "purl": "$JADE_PURL",
   "project_id": "blockstream_jade",
   "release_tag": "$JADE_TAG",
   "origin": "$JADE_ORIGIN",
@@ -530,6 +565,7 @@ cat << JSONEOF > "$ACCUM_DIR/blockstream_jade.json"
 JSONEOF
 
 # 13. krux (DIY Hardware Wallet Firmware)
+KRUX_PURL=$(get_purl "krux")
 KRUX_TAG=$(get_tag "krux" "v26.08.0")
 KRUX_ORIGIN=$(get_origin "krux")
 echo ">> Auditing Project: krux ($KRUX_TAG)..."
@@ -558,6 +594,7 @@ fi
 
 cat << JSONEOF > "$ACCUM_DIR/krux.json"
 {
+  "purl": "$KRUX_PURL",
   "project_id": "krux",
   "release_tag": "$KRUX_TAG",
   "origin": "$KRUX_ORIGIN",
@@ -580,6 +617,7 @@ cat << JSONEOF > "$ACCUM_DIR/krux.json"
 JSONEOF
 
 # 14. coldcard (Hardware Wallet Firmware - MK4, Q1, MK4-X, Q1-QX)
+CC_PURL=$(get_purl "coldcard")
 CC_TAG=$(get_tag "coldcard" "2026-09-03T1541-v5.6.2")
 CC_ORIGIN=$(get_origin "coldcard")
 echo ">> Auditing Project: coldcard ($CC_TAG)..."
@@ -599,6 +637,7 @@ CC_Q1QX_HASH=$(grep "2026-08-31T1604-v6.6.1QX-q1-coldcard.dfu" "$CC_DIR/signatur
 
 cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
 {
+  "purl": "$CC_PURL",
   "project_id": "coldcard",
   "release_tag": "$CC_TAG",
   "origin": "$CC_ORIGIN",
@@ -648,6 +687,7 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
 JSONEOF
 
 # 15. electrum (Sovereign Desktop / Mobile Wallet)
+EL_PURL=$(get_purl "electrum")
 EL_TAG=$(get_tag "electrum" "4.8.2")
 EL_ORIGIN=$(get_origin "electrum")
 echo ">> Auditing Project: electrum ($EL_TAG)..."
@@ -671,6 +711,7 @@ fi
 
 cat << JSONEOF > "$ACCUM_DIR/electrum.json"
 {
+  "purl": "$EL_PURL",
   "project_id": "electrum",
   "release_tag": "$EL_TAG",
   "origin": "$EL_ORIGIN",
@@ -693,6 +734,7 @@ cat << JSONEOF > "$ACCUM_DIR/electrum.json"
 JSONEOF
 
 # 16. bitcoin_keeper (Lapsed / Expired Signing Key Alert)
+BK_PURL=$(get_purl "bitcoin_keeper")
 BK_TAG=$(get_tag "bitcoin_keeper" "v2.5.13")
 BK_ORIGIN=$(get_origin "bitcoin_keeper")
 echo ">> Auditing Project: bitcoin_keeper ($BK_TAG)..."
@@ -709,6 +751,7 @@ BK_NAME=$(grep "Bitcoin_Keeper_.*.apk" "$BK_DIR/SHA256SUM.asc" 2>/dev/null | awk
 
 cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
 {
+  "purl": "$BK_PURL",
   "project_id": "bitcoin_keeper",
   "release_tag": "$BK_TAG",
   "origin": "$BK_ORIGIN",
@@ -731,6 +774,7 @@ cat << JSONEOF > "$ACCUM_DIR/bitcoin_keeper.json"
 JSONEOF
 
 # 17. phoenix (ACINQ Lightning Wallet)
+PHX_PURL=$(get_purl "phoenix")
 PHX_TAG=$(get_tag "phoenix" "android-v2.8.2")
 PHX_ORIGIN=$(get_origin "phoenix")
 echo ">> Auditing Project: phoenix ($PHX_TAG)..."
@@ -754,6 +798,7 @@ fi
 
 cat << JSONEOF > "$ACCUM_DIR/phoenix.json"
 {
+  "purl": "$PHX_PURL",
   "project_id": "phoenix",
   "release_tag": "$PHX_TAG",
   "origin": "$PHX_ORIGIN",
@@ -776,6 +821,7 @@ cat << JSONEOF > "$ACCUM_DIR/phoenix.json"
 JSONEOF
 
 # 18. aqua (JAN3 Sovereign Lightning & Liquid Wallet)
+AQUA_PURL=$(get_purl "aqua")
 AQUA_TAG=$(get_tag "aqua" "v0.5.3")
 AQUA_ORIGIN=$(get_origin "aqua")
 echo ">> Auditing Project: aqua ($AQUA_TAG)..."
@@ -792,6 +838,7 @@ AQUA_STATUS="OK"
 
 cat << JSONEOF > "$ACCUM_DIR/aqua.json"
 {
+  "purl": "$AQUA_PURL",
   "project_id": "aqua",
   "release_tag": "$AQUA_TAG",
   "origin": "$AQUA_ORIGIN",
@@ -814,6 +861,7 @@ cat << JSONEOF > "$ACCUM_DIR/aqua.json"
 JSONEOF
 
 # 19. cake_wallet (Non-Custodial Multi-Currency / Monero & Bitcoin Wallet)
+CAKE_PURL=$(get_purl "cake_wallet")
 CAKE_TAG=$(get_tag "cake_wallet" "v6.4.4")
 CAKE_ORIGIN=$(get_origin "cake_wallet")
 echo ">> Auditing Project: cake_wallet ($CAKE_TAG)..."
@@ -830,6 +878,7 @@ CAKE_STATUS="OK"
 
 cat << JSONEOF > "$ACCUM_DIR/cake_wallet.json"
 {
+  "purl": "$CAKE_PURL",
   "project_id": "cake_wallet",
   "release_tag": "$CAKE_TAG",
   "origin": "$CAKE_ORIGIN",
@@ -872,6 +921,7 @@ fi
 
 for entry in "${NOBLE_REPOS[@]}"; do
     IFS=":" read -r repo outfile <<< "$entry"
+    purl=$(get_purl "$repo")
     tag=$(get_tag "$repo" "2.4.0")
     orig=$(get_origin "$repo" "git_tag")
     echo ">> Auditing Supply-Chain Target: $repo ($tag) [$orig]..."
@@ -888,6 +938,7 @@ for entry in "${NOBLE_REPOS[@]}"; do
     
     cat << JSONEOF > "$ACCUM_DIR/${outfile}.json"
 {
+  "purl": "$purl",
   "project_id": "$repo",
   "release_tag": "$tag",
   "origin": "$orig",
@@ -911,6 +962,7 @@ JSONEOF
 done
 
 # 26. libsecp256k1 (Bitcoin Core Cryptographic Bedrock)
+SECP_PURL=$(get_purl "libsecp256k1")
 SECP_TAG=$(get_tag "libsecp256k1" "v0.8.0")
 SECP_ORIGIN=$(get_origin "libsecp256k1" "git_tag")
 echo ">> Auditing Supply-Chain Target: libsecp256k1 ($SECP_TAG)..."
@@ -922,6 +974,7 @@ fi
 
 cat << JSONEOF > "$ACCUM_DIR/libsecp256k1.json"
 {
+  "purl": "$SECP_PURL",
   "project_id": "libsecp256k1",
   "release_tag": "$SECP_TAG",
   "origin": "$SECP_ORIGIN",
@@ -944,6 +997,7 @@ cat << JSONEOF > "$ACCUM_DIR/libsecp256k1.json"
 JSONEOF
 
 # 27. openssh-portable (Industry Standard OpenSSH Portable)
+SSH_PURL=$(get_purl "openssh-portable")
 SSH_TAG=$(get_tag "openssh-portable" "V_10_5_P1")
 SSH_ORIGIN=$(get_origin "openssh-portable" "git_tag")
 echo ">> Auditing Supply-Chain Target: openssh-portable ($SSH_TAG)..."
@@ -955,6 +1009,7 @@ fi
 
 cat << JSONEOF > "$ACCUM_DIR/openssh_portable.json"
 {
+  "purl": "$SSH_PURL",
   "project_id": "openssh-portable",
   "release_tag": "$SSH_TAG",
   "origin": "$SSH_ORIGIN",
@@ -987,7 +1042,7 @@ jq -n   --arg ts "$UTC_TIME"   --argjson bh "$BTC_HEIGHT"   --arg hash "$BTC_HAS
       [$p1[0], $p2[0], $p3[0], $p4[0], $p5[0], $p6[0], $p7[0], $p8[0], $p9[0], $p10[0],
        $p11[0], $p12[0], $p13[0], $p14[0], $p15[0], $p16[0], $p17[0], $p18[0], $p19[0], $p20[0],
        $p21[0], $p22[0], $p23[0], $p24[0], $p25[0], $p26[0], $p27[0]]
-      | map({ ("\(.project_id):\(.origin // "upstream")"): . })
+      | map({ ("\(.project_id):\(.origin // "upstream")"): { purl: .purl, project_id: .project_id, release_tag: .release_tag, origin: .origin, upstream_url: .upstream_url, trust_anchor_url: .trust_anchor_url, manifest_url: .manifest_url, key_url: .key_url, artifacts: .artifacts } })
       | add
     )
   }' > "$MANIFEST_OUT"  

@@ -56,6 +56,8 @@ pub struct AdvisoryBaseline {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProjectAudit {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub purl: Option<String>,
     pub project_id: String,
     pub release_tag: String,
     pub upstream_url: String,
@@ -400,6 +402,7 @@ fn main() -> io::Result<()> {
             manifest.projects.insert(
                 "pipe-k1".to_string(),
                 ProjectAudit {
+                    purl: Some("pkg:github/bootlace-dev/pipe-k1@v0.0.1-rc0".to_string()),
                     project_id: "pipe-k1".to_string(),
                     release_tag: "v0.0.1-rc0".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/pipe-k1".to_string(),
@@ -426,6 +429,7 @@ fn main() -> io::Result<()> {
             manifest.projects.insert(
                 "subzero-rs".to_string(),
                 ProjectAudit {
+                    purl: Some("pkg:github/bootlace-dev/subzero-keyosk@v0.4.0-testnet4".to_string()),
                     project_id: "subzero-rs".to_string(),
                     release_tag: "v0.4.0-testnet4".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/subzero-keyosk".to_string(),
@@ -453,6 +457,7 @@ fn main() -> io::Result<()> {
             manifest.projects.insert(
                 "bitcoin_core".to_string(),
                 ProjectAudit {
+                    purl: Some("pkg:github/bitcoin/bitcoin@v29.4".to_string()),
                     project_id: "bitcoin_core".to_string(),
                     release_tag: "v29.4".to_string(),
                     upstream_url: "https://bitcoincore.org/bin".to_string(),
@@ -505,6 +510,7 @@ mod tests {
         let mut manifest2 = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
 
         let proj_a = ProjectAudit {
+            purl: Some("pkg:generic/alpha@v1.0.0".to_string()),
             project_id: "alpha".to_string(),
             release_tag: "v1.0.0".to_string(),
             upstream_url: "https://example.com/alpha".to_string(),
@@ -539,6 +545,7 @@ mod tests {
         };
 
         let proj_b = ProjectAudit {
+            purl: Some("pkg:generic/zeta@v2.0.0".to_string()),
             project_id: "zeta".to_string(),
             release_tag: "v2.0.0".to_string(),
             upstream_url: "https://example.com/zeta".to_string(),
@@ -579,6 +586,7 @@ mod tests {
     fn test_expired_key_status_formatting() {
         let mut manifest = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
         let expired_proj = ProjectAudit {
+            purl: Some("pkg:github/KeeperCommunity/bitcoin-keeper@v2.5.13".to_string()),
             project_id: "bitcoin_keeper".to_string(),
             release_tag: "v2.5.13".to_string(),
             upstream_url: "https://github.com/KeeperCommunity/bitcoin-keeper".to_string(),
@@ -613,6 +621,7 @@ mod tests {
     fn test_expired_key_without_audit_note() {
         let mut manifest = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
         let expired_proj = ProjectAudit {
+            purl: Some("pkg:generic/test_project@v1.0.0".to_string()),
             project_id: "test_project".to_string(),
             release_tag: "v1.0.0".to_string(),
             upstream_url: "https://example.com".to_string(),
