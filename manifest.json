@@ -1,10 +1,10 @@
 {
   "notice": "PRE-RELEASE RESEARCH PROTOTYPE • FOR DISCUSSION ONLY • PASSIVE CONDUIT MIRROR OF OSV.DEV ADVISORIES",
-  "timestamp_utc": "2026-09-16T00:42:39Z",
-  "block_height": 967206,
-  "block_hash": "0000000000000000000028bbaf17407efa0010ab9b46c19c8d88eadc9af6cb3f",
-  "merkle_root_sha256": "989299aa48cc5484478d04e6498c3a2c348431a069b945ebc56ca070eeebccae",
-  "hex_seal": "989299",
+  "timestamp_utc": "2026-09-16T02:03:08Z",
+  "block_height": 967213,
+  "block_hash": "000000000000000000015f0c4bbb8bea1687de0124e03bd577553f85e8ece6ff",
+  "merkle_root_sha256": "4f7dd651bb68560f5e6346e79eaf779deea0b29c6a6c3a456c4e9aae1fd2c62a",
+  "hex_seal": "4F7DD6",
   "projects": {
     "alby_hub:github_release": {
       "project_id": "alby_hub",
@@ -18,7 +18,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v1.24.0",
         "previous_primary_hash": "b7495ceb19d2428c58de113edc8a74452efe965f79b2627c6a0e11bbecad57cd  ./albyhub-Server-Linux-x86_64.tar.bz2",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -53,7 +53,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 5,
-        "consecutive_epochs": 50,
+        "consecutive_epochs": 53,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "artifacts": [
@@ -80,7 +80,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v29.4",
         "previous_primary_hash": "e15bff6f6d21a315c4af25d2e8ae933a22bd51e924e0e90ab0474e1e11516331  bitcoin-29.4-x86_64-linux-gnu.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -116,7 +116,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v2.5.13",
         "previous_primary_hash": "e0dcf215a7a749b437df979c9f978f367e4757d58521e4ab7278f4648aa1aa9a  Bitcoin_Keeper_v2.5.13.apk",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -145,7 +145,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "release_3.5.3",
         "previous_primary_hash": "9e7091654abb460cd8a9fd3fa72324ab5e3422a91f483d89425d9e42325ee7ac  ./Blockstream-x86_64.AppImage",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -173,7 +173,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 7,
-        "consecutive_epochs": 56,
+        "consecutive_epochs": 59,
         "previous_release_tag": "1.0.41",
         "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -201,7 +201,7 @@
         "first_seen_utc": "2026-09-11T12:50:14Z",
         "first_seen_block": 966503,
         "days_stable": 5,
-        "consecutive_epochs": 50,
+        "consecutive_epochs": 53,
         "last_changed_utc": "2026-09-11T12:50:14Z"
       },
       "advisory_baseline": {
@@ -225,30 +225,39 @@
     },
     "coldcard:github_release": {
       "project_id": "coldcard",
-      "release_tag": "2026-08-31T1606-v6.6.1X",
+      "release_tag": "2026-09-03T1541-v5.6.2",
       "upstream_url": "https://github.com/Coldcard/firmware",
       "origin": "github_release",
-      "trust_anchor_url": "https://coldcard.com/downloads",
+      "trust_anchor_url": "https://coldcard.com/docs/upgrade/",
       "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
       "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
       "history": {
-        "first_seen_utc": "2026-09-13T01:14:00Z",
-        "first_seen_block": 966747,
-        "days_stable": 3,
-        "consecutive_epochs": 34,
-        "previous_release_tag": "v5.6.2",
-        "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398  2026-09-03T1541-v5.6.2-mk-coldcard.dfu",
-        "last_changed_utc": "2026-09-13T01:14:00Z"
+        "first_seen_utc": "2026-09-16T02:03:08Z",
+        "first_seen_block": 967213,
+        "days_stable": 0,
+        "consecutive_epochs": 1,
+        "previous_release_tag": "2026-08-31T1606-v6.6.1X",
+        "previous_primary_hash": "43561b2cf57600316e66c58169efd98be14bfc6005b4bca745926c808b219f2c",
+        "last_changed_utc": "2026-09-16T02:03:08Z"
       },
       "artifacts": [
         {
-          "name": "2026-08-31T1606-v6.6.1X-mk-coldcard.dfu",
+          "name": "2026-09-03T1541-v5.6.2-mk-coldcard.dfu",
           "origin": "github_release",
-          "expected_sha256": "43561b2cf57600316e66c58169efd98be14bfc6005b4bca745926c808b219f2c",
-          "observed_sha256": "43561b2cf57600316e66c58169efd98be14bfc6005b4bca745926c808b219f2c",
+          "expected_sha256": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
+          "observed_sha256": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
           "sig_status": "OK",
           "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
-          "audit_note": "Signed by Coinkite Peter Gray master release key"
+          "audit_note": "MK4 Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
+        },
+        {
+          "name": "2026-09-03T1540-v1.5.2Q-q1-coldcard.dfu",
+          "origin": "github_release",
+          "expected_sha256": "2644d7c8e81136f7d5303cd0a39a99a36c6893b2b27ac363eafee17939e1a0db",
+          "observed_sha256": "2644d7c8e81136f7d5303cd0a39a99a36c6893b2b27ac363eafee17939e1a0db",
+          "sig_status": "OK",
+          "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
+          "audit_note": "Q1 Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
         }
       ]
     },
@@ -264,7 +273,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 7,
-        "consecutive_epochs": 56,
+        "consecutive_epochs": 59,
         "previous_release_tag": "v25.05",
         "previous_primary_hash": "9d02636d7a4699f1ff4d7159fc56561f55f2ef6c41b8c2be0b4fa5c464efbe10",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -300,7 +309,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "4.8.2",
         "previous_primary_hash": "f38cee333c866986cdfb304428fa7487affc429c3853fc80e9822bd420bbc229  /tmp/binwatch_run.hsDTx1/electrum/Electrum-4.8.2.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -336,7 +345,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v26.08.0",
         "previous_primary_hash": "65b99bf6adf67b8105f665e5ae3fb34f183a53235debebc75250f8c815159b06  krux-v26.08.0.zip",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -365,7 +374,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 33,
+        "consecutive_epochs": 36,
         "previous_release_tag": "v0.8.0",
         "previous_primary_hash": "18f07c42218765cd46148d74d9fe575795f56dce",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -394,7 +403,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "elements-23.3.3",
         "previous_primary_hash": "90d6659a4f5d6d94bbf2321f6114e1286fbec8031cfc614b2f2319ddfcd9b3e1  elements-23.3.3-x86_64-linux-gnu.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -423,7 +432,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v0.21.3-beta",
         "previous_primary_hash": "aad62005d25bb0d974c5c1b135decc269d8f3e69ee9cde8bb6b32998100bc3fd  lnd-linux-amd64-v0.21.3-beta.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -459,7 +468,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 4,
-        "consecutive_epochs": 47,
+        "consecutive_epochs": 50,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -486,7 +495,7 @@
         "first_seen_utc": "2026-09-12T01:50:01Z",
         "first_seen_block": 966592,
         "days_stable": 4,
-        "consecutive_epochs": 47,
+        "consecutive_epochs": 50,
         "last_changed_utc": "2026-09-12T01:50:01Z"
       },
       "artifacts": [
@@ -513,7 +522,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 33,
+        "consecutive_epochs": 36,
         "previous_release_tag": "3.2.0",
         "previous_primary_hash": "02d0705114a4d81d08b77bbb3faaa8691b8d9561",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -542,7 +551,7 @@
         "first_seen_utc": "2026-09-09T13:46:15Z",
         "first_seen_block": 966214,
         "days_stable": 7,
-        "consecutive_epochs": 56,
+        "consecutive_epochs": 59,
         "previous_release_tag": "v0.0.51",
         "previous_primary_hash": "e228945cf4597b833215286ce17bb8b66e927c9ef5b46e3e5606fcb666a4bc4a",
         "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -570,7 +579,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 33,
+        "consecutive_epochs": 36,
         "previous_release_tag": "V_10_5_P1",
         "previous_primary_hash": "f11c902f8b6026d68f980b8b14b7fd75f6f95d5f",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -599,7 +608,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "android-v2.8.2",
         "previous_primary_hash": "b76f5aa75c78f8c73ec25a515ad9587f4106be989c8d89ffe14fc7263c8f3ec6 *phoenix-118-2.8.2-mainnet.apk",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -627,7 +636,7 @@
         "first_seen_utc": "2026-09-08T18:00:00Z",
         "first_seen_block": 965215,
         "days_stable": 8,
-        "consecutive_epochs": 61,
+        "consecutive_epochs": 64,
         "last_changed_utc": "2026-09-08T18:00:00Z"
       },
       "artifacts": [
@@ -654,7 +663,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 33,
+        "consecutive_epochs": 36,
         "previous_release_tag": "2.4.0",
         "previous_primary_hash": "5256db12ebd7f555d8a8f83d1c3264ae7d675253",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -683,7 +692,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 33,
+        "consecutive_epochs": 36,
         "previous_release_tag": "2.4.0",
         "previous_primary_hash": "358e540e61a56248add0f1810705b70bf15a584b",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -712,7 +721,7 @@
         "first_seen_utc": "2026-09-13T01:15:55Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 33,
+        "consecutive_epochs": 36,
         "previous_release_tag": "2.4.1",
         "previous_primary_hash": "55d1f3e87ca001e8ec9193f19b72750a1b07d4f7",
         "last_changed_utc": "2026-09-13T01:15:55Z"
@@ -740,7 +749,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v0.8.7",
         "previous_primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9  seedsigner_os.0.8.7.pi0.img",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -768,7 +777,7 @@
         "first_seen_utc": "2026-09-13T01:14:00Z",
         "first_seen_block": 966747,
         "days_stable": 3,
-        "consecutive_epochs": 34,
+        "consecutive_epochs": 37,
         "previous_release_tag": "v2.5.4",
         "previous_primary_hash": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e *sparrowwallet-2.5.4-x86_64.tar.gz",
         "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -804,7 +813,7 @@
         "first_seen_utc": "2026-09-13T00:33:36Z",
         "first_seen_block": 966741,
         "days_stable": 3,
-        "consecutive_epochs": 38,
+        "consecutive_epochs": 41,
         "previous_release_tag": "v0.3.0",
         "previous_primary_hash": "01b45846718de43b7bb9ef8898be6d725bf5609790bb9dcfb729f28ccfebed9c",
         "last_changed_utc": "2026-09-13T00:33:36Z"

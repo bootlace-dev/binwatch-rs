@@ -155,15 +155,14 @@
   },
   {
     "project_id": "coldcard",
-    "release_tag": "2026-08-31T1606-v6.6.1X",
+    "release_tag": "2026-09-03T1541-v5.6.2",
     "upstream_url": "https://github.com/Coldcard/firmware",
-    "trust_anchor_url": "https://coldcard.com/downloads",
+    "trust_anchor_url": "https://coldcard.com/docs/upgrade/",
     "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
     "signature_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
     "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
     "verifier_type": "sha256_manifest",
     "verifier_key": "4589779ADFC14F3327534EA8A3A31BAD5A2A5B10",
-    "git_tag": "2026-09-03T1541-v5.6.2",
     "origin": "github_release"
   },
   {

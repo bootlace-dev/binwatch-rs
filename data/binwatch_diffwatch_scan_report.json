@@ -1,31 +1,29 @@
 [
   {
     "repo": "bitcoin/bitcoin",
-    "sha": "17817818",
-    "message": "Merge bitcoin/bitcoin#36228: ci, iwyu: generate embedded ASM",
-    "diff_lines": 127,
-    "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
-    ],
-    "verdict": "FLAGGED_FOR_INSPECTION"
-  },
-  {
-    "repo": "bitcoin/bitcoin",
-    "sha": "1cbbf64e",
-    "message": "ci, iwyu: generate embedded ASMap header explicitly",
-    "diff_lines": 102,
-    "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
-    ],
-    "verdict": "FLAGGED_FOR_INSPECTION"
-  },
-  {
-    "repo": "bitcoin/bitcoin",
-    "sha": "1afa0cd7",
-    "message": "cmake: add raw data header generation target",
-    "diff_lines": 25,
+    "sha": "57721f80",
+    "message": "Merge bitcoin/bitcoin#36253: fuzz: Use `LIMITED_WHILE` in `c",
+    "diff_lines": 120,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "bitcoin/bitcoin",
+    "sha": "dadca55f",
+    "message": "Merge bitcoin/bitcoin#36251: rest: add `generated` and `heig",
+    "diff_lines": 60,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "bitcoin/bitcoin",
+    "sha": "de394ad3",
+    "message": "Merge bitcoin/bitcoin#36207: kernel: add wtxid accessor",
+    "diff_lines": 283,
+    "matched_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
   },
   {
     "repo": "lightningnetwork/lnd",
@@ -33,8 +31,8 @@
     "message": "Merge pull request #11179 from ziggie1984/fix-kv-graph-migra",
     "diff_lines": 275,
     "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "BOUNDARY.EMPTY_ZERO_LENIENCY"
+      "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -56,29 +54,25 @@
   },
   {
     "repo": "ElementsProject/lightning",
-    "sha": "a34b9758",
-    "message": "doc: document error 313 on every command which can return it",
-    "diff_lines": 132,
-    "matched_smells": [
-      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
-    ],
-    "verdict": "FLAGGED_FOR_INSPECTION"
+    "sha": "3588f826",
+    "message": "lightningd: prefer latest blocks when querying historic bloc",
+    "diff_lines": 41,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
   },
   {
     "repo": "ElementsProject/lightning",
-    "sha": "d7d1e78c",
-    "message": "doc: fix wording of the min-emergency-msat error description",
-    "diff_lines": 70,
-    "matched_smells": [
-      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
-    ],
-    "verdict": "FLAGGED_FOR_INSPECTION"
+    "sha": "3589fd7c",
+    "message": "gossipd: don't bother looking up ancient blocks.",
+    "diff_lines": 15,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
   },
   {
     "repo": "ElementsProject/lightning",
-    "sha": "78f4cd72",
-    "message": "docs: remove old references to pay, use xpay",
-    "diff_lines": 77,
+    "sha": "0550e5a2",
+    "message": "pytest: onion message reply path with no hops must not stop ",
+    "diff_lines": 73,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
@@ -130,37 +124,37 @@
     "message": "Merge ElementsProject/elements#1593: Fix RPC return errors f",
     "diff_lines": 480,
     "matched_smells": [
-      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
       "CRYPTO.PROOF_CACHE_KEY_COLLISION_REUSE",
-      "COINJOIN.UNBLINDED_INPUT_DEANON"
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
   {
     "repo": "sparrowwallet/sparrow",
-    "sha": "e63e4b27",
-    "message": "pay the silent payment address of a resolved instruction whe",
-    "diff_lines": 162,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "sparrowwallet/sparrow",
-    "sha": "8e9661a6",
-    "message": "verify psbt silent payment metadata against the input hash o",
-    "diff_lines": 7,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "sparrowwallet/sparrow",
-    "sha": "b43f24f9",
-    "message": "hide the gap limit and request a birth date for a silent pay",
-    "diff_lines": 134,
+    "sha": "c4b53879",
+    "message": "add file import of the xpub descriptor jade writes to usb st",
+    "diff_lines": 130,
     "matched_smells": [
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "sparrowwallet/sparrow",
+    "sha": "0e2c402f",
+    "message": "include the non-witness utxo in psbts for krux keystores, an",
+    "diff_lines": 23,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "sparrowwallet/sparrow",
+    "sha": "d7ded1e7",
+    "message": "clear a scanned wallet when a file, text payload or unrecogn",
+    "diff_lines": 31,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
   },
   {
     "repo": "KeeperCommunity/bitcoin-keeper",
@@ -197,27 +191,27 @@
   },
   {
     "repo": "spesmilo/electrum",
-    "sha": "79d27b76",
-    "message": "release notes: add credits for private sec disclosures",
-    "diff_lines": 40,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "spesmilo/electrum",
-    "sha": "7bac552b",
-    "message": "release notes: add \"security update\" markers",
-    "diff_lines": 74,
+    "sha": "a57ef6e7",
+    "message": "Merge pull request #10940 from accumulator/fix_10937",
+    "diff_lines": 1154,
     "matched_smells": [
-      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+      "NWC.BUDGET_ALLOWANCE_RACE"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
   {
     "repo": "spesmilo/electrum",
-    "sha": "39cab571",
-    "message": "Merge pull request #10966 from f321x/appimage_runtime_nocach",
-    "diff_lines": 138,
+    "sha": "3026fbdb",
+    "message": "bolt11: followup #10940",
+    "diff_lines": 108,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "spesmilo/electrum",
+    "sha": "1444e34c",
+    "message": "Merge pull request #10967 from fametrano/btclib-qml-test-loc",
+    "diff_lines": 19,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
@@ -271,29 +265,29 @@
   },
   {
     "repo": "rust-bitcoin/rust-bitcoin",
-    "sha": "d6a9b71b",
-    "message": "Merge rust-bitcoin/rust-bitcoin#6859: units: fix `Target::fr",
-    "diff_lines": 45,
+    "sha": "1cbf4bd6",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6879: primitives: Fix Witnes",
+    "diff_lines": 28,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "1c868240",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6844: chacha20: Add RFC appe",
+    "diff_lines": 28,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "rust-bitcoin/rust-bitcoin",
+    "sha": "ab7652b3",
+    "message": "Merge rust-bitcoin/rust-bitcoin#6850: Use stacked attributes",
+    "diff_lines": 76,
     "matched_smells": [
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
-  },
-  {
-    "repo": "rust-bitcoin/rust-bitcoin",
-    "sha": "61626a16",
-    "message": "Merge rust-bitcoin/rust-bitcoin#6871: Remove uses of `Index`",
-    "diff_lines": 35,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "rust-bitcoin/rust-bitcoin",
-    "sha": "e19739bc",
-    "message": "Merge rust-bitcoin/rust-bitcoin#6865: units: fix relative lo",
-    "diff_lines": 55,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
   },
   {
     "repo": "bitcoindevkit/bdk",
@@ -471,6 +465,14 @@
   },
   {
     "repo": "RustCrypto/elliptic-curves",
+    "sha": "abb7c388",
+    "message": "bignp256: make swu feature enable arithmetic (#1931)",
+    "diff_lines": 25,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "RustCrypto/elliptic-curves",
     "sha": "69308431",
     "message": "bignp256: fix/pass original prehash to `bign-genk` (#1932)",
     "diff_lines": 26,
@@ -488,10 +490,10 @@
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
   {
-    "repo": "RustCrypto/elliptic-curves",
-    "sha": "f8ac5adf",
-    "message": "p521: fix incorrect exponent in sqrt comment (#1928)",
-    "diff_lines": 13,
+    "repo": "RustCrypto/AEADs",
+    "sha": "f90367cf",
+    "message": "ascon-aead128: tweak changelog (#886)",
+    "diff_lines": 20,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
@@ -514,14 +516,6 @@
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
   {
-    "repo": "RustCrypto/AEADs",
-    "sha": "c47c71ef",
-    "message": "build(deps): bump chacha20 from 0.10.1 to 0.10.2 (#883)",
-    "diff_lines": 16,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
     "repo": "proto-at-block/bitkey",
     "sha": "4ba8c4c8",
     "message": "Publish non-app source 2026-08-12-2119",
@@ -537,14 +531,14 @@
     "message": "Publish non-app source 2026-08-11-1832",
     "diff_lines": 46848,
     "matched_smells": [
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
       "LIGHTNING.REPLACEMENT_CYCLING_RACE",
       "HW.TRNG_SILENT_FALLBACK_PRNG",
       "HW.CHANGE_DESCRIPTOR_DESYNC",
-      "BOUNDARY.EMPTY_ZERO_LENIENCY",
-      "NWC.BUDGET_ALLOWANCE_RACE",
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
-      "COINJOIN.UNBLINDED_INPUT_DEANON"
+      "NWC.BUDGET_ALLOWANCE_RACE",
+      "BOUNDARY.EMPTY_ZERO_LENIENCY"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -554,14 +548,14 @@
     "message": "Publish source 2026-08-05",
     "diff_lines": 45142,
     "matched_smells": [
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
       "LIGHTNING.REPLACEMENT_CYCLING_RACE",
       "HW.TRNG_SILENT_FALLBACK_PRNG",
       "HW.CHANGE_DESCRIPTOR_DESYNC",
-      "BOUNDARY.EMPTY_ZERO_LENIENCY",
-      "NWC.BUDGET_ALLOWANCE_RACE",
       "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
-      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
-      "COINJOIN.UNBLINDED_INPUT_DEANON"
+      "NWC.BUDGET_ALLOWANCE_RACE",
+      "BOUNDARY.EMPTY_ZERO_LENIENCY"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
   },
@@ -591,29 +585,29 @@
   },
   {
     "repo": "cake-tech/cake_wallet",
-    "sha": "21c73d00",
-    "message": "change arbitrum default node [skip ci]",
-    "diff_lines": 476,
+    "sha": "5ed6759e",
+    "message": "fix linux",
+    "diff_lines": 67,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
   {
     "repo": "cake-tech/cake_wallet",
-    "sha": "3bb64b71",
-    "message": "Add more guards to amounts being zero or infinity (#3612)",
-    "diff_lines": 307,
+    "sha": "e3215157",
+    "message": "fix(linux): don't ship libsqlite3.so as a dereferenced symli",
+    "diff_lines": 68,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "cake-tech/cake_wallet",
+    "sha": "90e300f2",
+    "message": "Merge pull request #3584 from cake-tech/CW-1529-Improved-See",
+    "diff_lines": 8266,
     "matched_smells": [
       "LIGHTNING.REPLACEMENT_CYCLING_RACE"
     ],
     "verdict": "FLAGGED_FOR_INSPECTION"
-  },
-  {
-    "repo": "cake-tech/cake_wallet",
-    "sha": "8d75c3f0",
-    "message": "minor fix [skip ci]",
-    "diff_lines": 25,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
   },
   {
     "repo": "GrapheneOS/hardened_malloc",
@@ -643,6 +637,22 @@
   },
   {
     "repo": "GrapheneOS/Auditor",
+    "sha": "04fd0698",
+    "message": "Bump actions/setup-java from 6.0.0 to 6.0.1",
+    "diff_lines": 13,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/Auditor",
+    "sha": "c03af00e",
+    "message": "update Bouncy Castle to 1.86",
+    "diff_lines": 45,
+    "matched_smells": [],
+    "verdict": "CLEAN_PASS"
+  },
+  {
+    "repo": "GrapheneOS/Auditor",
     "sha": "f1bb2ac9",
     "message": "Bump actions/setup-java from 5.7.0 to 6.0.0",
     "diff_lines": 13,
@@ -650,42 +660,45 @@
     "verdict": "CLEAN_PASS"
   },
   {
-    "repo": "GrapheneOS/Auditor",
-    "sha": "94c9d6b0",
-    "message": "update Guava to 33.7.1",
-    "diff_lines": 63,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "GrapheneOS/Auditor",
-    "sha": "0581ab1e",
-    "message": "update Guava to 33.7.0",
-    "diff_lines": 138,
+    "repo": "openssh/openssh-portable",
+    "sha": "ae7373df",
+    "message": "fix merge botch that put lines in wrong function",
+    "diff_lines": 24,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
   {
     "repo": "openssh/openssh-portable",
-    "sha": "7fe3b24c",
-    "message": "set -Wno-error=discarded-qualifiers",
-    "diff_lines": 12,
+    "sha": "aef20dfe",
+    "message": "upstream: Correct handling of DST when converting dates",
+    "diff_lines": 18,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
   {
     "repo": "openssh/openssh-portable",
-    "sha": "769728b8",
-    "message": "seccomp sandbox: restrict mremap flags",
-    "diff_lines": 13,
+    "sha": "e1d1c951",
+    "message": "upstream: sk-usbhid: preserve UV requirement for resident ke",
+    "diff_lines": 45,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
   {
-    "repo": "openssh/openssh-portable",
-    "sha": "8e964781",
-    "message": "upstream: reenable ssh-mldsa44-ed25519 at a low priority pos",
-    "diff_lines": 28,
+    "repo": "WalletWasabi/WalletWasabi",
+    "sha": "f8e1d4d4",
+    "message": "Make coordinator use the native WabiSabi (#14729)",
+    "diff_lines": 2148,
+    "matched_smells": [
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "verdict": "FLAGGED_FOR_INSPECTION"
+  },
+  {
+    "repo": "WalletWasabi/WalletWasabi",
+    "sha": "756415e7",
+    "message": "Update release highlights for v2.8.3 (#15050)",
+    "diff_lines": 54,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },
@@ -694,22 +707,6 @@
     "sha": "e29afe93",
     "message": "Make PJ use TR as well (#15045)",
     "diff_lines": 112,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "WalletWasabi/WalletWasabi",
-    "sha": "690fa3ae",
-    "message": "Global: `ConfigureBitcoinRpcClient` \u2013 report more user-frien",
-    "diff_lines": 26,
-    "matched_smells": [],
-    "verdict": "CLEAN_PASS"
-  },
-  {
-    "repo": "WalletWasabi/WalletWasabi",
-    "sha": "43d8b5f4",
-    "message": "xUnit: Modernize `IntegrationTestFixture` (#14980)",
-    "diff_lines": 86,
     "matched_smells": [],
     "verdict": "CLEAN_PASS"
   },

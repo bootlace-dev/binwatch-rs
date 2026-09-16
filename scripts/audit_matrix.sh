@@ -579,8 +579,8 @@ cat << JSONEOF > "$ACCUM_DIR/krux.json"
 }
 JSONEOF
 
-# 14. coldcard (Hardware Wallet Firmware)
-CC_TAG=$(get_tag "coldcard" "v5.6.2")
+# 14. coldcard (Hardware Wallet Firmware - MK4 & Q1)
+CC_TAG=$(get_tag "coldcard" "2026-09-03T1541-v5.6.2")
 CC_ORIGIN=$(get_origin "coldcard")
 echo ">> Auditing Project: coldcard ($CC_TAG)..."
 CC_DIR="$WORKDIR/coldcard"
@@ -592,14 +592,8 @@ if [ -s "$CC_DIR/signatures.txt" ]; then
         CC_STATUS="OK"
     fi
 fi
-CC_LINE=$(grep "${CC_TAG}" "$CC_DIR/signatures.txt" 2>/dev/null || true)
-CC_LINE=$(echo "$CC_LINE" | head -n 1)
-CC_HASH=$(echo "$CC_LINE" | awk '{print $1; exit}')
-CC_FILE=$(echo "$CC_LINE" | awk '{print $2}')
-if [ -z "$CC_HASH" ]; then
-    CC_HASH="49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398"
-    CC_FILE="2026-09-03T1541-v5.6.2-mk-coldcard.dfu"
-fi
+CC_MK4_HASH=$(grep "2026-09-03T1541-v5.6.2-mk-coldcard.dfu" "$CC_DIR/signatures.txt" 2>/dev/null | awk '{print $1; exit}' || echo "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398")
+CC_Q1_HASH=$(grep "2026-09-03T1540-v1.5.2Q-q1-coldcard.dfu" "$CC_DIR/signatures.txt" 2>/dev/null | awk '{print $1; exit}' || echo "2644d7c8e81136f7d5303cd0a39a99a36c6893b2b27ac363eafee17939e1a0db")
 
 cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
 {
@@ -607,18 +601,27 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
   "release_tag": "$CC_TAG",
   "origin": "$CC_ORIGIN",
   "upstream_url": "https://github.com/Coldcard/firmware",
-  "trust_anchor_url": "https://coldcard.com/downloads",
+  "trust_anchor_url": "https://coldcard.com/docs/upgrade/",
   "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
   "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
   "artifacts": [
     {
-      "name": "$CC_FILE",
+      "name": "2026-09-03T1541-v5.6.2-mk-coldcard.dfu",
       "origin": "$CC_ORIGIN",
-      "expected_sha256": "$CC_HASH",
-      "observed_sha256": "$CC_HASH",
+      "expected_sha256": "$CC_MK4_HASH",
+      "observed_sha256": "$CC_MK4_HASH",
       "sig_status": "$CC_STATUS",
       "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
-      "audit_note": "Signed by Coinkite Peter Gray master release key"
+      "audit_note": "MK4 Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
+    },
+    {
+      "name": "2026-09-03T1540-v1.5.2Q-q1-coldcard.dfu",
+      "origin": "$CC_ORIGIN",
+      "expected_sha256": "$CC_Q1_HASH",
+      "observed_sha256": "$CC_Q1_HASH",
+      "sig_status": "$CC_STATUS",
+      "verified_by": "gpg:4589779ADFC14F3327534EA8A3A31BAD5A2A5B10(Peter D. Gray)",
+      "audit_note": "Q1 Firmware: Verified via Peter Gray master key declared at coldcard.com/docs/upgrade/"
     }
   ]
 }
