@@ -152,7 +152,10 @@ def main():
         for k, v in proj.items():
             if k != "purl":
                 new_proj[k] = v
-        proj["history"] = entry
+        if "anchor_content_sha256" in proj:
+            new_proj["anchor_content_sha256"] = proj["anchor_content_sha256"]
+        new_proj["history"] = entry
+        projects[proj_id] = new_proj
 
     history_data["last_updated_utc"] = now_iso
     history_data["last_block_height"] = current_block

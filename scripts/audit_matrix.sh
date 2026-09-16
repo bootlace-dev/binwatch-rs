@@ -624,6 +624,11 @@ echo ">> Auditing Project: coldcard ($CC_TAG)..."
 CC_DIR="$WORKDIR/coldcard"
 mkdir -p "$CC_DIR"
 curl -sL --connect-timeout 10 https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt -o "$CC_DIR/signatures.txt" || true
+curl -sL --connect-timeout 10 https://coldcard.com/docs/upgrade/ -o "$CC_DIR/upgrade.html" || true
+CC_ANCHOR_HASH=""
+if [ -s "$CC_DIR/upgrade.html" ]; then
+    CC_ANCHOR_HASH=$(python3 -c 'import sys, re, hashlib; html = open(sys.argv[1], errors="ignore").read(); clean = re.sub(r"<[^>]+>", " ", html); print(hashlib.sha256(" ".join(clean.split()).encode("utf-8")).hexdigest())' "$CC_DIR/upgrade.html" 2>/dev/null || echo "")
+fi
 CC_STATUS="FAIL"
 if [ -s "$CC_DIR/signatures.txt" ]; then
     if gpg --verify "$CC_DIR/signatures.txt" >/dev/null 2>&1; then
@@ -643,6 +648,7 @@ cat << JSONEOF > "$ACCUM_DIR/coldcard.json"
   "origin": "$CC_ORIGIN",
   "upstream_url": "https://github.com/Coldcard/firmware",
   "trust_anchor_url": "https://coldcard.com/docs/upgrade/",
+  "anchor_content_sha256": "$CC_ANCHOR_HASH",
   "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
   "key_url": "https://bootlace-dev.github.io/binwatch-rs/keys/coldcard_peter.asc",
   "artifacts": [
@@ -1042,7 +1048,7 @@ jq -n   --arg ts "$UTC_TIME"   --argjson bh "$BTC_HEIGHT"   --arg hash "$BTC_HAS
       [$p1[0], $p2[0], $p3[0], $p4[0], $p5[0], $p6[0], $p7[0], $p8[0], $p9[0], $p10[0],
        $p11[0], $p12[0], $p13[0], $p14[0], $p15[0], $p16[0], $p17[0], $p18[0], $p19[0], $p20[0],
        $p21[0], $p22[0], $p23[0], $p24[0], $p25[0], $p26[0], $p27[0]]
-      | map({ ("\(.project_id):\(.origin // "upstream")"): { purl: .purl, project_id: .project_id, release_tag: .release_tag, origin: .origin, upstream_url: .upstream_url, trust_anchor_url: .trust_anchor_url, manifest_url: .manifest_url, key_url: .key_url, artifacts: .artifacts } })
+      | map({ ("\(.project_id):\(.origin // "upstream")"): (. + { purl: .purl }) })
       | add
     )
   }' > "$MANIFEST_OUT"  

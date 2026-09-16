@@ -58,6 +58,8 @@ pub struct AdvisoryBaseline {
 pub struct ProjectAudit {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub purl: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub anchor_content_sha256: Option<String>,
     pub project_id: String,
     pub release_tag: String,
     pub upstream_url: String,
@@ -403,6 +405,7 @@ fn main() -> io::Result<()> {
                 "pipe-k1".to_string(),
                 ProjectAudit {
                     purl: Some("pkg:github/bootlace-dev/pipe-k1@v0.0.1-rc0".to_string()),
+                    anchor_content_sha256: None,
                     project_id: "pipe-k1".to_string(),
                     release_tag: "v0.0.1-rc0".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/pipe-k1".to_string(),
@@ -430,6 +433,7 @@ fn main() -> io::Result<()> {
                 "subzero-rs".to_string(),
                 ProjectAudit {
                     purl: Some("pkg:github/bootlace-dev/subzero-keyosk@v0.4.0-testnet4".to_string()),
+                    anchor_content_sha256: None,
                     project_id: "subzero-rs".to_string(),
                     release_tag: "v0.4.0-testnet4".to_string(),
                     upstream_url: "https://github.com/bootlace-dev/subzero-keyosk".to_string(),
@@ -458,6 +462,7 @@ fn main() -> io::Result<()> {
                 "bitcoin_core".to_string(),
                 ProjectAudit {
                     purl: Some("pkg:github/bitcoin/bitcoin@v29.4".to_string()),
+                    anchor_content_sha256: None,
                     project_id: "bitcoin_core".to_string(),
                     release_tag: "v29.4".to_string(),
                     upstream_url: "https://bitcoincore.org/bin".to_string(),
@@ -511,6 +516,7 @@ mod tests {
 
         let proj_a = ProjectAudit {
             purl: Some("pkg:generic/alpha@v1.0.0".to_string()),
+            anchor_content_sha256: None,
             project_id: "alpha".to_string(),
             release_tag: "v1.0.0".to_string(),
             upstream_url: "https://example.com/alpha".to_string(),
@@ -546,6 +552,7 @@ mod tests {
 
         let proj_b = ProjectAudit {
             purl: Some("pkg:generic/zeta@v2.0.0".to_string()),
+            anchor_content_sha256: None,
             project_id: "zeta".to_string(),
             release_tag: "v2.0.0".to_string(),
             upstream_url: "https://example.com/zeta".to_string(),
@@ -587,6 +594,7 @@ mod tests {
         let mut manifest = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
         let expired_proj = ProjectAudit {
             purl: Some("pkg:github/KeeperCommunity/bitcoin-keeper@v2.5.13".to_string()),
+            anchor_content_sha256: None,
             project_id: "bitcoin_keeper".to_string(),
             release_tag: "v2.5.13".to_string(),
             upstream_url: "https://github.com/KeeperCommunity/bitcoin-keeper".to_string(),
@@ -622,6 +630,7 @@ mod tests {
         let mut manifest = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
         let expired_proj = ProjectAudit {
             purl: Some("pkg:generic/test_project@v1.0.0".to_string()),
+            anchor_content_sha256: None,
             project_id: "test_project".to_string(),
             release_tag: "v1.0.0".to_string(),
             upstream_url: "https://example.com".to_string(),
@@ -651,4 +660,38 @@ mod tests {
         assert!(digest.contains("1 artifact(s)"));
     }
 }
+
+/// Strips HTML markup tags and normalizes whitespace into single space for CSS-resilient hashing
+pub fn canonicalize_dom_text(html_content: &str) -> String {
+    let mut in_tag = false;
+    let mut clean_text = String::new();
+
+    for c in html_content.chars() {
+        if c == '<' {
+            in_tag = true;
+            clean_text.push(' ');
+        } else if c == '>' {
+            in_tag = false;
+            clean_text.push(' ');
+        } else if !in_tag {
+            clean_text.push(c);
+        }
+    }
+
+    let words: Vec<&str> = clean_text.split_whitespace().collect();
+    words.join(" ")
+}
+
+#[cfg(test)]
+mod dom_tests {
+    use super::*;
+
+    #[test]
+    fn test_canonicalize_dom_text_strips_tags_and_whitespace() {
+        let html = "<div class=\"theme-dark\">\n  <span style=\"color:red\">Peter Gray Key</span>\n</div>";
+        let canonical = canonicalize_dom_text(html);
+        assert_eq!(canonical, "Peter Gray Key");
+    }
+}
+
 
