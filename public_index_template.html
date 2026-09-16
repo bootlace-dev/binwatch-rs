@@ -743,7 +743,7 @@
           }).join('');
 
           drawerRow.innerHTML = `
-            <td colspan="5">
+            <td colspan="6">
               <div class="drawer-content">
                 <div style="margin-bottom: 0.5rem;"><strong title="Unbroken chain from upstream authoritative declaration to artifact verification.">Cryptographic Chain-of-Custody:</strong></div>
                 <div class="drawer-grid">
@@ -788,15 +788,17 @@
                 </div>
                 ` : ''}
 
+                ${p.walletscrutiny ? `
                 <div style="margin-top: 1rem; margin-bottom: 0.5rem;"><strong title="WalletScrutiny (WalletScrutiny.com) independent build-reproducibility attestation feed (BW-WS-INGEST-v1).">WalletScrutiny Build Attestation (BW-WS-INGEST-v1):</strong></div>
                 <div class="drawer-grid">
                   <div class="drawer-label" title="Source-to-binary compilation determinism verified by WalletScrutiny Docker VM build server.">Reproducible Build:</div>
                   <div style="color:#34d399; font-weight:600;">
-                    ✓ Attested Byte-for-Byte Identical (WalletScrutiny Nostr Event <span class="mono" style="font-size:0.75rem; color:#58a6ff;">pubkey:1f9e547c...</span>)
+                    ✓ Attested Byte-for-Byte Identical (${p.walletscrutiny.verdict || 'REPRODUCIBLE'})
                   </div>
                   <div class="drawer-label" title="Independent proof link on WalletScrutiny.com.">Verification Record:</div>
-                  <div><a href="https://walletscrutiny.com/verifier/?pubkey=1f9e547c2f31942623b8ad1d07713282e8640fd8cf474e9f79f18ace8af216ed" target="_blank" style="color:#58a6ff;">https://walletscrutiny.com (Verification ID: 36c08f41...)</a></div>
+                  <div><a href="${p.walletscrutiny.url || 'https://walletscrutiny.com'}" target="_blank" style="color:#58a6ff;">${p.walletscrutiny.url || 'https://walletscrutiny.com'}</a></div>
                 </div>
+                ` : ''}
 
 
                 <div style="margin-top: 1rem; margin-bottom: 0.35rem;"><strong title="Individual binary artifacts and SHA-256 digests audited in this release.">Audited Artifacts (${p.artifacts.length}):</strong></div>

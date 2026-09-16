@@ -234,11 +234,33 @@ async def main_async():
         print(f">> State Unchanged (Merkle Seal #{seal_tag} matches previous broadcast {hours_ago}h ago). Skipping until 24h heartbeat or state mutation.")
         sys.exit(0)
 
-    # Format bold mutation / continuity status banner
+    # Format bold mutation / continuity status banner with detailed mutated project summary
     status_banner = ""
     if has_mutation:
         prev_seal = last_state.get("seal", "UNKNOWN")
-        status_banner = f"🟡 SUPPLY CHAIN MUTATION DETECTED\nPrior Seal: #{prev_seal} ➔ New Seal: #{seal_tag}\n\n"
+        mutated_summary = []
+        
+        # Parse manifest file if provided to identify exact mutated projects
+        manifest_path = sys.argv[2] if len(sys.argv) > 2 and sys.argv[2].endswith(".json") else None
+        if manifest_path and os.path.exists(manifest_path):
+            try:
+                with open(manifest_path, "r") as mf:
+                    mdata = json.load(mf)
+                for pid, pinfo in mdata.get("projects", {}).items():
+                    hist = pinfo.get("history", {})
+                    if hist and hist.get("days_stable") == 0 and hist.get("previous_release_tag"):
+                        p_name = pinfo.get("project_id", pid)
+                        cur_tag = pinfo.get("release_tag", "")
+                        prev_tag = hist.get("previous_release_tag", "")
+                        if cur_tag != prev_tag:
+                            mutated_summary.append(f"• {p_name}: {prev_tag} ➔ {cur_tag}")
+                        else:
+                            mutated_summary.append(f"• {p_name}: {cur_tag} (SHA-256 Digest Mutated)")
+            except Exception:
+                pass
+        
+        diff_detail = ("\n" + "\n".join(mutated_summary) + "\n") if mutated_summary else ""
+        status_banner = f"🟡 SUPPLY CHAIN MUTATION DETECTED\nPrior Seal: #{prev_seal} ➔ New Seal: #{seal_tag}\n{diff_detail}\n"
     elif last_seal is not None:
         last_date = last_state.get("date_utc", "previous run")
         last_block = last_state.get("block", "")
