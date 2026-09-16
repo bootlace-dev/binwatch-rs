@@ -196,9 +196,10 @@ async def main_async():
     with open(digest_file, 'r') as f:
         content = f.read().strip()
 
+    enable_broadcast = "--enable-broadcast" in sys.argv
     nsec = os.environ.get("NOSTR_BOT_NSEC")
-    if not nsec:
-        print("Notice: NOSTR_BOT_NSEC not set, skipping relay broadcast.")
+    if not nsec or not enable_broadcast:
+        print("Notice: Nostr relay broadcast disabled by default for local review (--enable-broadcast not set). Skipping network broadcast.")
         sys.exit(0)
 
     sk_bytes = get_nsec_bytes(nsec)
