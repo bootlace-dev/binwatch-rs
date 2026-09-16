@@ -753,7 +753,7 @@
                   <div class="mono" style="font-size:0.8rem;">${verEngine}</div>
                   ${p.purl ? `<div class="drawer-label" title="Standard Package URL (PURL) specifier for software supply-chain tracking.">Package URL (PURL):</div><div class="mono" style="font-size:0.8rem; color:#58a6ff;">${p.purl}</div>` : ""}
                   <div class="drawer-label" title="The authoritative upstream document, README, or git tree declaring why this signing key is trusted.">Trust Anchor:</div>
-                  <div>${trustAnchorLink} ${p.anchor_content_sha256 ? `<span class="hash-badge" title="SHA-256 digest of untrusted upstream HTML page content stability: ${p.anchor_content_sha256}">HTML Hash: #${p.anchor_content_sha256.substring(0,8)}</span>` : ""}</div>
+                  <div>${trustAnchorLink} ${p.anchor_content_sha256 ? `<span class="hash-badge" title="SHA-256 canonical text digest of upstream HTML anchor (${p.trust_anchor_url || 'upstream page'}): ${p.anchor_content_sha256}">HTML Hash: #${p.anchor_content_sha256.substring(0,8)}</span>` : ""}</div>
                   <div class="drawer-label" title="The raw signed checksum manifest (SHA256SUMS / manifest.txt) produced by the project maintainers.">Signed Manifest:</div>
                   <div>${manifestLink}</div>
                   <div class="drawer-label" title="Mirror of the armored public key file hosted statically on GitHub Pages for independent audits.">Public Key Mirror:</div>
