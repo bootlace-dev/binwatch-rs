@@ -453,7 +453,7 @@
     </div>
 
     <div class="card" style="border-left: 3px solid #79c0ff;">
-      <details>
+      <details open>
         <summary style="cursor: pointer; font-weight: bold; color: #c9d1d9; font-size: 0.95rem;">
           📜 Merkle Seal Mutation & Lineage Changelog (Historical Audit Trail)
         </summary>
@@ -461,15 +461,15 @@
           <p style="margin-top: 0;">This audit log records explicit architectural mutations, schema updates, upstream release discoveries, and key status changes that required recalculation of the canonical Merkle root seal (<code>#HEXSEAL</code>) across historical evaluation epochs.</p>
           
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
-            <div style="color: #3fb950; font-weight: bold;">1. Merkle Seal <code>#5EFBEA</code> (2026-09-15T20:36:50Z | BTC Block <code>#967205</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: API Rate Limit Sentinel Hardening & Multi-Artifact Determinism Verification.</div>
-            <div>&bull; <strong>Mutations</strong>: Hardened <code>check_advisories.py</code> to distinguish API rate-limiting blocks (HTTP 429/403) from zero-advisory clean returns, eliminating false-positive clean passes. Added multi-artifact leaf sorting tests and published local lineage audit trail.</div>
+            <div style="color: #3fb950; font-weight: bold;">1. Merkle Seal <code>#989299</code> (2026-09-16T00:42:39Z | BTC Block <code>#967206</code>) [ACTIVE]</div>
+            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Live Matrix Recalculation, API Rate-Limiting Hardening & Multi-Artifact Determinism Verification.</div>
+            <div>&bull; <strong>Mutations</strong>: Re-ran full live audit matrix (<code>audit_matrix.sh</code>) across all 27 sovereign targets. Hardened <code>check_advisories.py</code> error handling to prevent false-positive clean passes on rate-limiting. Added multi-artifact leaf sorting tests.</div>
           </div>
 
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
             <div style="color: #79c0ff; font-weight: bold;">2. Merkle Seal <code>#222E65</code> (2026-09-15T17:57:53Z | BTC Block <code>#967173</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Upstream GPG Key Expiration Sentinel Alert (<code>bitcoin_keeper</code> v2.5.13).</div>
-            <div>&bull; <strong>Mutations</strong>: Detected expired upstream GPG key (<code>2026-08-06</code>) for <code>bitcoin_keeper</code> (<code>#e0dcf2</code>). Transitioned artifact <code>sig_status</code> from <code>OK</code> to <code>EXPIRED</code>. Triggered Nostr Kind 1 mutation alert digest (<code>🟡 SUPPLY CHAIN MUTATION DETECTED</code>).</div>
+            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Upstream GPG Key Expiration Sentinel Alert (<code>bitcoin_keeper</code> v2.5.13 broadcast).</div>
+            <div>&bull; <strong>Mutations</strong>: Broadcast Nostr Kind 1 supply-chain mutation alert (<code>🟡 SUPPLY CHAIN MUTATION DETECTED</code>) for expired upstream GPG key (<code>2026-08-06</code>) on <code>bitcoin_keeper</code> (<code>#e0dcf2</code>). Transitioned artifact <code>sig_status</code> from <code>OK</code> to <code>EXPIRED</code>.</div>
           </div>
 
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
@@ -486,8 +486,8 @@
 
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
             <div style="color: #79c0ff; font-weight: bold;">5. Merkle Seal <code>#68B733</code> (2026-09-13T01:15:55Z | BTC Block <code>#966747</code>)</div>
-            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Full Matrix Pipeline Expansion to 27 Sovereign Projects.</div>
-            <div>&bull; <strong>Mutations</strong>: Added <code>alby_hub</code> (v1.24.0), <code>pipe-k1</code> (v0.0.1-rc0), <code>noble-curves</code> (2.4.0), <code>scure-btc-signer</code> (2.4.1), and <code>subzero-rs</code> (v0.4.0-testnet4). Added OSV.dev vulnerability baseline queries (<code>check_advisories.py</code>).</div>
+            <div style="color: #c9d1d9;">&bull; <strong>Cause</strong>: Full Matrix Pipeline Expansion & Initial GPG Expiration Discovery (<code>bitcoin_keeper</code>).</div>
+            <div>&bull; <strong>Mutations</strong>: Added <code>alby_hub</code> (v1.24.0), <code>pipe-k1</code> (v0.0.1-rc0), <code>noble-curves</code> (2.4.0), <code>scure-btc-signer</code> (2.4.1), and <code>subzero-rs</code> (v0.4.0-testnet4). Discovered expired <code>bitcoin_keeper</code> key (<code>2026-08-06</code>). Added OSV.dev vulnerability baseline queries (<code>check_advisories.py</code>).</div>
           </div>
 
           <div style="border-left: 2px solid #30363d; padding-left: 0.75rem; margin-top: 0.75rem;">
