@@ -494,3 +494,152 @@ fn main() -> io::Result<()> {
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_manifest_merkle_determinism_and_sorting() {
+        let mut manifest1 = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
+        let mut manifest2 = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
+
+        let proj_a = ProjectAudit {
+            project_id: "alpha".to_string(),
+            release_tag: "v1.0.0".to_string(),
+            upstream_url: "https://example.com/alpha".to_string(),
+            origin: Some("github_release".to_string()),
+            trust_anchor_url: None,
+            manifest_url: None,
+            key_url: None,
+            history: None,
+            advisory_baseline: None,
+            artifacts: vec![
+                BinaryArtifact {
+                    name: "alpha-bin-x86".to_string(),
+                    origin: Some("github_release".to_string()),
+                    expected_sha256: "1111111111111111111111111111111111111111111111111111111111111111".to_string(),
+                    observed_sha256: Some("1111111111111111111111111111111111111111111111111111111111111111".to_string()),
+                    sig_status: "OK".to_string(),
+                    verified_by: "gpg:ed25519".to_string(),
+                    status_vector: Some(PipelineStatusVector::full_pass()),
+                    audit_note: None,
+                },
+                BinaryArtifact {
+                    name: "alpha-bin-arm64".to_string(),
+                    origin: Some("github_release".to_string()),
+                    expected_sha256: "2222222222222222222222222222222222222222222222222222222222222222".to_string(),
+                    observed_sha256: Some("2222222222222222222222222222222222222222222222222222222222222222".to_string()),
+                    sig_status: "OK".to_string(),
+                    verified_by: "gpg:ed25519".to_string(),
+                    status_vector: Some(PipelineStatusVector::full_pass()),
+                    audit_note: None,
+                },
+            ],
+        };
+
+        let proj_b = ProjectAudit {
+            project_id: "zeta".to_string(),
+            release_tag: "v2.0.0".to_string(),
+            upstream_url: "https://example.com/zeta".to_string(),
+            origin: Some("github_release".to_string()),
+            trust_anchor_url: None,
+            manifest_url: None,
+            key_url: None,
+            history: None,
+            advisory_baseline: None,
+            artifacts: vec![BinaryArtifact {
+                name: "zeta-bin".to_string(),
+                origin: Some("github_release".to_string()),
+                expected_sha256: "9999999999999999999999999999999999999999999999999999999999999999".to_string(),
+                observed_sha256: Some("9999999999999999999999999999999999999999999999999999999999999999".to_string()),
+                sig_status: "OK".to_string(),
+                verified_by: "gpg:rsa4096".to_string(),
+                status_vector: Some(PipelineStatusVector::full_pass()),
+                audit_note: None,
+            }],
+        };
+
+        // Insert in order A then B
+        manifest1.projects.insert("alpha".to_string(), proj_a.clone());
+        manifest1.projects.insert("zeta".to_string(), proj_b.clone());
+        manifest1.finalize_seal();
+
+        // Insert in reverse order B then A
+        manifest2.projects.insert("zeta".to_string(), proj_b);
+        manifest2.projects.insert("alpha".to_string(), proj_a);
+        manifest2.finalize_seal();
+
+        // Merkle seals MUST be byte-for-byte identical regardless of insertion order
+        assert_eq!(manifest1.merkle_root_sha256, manifest2.merkle_root_sha256);
+        assert_eq!(manifest1.hex_seal, manifest2.hex_seal);
+    }
+
+    #[test]
+    fn test_expired_key_status_formatting() {
+        let mut manifest = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
+        let expired_proj = ProjectAudit {
+            project_id: "bitcoin_keeper".to_string(),
+            release_tag: "v2.5.13".to_string(),
+            upstream_url: "https://github.com/KeeperCommunity/bitcoin-keeper".to_string(),
+            origin: Some("github_release".to_string()),
+            trust_anchor_url: None,
+            manifest_url: None,
+            key_url: None,
+            history: None,
+            advisory_baseline: None,
+            artifacts: vec![BinaryArtifact {
+                name: "bitcoin_keeper-2.5.13.apk".to_string(),
+                origin: Some("github_release".to_string()),
+                expected_sha256: "e0dcf21111111111111111111111111111111111111111111111111111111111".to_string(),
+                observed_sha256: Some("e0dcf21111111111111111111111111111111111111111111111111111111111".to_string()),
+                sig_status: "EXPIRED".to_string(),
+                verified_by: "gpg:rsa4096".to_string(),
+                status_vector: Some(PipelineStatusVector::full_pass()),
+                audit_note: Some("Signed by declared key from KeeperCommunity README; key expired on 2026-08-06".to_string()),
+            }],
+        };
+
+        manifest.projects.insert("bitcoin_keeper".to_string(), expired_proj);
+        manifest.finalize_seal();
+        let digest = manifest.to_nostr_digest();
+
+        assert!(digest.contains("❌ EXPIRED: bitcoin_keeper (v2.5.13)"));
+        assert!(digest.contains("key expired on 2026-08-06"));
+        assert!(digest.contains("❌ 1 Expired Key"));
+    }
+
+    #[test]
+    fn test_expired_key_without_audit_note() {
+        let mut manifest = ManifestAudit::new("2026-09-15T18:00:00Z".to_string(), Some(967173), None);
+        let expired_proj = ProjectAudit {
+            project_id: "test_project".to_string(),
+            release_tag: "v1.0.0".to_string(),
+            upstream_url: "https://example.com".to_string(),
+            origin: Some("github_release".to_string()),
+            trust_anchor_url: None,
+            manifest_url: None,
+            key_url: None,
+            history: None,
+            advisory_baseline: None,
+            artifacts: vec![BinaryArtifact {
+                name: "test.apk".to_string(),
+                origin: Some("github_release".to_string()),
+                expected_sha256: "aaaaaa1111111111111111111111111111111111111111111111111111111111".to_string(),
+                observed_sha256: Some("aaaaaa1111111111111111111111111111111111111111111111111111111111".to_string()),
+                sig_status: "EXPIRED".to_string(),
+                verified_by: "gpg:rsa4096".to_string(),
+                status_vector: Some(PipelineStatusVector::full_pass()),
+                audit_note: None,
+            }],
+        };
+
+        manifest.projects.insert("test_project".to_string(), expired_proj);
+        manifest.finalize_seal();
+        let digest = manifest.to_nostr_digest();
+
+        assert!(digest.contains("❌ EXPIRED: test_project (v1.0.0)"));
+        assert!(digest.contains("1 artifact(s)"));
+    }
+}
+

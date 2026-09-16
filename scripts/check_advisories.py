@@ -7,10 +7,13 @@ Queries OSV.dev and GitHub Security Advisory databases for package vulnerabiliti
 Anonymous / Zero-PII Invariant: bootlace-dev <bootlace-dev@users.noreply.github.com>
 """
 
+import os
 import sys
 import json
+import time
 import urllib.request
-import urllib.error
+import urllib.parse
+from urllib.error import HTTPError, URLError
 
 # Ecosystem & package mapping for BinWatch 16 projects
 PACKAGE_MAP = {
@@ -56,30 +59,66 @@ def query_osv(ecosystem, package, version):
     req = urllib.request.Request(
         url,
         data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json", "User-Agent": "binwatch-auditor"}
+        headers={"Content-Type": "application/json", "User-Agent": "binwatch-auditor/1.0"}
     )
     try:
         with urllib.request.urlopen(req, timeout=8) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            vulns = data.get("vulns", [])
-            return vulns
+            return data.get("vulns", [])
+    except HTTPError as e:
+        retry_after = e.headers.get("Retry-After")
+        retry_info = f" (Retry-After: {retry_after}s)" if retry_after else ""
+        print(f"[!] OSV.dev API error (HTTP {e.code}) for {package}{retry_info}", file=sys.stderr)
+        return None
     except Exception as e:
-        return []
+        print(f"[!] OSV.dev query exception for {package}: {e}", file=sys.stderr)
+        return None
 
 def query_github_advisories(repo):
-    url = f"https://api.github.com/repos/{repo}/security-advisories"
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "binwatch-auditor", "Accept": "application/vnd.github+json"}
-    )
+    encoded_repo = urllib.parse.quote(repo.strip(), safe="/")
+    url = f"https://api.github.com/repos/{encoded_repo}/security-advisories"
+    headers = {
+        "User-Agent": "binwatch-auditor/1.0",
+        "Accept": "application/vnd.github+json"
+    }
+    raw_token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if raw_token and raw_token.strip():
+        headers["Authorization"] = f"Bearer {raw_token.strip()}"
+
+    req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=8) as resp:
+            remaining = resp.headers.get("X-RateLimit-Remaining")
+            if remaining:
+                try:
+                    rem_int = int(remaining)
+                    if rem_int < 10:
+                        print(f"[!] GitHub API rate limit low: {rem_int} requests remaining", file=sys.stderr)
+                except ValueError:
+                    pass
             advisories = json.loads(resp.read().decode("utf-8"))
             if isinstance(advisories, list):
                 return advisories
-    except Exception:
-        pass
+    except HTTPError as e:
+        if e.code in (403, 429):
+            reset_header = e.headers.get("X-RateLimit-Reset")
+            reset_str = ""
+            if reset_header:
+                try:
+                    reset_epoch = int(reset_header)
+                    diff_secs = max(0, reset_epoch - int(time.time()))
+                    reset_str = f" (Reset in {diff_secs}s)"
+                except ValueError:
+                    reset_str = f" (Reset epoch: {reset_header})"
+            print(f"[!] GitHub API rate limit exceeded for {repo} (HTTP {e.code}){reset_str}", file=sys.stderr)
+        else:
+            print(f"[!] GitHub API HTTP {e.code} error for {repo}", file=sys.stderr)
+        return None
+    except Exception as e:
+        print(f"[!] GitHub API query exception for {repo}: {e}", file=sys.stderr)
+        return None
     return []
+
 
 # Historical vulnerability thresholds & baseline precedents
 KNOWN_VULNERABILITY_BASELINES = {
