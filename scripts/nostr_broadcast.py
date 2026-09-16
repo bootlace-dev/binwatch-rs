@@ -252,10 +252,16 @@ async def main_async():
                         p_name = pinfo.get("project_id", pid)
                         cur_tag = pinfo.get("release_tag", "")
                         prev_tag = hist.get("previous_release_tag", "")
+                        
+                        # Disambiguate multi-artifact targets (e.g. Coldcard streams)
+                        artifacts = pinfo.get("artifacts", [])
+                        art_name = artifacts[0].get("name", "") if artifacts else ""
+                        stream_label = f" ({art_name})" if "coldcard" in pid or len(artifacts) > 1 else ""
+
                         if cur_tag != prev_tag:
-                            mutated_summary.append(f"• {p_name}: {prev_tag} ➔ {cur_tag}")
+                            mutated_summary.append(f"• {p_name}{stream_label}: {prev_tag} ➔ {cur_tag}")
                         else:
-                            mutated_summary.append(f"• {p_name}: {cur_tag} (SHA-256 Digest Mutated)")
+                            mutated_summary.append(f"• {p_name}{stream_label}: {cur_tag} (SHA-256 Digest Mutated)")
             except Exception:
                 pass
         
