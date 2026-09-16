@@ -87,6 +87,10 @@ pub struct ManifestAudit {
     pub block_hash: Option<String>,
     pub merkle_root_sha256: String,
     pub hex_seal: String, // First 6 characters of merkle_root_sha256
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub schnorr_pubkey: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub schnorr_signature: Option<String>,
     pub projects: BTreeMap<String, ProjectAudit>,
 }
 
@@ -99,6 +103,8 @@ impl ManifestAudit {
             block_hash,
             merkle_root_sha256: String::new(),
             hex_seal: String::new(),
+            schnorr_pubkey: None,
+            schnorr_signature: None,
             projects: BTreeMap::new(),
         }
     }

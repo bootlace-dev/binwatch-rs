@@ -286,6 +286,20 @@ async def main_async():
     sig = schnorr_sign(msg_32, sk_bytes, os.urandom(32))
     sig_hex = sig.hex()
 
+    # Milestone 5: Cross-sign Merkle seal in manifest.json if manifest file path is passed
+    manifest_path = sys.argv[2] if len(sys.argv) > 2 and sys.argv[2].endswith(".json") else None
+    if manifest_path and os.path.exists(manifest_path):
+        try:
+            with open(manifest_path, "r") as mf:
+                mdata = json.load(mf)
+            mdata["schnorr_pubkey"] = pubkey_x
+            mdata["schnorr_signature"] = sig_hex
+            with open(manifest_path, "w") as mf:
+                json.dump(mdata, mf, indent=2)
+            print(f">> Milestone 5: Injected BIP-340 Schnorr cross-signature into {manifest_path}")
+        except Exception as ex:
+            print(f"Warning: Could not update Schnorr signature in manifest: {ex}")
+
     event = {
         "id": event_id,
         "pubkey": pubkey_x,
