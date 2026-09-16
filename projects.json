@@ -67,7 +67,7 @@
   {
     "purl": "pkg:github/coldcard/firmware@2026-09-03T1541-v5.6.2",
     "project_id": "coldcard",
-    "release_tag": "2026-09-03T1541-v5.6.2",
+    "release_tag": "2026-08-31T1606-v6.6.1X",
     "upstream_url": "https://github.com/Coldcard/firmware",
     "trust_anchor_url": "https://coldcard.com/docs/upgrade/",
     "manifest_url": "https://raw.githubusercontent.com/Coldcard/firmware/master/releases/signatures.txt",
