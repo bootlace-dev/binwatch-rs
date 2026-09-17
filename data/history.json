@@ -1,6 +1,6 @@
 {
-  "last_updated_utc": "2026-09-17T07:14:22Z",
-  "last_block_height": 967376,
+  "last_updated_utc": "2026-09-17T13:05:24Z",
+  "last_block_height": 967414,
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -363,7 +363,7 @@
       "first_seen_utc": "2026-09-13T01:14:00Z",
       "first_seen_block": 966747,
       "days_stable": 4,
-      "consecutive_epochs": 58,
+      "consecutive_epochs": 59,
       "previous_release_tag": "v29.4",
       "previous_primary_hash": "e15bff6f6d21a315c4af25d2e8ae933a22bd51e924e0e90ab0474e1e11516331  bitcoin-29.4-x86_64-linux-gnu.tar.gz",
       "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -400,15 +400,15 @@
       "cvo_id": "sparrow:upstream",
       "project_id": "sparrow",
       "origin": "",
-      "release_tag": "v2.5.4",
-      "primary_hash": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e",
-      "first_seen_utc": "2026-09-13T01:14:00Z",
-      "first_seen_block": 966747,
-      "days_stable": 4,
-      "consecutive_epochs": 58,
+      "release_tag": "v2.5.5",
+      "primary_hash": "7e8a59bf7e7293bd924518dda8ea7747696634297de54878c1c5f5cdb528559d",
+      "first_seen_utc": "2026-09-17T13:05:24Z",
+      "first_seen_block": 967414,
+      "days_stable": 0,
+      "consecutive_epochs": 1,
       "previous_release_tag": "v2.5.4",
-      "previous_primary_hash": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e *sparrowwallet-2.5.4-x86_64.tar.gz",
-      "last_changed_utc": "2026-09-13T01:14:00Z"
+      "previous_primary_hash": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e",
+      "last_changed_utc": "2026-09-17T13:05:24Z"
     },
     "lnd:github_release": {
       "cvo_id": "lnd:github_release",
@@ -433,7 +433,7 @@
       "first_seen_utc": "2026-09-13T01:14:00Z",
       "first_seen_block": 966747,
       "days_stable": 4,
-      "consecutive_epochs": 58,
+      "consecutive_epochs": 59,
       "previous_release_tag": "v0.8.7",
       "previous_primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9  seedsigner_os.0.8.7.pi0.img",
       "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -489,7 +489,7 @@
       "first_seen_utc": "2026-09-09T13:46:15Z",
       "first_seen_block": 966214,
       "days_stable": 8,
-      "consecutive_epochs": 80,
+      "consecutive_epochs": 81,
       "previous_release_tag": "1.0.41",
       "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
       "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -517,7 +517,7 @@
       "first_seen_utc": "2026-09-16T02:57:24Z",
       "first_seen_block": 967216,
       "days_stable": 1,
-      "consecutive_epochs": 18,
+      "consecutive_epochs": 19,
       "previous_release_tag": null,
       "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "last_changed_utc": "2026-09-16T02:57:24Z"

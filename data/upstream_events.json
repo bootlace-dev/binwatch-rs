@@ -937,5 +937,21 @@
       "NWC.BUDGET_ALLOWANCE_RACE"
     ],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-09-17T13:05:10.519657+00:00",
+    "project_id": "sparrow",
+    "upstream_url": "https://github.com/sparrowwallet/sparrow",
+    "previous_tag": "2.5.4",
+    "detected_tag": "2.5.5",
+    "diff_bytes": 399366,
+    "detected_smells": [
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
