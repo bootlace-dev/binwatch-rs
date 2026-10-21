@@ -2,7 +2,7 @@
   {
     "purl": "pkg:github/bitcoin/bitcoin@v31.1",
     "project_id": "bitcoin_core",
-    "release_tag": "v31.1",
+    "release_tag": "v32.0",
     "upstream_url": "https://bitcoincore.org/bin",
     "trust_anchor_url": "https://bitcoincore.org/en/download/",
     "manifest_url": "https://bitcoincore.org/bin/bitcoin-core-29.4/SHA256SUMS",

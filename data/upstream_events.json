@@ -953,5 +953,15 @@
       "NWC.BUDGET_ALLOWANCE_RACE"
     ],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-10-21T14:53:30.662783+00:00",
+    "project_id": "bitcoin_core",
+    "upstream_url": "https://bitcoincore.org/bin",
+    "previous_tag": "v31.1",
+    "detected_tag": "v32.0",
+    "diff_bytes": 0,
+    "detected_smells": [],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
