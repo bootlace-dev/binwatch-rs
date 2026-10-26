@@ -963,5 +963,15 @@
     "diff_bytes": 0,
     "detected_smells": [],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-10-26T22:21:28.608777+00:00",
+    "project_id": "bitcoin_core",
+    "upstream_url": "https://bitcoincore.org/bin",
+    "previous_tag": "v32.0",
+    "detected_tag": "v32.1",
+    "diff_bytes": 0,
+    "detected_smells": [],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
