@@ -1,6 +1,6 @@
 {
-  "last_updated_utc": "2026-10-28T07:58:22Z",
-  "last_block_height": 973520,
+  "last_updated_utc": "2026-10-28T15:01:02Z",
+  "last_block_height": 973570,
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -363,7 +363,7 @@
       "first_seen_utc": "2026-10-27T20:27:46Z",
       "first_seen_block": 973449,
       "days_stable": 1,
-      "consecutive_epochs": 3,
+      "consecutive_epochs": 4,
       "previous_release_tag": "v32.1",
       "previous_primary_hash": "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689",
       "last_changed_utc": "2026-10-27T20:27:46Z"
@@ -405,7 +405,7 @@
       "first_seen_utc": "2026-09-17T13:05:24Z",
       "first_seen_block": 967414,
       "days_stable": 41,
-      "consecutive_epochs": 188,
+      "consecutive_epochs": 189,
       "previous_release_tag": "v2.5.4",
       "previous_primary_hash": "c1a3180117866e48a19caf2d9ed6fe80fecec9fdf82b8fdbcc565d0d3aec7b6e",
       "last_changed_utc": "2026-09-17T13:05:24Z"
@@ -433,7 +433,7 @@
       "first_seen_utc": "2026-09-13T01:14:00Z",
       "first_seen_block": 966747,
       "days_stable": 45,
-      "consecutive_epochs": 246,
+      "consecutive_epochs": 247,
       "previous_release_tag": "v0.8.7",
       "previous_primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9  seedsigner_os.0.8.7.pi0.img",
       "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -489,7 +489,7 @@
       "first_seen_utc": "2026-09-09T13:46:15Z",
       "first_seen_block": 966214,
       "days_stable": 49,
-      "consecutive_epochs": 268,
+      "consecutive_epochs": 269,
       "previous_release_tag": "1.0.41",
       "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
       "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -517,7 +517,7 @@
       "first_seen_utc": "2026-09-16T02:57:24Z",
       "first_seen_block": 967216,
       "days_stable": 42,
-      "consecutive_epochs": 206,
+      "consecutive_epochs": 207,
       "previous_release_tag": null,
       "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "last_changed_utc": "2026-09-16T02:57:24Z"
