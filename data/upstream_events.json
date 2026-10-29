@@ -973,5 +973,21 @@
     "diff_bytes": 0,
     "detected_smells": [],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-10-29T16:38:50.324198+00:00",
+    "project_id": "sparrow",
+    "upstream_url": "https://github.com/sparrowwallet/sparrow",
+    "previous_tag": "2.5.5",
+    "detected_tag": "2.5.6",
+    "diff_bytes": 607320,
+    "detected_smells": [
+      "COINJOIN.TELEMETRY_OR_TRACKING_INJECTION",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
