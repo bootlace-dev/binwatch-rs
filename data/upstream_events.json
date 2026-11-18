@@ -989,5 +989,23 @@
       "NWC.BUDGET_ALLOWANCE_RACE"
     ],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-11-18T00:36:59.377039+00:00",
+    "project_id": "coldcard",
+    "upstream_url": "https://github.com/Coldcard/firmware",
+    "previous_tag": "2026-08-31T1606-v6.6.1X",
+    "detected_tag": "2026-11-17T1904-v6.6.2X",
+    "diff_bytes": 653804,
+    "detected_smells": [
+      "BOUNDARY.EMPTY_ZERO_LENIENCY",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "LIGHTNING.DUST_HTLC_TRIMMING_EXPOSURE",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE",
+      "NWC.BUDGET_ALLOWANCE_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
