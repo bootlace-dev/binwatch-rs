@@ -1,6 +1,6 @@
 {
-  "last_updated_utc": "2026-11-18T18:40:27Z",
-  "last_block_height": 976465,
+  "last_updated_utc": "2026-11-19T01:44:16Z",
+  "last_block_height": 976513,
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -359,14 +359,14 @@
       "project_id": "bitcoin_core",
       "origin": "upstream_download",
       "release_tag": "v32.1",
-      "primary_hash": "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689",
-      "first_seen_utc": "2026-11-18T18:40:27Z",
-      "first_seen_block": 976465,
+      "primary_hash": "61545c17c3120fb7412f896d248b11993af04ec8817aad3649c55b2afb044963",
+      "first_seen_utc": "2026-11-19T01:44:16Z",
+      "first_seen_block": 976513,
       "days_stable": 0,
       "consecutive_epochs": 1,
       "previous_release_tag": "v32.1",
-      "previous_primary_hash": "61545c17c3120fb7412f896d248b11993af04ec8817aad3649c55b2afb044963",
-      "last_changed_utc": "2026-11-18T18:40:27Z"
+      "previous_primary_hash": "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689",
+      "last_changed_utc": "2026-11-19T01:44:16Z"
     },
     "alby_hub:github_release": {
       "cvo_id": "alby_hub:github_release",
@@ -404,8 +404,8 @@
       "primary_hash": "6085a16a86feb48a637fa69f0ec4a92e1b0c1f0edb4ba76d677a0a158984ef15",
       "first_seen_utc": "2026-10-29T16:39:11Z",
       "first_seen_block": 973714,
-      "days_stable": 20,
-      "consecutive_epochs": 70,
+      "days_stable": 21,
+      "consecutive_epochs": 71,
       "previous_release_tag": "v2.5.5",
       "previous_primary_hash": "7e8a59bf7e7293bd924518dda8ea7747696634297de54878c1c5f5cdb528559d",
       "last_changed_utc": "2026-10-29T16:39:11Z"
@@ -432,8 +432,8 @@
       "primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9",
       "first_seen_utc": "2026-09-13T01:14:00Z",
       "first_seen_block": 966747,
-      "days_stable": 66,
-      "consecutive_epochs": 320,
+      "days_stable": 67,
+      "consecutive_epochs": 321,
       "previous_release_tag": "v0.8.7",
       "previous_primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9  seedsigner_os.0.8.7.pi0.img",
       "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -488,8 +488,8 @@
       "primary_hash": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
       "first_seen_utc": "2026-09-09T13:46:15Z",
       "first_seen_block": 966214,
-      "days_stable": 70,
-      "consecutive_epochs": 342,
+      "days_stable": 71,
+      "consecutive_epochs": 343,
       "previous_release_tag": "1.0.41",
       "previous_primary_hash": "07b5394be5f8e5f32415d4d3a0425be15f2122616a9fe789178ad54eebe07b9a",
       "last_changed_utc": "2026-09-09T13:46:15Z"
@@ -516,8 +516,8 @@
       "primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "first_seen_utc": "2026-11-18T00:37:09Z",
       "first_seen_block": 976353,
-      "days_stable": 0,
-      "consecutive_epochs": 3,
+      "days_stable": 1,
+      "consecutive_epochs": 4,
       "previous_release_tag": "2026-08-31T1606-v6.6.1X",
       "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "last_changed_utc": "2026-11-18T00:37:09Z"
