@@ -1023,5 +1023,21 @@
       "NWC.BUDGET_ALLOWANCE_RACE"
     ],
     "status": "UNATTESTED_NEW_RELEASE"
+  },
+  {
+    "timestamp_utc": "2026-11-27T17:52:27.298071+00:00",
+    "project_id": "blockstream_jade",
+    "upstream_url": "https://github.com/Blockstream/Jade",
+    "previous_tag": "1.0.41",
+    "detected_tag": "1.0.42",
+    "diff_bytes": 5321898,
+    "detected_smells": [
+      "COINJOIN.UNBLINDED_INPUT_DEANON",
+      "CONSENSUS.POLICY_VS_CONSENSUS_DRIFT",
+      "HW.CHANGE_DESCRIPTOR_DESYNC",
+      "HW.TRNG_SILENT_FALLBACK_PRNG",
+      "LIGHTNING.REPLACEMENT_CYCLING_RACE"
+    ],
+    "status": "UNATTESTED_NEW_RELEASE"
   }
 ]
