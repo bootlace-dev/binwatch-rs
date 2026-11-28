@@ -1,6 +1,6 @@
 {
-  "last_updated_utc": "2026-11-27T17:52:44Z",
-  "last_block_height": 977828,
+  "last_updated_utc": "2026-11-28T01:11:08Z",
+  "last_block_height": 977876,
   "projects": {
     "alby_hub": {
       "project_id": "alby_hub",
@@ -362,8 +362,8 @@
       "primary_hash": "61545c17c3120fb7412f896d248b11993af04ec8817aad3649c55b2afb044963",
       "first_seen_utc": "2026-11-19T01:44:16Z",
       "first_seen_block": 976513,
-      "days_stable": 8,
-      "consecutive_epochs": 25,
+      "days_stable": 9,
+      "consecutive_epochs": 26,
       "previous_release_tag": "v32.1",
       "previous_primary_hash": "cf54c46ae95bf13d4e71cdc22d41a2caa1e4f9202551f297c3cc8141a1320689",
       "last_changed_utc": "2026-11-19T01:44:16Z"
@@ -404,8 +404,8 @@
       "primary_hash": "8a2a4820100e1553f6d1df45dac1a3b7ff353903918057d0796374efa621738b",
       "first_seen_utc": "2026-11-25T10:55:16Z",
       "first_seen_block": 977507,
-      "days_stable": 2,
-      "consecutive_epochs": 7,
+      "days_stable": 3,
+      "consecutive_epochs": 8,
       "previous_release_tag": "v2.5.6",
       "previous_primary_hash": "6085a16a86feb48a637fa69f0ec4a92e1b0c1f0edb4ba76d677a0a158984ef15",
       "last_changed_utc": "2026-11-25T10:55:16Z"
@@ -432,8 +432,8 @@
       "primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9",
       "first_seen_utc": "2026-09-13T01:14:00Z",
       "first_seen_block": 966747,
-      "days_stable": 75,
-      "consecutive_epochs": 345,
+      "days_stable": 76,
+      "consecutive_epochs": 346,
       "previous_release_tag": "v0.8.7",
       "previous_primary_hash": "67f005c7ace26500a78be3f4d97eaf02d76d018550ec54df011741dde1933ce9  seedsigner_os.0.8.7.pi0.img",
       "last_changed_utc": "2026-09-13T01:14:00Z"
@@ -488,8 +488,8 @@
       "primary_hash": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
       "first_seen_utc": "2026-11-27T17:52:44Z",
       "first_seen_block": 977828,
-      "days_stable": 0,
-      "consecutive_epochs": 1,
+      "days_stable": 1,
+      "consecutive_epochs": 2,
       "previous_release_tag": "1.0.41",
       "previous_primary_hash": "fe9603012128b9c3f0b4d953bd2bae56e78701ff12bdff7e6847881164fbae9b",
       "last_changed_utc": "2026-11-27T17:52:44Z"
@@ -516,8 +516,8 @@
       "primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "first_seen_utc": "2026-11-18T00:37:09Z",
       "first_seen_block": 976353,
-      "days_stable": 9,
-      "consecutive_epochs": 28,
+      "days_stable": 10,
+      "consecutive_epochs": 29,
       "previous_release_tag": "2026-08-31T1606-v6.6.1X",
       "previous_primary_hash": "49eb41b6b06c97f2622bc9a7496f9d5d792c0b0906e619ba0ddaf6333b561398",
       "last_changed_utc": "2026-11-18T00:37:09Z"
